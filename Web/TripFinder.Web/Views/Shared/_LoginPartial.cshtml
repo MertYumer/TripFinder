@@ -1,34 +1,29 @@
-﻿@using TripFinder.Common
+﻿@using Microsoft.AspNetCore.Identity
 @using TripFinder.Data.Models
-@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav">
+<ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/Home/About">About</a></li>
     @if (this.SignInManager.IsSignedIn(this.User))
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(this.User.Identity.Name)!</a>
+        <li><a href="/Users/Profile">Profile</a></li>
+        <li><a href="cars.html">Cars</a></li>
+        <li>
+            <a href="index.html">Pages</a>
+            <ul>
+                <li><a href="package.html">Pricing</a></li>
+                <li><a href="driver.html">Driver</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="help-desk.html">Help Desk</a></li>
+                <li><a href="404.html">404</a></li>
+            </ul>
         </li>
-        if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
-            </li>
-        }
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@(this.Url.Action("Index", "Home", new { area = string.Empty }))">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-            </form>
-        </li>
+        <li><a href="/Users/Logout">Log out</a></li>
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
+        <li><a href="/Users/Login">Log in</a></li>
+        <li><a href="/Users/Register">Sign up</a></li>
     }
 </ul>
