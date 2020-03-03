@@ -1,0 +1,70 @@
+﻿<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="d-flex flex-row justify-content-center">
+                    <div>
+                        <img src="/img/avatar.png" alt="Profile Picture" class="rounded-circle img-fluid profile-picture">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <div>Profile of</div>
+                        <h3>@Model.FirstName @Model.LastName</h3>
+                    </div>
+                    <div class="col-12 col-md-auto">
+                        <a class="btn btn-warning btn-block" href="/Users/Edit"><i class="fa fa-pencil"></i> Edit</a>
+                    </div>
+                </div>
+                <div class="row mb-3 mt-3 mt-md-0">
+                    <div class="col">
+                        <div>Rating</div>
+                        <h3>@Model.Rating / 5</h3>
+                        <!--<h3 class="d-inline">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                        </h3>-->
+                        <span>
+                            from @Model.RatingsCount <span>users</span>
+                        </span>
+                    </div>
+                </div>
+
+
+                <div class="row text-center mb-4 mb-md-3">
+                    <div class="col-12 col-sm col-lg-4 mb-3 mb-sm-0">
+                        <div class="thin-border py-2" data-toggle="tooltip">
+                            <h5>Passenger - @Model.TripsCountAsPassenger times</h5> 
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm col-lg-4">
+                        <div class="thin-border py-2" data-toggle="tooltip">
+                            <h5>Driver - @Model.TripsCountAsDriver times</h5> 
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm col-lg-4">
+                        <div class="thin-border py-2" data-toggle="tooltip">
+                            <h5>Travelled distance - @Model.TravelledDistance km</h5> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="d-flex flex-row justify-content-md-center">
+                    <div>
+                        <h5>Information</h5>
+                        <span class="d-block"><strong>Phone number:</strong> @Model.PhoneNumber</span>
+                        <span class="d-block"><strong>Gender:</strong> @Model.Gender</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

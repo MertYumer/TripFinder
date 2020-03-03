@@ -2232,6 +2232,7 @@ body,
 	background-image: url("/img/page-title.jpg");
 	background-position: center center;
 	background-size: cover;
+	height: 100%;
 }
 
 #page-title-area .section-title {
