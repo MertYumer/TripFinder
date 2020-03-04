@@ -1,9 +1,8 @@
 ﻿namespace TripFinder.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

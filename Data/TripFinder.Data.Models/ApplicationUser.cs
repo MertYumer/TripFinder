@@ -4,9 +4,8 @@ namespace TripFinder.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using TripFinder.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using TripFinder.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {

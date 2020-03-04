@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using TripFinder.Common;
-    using TripFinder.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using TripFinder.Common;
+    using TripFinder.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

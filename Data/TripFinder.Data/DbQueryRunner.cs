@@ -3,9 +3,8 @@
     using System;
     using System.Threading.Tasks;
 
-    using TripFinder.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+    using TripFinder.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

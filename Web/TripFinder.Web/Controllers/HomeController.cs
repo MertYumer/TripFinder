@@ -2,9 +2,8 @@
 {
     using System.Diagnostics;
 
-    using TripFinder.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+    using TripFinder.Web.ViewModels;
 
     public class HomeController : BaseController
     {

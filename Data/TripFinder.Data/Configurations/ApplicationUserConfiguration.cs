@@ -1,8 +1,8 @@
 ﻿namespace TripFinder.Data.Configurations
 {
-    using TripFinder.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using TripFinder.Data.Models;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

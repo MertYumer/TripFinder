@@ -2,9 +2,8 @@
 {
     using System.Linq;
 
-    using TripFinder.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+    using TripFinder.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {
