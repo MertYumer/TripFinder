@@ -23,6 +23,18 @@
         {
         }
 
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Car> Cars { get; set; }
+
+        public DbSet<Trip> Trips { get; set; }
+
+        public DbSet<TownsDistance> TownsDistances { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
+        public DbSet<UserTrip> UserTrips { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
@@ -80,8 +92,51 @@
         }
 
         // Applies configurations
-        private void ConfigureUserIdentityRelations(ModelBuilder builder)
-             => builder.ApplyConfigurationsFromAssembly(this.GetType().Assembly);
+        private void ConfigureUserIdentityRelations(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<UserTrip>()
+                .HasKey(ut => new
+                {
+                    ut.UserId,
+                    ut.TripId,
+                });
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Car)
+                .WithOne(c => c.Owner)
+                .HasForeignKey<Car>(c => c.OwnerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.ReviewsByUser)
+                .WithOne(r => r.ReviewedUser)
+                .HasForeignKey(r => r.ReviewedUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.ReviewsForUser)
+                .WithOne(r => r.Reviewer)
+                .HasForeignKey(r => r.ReviewerId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.UserTrips)
+                .WithOne(ut => ut.User)
+                .HasForeignKey(ut => ut.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Trip>()
+                .HasMany(t => t.UserTrips)
+                .WithOne(ut => ut.Trip)
+                .HasForeignKey(ut => ut.TripId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Car>()
+                .HasMany(c => c.Trips)
+                .WithOne(t => t.Car)
+                .HasForeignKey(t => t.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
 
         private void ApplyAuditInfoRules()
         {
