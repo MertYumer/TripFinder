@@ -38,7 +38,6 @@
         public string Email { get; set; }
 
         [Required]
-        [MinLength(3)]
         public string Password { get; set; }
 
         public string AvatarImage { get; set; }
