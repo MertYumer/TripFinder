@@ -3,11 +3,11 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 <ul>
-    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-    <li><a asp-controller="Home" asp-action="About">About</a></li>
+    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
     @if (this.SignInManager.IsSignedIn(this.User))
     {
-        <li><a asp-controller="Users" asp-action="Profile">Profile</a></li>
+        <li><a asp-area="" asp-controller="Users" asp-action="Profile">Profile</a></li>
         <li><a href="cars.html">Cars</a></li>
         <li>
             <a href="index.html">Pages</a>
@@ -23,7 +23,7 @@
     }
     else
     {
-        <li><a asp-controller="Users" asp-action="Login">Log in</a></li>
-        <li><a asp-controller="Users" asp-action="Register">Sign up</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Login">Log in</a></li>
+        <li><a asp-area="Identity" asp-page="/Account/Register">Sign up</a></li>
     }
 </ul>
