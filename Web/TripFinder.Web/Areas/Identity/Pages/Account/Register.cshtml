@@ -18,47 +18,43 @@
             <div class="col-lg-5 col-md-8 m-auto">
                 <div class="login-page-content">
                     <div class="login-form">
-                        <form method="post" action="/Users/Register">
+                        <form method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="name">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="First Name" name="firstName">
+                                        <input asp-for="Input.FirstName" type="text" placeholder="First Name">
+                                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-6">
-                                        <input type="text" placeholder="Last Name" name="lastName">
+                                        <input asp-for="Input.LastName" type="text" placeholder="Last Name">
+                                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="email">
-                                <input type="email" placeholder="Email" name="email">
+                                <input asp-for="Input.Email" type="email" placeholder="Email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="phone-number">
-                                <input type="text" placeholder="Phone Number" name="phoneNumber">
+                                <input asp-for="Input.PhoneNumber" type="text" placeholder="Phone Number">
+                                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
                             </div>
                             <div class="password">
-                                <input type="password" placeholder="Password" name="password">
+                                <input asp-for="Input.Password" type="password" placeholder="Password">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="confirmPassword">
-                                <input type="password" placeholder="Confirm Password" name="confirmPassword">
+                                <input asp-for="Input.ConfirmPassword" type="password" placeholder="Confirm Password">
+                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
                             <div class="log-btn">
                                 <button type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
                             </div>
                         </form>
                     </div>
-
-                    <div class="login-other">
-                        <span class="or">or</span>
-                        <a href="#" class="login-with-btn facebook"><i class="fa fa-facebook"></i> Sign up With Facebook</a>
-                        <a href="#" class="login-with-btn google"><i class="fa fa-google"></i> Sign up With Google</a>
-                    </div>
                     <div class="create-ac">
-                        <p>Have an account? <a href="/Users/Login">Log In</a></p>
-                    </div>
-                    <div class="login-menu">
-                        <a href="about.html">About</a>
-                        <span>|</span>
-                        <a href="contact.html">Contact</a>
+                        <p>Have an account? <a asp-page="./Login">Log In</a></p>
                     </div>
                 </div>
             </div>

@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-
 namespace TripFinder.Web.Areas.Identity.Pages.Account
 {
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+
     public class RegisterModel : PageModel
     {
         public void OnGet()

@@ -18,34 +18,25 @@
                 <div class="login-page-content">
                     <div class="login-form">
                         <form method="post" action="/Users/Login">
+                            <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="email">
-                                <input type="text" placeholder="Email" name="email">
+                                <input asp-for="Input.Email" type="text" placeholder="Email">
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
                             <div class="password">
-                                <input type="password" placeholder="Password" name="password">
+                                <input asp-for="Input.Password" type="password" placeholder="Password">
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
                             </div>
                             <div class="log-btn">
                                 <button type="submit"><i class="fa fa-sign-in"></i> Log In</button>
                             </div>
                         </form>
                     </div>
-
-                    <div class="login-other">
-                        <span class="or">or</span>
-                        <a href="#" class="login-with-btn facebook"><i class="fa fa-facebook"></i> Login With Facebook</a>
-                        <a href="#" class="login-with-btn google"><i class="fa fa-google"></i> Login With Google</a>
-                    </div>
                     <div class="create-ac">
-                        <p>Don't have an account? <a href="/Users/Register">Sign Up</a></p>
-                    </div>
-                    <div class="login-menu">
-                        <a href="about.html">About</a>
-                        <span>|</span>
-                        <a href="contact.html">Contact</a>
+                        <p>Don't have an account? <a asp-page="./Register">Sign Up</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
