@@ -16,12 +16,12 @@
         [Required]
         public string ReviewerId { get; set; }
 
-        public virtual User Reviewer { get; set; }
+        public virtual ApplicationUser Reviewer { get; set; }
 
         [Required]
         public string ReviewedUserId { get; set; }
 
-        public virtual User ReviewedUser { get; set; }
+        public virtual ApplicationUser ReviewedUser { get; set; }
 
         [Required]
         [Range(0, 5)]

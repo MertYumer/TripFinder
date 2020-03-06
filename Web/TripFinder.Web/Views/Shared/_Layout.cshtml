@@ -36,7 +36,11 @@
                     </div>
                     <div class="col-lg-8 d-none d-xl-block">
                         <nav class="mainmenu alignright">
-                            <partial name="_LoginPartial" />
+                            <ul>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                                <partial name="_LoginPartial" />
+                            </ul>
                         </nav>
                     </div>
                 </div>

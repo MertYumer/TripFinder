@@ -11,6 +11,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200306200858_RemoveTripFinderUserTable.cs" />
+    <Compile Remove="Migrations\20200306200858_RemoveTripFinderUserTable.Designer.cs" />
+    <Compile Remove="Migrations\20200306201559_RemoveTripFinderUsersTable.cs" />
+    <Compile Remove="Migrations\20200306201559_RemoveTripFinderUsersTable.Designer.cs" />
+    <Compile Remove="Migrations\20200306202337_RemoveUsersTable.cs" />
+    <Compile Remove="Migrations\20200306202337_RemoveUsersTable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
 

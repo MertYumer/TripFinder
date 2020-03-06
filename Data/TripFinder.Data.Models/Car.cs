@@ -39,7 +39,7 @@
         [Required]
         public string OwnerId { get; set; }
 
-        public virtual User Owner { get; set; }
+        public virtual ApplicationUser Owner { get; set; }
 
         [Required]
         public bool AllowedSmoking { get; set; }
