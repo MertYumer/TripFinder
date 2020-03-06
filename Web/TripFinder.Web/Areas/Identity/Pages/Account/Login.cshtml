@@ -1,6 +1,8 @@
 ﻿@page
 @model TripFinder.Web.Areas.Identity.Pages.Account.LoginModel
+
 @{
+    ViewData["Title"] = "Log in";
 }
 
 <section id="page-title-area" class="section-padding overlay">
@@ -17,7 +19,7 @@
             <div class="col-lg-4 col-md-8 m-auto">
                 <div class="login-page-content">
                     <div class="login-form">
-                        <form method="post" action="/Users/Login">
+                        <form method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="email">
                                 <input asp-for="Input.Email" type="text" placeholder="Email">
@@ -26,6 +28,12 @@
                             <div class="password">
                                 <input asp-for="Input.Password" type="password" placeholder="Password">
                                 <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="checkbox p-1">
+                                <label asp-for="Input.RememberMe">
+                                    <input asp-for="Input.RememberMe" />
+                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                </label>
                             </div>
                             <div class="log-btn">
                                 <button type="submit"><i class="fa fa-sign-in"></i> Log In</button>
@@ -40,3 +48,7 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
