@@ -43,8 +43,4 @@
     <ProjectReference Include="..\TripFinder.Web.Infrastructure\TripFinder.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\TripFinder.Web.ViewModels\TripFinder.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Users\" />
-  </ItemGroup>
 </Project>

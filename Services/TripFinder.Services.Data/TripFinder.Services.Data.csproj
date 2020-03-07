@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\TripFinder.Data.Common\TripFinder.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\TripFinder.Data.Models\TripFinder.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\TripFinder.Web.ViewModels\TripFinder.Web.ViewModels.csproj" />
     <ProjectReference Include="..\TripFinder.Services.Mapping\TripFinder.Services.Mapping.csproj" />
   </ItemGroup>
 
