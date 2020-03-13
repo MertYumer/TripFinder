@@ -23,6 +23,6 @@
         public string Distance { get; set; }
 
         [Required]
-        public string EstimatedTime { get; set; }
+        public int EstimatedMinutes { get; set; }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace TripFinder.Data.Migrations
+﻿namespace TripFinder.Data.Migrations
 {
+    using System;
+
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddTripFinderUsersTable : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
