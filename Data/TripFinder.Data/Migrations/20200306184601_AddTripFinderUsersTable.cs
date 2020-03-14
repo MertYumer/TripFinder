@@ -50,7 +50,7 @@
                     RatingsCount = table.Column<int>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
                     TravelledDistance = table.Column<long>(nullable: false),
-                    CarId = table.Column<string>(nullable: true)
+                    CarId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -151,7 +151,7 @@
                     RatingsCount = table.Column<int>(type: "int", nullable: false),
                     TravelledDistance = table.Column<long>(type: "bigint", nullable: false),
                     TripsCountAsDriver = table.Column<int>(type: "int", nullable: false),
-                    TripsCountAsPassenger = table.Column<int>(type: "int", nullable: false)
+                    TripsCountAsPassenger = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

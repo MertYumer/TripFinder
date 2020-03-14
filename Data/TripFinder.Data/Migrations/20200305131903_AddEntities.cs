@@ -33,7 +33,7 @@
                     Origin = table.Column<string>(nullable: false),
                     Destination = table.Column<string>(nullable: false),
                     Distance = table.Column<string>(nullable: false),
-                    EstimatedTime = table.Column<string>(nullable: false)
+                    EstimatedTime = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -62,7 +62,7 @@
                     TripsCountAsPassenger = table.Column<int>(nullable: false),
                     RatingsCount = table.Column<int>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
-                    TravelledDistance = table.Column<long>(nullable: false)
+                    TravelledDistance = table.Column<long>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,7 @@
                     AllowedDrinks = table.Column<bool>(nullable: false),
                     PlaceForLuggage = table.Column<bool>(nullable: false),
                     AllowedPets = table.Column<bool>(nullable: false),
-                    HasAirConditioning = table.Column<bool>(nullable: false)
+                    HasAirConditioning = table.Column<bool>(nullable: false),
                 },
                 constraints: table =>
                 {
@@ -120,7 +120,7 @@
                     ReviewerId = table.Column<string>(nullable: false),
                     ReviewedUserId = table.Column<string>(nullable: false),
                     Rating = table.Column<double>(nullable: false),
-                    Comment = table.Column<string>(maxLength: 50, nullable: true)
+                    Comment = table.Column<string>(maxLength: 50, nullable: true),
                 },
                 constraints: table =>
                 {
@@ -153,7 +153,7 @@
                     TotalSeats = table.Column<int>(nullable: false),
                     FreeSeats = table.Column<int>(nullable: false),
                     ExpensePerPerson = table.Column<decimal>(nullable: false),
-                    AdditionalInformation = table.Column<string>(nullable: true)
+                    AdditionalInformation = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {
@@ -177,7 +177,7 @@
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    TripId = table.Column<string>(nullable: false)
+                    TripId = table.Column<string>(nullable: false),
                 },
                 constraints: table =>
                 {

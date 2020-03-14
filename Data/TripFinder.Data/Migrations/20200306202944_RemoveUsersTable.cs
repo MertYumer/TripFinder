@@ -47,7 +47,7 @@
                 table: "AspNetUsers",
                 maxLength: 20,
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<int>(
                 name: "Gender",
@@ -59,13 +59,13 @@
                 table: "AspNetUsers",
                 maxLength: 20,
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<string>(
                 name: "Password",
                 table: "AspNetUsers",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.AddColumn<double>(
                 name: "Rating",
@@ -219,7 +219,7 @@
                     RatingsCount = table.Column<int>(type: "int", nullable: false),
                     TravelledDistance = table.Column<long>(type: "bigint", nullable: false),
                     TripsCountAsDriver = table.Column<int>(type: "int", nullable: false),
-                    TripsCountAsPassenger = table.Column<int>(type: "int", nullable: false)
+                    TripsCountAsPassenger = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {

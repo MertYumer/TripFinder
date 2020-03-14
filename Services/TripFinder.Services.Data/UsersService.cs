@@ -4,6 +4,7 @@
 
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
+    using TripFinder.Services.Mapping;
     using TripFinder.Web.ViewModels.Users;
 
     public class UsersService : IUsersService
@@ -20,21 +21,7 @@
             var user = this.usersRepository
                 .AllAsNoTracking()
                 .Where(u => u.Id == userId)
-                .Select(u => new UserDetailsViewModel
-                {
-                    Id = u.Id,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    AvatarImage = u.AvatarImage,
-                    Gender = u.Gender.ToString(),
-                    PhoneNumber = u.PhoneNumber,
-                    TripsCountAsDriver = u.TripsCountAsDriver,
-                    TripsCountAsPassenger = u.TripsCountAsPassenger,
-                    RatingsCount = u.RatingsCount,
-                    Rating = u.Rating,
-                    TravelledDistance = u.TravelledDistance,
-                })
+                .To<UserDetailsViewModel>()
                 .SingleOrDefault();
 
             return user;
