@@ -6,7 +6,7 @@
 
     using TripFinder.Data.Common.Models;
 
-    public class Trip : BaseModel<string>
+    public class Trip : BaseDeletableModel<string>
     {
         public Trip()
         {
