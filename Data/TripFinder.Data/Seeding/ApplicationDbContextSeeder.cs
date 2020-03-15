@@ -27,6 +27,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new CarsSeeder(),
                           };
 
             foreach (var seeder in seeders)

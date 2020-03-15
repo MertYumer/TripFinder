@@ -25,7 +25,7 @@
         [MaxLength(20)]
         public string Model { get; set; }
 
-        public string Type { get; set; }
+        public CarType Type { get; set; }
 
         public string Color { get; set; }
 
