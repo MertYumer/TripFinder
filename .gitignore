@@ -353,4 +353,5 @@ MigrationBackup/
 .ionide/
 
 appsettings.json
-Web/TripFinder.Web/appsettings.json
+appsettings.Production.json
+appsettings.Development.json
