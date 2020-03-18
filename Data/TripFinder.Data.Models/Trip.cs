@@ -15,6 +15,10 @@
             this.CreatedOn = DateTime.UtcNow;
         }
 
+        public string DriverId { get; set; }
+
+        public virtual ApplicationUser Driver { get; set; }
+
         [Required]
         public string TownsDistanceId { get; set; }
 
