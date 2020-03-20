@@ -10,8 +10,8 @@ using TripFinder.Data;
 namespace TripFinder.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200315022047_ChangeCarTypeColumn")]
-    partial class ChangeCarTypeColumn
+    [Migration("20200320193948_AddCarIdForeignKey")]
+    partial class AddCarIdForeignKey
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -196,7 +196,7 @@ namespace TripFinder.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -284,6 +284,10 @@ namespace TripFinder.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CarId")
+                        .IsUnique()
+                        .HasFilter("[CarId] IS NOT NULL");
+
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
@@ -345,10 +349,6 @@ namespace TripFinder.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("PassengerSeats")
                         .HasColumnType("int");
 
@@ -358,15 +358,16 @@ namespace TripFinder.Data.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Year")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("OwnerId")
-                        .IsUnique();
 
                     b.ToTable("Cars");
                 });
@@ -490,6 +491,9 @@ namespace TripFinder.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DriverId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal>("ExpensePerPerson")
                         .HasColumnType("decimal(18,2)");
 
@@ -515,6 +519,8 @@ namespace TripFinder.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CarId");
+
+                    b.HasIndex("DriverId");
 
                     b.HasIndex("IsDeleted");
 
@@ -601,13 +607,12 @@ namespace TripFinder.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TripFinder.Data.Models.Car", b =>
+            modelBuilder.Entity("TripFinder.Data.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("TripFinder.Data.Models.ApplicationUser", "Owner")
-                        .WithOne("Car")
-                        .HasForeignKey("TripFinder.Data.Models.Car", "OwnerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.HasOne("TripFinder.Data.Models.Car", "Car")
+                        .WithOne("User")
+                        .HasForeignKey("TripFinder.Data.Models.ApplicationUser", "CarId")
+                        .OnDelete(DeleteBehavior.SetNull);
                 });
 
             modelBuilder.Entity("TripFinder.Data.Models.Review", b =>
@@ -632,6 +637,10 @@ namespace TripFinder.Data.Migrations
                         .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("TripFinder.Data.Models.ApplicationUser", "Driver")
+                        .WithMany()
+                        .HasForeignKey("DriverId");
 
                     b.HasOne("TripFinder.Data.Models.TownsDistance", "TownsDistance")
                         .WithMany()
