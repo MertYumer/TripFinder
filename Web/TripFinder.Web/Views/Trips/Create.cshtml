@@ -1,4 +1,4 @@
-﻿@model TripFinder.Web.ViewModels.Trips.CreateTripInputModel;
+﻿@model TripFinder.Web.ViewModels.Trips.TripCreateInputModel;
 
 @{
     ViewData["Title"] = "DriverCreate";
@@ -41,7 +41,7 @@
                                 <span asp-validation-for="FreeSeats" class="text-danger"></span>
                             </div>
                             <div>
-                                <input asp-for="ExpensePerPerson" type="number" placeholder="Free seats">
+                                <input asp-for="ExpensePerPerson" type="number" placeholder="Expense per person">
                                 <span asp-validation-for="ExpensePerPerson" class="text-danger"></span>
                             </div>
                             <div>

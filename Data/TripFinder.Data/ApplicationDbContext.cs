@@ -102,9 +102,21 @@
                 });
 
             modelBuilder.Entity<ApplicationUser>()
-                .HasOne(u => u.Car)
-                .WithOne(c => c.Owner)
-                .HasForeignKey<Car>(c => c.OwnerId)
+                .HasOne<Car>(u => u.Car)
+                .WithOne(c => c.ApplicationUser)
+                .HasForeignKey<Car>(c => c.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Car>()
+                .HasOne<ApplicationUser>(c => c.ApplicationUser)
+                .WithOne(au => au.Car)
+                .HasForeignKey<ApplicationUser>(au => au.CarId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Car>()
+                .HasMany(c => c.Trips)
+                .WithOne(t => t.Car)
+                .HasForeignKey(t => t.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ApplicationUser>()
@@ -129,12 +141,6 @@
                 .HasMany(t => t.UserTrips)
                 .WithOne(ut => ut.Trip)
                 .HasForeignKey(ut => ut.TripId)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<Car>()
-                .HasMany(c => c.Trips)
-                .WithOne(t => t.Car)
-                .HasForeignKey(t => t.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
         }
 

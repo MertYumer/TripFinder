@@ -17,6 +17,24 @@
     <Compile Remove="Migrations\20200306201559_RemoveTripFinderUsersTable.Designer.cs" />
     <Compile Remove="Migrations\20200306202337_RemoveUsersTable.cs" />
     <Compile Remove="Migrations\20200306202337_RemoveUsersTable.Designer.cs" />
+    <Compile Remove="Migrations\20200320034452_ChangedCarUserIdColumn.cs" />
+    <Compile Remove="Migrations\20200320034452_ChangedCarUserIdColumn.Designer.cs" />
+    <Compile Remove="Migrations\20200320040018_AddApplicationUserIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320040018_AddApplicationUserIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320041315_AddApplicationUserIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320041315_AddApplicationUserIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320042008_AddApplicationUserIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320042008_AddApplicationUserIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320042253_AddApplicationUserIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320042253_AddApplicationUserIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320043245_AddApplicationUserIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320043245_AddApplicationUserIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320043753_AddApplicationUserIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320043753_AddApplicationUserIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320044732_AddForeignKey.cs" />
+    <Compile Remove="Migrations\20200320044732_AddForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320045134_AddForeignKey.cs" />
+    <Compile Remove="Migrations\20200320045134_AddForeignKey.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

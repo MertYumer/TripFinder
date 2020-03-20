@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TripFinder.Data;
 
 namespace TripFinder.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200320031633_UpdatedUserCarRelationship")]
+    partial class UpdatedUserCarRelationship
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -316,10 +318,6 @@ namespace TripFinder.Data.Migrations
                     b.Property<bool>("AllowedSmoking")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ApplicationUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -350,6 +348,10 @@ namespace TripFinder.Data.Migrations
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("OwnerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PassengerSeats")
                         .HasColumnType("int");
@@ -608,7 +610,7 @@ namespace TripFinder.Data.Migrations
             modelBuilder.Entity("TripFinder.Data.Models.ApplicationUser", b =>
                 {
                     b.HasOne("TripFinder.Data.Models.Car", "Car")
-                        .WithOne("ApplicationUser")
+                        .WithOne("Owner")
                         .HasForeignKey("TripFinder.Data.Models.ApplicationUser", "CarId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });
