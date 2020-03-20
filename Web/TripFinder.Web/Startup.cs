@@ -59,7 +59,6 @@
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IUsersService, UsersService>();
-            services.AddTransient<ITripsService, TripsService>();
 
             // Singleton services
             Account account = new Account(

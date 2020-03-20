@@ -3,10 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using TripFinder.Data.Models;
-    using TripFinder.Services.Mapping;
-
-    public class TripCreateInputModel : IMapTo<Trip>
+    public class CreateTripInputModel
     {
         [Required]
         [MinLength(3)]
