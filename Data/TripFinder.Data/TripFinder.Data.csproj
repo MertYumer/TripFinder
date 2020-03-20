@@ -35,6 +35,10 @@
     <Compile Remove="Migrations\20200320044732_AddForeignKey.Designer.cs" />
     <Compile Remove="Migrations\20200320045134_AddForeignKey.cs" />
     <Compile Remove="Migrations\20200320045134_AddForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320153810_AddCarIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320153810_AddCarIdForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200320154318_AddCarIdForeignKey.cs" />
+    <Compile Remove="Migrations\20200320154318_AddCarIdForeignKey.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

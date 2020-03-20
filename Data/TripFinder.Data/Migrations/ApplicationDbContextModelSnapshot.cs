@@ -194,7 +194,7 @@ namespace TripFinder.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CarId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -282,10 +282,6 @@ namespace TripFinder.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId")
-                        .IsUnique()
-                        .HasFilter("[CarId] IS NOT NULL");
-
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
@@ -318,7 +314,7 @@ namespace TripFinder.Data.Migrations
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
@@ -364,6 +360,9 @@ namespace TripFinder.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
 
                     b.HasIndex("IsDeleted");
 
@@ -605,12 +604,13 @@ namespace TripFinder.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TripFinder.Data.Models.ApplicationUser", b =>
+            modelBuilder.Entity("TripFinder.Data.Models.Car", b =>
                 {
-                    b.HasOne("TripFinder.Data.Models.Car", "Car")
-                        .WithOne("ApplicationUser")
-                        .HasForeignKey("TripFinder.Data.Models.ApplicationUser", "CarId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                    b.HasOne("TripFinder.Data.Models.ApplicationUser", "ApplicationUser")
+                        .WithOne("Car")
+                        .HasForeignKey("TripFinder.Data.Models.Car", "ApplicationUserId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TripFinder.Data.Models.Review", b =>

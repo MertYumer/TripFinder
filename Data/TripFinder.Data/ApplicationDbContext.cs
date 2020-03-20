@@ -101,17 +101,17 @@
                     ut.TripId,
                 });
 
-            modelBuilder.Entity<ApplicationUser>()
-                .HasOne<Car>(u => u.Car)
-                .WithOne(c => c.ApplicationUser)
-                .HasForeignKey<Car>(c => c.ApplicationUserId)
+            modelBuilder.Entity<Car>()
+                .HasOne(e => e.ApplicationUser)
+                .WithOne(e => e.Car)
+                .HasForeignKey<ApplicationUser>(e => e.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Car>()
-                .HasOne<ApplicationUser>(c => c.ApplicationUser)
-                .WithOne(au => au.Car)
-                .HasForeignKey<ApplicationUser>(au => au.CarId)
-                .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<ApplicationUser>()
+                .HasOne(e => e.Car)
+                .WithOne(e => e.ApplicationUser)
+                .HasForeignKey<Car>(e => e.ApplicationUserId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Car>()
                 .HasMany(c => c.Trips)
