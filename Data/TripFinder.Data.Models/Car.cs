@@ -37,9 +37,9 @@
         public int PassengerSeats { get; set; }
 
         [Required]
-        public string OwnerId { get; set; }
+        public string UserId { get; set; }
 
-        public virtual ApplicationUser Owner { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [Required]
         public bool AllowedSmoking { get; set; }

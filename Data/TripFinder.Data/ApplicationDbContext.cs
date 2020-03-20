@@ -101,29 +101,22 @@
                     ut.TripId,
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity<Car>()
-                .HasOne(e => e.ApplicationUser)
+                .HasOne(e => e.User)
                 .WithOne(e => e.Car)
                 .HasForeignKey<ApplicationUser>(e => e.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasOne(e => e.Car)
-                .WithOne(e => e.ApplicationUser)
-                .HasForeignKey<Car>(e => e.ApplicationUserId)
+                .WithOne(e => e.User)
+                .HasForeignKey<Car>(e => e.UserId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Car>()
                 .HasMany(c => c.Trips)
                 .WithOne(t => t.Car)
                 .HasForeignKey(t => t.CarId)
-=======
-            modelBuilder.Entity<ApplicationUser>()
-                .HasOne(u => u.Car)
-                .WithOne(c => c.Owner)
-                .HasForeignKey<Car>(c => c.OwnerId)
->>>>>>> parent of 13e97e4... Implemented Trip creation (unfinished)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ApplicationUser>()

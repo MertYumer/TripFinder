@@ -312,13 +312,10 @@ namespace TripFinder.Data.Migrations
                     b.Property<bool>("AllowedSmoking")
                         .HasColumnType("bit");
 
-<<<<<<< HEAD
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-=======
->>>>>>> parent of 13e97e4... Implemented Trip creation (unfinished)
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
@@ -616,17 +613,15 @@ namespace TripFinder.Data.Migrations
 
             modelBuilder.Entity("TripFinder.Data.Models.Car", b =>
                 {
-<<<<<<< HEAD
                     b.HasOne("TripFinder.Data.Models.ApplicationUser", "ApplicationUser")
                         .WithOne("Car")
                         .HasForeignKey("TripFinder.Data.Models.Car", "ApplicationUserId")
-                        .OnDelete(DeleteBehavior.SetNull)
-=======
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("TripFinder.Data.Models.ApplicationUser", "Owner")
                         .WithOne("Car")
                         .HasForeignKey("TripFinder.Data.Models.Car", "OwnerId")
                         .OnDelete(DeleteBehavior.Restrict)
->>>>>>> parent of 13e97e4... Implemented Trip creation (unfinished)
                         .IsRequired();
                 });
 
