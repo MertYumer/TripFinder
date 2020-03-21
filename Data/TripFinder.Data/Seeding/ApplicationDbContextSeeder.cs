@@ -6,6 +6,7 @@
 
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using TripFinder.Data.Models;
 
     public class ApplicationDbContextSeeder : ISeeder
     {
@@ -27,6 +28,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new TownsDistancesSeeder(),
                           };
 
             foreach (var seeder in seeders)

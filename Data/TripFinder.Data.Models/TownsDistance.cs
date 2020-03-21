@@ -20,7 +20,7 @@
         public string Destination { get; set; }
 
         [Required]
-        public string Distance { get; set; }
+        public int Distance { get; set; }
 
         [Required]
         public int EstimatedMinutes { get; set; }

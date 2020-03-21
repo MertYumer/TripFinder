@@ -1,0 +1,2108 @@
+[
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Burgas",
+    "Distance": 494,
+    "EstimatedMinutes": 278
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Varna",
+    "Distance": 545,
+    "EstimatedMinutes": 373
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Veliko Tarnovo",
+    "Distance": 323,
+    "EstimatedMinutes": 215
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Vidin",
+    "Distance": 283,
+    "EstimatedMinutes": 231
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Vratsa",
+    "Distance": 215,
+    "EstimatedMinutes": 147
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Gabrovo",
+    "Distance": 306,
+    "EstimatedMinutes": 208
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Dobrich",
+    "Distance": 569,
+    "EstimatedMinutes": 400
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Kardzhali",
+    "Distance": 389,
+    "EstimatedMinutes": 250
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Kyustendil",
+    "Distance": 68,
+    "EstimatedMinutes": 55
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Lovech",
+    "Distance": 253,
+    "EstimatedMinutes": 169
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Montana",
+    "Distance": 196,
+    "EstimatedMinutes": 159
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Pazardzhik",
+    "Distance": 223,
+    "EstimatedMinutes": 141
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Pernik",
+    "Distance": 80,
+    "EstimatedMinutes": 51
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Pleven",
+    "Distance": 267,
+    "EstimatedMinutes": 179
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Plovdiv",
+    "Distance": 260,
+    "EstimatedMinutes": 164
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Razgrad",
+    "Distance": 439,
+    "EstimatedMinutes": 311
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Ruse",
+    "Distance": 413,
+    "EstimatedMinutes": 283
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Silistra",
+    "Distance": 534,
+    "EstimatedMinutes": 379
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Sliven",
+    "Distance": 419,
+    "EstimatedMinutes": 253
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Smolyan",
+    "Distance": 230,
+    "EstimatedMinutes": 254
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Sofia",
+    "Distance": 101,
+    "EstimatedMinutes": 75
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Stara Zagora",
+    "Distance": 342,
+    "EstimatedMinutes": 204
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Targovishte",
+    "Distance": 422,
+    "EstimatedMinutes": 293
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Haskovo",
+    "Distance": 338,
+    "EstimatedMinutes": 199
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Shumen",
+    "Distance": 464,
+    "EstimatedMinutes": 327
+  },
+  {
+    "Origin": "Blagoevgrad",
+    "Destination": "Yambol",
+    "Distance": 408,
+    "EstimatedMinutes": 235
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Varna",
+    "Distance": 131,
+    "EstimatedMinutes": 119
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Veliko Tarnovo",
+    "Distance": 216,
+    "EstimatedMinutes": 150
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Vidin",
+    "Distance": 600,
+    "EstimatedMinutes": 383
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Vratsa",
+    "Distance": 477,
+    "EstimatedMinutes": 279
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Gabrovo",
+    "Distance": 247,
+    "EstimatedMinutes": 176
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Dobrich",
+    "Distance": 179,
+    "EstimatedMinutes": 166
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Kardzhali",
+    "Distance": 263,
+    "EstimatedMinutes": 175
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Kyustendil",
+    "Distance": 497,
+    "EstimatedMinutes": 287
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Lovech",
+    "Distance": 306,
+    "EstimatedMinutes": 219
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Montana",
+    "Distance": 494,
+    "EstimatedMinutes": 314
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Pazardzhik",
+    "Distance": 289,
+    "EstimatedMinutes": 162
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Pernik",
+    "Distance": 428,
+    "EstimatedMinutes": 239
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Pleven",
+    "Distance": 333,
+    "EstimatedMinutes": 224
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Plovdiv",
+    "Distance": 249,
+    "EstimatedMinutes": 146
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Razgrad",
+    "Distance": 175,
+    "EstimatedMinutes": 151
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Ruse",
+    "Distance": 238,
+    "EstimatedMinutes": 199
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Silistra",
+    "Distance": 229,
+    "EstimatedMinutes": 209
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Sliven",
+    "Distance": 114,
+    "EstimatedMinutes": 74
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Smolyan",
+    "Distance": 320,
+    "EstimatedMinutes": 222
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Sofia",
+    "Distance": 382,
+    "EstimatedMinutes": 215
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Stara Zagora",
+    "Distance": 171,
+    "EstimatedMinutes": 99
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Targovishte",
+    "Distance": 179,
+    "EstimatedMinutes": 146
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Haskovo",
+    "Distance": 212,
+    "EstimatedMinutes": 131
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Shumen",
+    "Distance": 127,
+    "EstimatedMinutes": 118
+  },
+  {
+    "Origin": "Burgas",
+    "Destination": "Yambol",
+    "Distance": 92,
+    "EstimatedMinutes": 56
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Veliko Tarnovo",
+    "Distance": 222,
+    "EstimatedMinutes": 159
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Vidin",
+    "Distance": 508,
+    "EstimatedMinutes": 391
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Vratsa",
+    "Distance": 403,
+    "EstimatedMinutes": 299
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Gabrovo",
+    "Distance": 263,
+    "EstimatedMinutes": 195
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Dobrich",
+    "Distance": 51,
+    "EstimatedMinutes": 51
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Kardzhali",
+    "Distance": 389,
+    "EstimatedMinutes": 291
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Kyustendil",
+    "Distance": 548,
+    "EstimatedMinutes": 383
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Lovech",
+    "Distance": 312,
+    "EstimatedMinutes": 229
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Montana",
+    "Distance": 423,
+    "EstimatedMinutes": 321
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Pazardzhik",
+    "Distance": 415,
+    "EstimatedMinutes": 279
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Pernik",
+    "Distance": 479,
+    "EstimatedMinutes": 334
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Pleven",
+    "Distance": 299,
+    "EstimatedMinutes": 221
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Plovdiv",
+    "Distance": 374,
+    "EstimatedMinutes": 262
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Razgrad",
+    "Distance": 128,
+    "EstimatedMinutes": 84
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Ruse",
+    "Distance": 191,
+    "EstimatedMinutes": 132
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Silistra",
+    "Distance": 141,
+    "EstimatedMinutes": 112
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Sliven",
+    "Distance": 221,
+    "EstimatedMinutes": 179
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Smolyan",
+    "Distance": 445,
+    "EstimatedMinutes": 357
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Sofia",
+    "Distance": 440,
+    "EstimatedMinutes": 319
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Stara Zagora",
+    "Distance": 297,
+    "EstimatedMinutes": 215
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Targovishte",
+    "Distance": 121,
+    "EstimatedMinutes": 82
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Haskovo",
+    "Distance": 338,
+    "EstimatedMinutes": 251
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Shumen",
+    "Distance": 88,
+    "EstimatedMinutes": 57
+  },
+  {
+    "Origin": "Varna",
+    "Destination": "Yambol",
+    "Distance": 218,
+    "EstimatedMinutes": 177
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Vidin",
+    "Distance": 336,
+    "EstimatedMinutes": 262
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Vratsa",
+    "Distance": 212,
+    "EstimatedMinutes": 158
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Gabrovo",
+    "Distance": 44,
+    "EstimatedMinutes": 45
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Dobrich",
+    "Distance": 243,
+    "EstimatedMinutes": 173
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Kardzhali",
+    "Distance": 221,
+    "EstimatedMinutes": 190
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Kyustendil",
+    "Distance": 327,
+    "EstimatedMinutes": 226
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Lovech",
+    "Distance": 90,
+    "EstimatedMinutes": 72
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Montana",
+    "Distance": 251,
+    "EstimatedMinutes": 193
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Pazardzhik",
+    "Distance": 247,
+    "EstimatedMinutes": 178
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Pernik",
+    "Distance": 258,
+    "EstimatedMinutes": 177
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Pleven",
+    "Distance": 127,
+    "EstimatedMinutes": 101
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Plovdiv",
+    "Distance": 206,
+    "EstimatedMinutes": 161
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Razgrad",
+    "Distance": 117,
+    "EstimatedMinutes": 99
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Ruse",
+    "Distance": 107,
+    "EstimatedMinutes": 87
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Silistra",
+    "Distance": 230,
+    "EstimatedMinutes": 167
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Sliven",
+    "Distance": 112,
+    "EstimatedMinutes": 94
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Smolyan",
+    "Distance": 277,
+    "EstimatedMinutes": 255
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Sofia",
+    "Distance": 219,
+    "EstimatedMinutes": 162
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Stara Zagora",
+    "Distance": 106,
+    "EstimatedMinutes": 93
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Targovishte",
+    "Distance": 99,
+    "EstimatedMinutes": 81
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Haskovo",
+    "Distance": 169,
+    "EstimatedMinutes": 145
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Shumen",
+    "Distance": 142,
+    "EstimatedMinutes": 115
+  },
+  {
+    "Origin": "Veliko Tarnovo",
+    "Destination": "Yambol",
+    "Distance": 130,
+    "EstimatedMinutes": 106
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Vratsa",
+    "Distance": 124,
+    "EstimatedMinutes": 107
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Gabrovo",
+    "Distance": 319,
+    "EstimatedMinutes": 258
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Dobrich",
+    "Distance": 530,
+    "EstimatedMinutes": 382
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Kardzhali",
+    "Distance": 476,
+    "EstimatedMinutes": 354
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Kyustendil",
+    "Distance": 286,
+    "EstimatedMinutes": 221
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Lovech",
+    "Distance": 247,
+    "EstimatedMinutes": 214
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Montana",
+    "Distance": 88,
+    "EstimatedMinutes": 83
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Pazardzhik",
+    "Distance": 311,
+    "EstimatedMinutes": 252
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Pernik",
+    "Distance": 217,
+    "EstimatedMinutes": 193
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Pleven",
+    "Distance": 212,
+    "EstimatedMinutes": 164
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Plovdiv",
+    "Distance": 347,
+    "EstimatedMinutes": 274
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Razgrad",
+    "Distance": 399,
+    "EstimatedMinutes": 324
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Ruse",
+    "Distance": 358,
+    "EstimatedMinutes": 285
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Silistra",
+    "Distance": 482,
+    "EstimatedMinutes": 380
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Sliven",
+    "Distance": 448,
+    "EstimatedMinutes": 356
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Smolyan",
+    "Distance": 442,
+    "EstimatedMinutes": 383
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Sofia",
+    "Distance": 197,
+    "EstimatedMinutes": 190
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Stara Zagora",
+    "Distance": 430,
+    "EstimatedMinutes": 314
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Targovishte",
+    "Distance": 394,
+    "EstimatedMinutes": 323
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Haskovo",
+    "Distance": 425,
+    "EstimatedMinutes": 322
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Shumen",
+    "Distance": 428,
+    "EstimatedMinutes": 348
+  },
+  {
+    "Origin": "Vidin",
+    "Destination": "Yambol",
+    "Distance": 496,
+    "EstimatedMinutes": 345
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Gabrovo",
+    "Distance": 197,
+    "EstimatedMinutes": 154
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Dobrich",
+    "Distance": 424,
+    "EstimatedMinutes": 327
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Kardzhali",
+    "Distance": 339,
+    "EstimatedMinutes": 260
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Kyustendil",
+    "Distance": 220,
+    "EstimatedMinutes": 160
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Lovech",
+    "Distance": 144,
+    "EstimatedMinutes": 115
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Montana",
+    "Distance": 40,
+    "EstimatedMinutes": 38
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Pazardzhik",
+    "Distance": 209,
+    "EstimatedMinutes": 148
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Pernik",
+    "Distance": 151,
+    "EstimatedMinutes": 112
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Pleven",
+    "Distance": 106,
+    "EstimatedMinutes": 87
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Plovdiv",
+    "Distance": 246,
+    "EstimatedMinutes": 171
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Razgrad",
+    "Distance": 294,
+    "EstimatedMinutes": 229
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Ruse",
+    "Distance": 252,
+    "EstimatedMinutes": 190
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Silistra",
+    "Distance": 376,
+    "EstimatedMinutes": 285
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Sliven",
+    "Distance": 325,
+    "EstimatedMinutes": 252
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Smolyan",
+    "Distance": 340,
+    "EstimatedMinutes": 279
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Sofia",
+    "Distance": 112,
+    "EstimatedMinutes": 96
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Stara Zagora",
+    "Distance": 328,
+    "EstimatedMinutes": 211
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Targovishte",
+    "Distance": 288,
+    "EstimatedMinutes": 228
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Haskovo",
+    "Distance": 324,
+    "EstimatedMinutes": 206
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Shumen",
+    "Distance": 323,
+    "EstimatedMinutes": 253
+  },
+  {
+    "Origin": "Vratsa",
+    "Destination": "Yambol",
+    "Distance": 394,
+    "EstimatedMinutes": 255
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Dobrich",
+    "Distance": 285,
+    "EstimatedMinutes": 225
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Kardzhali",
+    "Distance": 195,
+    "EstimatedMinutes": 169
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Kyustendil",
+    "Distance": 310,
+    "EstimatedMinutes": 219
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Lovech",
+    "Distance": 67,
+    "EstimatedMinutes": 59
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Montana",
+    "Distance": 234,
+    "EstimatedMinutes": 172
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Pazardzhik",
+    "Distance": 172,
+    "EstimatedMinutes": 155
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Pernik",
+    "Distance": 241,
+    "EstimatedMinutes": 171
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Pleven",
+    "Distance": 100,
+    "EstimatedMinutes": 94
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Plovdiv",
+    "Distance": 137,
+    "EstimatedMinutes": 139
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Razgrad",
+    "Distance": 159,
+    "EstimatedMinutes": 135
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Ruse",
+    "Distance": 148,
+    "EstimatedMinutes": 118
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Silistra",
+    "Distance": 271,
+    "EstimatedMinutes": 217
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Sliven",
+    "Distance": 144,
+    "EstimatedMinutes": 111
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Smolyan",
+    "Distance": 232,
+    "EstimatedMinutes": 250
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Sofia",
+    "Distance": 202,
+    "EstimatedMinutes": 155
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Stara Zagora",
+    "Distance": 80,
+    "EstimatedMinutes": 88
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Targovishte",
+    "Distance": 142,
+    "EstimatedMinutes": 117
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Haskovo",
+    "Distance": 143,
+    "EstimatedMinutes": 140
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Shumen",
+    "Distance": 184,
+    "EstimatedMinutes": 151
+  },
+  {
+    "Origin": "Gabrovo",
+    "Destination": "Yambol",
+    "Distance": 162,
+    "EstimatedMinutes": 132
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Kardzhali",
+    "Distance": 423,
+    "EstimatedMinutes": 317
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Kyustendil",
+    "Distance": 584,
+    "EstimatedMinutes": 409
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Lovech",
+    "Distance": 348,
+    "EstimatedMinutes": 255
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Montana",
+    "Distance": 459,
+    "EstimatedMinutes": 348
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Pazardzhik",
+    "Distance": 448,
+    "EstimatedMinutes": 315
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Pernik",
+    "Distance": 515,
+    "EstimatedMinutes": 336
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Pleven",
+    "Distance": 335,
+    "EstimatedMinutes": 251
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Plovdiv",
+    "Distance": 400,
+    "EstimatedMinutes": 290
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Razgrad",
+    "Distance": 164,
+    "EstimatedMinutes": 111
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Ruse",
+    "Distance": 208,
+    "EstimatedMinutes": 157
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Silistra",
+    "Distance": 89,
+    "EstimatedMinutes": 70
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Sliven",
+    "Distance": 257,
+    "EstimatedMinutes": 205
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Smolyan",
+    "Distance": 471,
+    "EstimatedMinutes": 384
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Sofia",
+    "Distance": 476,
+    "EstimatedMinutes": 346
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Stara Zagora",
+    "Distance": 323,
+    "EstimatedMinutes": 221
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Targovishte",
+    "Distance": 157,
+    "EstimatedMinutes": 109
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Haskovo",
+    "Distance": 371,
+    "EstimatedMinutes": 273
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Shumen",
+    "Distance": 125,
+    "EstimatedMinutes": 90
+  },
+  {
+    "Origin": "Dobrich",
+    "Destination": "Yambol",
+    "Distance": 243,
+    "EstimatedMinutes": 204
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Kyustendil",
+    "Distance": 393,
+    "EstimatedMinutes": 253
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Lovech",
+    "Distance": 261,
+    "EstimatedMinutes": 228
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Montana",
+    "Distance": 390,
+    "EstimatedMinutes": 279
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Pazardzhik",
+    "Distance": 137,
+    "EstimatedMinutes": 138
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Pernik",
+    "Distance": 324,
+    "EstimatedMinutes": 204
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Pleven",
+    "Distance": 294,
+    "EstimatedMinutes": 276
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Plovdiv",
+    "Distance": 94,
+    "EstimatedMinutes": 96
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Razgrad",
+    "Distance": 331,
+    "EstimatedMinutes": 258
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Ruse",
+    "Distance": 323,
+    "EstimatedMinutes": 265
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Silistra",
+    "Distance": 414,
+    "EstimatedMinutes": 327
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Sliven",
+    "Distance": 188,
+    "EstimatedMinutes": 142
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Smolyan",
+    "Distance": 88,
+    "EstimatedMinutes": 113
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Sofia",
+    "Distance": 279,
+    "EstimatedMinutes": 166
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Stara Zagora",
+    "Distance": 111,
+    "EstimatedMinutes": 100
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Targovishte",
+    "Distance": 295,
+    "EstimatedMinutes": 232
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Haskovo",
+    "Distance": 47,
+    "EstimatedMinutes": 47
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Shumen",
+    "Distance": 301,
+    "EstimatedMinutes": 238
+  },
+  {
+    "Origin": "Kardzhali",
+    "Destination": "Yambol",
+    "Distance": 178,
+    "EstimatedMinutes": 131
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Lovech",
+    "Distance": 255,
+    "EstimatedMinutes": 177
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Montana",
+    "Distance": 198,
+    "EstimatedMinutes": 167
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Pazardzhik",
+    "Distance": 226,
+    "EstimatedMinutes": 150
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Pernik",
+    "Distance": 57,
+    "EstimatedMinutes": 54
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Pleven",
+    "Distance": 269,
+    "EstimatedMinutes": 195
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Plovdiv",
+    "Distance": 262,
+    "EstimatedMinutes": 172
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Razgrad",
+    "Distance": 442,
+    "EstimatedMinutes": 320
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Ruse",
+    "Distance": 416,
+    "EstimatedMinutes": 292
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Silistra",
+    "Distance": 539,
+    "EstimatedMinutes": 387
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Sliven",
+    "Distance": 421,
+    "EstimatedMinutes": 254
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Smolyan",
+    "Distance": 357,
+    "EstimatedMinutes": 281
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Sofia",
+    "Distance": 104,
+    "EstimatedMinutes": 83
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Stara Zagora",
+    "Distance": 345,
+    "EstimatedMinutes": 212
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Targovishte",
+    "Distance": 425,
+    "EstimatedMinutes": 281
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Haskovo",
+    "Distance": 340,
+    "EstimatedMinutes": 208
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Shumen",
+    "Distance": 466,
+    "EstimatedMinutes": 335
+  },
+  {
+    "Origin": "Kyustendil",
+    "Destination": "Yambol",
+    "Distance": 411,
+    "EstimatedMinutes": 257
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Montana",
+    "Distance": 161,
+    "EstimatedMinutes": 143
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Pazardzhik",
+    "Distance": 246,
+    "EstimatedMinutes": 167
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Pernik",
+    "Distance": 188,
+    "EstimatedMinutes": 131
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Pleven",
+    "Distance": 36,
+    "EstimatedMinutes": 36
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Plovdiv",
+    "Distance": 163,
+    "EstimatedMinutes": 179
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Razgrad",
+    "Distance": 196,
+    "EstimatedMinutes": 164
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Ruse",
+    "Distance": 154,
+    "EstimatedMinutes": 115
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Silistra",
+    "Distance": 278,
+    "EstimatedMinutes": 221
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Sliven",
+    "Distance": 203,
+    "EstimatedMinutes": 164
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Smolyan",
+    "Distance": 257,
+    "EstimatedMinutes": 290
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Sofia",
+    "Distance": 148,
+    "EstimatedMinutes": 115
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Stara Zagora",
+    "Distance": 147,
+    "EstimatedMinutes": 153
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Targovishte",
+    "Distance": 190,
+    "EstimatedMinutes": 151
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Haskovo",
+    "Distance": 210,
+    "EstimatedMinutes": 204
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Shumen",
+    "Distance": 232,
+    "EstimatedMinutes": 177
+  },
+  {
+    "Origin": "Lovech",
+    "Destination": "Yambol",
+    "Distance": 220,
+    "EstimatedMinutes": 176
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Pazardzhik",
+    "Distance": 223,
+    "EstimatedMinutes": 178
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Pernik",
+    "Distance": 129,
+    "EstimatedMinutes": 109
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Pleven",
+    "Distance": 126,
+    "EstimatedMinutes": 111
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Plovdiv",
+    "Distance": 260,
+    "EstimatedMinutes": 201
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Razgrad",
+    "Distance": 314,
+    "EstimatedMinutes": 252
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Ruse",
+    "Distance": 272,
+    "EstimatedMinutes": 213
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Silistra",
+    "Distance": 396,
+    "EstimatedMinutes": 282
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Sliven",
+    "Distance": 362,
+    "EstimatedMinutes": 285
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Smolyan",
+    "Distance": 354,
+    "EstimatedMinutes": 314
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Sofia",
+    "Distance": 109,
+    "EstimatedMinutes": 117
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Stara Zagora",
+    "Distance": 342,
+    "EstimatedMinutes": 254
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Targovishte",
+    "Distance": 308,
+    "EstimatedMinutes": 252
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Haskovo",
+    "Distance": 338,
+    "EstimatedMinutes": 236
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Shumen",
+    "Distance": 343,
+    "EstimatedMinutes": 277
+  },
+  {
+    "Origin": "Montana",
+    "Destination": "Yambol",
+    "Distance": 408,
+    "EstimatedMinutes": 272
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Pernik",
+    "Distance": 158,
+    "EstimatedMinutes": 102
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Pleven",
+    "Distance": 258,
+    "EstimatedMinutes": 176
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Plovdiv",
+    "Distance": 38,
+    "EstimatedMinutes": 44
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Razgrad",
+    "Distance": 356,
+    "EstimatedMinutes": 255
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Ruse",
+    "Distance": 349,
+    "EstimatedMinutes": 252
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Silistra",
+    "Distance": 439,
+    "EstimatedMinutes": 314
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Sliven",
+    "Distance": 213,
+    "EstimatedMinutes": 131
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Smolyan",
+    "Distance": 134,
+    "EstimatedMinutes": 150
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Sofia",
+    "Distance": 112,
+    "EstimatedMinutes": 78
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Stara Zagora",
+    "Distance": 136,
+    "EstimatedMinutes": 87
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Targovishte",
+    "Distance": 320,
+    "EstimatedMinutes": 218
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Haskovo",
+    "Distance": 132,
+    "EstimatedMinutes": 82
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Shumen",
+    "Distance": 326,
+    "EstimatedMinutes": 224
+  },
+  {
+    "Origin": "Pazardzhik",
+    "Destination": "Yambol",
+    "Distance": 203,
+    "EstimatedMinutes": 118
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Pleven",
+    "Distance": 213,
+    "EstimatedMinutes": 154
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Plovdiv",
+    "Distance": 186,
+    "EstimatedMinutes": 139
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Razgrad",
+    "Distance": 385,
+    "EstimatedMinutes": 284
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Ruse",
+    "Distance": 359,
+    "EstimatedMinutes": 257
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Silistra",
+    "Distance": 483,
+    "EstimatedMinutes": 352
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Sliven",
+    "Distance": 345,
+    "EstimatedMinutes": 221
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Smolyan",
+    "Distance": 281,
+    "EstimatedMinutes": 227
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Sofia",
+    "Distance": 46,
+    "EstimatedMinutes": 48
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Stara Zagora",
+    "Distance": 269,
+    "EstimatedMinutes": 179
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Targovishte",
+    "Distance": 368,
+    "EstimatedMinutes": 266
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Haskovo",
+    "Distance": 264,
+    "EstimatedMinutes": 175
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Shumen",
+    "Distance": 410,
+    "EstimatedMinutes": 279
+  },
+  {
+    "Origin": "Pernik",
+    "Destination": "Yambol",
+    "Distance": 335,
+    "EstimatedMinutes": 210
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Plovdiv",
+    "Distance": 199,
+    "EstimatedMinutes": 208
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Razgrad",
+    "Distance": 192,
+    "EstimatedMinutes": 152
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Ruse",
+    "Distance": 151,
+    "EstimatedMinutes": 113
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Silistra",
+    "Distance": 274,
+    "EstimatedMinutes": 209
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Sliven",
+    "Distance": 232,
+    "EstimatedMinutes": 172
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Smolyan",
+    "Distance": 294,
+    "EstimatedMinutes": 319
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Sofia",
+    "Distance": 163,
+    "EstimatedMinutes": 117
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Stara Zagora",
+    "Distance": 190,
+    "EstimatedMinutes": 177
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Targovishte",
+    "Distance": 187,
+    "EstimatedMinutes": 151
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Haskovo",
+    "Distance": 253,
+    "EstimatedMinutes": 233
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Shumen",
+    "Distance": 221,
+    "EstimatedMinutes": 176
+  },
+  {
+    "Origin": "Pleven",
+    "Destination": "Yambol",
+    "Distance": 250,
+    "EstimatedMinutes": 200
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Razgrad",
+    "Distance": 320,
+    "EstimatedMinutes": 232
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Ruse",
+    "Distance": 312,
+    "EstimatedMinutes": 222
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Silistra",
+    "Distance": 403,
+    "EstimatedMinutes": 322
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Sliven",
+    "Distance": 176,
+    "EstimatedMinutes": 117
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Smolyan",
+    "Distance": 96,
+    "EstimatedMinutes": 116
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Sofia",
+    "Distance": 144,
+    "EstimatedMinutes": 101
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Stara Zagora",
+    "Distance": 100,
+    "EstimatedMinutes": 75
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Targovishte",
+    "Distance": 284,
+    "EstimatedMinutes": 206
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Haskovo",
+    "Distance": 78,
+    "EstimatedMinutes": 71
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Shumen",
+    "Distance": 290,
+    "EstimatedMinutes": 212
+  },
+  {
+    "Origin": "Plovdiv",
+    "Destination": "Yambol",
+    "Distance": 166,
+    "EstimatedMinutes": 106
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Ruse",
+    "Distance": 63,
+    "EstimatedMinutes": 47
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Silistra",
+    "Distance": 107,
+    "EstimatedMinutes": 102
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Sliven",
+    "Distance": 148,
+    "EstimatedMinutes": 143
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Smolyan",
+    "Distance": 388,
+    "EstimatedMinutes": 323
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Sofia",
+    "Distance": 335,
+    "EstimatedMinutes": 258
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Stara Zagora",
+    "Distance": 240,
+    "EstimatedMinutes": 167
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Targovishte",
+    "Distance": 37,
+    "EstimatedMinutes": 33
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Haskovo",
+    "Distance": 280,
+    "EstimatedMinutes": 213
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Shumen",
+    "Distance": 48,
+    "EstimatedMinutes": 39
+  },
+  {
+    "Origin": "Razgrad",
+    "Destination": "Yambol",
+    "Distance": 160,
+    "EstimatedMinutes": 142
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Silistra",
+    "Distance": 124,
+    "EstimatedMinutes": 96
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Sliven",
+    "Distance": 216,
+    "EstimatedMinutes": 173
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Smolyan",
+    "Distance": 381,
+    "EstimatedMinutes": 335
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Sofia",
+    "Distance": 309,
+    "EstimatedMinutes": 231
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Stara Zagora",
+    "Distance": 210,
+    "EstimatedMinutes": 173
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Targovishte",
+    "Distance": 102,
+    "EstimatedMinutes": 82
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Haskovo",
+    "Distance": 273,
+    "EstimatedMinutes": 224
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Shumen",
+    "Distance": 112,
+    "EstimatedMinutes": 87
+  },
+  {
+    "Origin": "Ruse",
+    "Destination": "Yambol",
+    "Distance": 224,
+    "EstimatedMinutes": 191
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Sliven",
+    "Distance": 250,
+    "EstimatedMinutes": 215
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Smolyan",
+    "Distance": 472,
+    "EstimatedMinutes": 392
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Sofia",
+    "Distance": 432,
+    "EstimatedMinutes": 326
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Stara Zagora",
+    "Distance": 323,
+    "EstimatedMinutes": 250
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Targovishte",
+    "Distance": 140,
+    "EstimatedMinutes": 113
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Haskovo",
+    "Distance": 364,
+    "EstimatedMinutes": 282
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Shumen",
+    "Distance": 112,
+    "EstimatedMinutes": 95
+  },
+  {
+    "Origin": "Silistra",
+    "Destination": "Yambol",
+    "Distance": 243,
+    "EstimatedMinutes": 211
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Smolyan",
+    "Distance": 243,
+    "EstimatedMinutes": 206
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Sofia",
+    "Distance": 306,
+    "EstimatedMinutes": 191
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Stara Zagora",
+    "Distance": 69,
+    "EstimatedMinutes": 58
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Targovishte",
+    "Distance": 112,
+    "EstimatedMinutes": 119
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Haskovo",
+    "Distance": 107,
+    "EstimatedMinutes": 79
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Shumen",
+    "Distance": 136,
+    "EstimatedMinutes": 114
+  },
+  {
+    "Origin": "Sliven",
+    "Destination": "Yambol",
+    "Distance": 28,
+    "EstimatedMinutes": 29
+  },
+  {
+    "Origin": "Smolyan",
+    "Destination": "Sofia",
+    "Distance": 244,
+    "EstimatedMinutes": 210
+  },
+  {
+    "Origin": "Smolyan",
+    "Destination": "Stara Zagora",
+    "Distance": 168,
+    "EstimatedMinutes": 164
+  },
+  {
+    "Origin": "Smolyan",
+    "Destination": "Targovishte",
+    "Distance": 352,
+    "EstimatedMinutes": 295
+  },
+  {
+    "Origin": "Smolyan",
+    "Destination": "Haskovo",
+    "Distance": 149,
+    "EstimatedMinutes": 154
+  },
+  {
+    "Origin": "Smolyan",
+    "Destination": "Shumen",
+    "Distance": 358,
+    "EstimatedMinutes": 276
+  },
+  {
+    "Origin": "Smolyan",
+    "Destination": "Yambol",
+    "Distance": 234,
+    "EstimatedMinutes": 195
+  },
+  {
+    "Origin": "Sofia",
+    "Destination": "Stara Zagora",
+    "Distance": 232,
+    "EstimatedMinutes": 145
+  },
+  {
+    "Origin": "Sofia",
+    "Destination": "Targovishte",
+    "Distance": 318,
+    "EstimatedMinutes": 239
+  },
+  {
+    "Origin": "Sofia",
+    "Destination": "Haskovo",
+    "Distance": 227,
+    "EstimatedMinutes": 140
+  },
+  {
+    "Origin": "Sofia",
+    "Destination": "Shumen",
+    "Distance": 360,
+    "EstimatedMinutes": 272
+  },
+  {
+    "Origin": "Sofia",
+    "Destination": "Yambol",
+    "Distance": 298,
+    "EstimatedMinutes": 176
+  },
+  {
+    "Origin": "Stara Zagora",
+    "Destination": "Targovishte",
+    "Distance": 205,
+    "EstimatedMinutes": 157
+  },
+  {
+    "Origin": "Stara Zagora",
+    "Destination": "Haskovo",
+    "Distance": 59,
+    "EstimatedMinutes": 56
+  },
+  {
+    "Origin": "Stara Zagora",
+    "Destination": "Shumen",
+    "Distance": 211,
+    "EstimatedMinutes": 163
+  },
+  {
+    "Origin": "Stara Zagora",
+    "Destination": "Yambol",
+    "Distance": 87,
+    "EstimatedMinutes": 57
+  },
+  {
+    "Origin": "Targovishte",
+    "Destination": "Haskovo",
+    "Distance": 245,
+    "EstimatedMinutes": 173
+  },
+  {
+    "Origin": "Targovishte",
+    "Destination": "Shumen",
+    "Distance": 41,
+    "EstimatedMinutes": 38
+  },
+  {
+    "Origin": "Targovishte",
+    "Destination": "Yambol",
+    "Distance": 124,
+    "EstimatedMinutes": 117
+  },
+  {
+    "Origin": "Haskovo",
+    "Destination": "Shumen",
+    "Distance": 250,
+    "EstimatedMinutes": 197
+  },
+  {
+    "Origin": "Haskovo",
+    "Destination": "Yambol",
+    "Distance": 127,
+    "EstimatedMinutes": 91
+  },
+  {
+    "Origin": "Shumen",
+    "Destination": "Yambol",
+    "Distance": 130,
+    "EstimatedMinutes": 109
+  }
+]
