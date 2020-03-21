@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateTripInputModel
+    public class TripCreateInputModel
     {
         [Required]
         [MinLength(3)]
