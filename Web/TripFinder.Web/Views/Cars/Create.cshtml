@@ -1,0 +1,135 @@
+﻿@model TripFinder.Web.ViewModels.Cars.CarCreateInputModel;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title  text-center">
+                    <h2>Create car</h2>
+                    <span class="title-line"><i class="fa fa-car"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 m-auto">
+                <div class="form-page-content">
+                    <div class="form">
+                        <form class="col-lg-8 col-md-8 m-auto" method="post">
+                            <div class="col">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div>
+                                    <input asp-for="Make" type="text" placeholder="Make">
+                                    <span asp-validation-for="Make" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <input asp-for="Model" type="text" placeholder="Model">
+                                    <span asp-validation-for="Model" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<CarType>()">
+                                        <option value="">Car type</option>
+                                    </select>
+                                    <span asp-validation-for="Type" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <input asp-for="Color" type="text" placeholder="Color">
+                                    <span asp-validation-for="Color" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <select asp-for="Year" placeholder>
+                                        <option value="">Year</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                        <option value="2006">2006</option>
+                                        <option value="2005">2005</option>
+                                        <option value="2004">2004</option>
+                                        <option value="2003">2003</option>
+                                        <option value="2002">2002</option>
+                                        <option value="2001">2001</option>
+                                        <option value="2000">2000</option>
+                                        <option value="1999">1999</option>
+                                        <option value="1998">1998</option>
+                                        <option value="1997">1997</option>
+                                        <option value="1996">1996</option>
+                                        <option value="1995">1995</option>
+                                        <option value="1994">1994</option>
+                                        <option value="1993">1993</option>
+                                        <option value="1992">1992</option>
+                                        <option value="1991">1991</option>
+                                        <option value="1990">1990</option>
+                                    </select>
+                                    <span asp-validation-for="Year" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <input asp-for="Image" type="text" placeholder="Image">
+                                    <span asp-validation-for="Image" class="text-danger"></span>
+                                </div>
+                                <div>
+                                    <select asp-for="PassengerSeats">
+                                        <option value="">Passenger seats</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                    </select>
+                                    <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-check">
+                                    <input asp-for="AllowedSmoking" type="checkbox">
+                                    <label asp-for="AllowedSmoking"> Allowed smoking</label><br>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="AllowedFood" type="checkbox">
+                                    <label asp-for="AllowedFood"> Allowed food</label><br>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="AllowedDrinks" type="checkbox">
+                                    <label asp-for="AllowedDrinks"> Allowed drinks</label><br>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="PlaceForLuggage" type="checkbox">
+                                    <label asp-for="PlaceForLuggage"> Place for luggage</label><br>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="AllowedPets" type="checkbox">
+                                    <label asp-for="AllowedPets"> Allowed pets</label><br>
+                                </div>
+                                <div class="form-check">
+                                    <input asp-for="HasAirConditioning" type="checkbox">
+                                    <label asp-for="HasAirConditioning"> Has air conditioning</label><br>
+                                </div>
+                            </div>
+                            <div class="form-btn">
+                                <button type="submit"><i class="fa fa-sign-in"></i> Create trip</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,7 +1,7 @@
 ﻿@model TripFinder.Web.ViewModels.Trips.TripCreateInputModel;
 
 @{
-    ViewData["Title"] = "DriverCreate";
+    ViewData["Title"] = "Create";
 }
 
 <section id="page-title-area" class="section-padding overlay">
@@ -16,8 +16,8 @@
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-8 m-auto">
-                <div class="login-page-content">
-                    <div class="login-form">
+                <div class="form-page-content">
+                    <div class="form">
                         <form method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div>
@@ -48,7 +48,7 @@
                                 <input asp-for="AdditionalInformation" type="text" placeholder="Additional Information">
                                 <span asp-validation-for="AdditionalInformation" class="text-danger"></span>
                             </div>
-                            <div class="log-btn">
+                            <div class="form-btn">
                                 <button type="submit"><i class="fa fa-sign-in"></i> Create trip</button>
                             </div>
                         </form>

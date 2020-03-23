@@ -16,8 +16,8 @@
         </div>
         <div class="row">
             <div class="col-lg-5 col-md-8 m-auto">
-                <div class="login-page-content">
-                    <div class="login-form">
+                <div class="form-page-content">
+                    <div class="form">
                         <form method="post">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <div class="name">
@@ -48,7 +48,7 @@
                                 <input asp-for="Input.ConfirmPassword" type="password" placeholder="Confirm Password">
                                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
-                            <div class="log-btn">
+                            <div class="form-btn">
                                 <button type="submit"><i class="fa fa-check-square"></i> Sign Up</button>
                             </div>
                         </form>

@@ -2919,7 +2919,7 @@ body,
     Login Page Css
 ================================*/
 
-.login-page-content {
+.form-page-content {
 	-webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 	padding-bottom: 35px;
@@ -2927,12 +2927,12 @@ body,
 	border-radius: 3px;
 }
 
-.login-form {
+.form {
 	background-color: transparent;
 	padding: 15px 20px 15px;
 }
 
-.login-form h3 {
+.form h3 {
 	color: #ffd000;
 	font-size: 25px;
 	font-weight: 600;
@@ -2940,8 +2940,9 @@ body,
 	text-transform: uppercase;
 }
 
-	.login-form input,
-	.login-form button {
+	.form input,
+	.form select,
+	.form button {
 		background-color: white;
 		border: 1px solid white;
 		border-radius: 4px;
@@ -2953,11 +2954,11 @@ body,
 		width: 100%;
 	}
 
-.login-form input:focus {
+.form input:focus {
 	border-color: #fff;
 }
 
-.log-btn button {
+.form-btn button {
 	background-color: #ffd000;
 	border-color: #fff;
 	border-radius: 4px;
@@ -2967,7 +2968,7 @@ body,
 	font-weight: 700;
 }
 
-.log-btn button:hover {
+.form-btn button:hover {
 	background-color: #222;
 	border-color: #222;
 	color: #fff;
