@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using TripFinder.Services.Data;
+    using TripFinder.Web.ViewModels.Users;
 
     public class UsersController : BaseController
     {
@@ -16,7 +17,7 @@
         [Authorize]
         public IActionResult Details(string id)
         {
-            var userProfileViewModel = this.usersService.GetUserById(id);
+            var userProfileViewModel = this.usersService.GetById<UserDetailsViewModel>(id);
 
             return this.View(userProfileViewModel);
         }

@@ -1,9 +1,7 @@
 ﻿namespace TripFinder.Services.Data
 {
-    using TripFinder.Web.ViewModels.Users;
-
     public interface IUsersService
     {
-        UserDetailsViewModel GetUserById(string userId);
+        T GetById<T>(string id);
     }
 }

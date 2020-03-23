@@ -5,7 +5,6 @@
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
-    using TripFinder.Web.ViewModels.Users;
 
     public class UsersService : IUsersService
     {
@@ -16,13 +15,13 @@
             this.usersRepository = usersRepository;
         }
 
-        public UserDetailsViewModel GetUserById(string userId)
+        public T GetById<T>(string id)
         {
             var user = this.usersRepository
-                .AllAsNoTracking()
-                .Where(u => u.Id == userId)
-                .To<UserDetailsViewModel>()
-                .SingleOrDefault();
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
 
             return user;
         }

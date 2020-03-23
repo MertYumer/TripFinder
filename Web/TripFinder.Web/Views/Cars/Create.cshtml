@@ -18,8 +18,8 @@
             <div class="col-lg-8 col-md-8 m-auto">
                 <div class="form-page-content">
                     <div class="form">
-                        <form class="col-lg-8 col-md-8 m-auto" method="post">
-                            <div class="col">
+                        <form class="row mb-3" method="post">
+                            <div class="col-12 col-lg-6">
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <div>
                                     <input asp-for="Make" type="text" placeholder="Make">
@@ -93,34 +93,34 @@
                                     <span asp-validation-for="PassengerSeats" class="text-danger"></span>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-check">
+                            <div class="col-12 col-lg-6" style="text-align:left">
+                                <div>
                                     <input asp-for="AllowedSmoking" type="checkbox">
-                                    <label asp-for="AllowedSmoking"> Allowed smoking</label><br>
+                                    <label asp-for="AllowedSmoking">  Allowed smoking</label>
                                 </div>
-                                <div class="form-check">
-                                    <input asp-for="AllowedFood" type="checkbox">
-                                    <label asp-for="AllowedFood"> Allowed food</label><br>
+                                <div>
+                                    <input asp-for="AllowedFood" type="checkbox" class="inline-block-child">
+                                    <label asp-for="AllowedFood"> Allowed food</label>
                                 </div>
-                                <div class="form-check">
+                                <div>
                                     <input asp-for="AllowedDrinks" type="checkbox">
                                     <label asp-for="AllowedDrinks"> Allowed drinks</label><br>
                                 </div>
-                                <div class="form-check">
+                                <div>
                                     <input asp-for="PlaceForLuggage" type="checkbox">
                                     <label asp-for="PlaceForLuggage"> Place for luggage</label><br>
                                 </div>
-                                <div class="form-check">
+                                <div>
                                     <input asp-for="AllowedPets" type="checkbox">
                                     <label asp-for="AllowedPets"> Allowed pets</label><br>
                                 </div>
-                                <div class="form-check">
+                                <div>
                                     <input asp-for="HasAirConditioning" type="checkbox">
                                     <label asp-for="HasAirConditioning"> Has air conditioning</label><br>
                                 </div>
                             </div>
-                            <div class="form-btn">
-                                <button type="submit"><i class="fa fa-sign-in"></i> Create trip</button>
+                            <div class="col justify-content-center form-btn">
+                                <button class="col-4" type="submit">Create trip</button>
                             </div>
                         </form>
                     </div>

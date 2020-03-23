@@ -1,20 +1,17 @@
 ﻿namespace TripFinder.Web.ViewModels.Cars
 {
-    using System.ComponentModel.DataAnnotations;
-
     using TripFinder.Data.Models;
+    using TripFinder.Services.Mapping;
 
-    public class CarCreateInputModel
+    public class CarDetailsViewModel : IMapFrom<Car>
     {
-        [Required]
-        [MinLength(3)]
-        [MaxLength(20)]
         public string Make { get; set; }
 
-        [Required]
-        [MinLength(3)]
-        [MaxLength(20)]
         public string Model { get; set; }
+
+        public string UserFirstName { get; set; }
+
+        public string UserLastName { get; set; }
 
         public CarType Type { get; set; }
 
@@ -24,7 +21,6 @@
 
         public string Image { get; set; }
 
-        [Required]
         public int PassengerSeats { get; set; }
 
         public bool AllowedSmoking { get; set; }

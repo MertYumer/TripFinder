@@ -61,6 +61,7 @@
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<IUsersService, UsersService>();
             services.AddTransient<ITripsService, TripsService>();
+            services.AddTransient<ICarsService, CarsService>();
 
             // Singleton services
             Account account = new Account(
