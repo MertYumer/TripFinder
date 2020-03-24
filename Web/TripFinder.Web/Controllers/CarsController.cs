@@ -48,7 +48,7 @@
                 return this.View();
             }
 
-            return this.Redirect("/Home/Index");
+            return this.RedirectToAction("Details", new { id = carId });
         }
 
         public IActionResult Details(string id)

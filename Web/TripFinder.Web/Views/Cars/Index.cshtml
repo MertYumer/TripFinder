@@ -14,11 +14,12 @@
                 <div class="section-title  text-center">
                     @if (user.CarId == null)
                     {
-                        <h3>You don't have a registered car. Create one</h3>
+                        <h3>You don't have a registered car. Add one.</h3>
                         <span class="title-line"><i class="fa fa-car"></i></span>
-                        <a asp-area="" asp-controller="Cars" asp-action="Create">Create car</a>
+                        <div class="col-4 col-md-auto">
+                            <a class="btn btn-primary" asp-area="" asp-controller="Cars" asp-action="Create"><i class="fa fa-plus-circle"></i> Create car</a>
+                        </div>
                     }
-
                     else
                     {
                         <h3>Car details</h3>
