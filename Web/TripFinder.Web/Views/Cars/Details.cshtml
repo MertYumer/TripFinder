@@ -10,75 +10,81 @@
             <div class="col-md-4 mb-3">
                 <div class="d-flex flex-row justify-content-center">
                     <div>
-                        <img src="/img/avatar.png" alt="Profile Picture" class="rounded-circle img-fluid profile-picture">
+                        <img src="/img/car-avatar.png" alt="Profile Picture" class="rounded-circle img-fluid profile-picture">
                     </div>
                 </div>
             </div>
             <div class="col-md-8">
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Car: </div>
-                        <h3>@Model.Make @Model.Model</h3>
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Car: </div>
+                                <h3>@Model.Make @Model.Model</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Owner:</div>
+                                <h3>@Model.UserFirstName @Model.UserLastName</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Type:</div>
+                                <h3>@Model.Type</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Color:</div>
+                                <h3>@Model.Color</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Year:</div>
+                                <h3>@Model.Year</h3>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Owner:</div>
-                        <h3>@Model.UserFirstName @Model.UserLastName</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Type:</div>
-                        <h3>@Model.Type</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Color:</div>
-                        <h3>@Model.Color</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Year:</div>
-                        <h3>@Model.Year</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Allowed smoking:</div>
-                        <h3>@Model.AllowedSmoking</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Allowed food:</div>
-                        <h3>@Model.AllowedFood</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Allowed drinks:</div>
-                        <h3>@Model.AllowedDrinks</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Place for luggage:</div>
-                        <h3>@Model.PlaceForLuggage</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Allowed pets:</div>
-                        <h3>@Model.AllowedPets</h3>
-                    </div>
-                </div>
-                <div class="row mb-3 mt-3 mt-md-0">
-                    <div class="col">
-                        <div>Has air conditioning:</div>
-                        <h3>@Model.HasAirConditioning</h3>
+                    <div class="col-12 col-lg-6">
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed smoking:</div>
+                                <h3>@Model.AllowedSmoking</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed food:</div>
+                                <h3>@Model.AllowedFood</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed drinks:</div>
+                                <h3>@Model.AllowedDrinks</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Place for luggage:</div>
+                                <h3>@Model.PlaceForLuggage</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed pets:</div>
+                                <h3>@Model.AllowedPets</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Has air conditioning:</div>
+                                <h3>@Model.HasAirConditioning</h3>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
