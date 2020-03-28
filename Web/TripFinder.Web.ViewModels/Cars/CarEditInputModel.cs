@@ -4,7 +4,7 @@
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
 
-    public class CarEditViewModel : IMapFrom<Car>
+    public class CarEditInputModel : IMapTo<Car>
     {
         public string Id { get; set; }
 

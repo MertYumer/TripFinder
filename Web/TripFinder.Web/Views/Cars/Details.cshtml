@@ -10,14 +10,7 @@
             <div class="col-md-4 mb-3">
                 <div class="d-flex flex-row justify-content-center">
                     <div>
-                        @if (Model.ImageUrl == null)
-                        {
-                            <img src="/img/car-avatar.png" class="rounded-circle img-fluid profile-picture">
-                        }
-                        else
-                        {
-                            <img src="@Model.ImageUrl" class="rounded-circle img-fluid profile-picture">
-                        }
+                        <img src="@Model.ImageUrl" class="rounded-circle img-fluid profile-picture">
                     </div>
                 </div>
             </div>

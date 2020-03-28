@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -61,14 +62,7 @@
 
         public IActionResult Details(string id)
         {
-            var carDetailsViewModel = this.carsService.GetById<CarDetailsViewModel>(id);
-
-            return this.View(carDetailsViewModel);
-        }
-
-        public IActionResult Edit(string id)
-        {
-            var viewModel = this.carsService.GetById<CarEditViewModel>(id);
+            var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
 
             viewModel.ImageUrl = viewModel.ImageUrl == null
                 ? "/img/car-avatar.png"
@@ -77,17 +71,29 @@
             return this.View(viewModel);
         }
 
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
+
+            if (viewModel.ImageUrl != null)
+            {
+                viewModel.ImageUrl = this.imagePathPrefix + this.imageSizing + viewModel.ImageUrl;
+            }
+
+            return this.View(viewModel);
+        }
+
         [HttpPost]
-        public async Task<IActionResult> Edit(CarEditViewModel viewModel)
+        public async Task<IActionResult> Edit(CarEditInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(viewModel.Id);
+                return this.View(inputModel);
             }
 
-            await this.carsService.UpdateAsync(viewModel);
+            await this.carsService.UpdateAsync(inputModel);
 
-            return this.View(viewModel.Id);
+            return this.RedirectToAction("Details", new { id = inputModel.Id });
         }
     }
 }

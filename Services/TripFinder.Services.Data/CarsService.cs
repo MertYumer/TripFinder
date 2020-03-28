@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
+    using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
@@ -65,6 +66,7 @@
         {
             var car = this.carsRepository
                 .All()
+                .Include(c => c.Image)
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();
@@ -72,7 +74,7 @@
             return car;
         }
 
-        public async Task<string> UpdateAsync(CarEditViewModel inputModel)
+        public async Task<string> UpdateAsync(CarEditInputModel inputModel)
         {
             var car = this.carsRepository
                 .All()
@@ -83,13 +85,35 @@
                 return null;
             }
 
-            var oldImageId = car.ImageId;
-            var newImage = await this.imagesService.CreateAsync(inputModel.NewImage);
-            car.ImageId = newImage.Id;
-            this.carsRepository.Update(car);
-            await this.carsRepository.SaveChangesAsync();
+            car.Make = inputModel.Make;
+            car.Model = inputModel.Model;
+            car.Type = inputModel.Type;
+            car.Year = inputModel.Year;
+            car.Color = inputModel.Color;
+            car.PassengerSeats = inputModel.PassengerSeats;
+            car.HasAirConditioning = inputModel.HasAirConditioning;
+            car.AllowedDrinks = inputModel.AllowedDrinks;
+            car.AllowedFood = inputModel.AllowedFood;
+            car.AllowedPets = inputModel.AllowedPets;
+            car.AllowedSmoking = inputModel.AllowedSmoking;
+            car.PlaceForLuggage = inputModel.PlaceForLuggage;
 
-            await this.imagesService.DeleteAsync(oldImageId);
+            if (inputModel.NewImage == null)
+            {
+                this.carsRepository.Update(car);
+                await this.carsRepository.SaveChangesAsync();
+            }
+            else
+            {
+                var oldImageId = car.ImageId;
+                var newImage = await this.imagesService.CreateAsync(inputModel.NewImage);
+                car.ImageId = newImage.Id;
+
+                this.carsRepository.Update(car);
+                await this.carsRepository.SaveChangesAsync();
+
+                await this.imagesService.DeleteAsync(oldImageId);
+            }
 
             return car.Id;
         }

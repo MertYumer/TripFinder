@@ -1,6 +1,7 @@
 ﻿namespace TripFinder.Services.Data
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using CloudinaryDotNet;
@@ -40,9 +41,21 @@
             return image;
         }
 
-        public Task DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            var image = this.imagesRepository
+                 .All()
+                 .FirstOrDefault(i => i.Id == id);
+
+            if (image != null)
+            {
+                var avatarUrl = image.ImageUrl;
+
+                this.imagesRepository.Delete(image);
+                await this.imagesRepository.SaveChangesAsync();
+
+                await ApplicationCloudinary.DeleteFileAsync(this.cloudinary, avatarUrl);
+            }
         }
     }
 }

@@ -9,7 +9,7 @@
     {
         Task<string> CreateAsync(CarCreateInputModel inputModel, ApplicationUser user);
 
-        Task<string> UpdateAsync(CarEditViewModel inputModel);
+        Task<string> UpdateAsync(CarEditInputModel inputModel);
 
         T GetById<T>(string id);
     }
