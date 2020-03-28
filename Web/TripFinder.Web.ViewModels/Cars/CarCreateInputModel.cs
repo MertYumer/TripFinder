@@ -22,8 +22,6 @@
 
         public int? Year { get; set; }
 
-        public string Image { get; set; }
-
         [Required]
         public int PassengerSeats { get; set; }
 

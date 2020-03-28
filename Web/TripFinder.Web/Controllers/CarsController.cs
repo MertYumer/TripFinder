@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using TripFinder.Data.Models;
     using TripFinder.Services.Data;
     using TripFinder.Web.ViewModels.Cars;
@@ -14,11 +15,18 @@
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ICarsService carsService;
+        private readonly IConfiguration configuration;
 
-        public CarsController(UserManager<ApplicationUser> userManager, ICarsService carsService)
+        private readonly string imagePathPrefix;
+        private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
+        private readonly string imageSizing = "w_300,h_300,c_crop,g_face,r_max/w_300/";
+
+        public CarsController(UserManager<ApplicationUser> userManager, ICarsService carsService, IConfiguration configuration)
         {
             this.userManager = userManager;
             this.carsService = carsService;
+            this.configuration = configuration;
+            this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
         }
 
         public IActionResult Index()
@@ -53,9 +61,33 @@
 
         public IActionResult Details(string id)
         {
-            var carProfileViewModel = this.carsService.GetById<CarDetailsViewModel>(id);
+            var carDetailsViewModel = this.carsService.GetById<CarDetailsViewModel>(id);
 
-            return this.View(carProfileViewModel);
+            return this.View(carDetailsViewModel);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            var viewModel = this.carsService.GetById<CarEditViewModel>(id);
+
+            viewModel.ImageUrl = viewModel.ImageUrl == null
+                ? "/img/car-avatar.png"
+                : this.imagePathPrefix + this.imageSizing + viewModel.ImageUrl;
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CarEditViewModel viewModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(viewModel.Id);
+            }
+
+            await this.carsService.UpdateAsync(viewModel);
+
+            return this.View(viewModel.Id);
         }
     }
 }

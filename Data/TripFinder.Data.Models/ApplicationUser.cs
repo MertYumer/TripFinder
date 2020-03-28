@@ -52,7 +52,9 @@ namespace TripFinder.Data.Models
         [MaxLength(20)]
         public override string Email { get; set; }
 
-        public string AvatarImage { get; set; }
+        public string AvatarImageId { get; set; }
+
+        public virtual Image AvatarImage { get; set; }
 
         public int? Age { get; set; }
 

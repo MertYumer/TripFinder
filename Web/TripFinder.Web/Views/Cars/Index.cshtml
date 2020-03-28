@@ -26,8 +26,8 @@
                         <span class="title-line"><i class="fa fa-car"></i></span>
                         <div class="col-4 col-md-auto">
                             <a class="btn btn-info" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@user.CarId"><i class="fa fa-info"></i> View details</a>
-                            <a class="btn btn-warning" asp-area="" asp-controller="Cars" asp-action="Edit"><i class="fa fa-pencil"></i> Modify car</a>
-                            <a class="btn btn-danger" asp-area="" asp-controller="Cars" asp-action="Delete"><i class="fa fa-remove"></i> Delete car</a>
+                            <a class="btn btn-warning" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@user.CarId"><i class="fa fa-pencil"></i> Modify car</a>
+                            <a class="btn btn-danger" asp-area="" asp-controller="Cars" asp-action="Delete" asp-route-id="@user.CarId"><i class="fa fa-trash"></i> Delete car</a>
                         </div>
                     }
                 </div>

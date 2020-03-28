@@ -45,6 +45,8 @@
     <Compile Remove="Migrations\20200320174302_ChangeDeleteBehavior.Designer.cs" />
     <Compile Remove="Migrations\20200320181136_AddForeignKey.cs" />
     <Compile Remove="Migrations\20200320181136_AddForeignKey.Designer.cs" />
+    <Compile Remove="Migrations\20200328025514_AddedImageColumn.cs" />
+    <Compile Remove="Migrations\20200328025514_AddedImageColumn.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

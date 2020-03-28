@@ -1,0 +1,142 @@
+﻿@model TripFinder.Web.ViewModels.Cars.CarEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <section id="page-title-area" class="section-padding overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="d-flex flex-row justify-content-center">
+                        <div>
+                            @if (Model.ImageUrl == null)
+                            {
+                                <img src="/img/car-avatar.png" class="rounded-circle img-fluid profile-picture">
+                            }
+                            else
+                            {
+                                <img src="@Model.ImageUrl" class="rounded-circle img-fluid profile-picture">
+                            }
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        @if (Model.ImageUrl == null)
+                        {
+                            <label class="form-btn">Add photo</label>
+                        }
+                        else
+                        {
+                            <label class="form-btn">Change photo</label>
+                        }
+                        <input asp-for="ImageUrl" type="file">
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8 form">
+                    <form class="row mb-3" method="post">
+                        <div class="col-12 col-lg-6">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div>
+                                <input asp-for="Make" type="text" placeholder="Make">
+                                <span asp-validation-for="Make" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <input asp-for="Model" type="text" placeholder="Model">
+                                <span asp-validation-for="Model" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <select asp-for="Type" asp-items="Html.GetEnumSelectList<CarType>()">
+                                    <option value="">Car type</option>
+                                </select>
+                                <span asp-validation-for="Type" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <input asp-for="Color" type="text" placeholder="Color">
+                                <span asp-validation-for="Color" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <select asp-for="Year" placeholder>
+                                    <option value="">Year</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2010">2010</option>
+                                    <option value="2009">2009</option>
+                                    <option value="2008">2008</option>
+                                    <option value="2007">2007</option>
+                                    <option value="2006">2006</option>
+                                    <option value="2005">2005</option>
+                                    <option value="2004">2004</option>
+                                    <option value="2003">2003</option>
+                                    <option value="2002">2002</option>
+                                    <option value="2001">2001</option>
+                                    <option value="2000">2000</option>
+                                    <option value="1999">1999</option>
+                                    <option value="1998">1998</option>
+                                    <option value="1997">1997</option>
+                                    <option value="1996">1996</option>
+                                    <option value="1995">1995</option>
+                                    <option value="1994">1994</option>
+                                    <option value="1993">1993</option>
+                                    <option value="1992">1992</option>
+                                    <option value="1991">1991</option>
+                                    <option value="1990">1990</option>
+                                </select>
+                                <span asp-validation-for="Year" class="text-danger"></span>
+                            </div>
+                            <div>
+                                <select asp-for="PassengerSeats">
+                                    <option value="">Passenger seats</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                                <span asp-validation-for="PassengerSeats" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6" style="text-align:left">
+                            <div>
+                                <input asp-for="AllowedSmoking" type="checkbox">
+                                <label asp-for="AllowedSmoking">  Allowed smoking</label>
+                            </div>
+                            <div>
+                                <input asp-for="AllowedFood" type="checkbox" class="inline-block-child">
+                                <label asp-for="AllowedFood"> Allowed food</label>
+                            </div>
+                            <div>
+                                <input asp-for="AllowedDrinks" type="checkbox">
+                                <label asp-for="AllowedDrinks"> Allowed drinks</label><br>
+                            </div>
+                            <div>
+                                <input asp-for="PlaceForLuggage" type="checkbox">
+                                <label asp-for="PlaceForLuggage"> Place for luggage</label><br>
+                            </div>
+                            <div>
+                                <input asp-for="AllowedPets" type="checkbox">
+                                <label asp-for="AllowedPets"> Allowed pets</label><br>
+                            </div>
+                            <div>
+                                <input asp-for="HasAirConditioning" type="checkbox">
+                                <label asp-for="HasAirConditioning"> Has air conditioning</label><br>
+                            </div>
+                        </div>
+                        <div class="col justify-content-center form-btn">
+                            <button class="col-4" type="submit">Edit car</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+

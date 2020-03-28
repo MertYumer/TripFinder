@@ -27,6 +27,8 @@
 
         public DbSet<Car> Cars { get; set; }
 
+        public DbSet<Image> Images { get; set; }
+
         public DbSet<Trip> Trips { get; set; }
 
         public DbSet<TownsDistance> TownsDistances { get; set; }
@@ -142,6 +144,16 @@
                 .WithOne(t => t.Car)
                 .HasForeignKey(t => t.CarId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Image>()
+                .HasOne(i => i.User)
+                .WithOne(up => up.AvatarImage)
+                .HasForeignKey<ApplicationUser>(up => up.AvatarImageId);
+
+            modelBuilder.Entity<Image>()
+                .HasOne(i => i.Car)
+                .WithOne(up => up.Image)
+                .HasForeignKey<Car>(up => up.ImageId);
         }
 
         private void ApplyAuditInfoRules()

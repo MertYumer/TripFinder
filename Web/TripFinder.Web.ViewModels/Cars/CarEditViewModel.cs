@@ -1,10 +1,13 @@
 ﻿namespace TripFinder.Web.ViewModels.Cars
 {
+    using Microsoft.AspNetCore.Http;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
 
-    public class CarDetailsViewModel : IMapFrom<Car>
+    public class CarEditViewModel : IMapFrom<Car>
     {
+        public string Id { get; set; }
+
         public string Make { get; set; }
 
         public string Model { get; set; }
@@ -19,9 +22,9 @@
 
         public int? Year { get; set; }
 
-        public string ImageId { get; set; }
-
         public string ImageUrl { get; set; }
+
+        public IFormFile NewImage { get; set; }
 
         public int PassengerSeats { get; set; }
 

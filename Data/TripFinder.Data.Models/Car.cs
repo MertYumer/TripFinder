@@ -31,7 +31,9 @@
 
         public int? Year { get; set; }
 
-        public string Image { get; set; }
+        public string ImageId { get; set; }
+
+        public virtual Image Image { get; set; }
 
         [Required]
         public int PassengerSeats { get; set; }

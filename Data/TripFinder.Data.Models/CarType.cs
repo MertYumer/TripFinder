@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TripFinder.Data.Models
+﻿namespace TripFinder.Data.Models
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum CarType
     {
         [Display(Name = "Hatchback")]
