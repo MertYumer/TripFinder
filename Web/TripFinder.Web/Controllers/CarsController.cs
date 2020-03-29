@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -20,7 +19,7 @@
 
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
-        private readonly string imageSizing = "w_300,h_300,c_crop,g_face,r_max/w_300/";
+        private readonly string imageSizing = "w_300,h_300,/w_300/";
 
         public CarsController(UserManager<ApplicationUser> userManager, ICarsService carsService, IConfiguration configuration)
         {
@@ -64,6 +63,11 @@
         {
             var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
 
+            if (viewModel == null)
+            {
+                return this.Redirect("/");
+            }
+
             viewModel.ImageUrl = viewModel.ImageUrl == null
                 ? "/img/car-avatar.png"
                 : this.imagePathPrefix + this.imageSizing + viewModel.ImageUrl;
@@ -75,10 +79,14 @@
         {
             var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
 
-            if (viewModel.ImageUrl != null)
+            if (viewModel == null)
             {
-                viewModel.ImageUrl = this.imagePathPrefix + this.imageSizing + viewModel.ImageUrl;
+                return this.Redirect("/");
             }
+
+            viewModel.ImageUrl = viewModel.ImageUrl == null
+                ? "/img/car-avatar.png"
+                : this.imagePathPrefix + this.imageSizing + viewModel.ImageUrl;
 
             return this.View(viewModel);
         }
@@ -91,9 +99,14 @@
                 return this.View(inputModel);
             }
 
-            await this.carsService.UpdateAsync(inputModel);
+            var carId = await this.carsService.UpdateAsync(inputModel);
 
-            return this.RedirectToAction("Details", new { id = inputModel.Id });
+            if (carId == null)
+            {
+                return this.RedirectToAction("Edit", new { id = inputModel.Id });
+            }
+
+            return this.RedirectToAction("Details", new { id = carId });
         }
     }
 }

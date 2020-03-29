@@ -10,14 +10,7 @@
             <div class="col-md-4 mb-3">
                 <div class="d-flex flex-row justify-content-center">
                     <div>
-                        @if (Model.ImageUrl == null)
-                        {
-                            <img src="/img/car-avatar.png" class="rounded-circle img-fluid profile-picture">
-                        }
-                        else
-                        {
-                            <img src="@Model.ImageUrl" class="rounded-circle img-fluid profile-picture">
-                        }
+                        <img src="@Model.ImageUrl" class="rounded-circle img-fluid">
                     </div>
                 </div>
             </div>
@@ -118,9 +111,9 @@
                             <input asp-for="HasAirConditioning" type="checkbox">
                             <label asp-for="HasAirConditioning"> Has air conditioning</label><br>
                         </div>
-                        <div class="text-center">
-                            <input asp-for="NewImage" type="file" name="NewImage" accept=".png,.jpg,.jpeg">
-                            <label asp-for="NewImage" class="form-btn">Change photo</label>
+                        <div>
+                            <label asp-for="NewImage" style="margin: 0">Change photo</label>
+                            <input asp-for="NewImage" type="file" name="NewImage" accept=".png,.jpg,.jpeg" style="background-color: transparent; border-color: transparent; margin: 0; color: #ffd000">
                             <span asp-validation-for="NewImage" class="text-danger"></span>
                         </div>
                     </div>

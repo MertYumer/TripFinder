@@ -11,7 +11,7 @@
             this.Id = Guid.NewGuid().ToString();
         }
 
-        public string ImageUrl { get; set; }
+        public string Url { get; set; }
 
         public string UserId { get; set; }
 

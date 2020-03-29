@@ -1,6 +1,5 @@
 ﻿namespace TripFinder.Services.Data
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -33,7 +32,7 @@
         {
             var compleateUrl = await ApplicationCloudinary.UploadFileAsync(this.cloudinary, imageSource);
             var url = compleateUrl.Replace(this.imagePathPrefix, string.Empty);
-            var image = new Image { ImageUrl = url };
+            var image = new Image { Url = url };
 
             await this.imagesRepository.AddAsync(image);
             await this.imagesRepository.SaveChangesAsync();
@@ -49,7 +48,7 @@
 
             if (image != null)
             {
-                var avatarUrl = image.ImageUrl;
+                var avatarUrl = image.Url;
 
                 this.imagesRepository.Delete(image);
                 await this.imagesRepository.SaveChangesAsync();

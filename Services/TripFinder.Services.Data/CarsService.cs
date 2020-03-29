@@ -3,7 +3,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using CloudinaryDotNet;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using TripFinder.Data.Common.Repositories;
@@ -17,23 +16,14 @@
         private readonly IRepository<Car> carsRepository;
         private readonly IImagesService imagesService;
 
-        private readonly IConfiguration configuration;
-
-        private readonly string imagePathPrefix;
-        private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
-        private readonly string imageSizing = "w_300,h_300,c_crop,g_face,r_max/w_300/";
-
         public CarsService(
             IRepository<ApplicationUser> usersRepository,
             IRepository<Car> carsRepository,
-            IImagesService imagesService,
-            IConfiguration configuration)
+            IImagesService imagesService)
         {
             this.usersRepository = usersRepository;
             this.carsRepository = carsRepository;
             this.imagesService = imagesService;
-            this.configuration = configuration;
-            this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
         }
 
         public async Task<string> CreateAsync(CarCreateInputModel inputModel, ApplicationUser user)
@@ -66,7 +56,6 @@
         {
             var car = this.carsRepository
                 .All()
-                .Include(c => c.Image)
                 .Where(x => x.Id == id)
                 .To<T>()
                 .FirstOrDefault();
