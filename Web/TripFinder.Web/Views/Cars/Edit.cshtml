@@ -17,7 +17,6 @@
             <div class="col-md-8 form">
                 <form class="row mb-3" method="post" enctype="multipart/form-data">
                     <div class="col-12 col-lg-6">
-                        <div asp-validation-summary="All" class="text-danger"></div>
                         <div>
                             <input asp-for="Make" type="text" placeholder="Make">
                             <span asp-validation-for="Make" class="text-danger"></span>
@@ -118,8 +117,8 @@
                         </div>
                     </div>
                     <div class="col justify-content-center form-btn">
-                        <button class="col-4 btn" type="submit"asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit car</button>
-                        <button class="col-4 btn" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-undo"></i> Cancel</button>
+                        <button class="col-4" type="submit" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit car</button>
+                        <button class="col-4" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-undo"></i> Cancel</button>
                     </div>
                 </form>
             </div>

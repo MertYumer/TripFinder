@@ -16,9 +16,7 @@
                         <div>Profile of</div>
                         <h3>@Model.FirstName @Model.LastName</h3>
                     </div>
-                    <div class="col-12 col-md-auto">
-                        <a class="btn btn-warning btn-block" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit</a>
-                    </div>
+                    
                 </div>
                 <div class="row mb-3 mt-3 mt-md-0">
                     <div class="col">
@@ -47,8 +45,9 @@
                     </div>
                 </div>
                 <div class="row text-center mb-4 mb-md-3">
-                    <div class="form-btn" style="margin: auto; width:30%">
-                        <a class="col-10 btn btn-warning" type="submit" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-undo"></i> Cancel</a>
+                    <div class="col-4 col-md-auto">
+                        <a class="btn btn-warning" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit</a>
+                        <a class="btn btn-warning" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
                     </div>
                 </div>
             </div>
