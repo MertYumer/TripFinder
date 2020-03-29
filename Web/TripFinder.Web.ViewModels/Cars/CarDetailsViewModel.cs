@@ -1,5 +1,7 @@
 ﻿namespace TripFinder.Web.ViewModels.Cars
 {
+    using System.ComponentModel.DataAnnotations;
+
     using Microsoft.AspNetCore.Http;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
@@ -8,8 +10,14 @@
     {
         public string Id { get; set; }
 
+        [Required]
+        [MinLength(3)]
+        [MaxLength(20)]
         public string Make { get; set; }
 
+        [Required]
+        [MinLength(2)]
+        [MaxLength(20)]
         public string Model { get; set; }
 
         public string UserFirstName { get; set; }
@@ -28,6 +36,7 @@
 
         public IFormFile NewImage { get; set; }
 
+        [Required]
         public int PassengerSeats { get; set; }
 
         public bool AllowedSmoking { get; set; }

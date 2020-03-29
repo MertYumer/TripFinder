@@ -1,0 +1,70 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TripFinder.Data.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@model TripFinder.Web.ViewModels.Users.UserEditViewModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+    var user = await this.UserManager.GetUserAsync(this.User);
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <div class="d-flex flex-row justify-content-center">
+                    <div>
+                        <img src="@Model.AvatarImageUrl" class="rounded-circle">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 form">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="col-lg-8">
+                        <div>
+                            <input asp-for="FirstName" type="text" placeholder="First name">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <input asp-for="LastName" type="text" placeholder="Last name">
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <input asp-for="Email" type="text" placeholder="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <input asp-for="Age" type="number" min="1" max="100" placeholder="Age">
+                            <span asp-validation-for="Age" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()">
+                                <option value="">Gender</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <input asp-for="PhoneNumber" type="text" placeholder="Phone number">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div>
+                            <label asp-for="NewImage" style="margin: 0; font-size: large">Change photo:</label>
+                            <input asp-for="NewImage" type="file" name="NewImage" accept=".png,.jpg,.jpeg" style="background-color: transparent; border-color: transparent; margin: 0; padding: 10px 10px; color: #ffd000; width: 60%; text-align-last: left">
+                            <span asp-validation-for="NewImage" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col justify-content-center form-btn">
+                        <button class="col-4" type="submit" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id"><i class="fa fa-pencil"></i> Edit profile</button>
+                        <button class="col-4" type="submit" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id"><i class="fa fa-undo"></i> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
