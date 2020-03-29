@@ -11,6 +11,8 @@
 
         Task<string> UpdateAsync(CarEditInputModel inputModel);
 
+        Task<string> DeleteAsync(string id);
+
         T GetById<T>(string id);
     }
 }

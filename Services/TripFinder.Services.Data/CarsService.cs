@@ -13,12 +13,12 @@
     public class CarsService : ICarsService
     {
         private readonly IRepository<ApplicationUser> usersRepository;
-        private readonly IRepository<Car> carsRepository;
+        private readonly IDeletableEntityRepository<Car> carsRepository;
         private readonly IImagesService imagesService;
 
         public CarsService(
             IRepository<ApplicationUser> usersRepository,
-            IRepository<Car> carsRepository,
+            IDeletableEntityRepository<Car> carsRepository,
             IImagesService imagesService)
         {
             this.usersRepository = usersRepository;
@@ -50,17 +50,6 @@
             await this.usersRepository.SaveChangesAsync();
 
             return user.CarId;
-        }
-
-        public T GetById<T>(string id)
-        {
-            var car = this.carsRepository
-                .All()
-                .Where(x => x.Id == id)
-                .To<T>()
-                .FirstOrDefault();
-
-            return car;
         }
 
         public async Task<string> UpdateAsync(CarEditInputModel inputModel)
@@ -105,6 +94,41 @@
             }
 
             return car.Id;
+        }
+
+        public async Task<string> DeleteAsync(string id)
+        {
+            var user = this.usersRepository
+                .All()
+                .Include(u => u.Car)
+                .FirstOrDefault(u => u.CarId == id);
+
+            if (user.CarId == null)
+            {
+                return null;
+            }
+
+            var carId = user.CarId;
+            user.CarId = null;
+
+            this.carsRepository.Delete(user.Car);
+            await this.carsRepository.SaveChangesAsync();
+
+            this.usersRepository.Update(user);
+            await this.usersRepository.SaveChangesAsync();
+
+            return carId;
+        }
+
+        public T GetById<T>(string id)
+        {
+            var car = this.carsRepository
+                .All()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            return car;
         }
     }
 }

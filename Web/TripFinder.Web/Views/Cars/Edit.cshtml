@@ -118,7 +118,8 @@
                         </div>
                     </div>
                     <div class="col justify-content-center form-btn">
-                        <button class="col-4" type="submit">Edit car</button>
+                        <button class="col-4 btn" type="submit"asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit car</button>
+                        <button class="col-4 btn" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-undo"></i> Cancel</button>
                     </div>
                 </form>
             </div>

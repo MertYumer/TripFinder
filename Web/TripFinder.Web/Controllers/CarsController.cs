@@ -108,5 +108,30 @@
 
             return this.RedirectToAction("Details", new { id = carId });
         }
+
+        public IActionResult Delete(string id)
+        {
+            var viewModel = this.carsService.GetById<CarDeleteViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.Redirect("/");
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            var carId = await this.carsService.DeleteAsync(id);
+
+            if (carId == null)
+            {
+                return this.RedirectToAction("Delete", new { id });
+            }
+
+            return this.RedirectToAction("Index");
+        }
     }
 }
