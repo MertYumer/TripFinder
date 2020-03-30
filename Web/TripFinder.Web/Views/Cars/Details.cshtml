@@ -86,8 +86,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-btn" style="margin: auto; width:30%">
-                        <a class="col-10 btn btn-warning" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Back</a>
+                    <div class="col-4 col-md-auto">
+                        <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Modify car</a>
+                        <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Cars" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</a>
+                        <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
                     </div>
                 </div>
             </div>

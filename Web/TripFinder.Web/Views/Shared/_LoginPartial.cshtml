@@ -3,12 +3,16 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
+@{ 
+    var user = await this.UserManager.GetUserAsync(this.User);
+}
+
 @if (this.SignInManager.IsSignedIn(this.User))
 {
     <li><a asp-area="" asp-controller="Trips" asp-action="Create">Will drive</a></li>
     <li><a asp-area="" asp-controller="Trips" asp-action="Search">Will travel</a></li>
-    <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>
-    <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@UserManager.GetUserId(this.User)">Profile</a></li>
+    <li><a asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@user.CarId">Car</a></li>
+    <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Profile</a></li>
     <li><a asp-area="Identity" asp-page="/Account/Logout">Log out</a></li>
 }
 else

@@ -10,9 +10,9 @@
             <div class="col-md-8 form">
                 <h3>Are you sure you want to delete your car from TripFinder?</h3>
                 <form class="row mb-3" method="post">
-                    <div class="col justify-content-center form-btn">
-                        <button class="col-4" type="submit" asp-area="" asp-controller="Cars" asp-action="DeletePost" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</button>
-                        <button class="col-4" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-undo"></i> Cancel</button>
+                    <div class="col-4 col-md-auto">
+                        <button class="btn btn-danger btn-lg" type="submit" asp-area="" asp-controller="Cars" asp-action="DeletePost" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</button>
+                        <button class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id"><i class="fa fa-undo"></i> Cancel</button>
                     </div>
                 </form>
             </div>

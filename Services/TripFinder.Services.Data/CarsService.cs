@@ -76,22 +76,16 @@
             car.AllowedSmoking = inputModel.AllowedSmoking;
             car.PlaceForLuggage = inputModel.PlaceForLuggage;
 
-            if (inputModel.NewImage == null)
-            {
-                this.carsRepository.Update(car);
-                await this.carsRepository.SaveChangesAsync();
-            }
-            else
+            if (inputModel.NewImage != null)
             {
                 var oldImageId = car.ImageId;
                 var newImage = await this.imagesService.CreateAsync(inputModel.NewImage);
                 car.ImageId = newImage.Id;
-
-                this.carsRepository.Update(car);
-                await this.carsRepository.SaveChangesAsync();
-
                 await this.imagesService.DeleteAsync(oldImageId);
             }
+
+            this.carsRepository.Update(car);
+            await this.carsRepository.SaveChangesAsync();
 
             return car.Id;
         }

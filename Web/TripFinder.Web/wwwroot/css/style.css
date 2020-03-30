@@ -2941,8 +2941,7 @@ body,
     }
 
     .form input,
-    .form select,
-    .form button {
+    .form select {
         background-color: white;
         border: 1px solid white;
         border-radius: 4px;

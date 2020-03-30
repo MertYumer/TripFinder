@@ -6,6 +6,9 @@
 
 <section id="page-title-area" class="section-padding overlay">
     <div class="container">
+        <div>
+            <h2 style="text-align: center">Update car details</h2>
+        </div>
         <div class="row">
             <div class="col-md-4 mb-3">
                 <div class="d-flex flex-row justify-content-center">
@@ -14,8 +17,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-8 form">
-                <form class="row mb-3" method="post" enctype="multipart/form-data">
+            <div class="col-md-8">
+                <form class="row mb-3 form" method="post" enctype="multipart/form-data">
                     <div class="col-12 col-lg-6">
                         <div>
                             <input asp-for="Make" type="text" placeholder="Make">
@@ -116,9 +119,9 @@
                             <span asp-validation-for="NewImage" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col justify-content-center form-btn">
-                        <button class="col-4" type="submit" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit car</button>
-                        <button class="col-4" type="submit" asp-area="" asp-controller="Cars" asp-action="Index"><i class="fa fa-undo"></i> Cancel</button>
+                    <div class="col justify-content-center">
+                        <button class="btn btn-warning btn-lg" type="submit" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit car</button>
+                        <button class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-undo"></i> Cancel</button>
                     </div>
                 </form>
             </div>
