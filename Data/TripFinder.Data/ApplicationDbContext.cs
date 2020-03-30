@@ -104,9 +104,9 @@
                 });
 
             modelBuilder.Entity<Car>()
-                .HasOne(e => e.User)
-                .WithOne(e => e.Car)
-                .HasForeignKey<ApplicationUser>(e => e.CarId)
+                .HasOne(c => c.User)
+                .WithOne(u => u.Car)
+                .HasForeignKey<ApplicationUser>(u => u.CarId)
                 .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Car>()
@@ -147,13 +147,13 @@
 
             modelBuilder.Entity<Image>()
                 .HasOne(i => i.User)
-                .WithOne(up => up.AvatarImage)
-                .HasForeignKey<ApplicationUser>(up => up.AvatarImageId);
+                .WithOne(u => u.AvatarImage)
+                .HasForeignKey<ApplicationUser>(u => u.AvatarImageId);
 
             modelBuilder.Entity<Image>()
                 .HasOne(i => i.Car)
-                .WithOne(up => up.Image)
-                .HasForeignKey<Car>(up => up.ImageId);
+                .WithOne(u => u.Image)
+                .HasForeignKey<Car>(u => u.ImageId);
         }
 
         private void ApplyAuditInfoRules()

@@ -1,5 +1,7 @@
 ﻿namespace TripFinder.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -25,9 +27,13 @@
 
         public IActionResult Details(string id)
         {
-            var userProfileViewModel = this.usersService.GetById<UserDetailsViewModel>(id);
+            var viewModel = this.usersService.GetById<UserDetailsViewModel>(id);
 
-            return this.View(userProfileViewModel);
+            viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.imageSizing + viewModel.AvatarImageUrl;
+
+            return this.View(viewModel);
         }
 
         public IActionResult Edit(string id)
@@ -44,6 +50,19 @@
                 : this.imagePathPrefix + this.imageSizing + viewModel.AvatarImageUrl;
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(UserEditInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Edit", new { id = inputModel.Id });
+            }
+
+            var userId = await this.usersService.UpdateAsync(inputModel);
+
+            return this.RedirectToAction("Details", new { id = userId });
         }
     }
 }

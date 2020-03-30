@@ -96,7 +96,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(inputModel);
+                return this.View(inputModel.Id);
             }
 
             var carId = await this.carsService.UpdateAsync(inputModel);

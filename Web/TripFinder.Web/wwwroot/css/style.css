@@ -2970,11 +2970,15 @@ body,
     font-weight: 700;
 }
 
-    .form-btn button:hover {
-        background-color: #222;
-        border-color: #222;
-        color: #fff;
-    }
+a {
+    font-weight: 700;
+}
+
+.form-btn button:hover {
+    background-color: #222;
+    border-color: #222;
+    color: #fff;
+}
 
 input[type=checkbox] {
     width: auto;

@@ -17,6 +17,8 @@
 
         public string PhoneNumber { get; set; }
 
+        public string AvatarImageUrl { get; set; }
+
         public int TripsCountAsDriver { get; set; }
 
         public int TripsCountAsPassenger { get; set; }
