@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Identity;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
@@ -13,10 +14,48 @@
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IImagesService imagesService;
 
-        public UsersService(IDeletableEntityRepository<ApplicationUser> usersRepository, IImagesService imagesService)
+        private readonly SignInManager<ApplicationUser> signInManager;
+
+        public UsersService(
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IImagesService imagesService,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.usersRepository = usersRepository;
             this.imagesService = imagesService;
+            this.signInManager = signInManager;
+        }
+
+        public string CheckForUserById(string id)
+        {
+            var userId = this.usersRepository
+                .All()
+                .Where(x => x.Id == id)
+                .FirstOrDefault()
+                .Id;
+
+            return userId;
+        }
+
+        public async Task<string> DeleteAsync(string id)
+        {
+            var user = this.usersRepository
+                .All()
+                .FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var userId = user.Id;
+
+            this.usersRepository.Delete(user);
+            await this.usersRepository.SaveChangesAsync();
+
+            await this.signInManager.SignOutAsync();
+
+            return userId;
         }
 
         public T GetById<T>(string id)

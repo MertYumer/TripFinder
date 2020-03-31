@@ -8,6 +8,10 @@
     {
         T GetById<T>(string id);
 
+        string CheckForUserById(string id);
+
         Task<string> UpdateAsync(UserEditInputModel inputModel);
+
+        Task<string> DeleteAsync(string id);
     }
 }

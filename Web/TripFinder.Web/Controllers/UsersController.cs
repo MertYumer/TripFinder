@@ -64,5 +64,30 @@
 
             return this.RedirectToAction("Details", new { id = userId });
         }
+
+        public IActionResult Delete(string id)
+        {
+            var userId = this.usersService.CheckForUserById(id);
+
+            if (userId == null)
+            {
+                return this.Redirect("/");
+            }
+
+            return this.View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            var userId = await this.usersService.DeleteAsync(id);
+
+            if (userId == null)
+            {
+                return this.RedirectToAction("Delete", new { id });
+            }
+
+            return this.RedirectToAction("Index", "Home");
+        }
     }
 }
