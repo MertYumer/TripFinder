@@ -21,7 +21,10 @@
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string imageSizing = "w_300,h_300,c_pad,b_black/";
 
-        public CarsController(UserManager<ApplicationUser> userManager, ICarsService carsService, IConfiguration configuration)
+        public CarsController(
+            UserManager<ApplicationUser> userManager,
+            ICarsService carsService,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.carsService = carsService;

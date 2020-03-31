@@ -1,7 +1,9 @@
 ﻿@model TripFinder.Web.ViewModels.Trips.TripCreateInputModel;
 
+
 @{
     ViewData["Title"] = "Create";
+    var totalSeats = this.ViewBag.TotalSeats;
 }
 
 <section id="page-title-area" class="section-padding overlay">
@@ -29,15 +31,15 @@
                                 <span asp-validation-for="Destination" class="text-danger"></span>
                             </div>
                             <div>
-                                <input asp-for="DateOfDeparture" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" type="text" placeholder="Date of departure" onfocus="(this.type='date')"/>
+                                <input asp-for="DateOfDeparture" value="@DateTime.UtcNow.ToString("yyyy-MM-dd")" min="@DateTime.UtcNow.ToString("yyyy-MM-dd")" type="text" placeholder="Date of departure" onfocus="(this.type='date')" />
                                 <span asp-validation-for="DateOfDeparture" class="text-danger"></span>
                             </div>
                             <div>
-                                <input asp-for="TimeOfDeparture" type="text" placeholder="Time of departure" onfocus="(this.type='time')"/>
+                                <input asp-for="TimeOfDeparture" type="text" placeholder="Time of departure" onfocus="(this.type='time')" />
                                 <span asp-validation-for="TimeOfDeparture" class="text-danger"></span>
                             </div>
                             <div>
-                                <input asp-for="FreeSeats" type="number" placeholder="Free seats">
+                                <input asp-for="FreeSeats" type="number" min="0" max="@totalSeats" placeholder="Free seats">
                                 <span asp-validation-for="FreeSeats" class="text-danger"></span>
                             </div>
                             <div>

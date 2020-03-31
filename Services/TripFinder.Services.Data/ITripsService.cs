@@ -8,5 +8,7 @@
     public interface ITripsService
     {
         Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user);
+
+        T GetById<T>(string id);
     }
 }

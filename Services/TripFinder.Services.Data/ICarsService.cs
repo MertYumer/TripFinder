@@ -14,5 +14,7 @@
         Task<string> DeleteAsync(string id);
 
         T GetById<T>(string id);
+
+        Car GetById(string id);
     }
 }

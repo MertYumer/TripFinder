@@ -123,5 +123,20 @@
 
             return car;
         }
+
+        public Car GetById(string id)
+        {
+            var car = this.carsRepository
+                .All()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            if (car == null)
+            {
+                return null;
+            }
+
+            return car;
+        }
     }
 }

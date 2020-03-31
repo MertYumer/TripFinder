@@ -1,0 +1,220 @@
+﻿@model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <p>Trip information</p>
+                <div class="trip-info">
+                    <div>
+                        <div class="row mt-2">
+                            <div class="col-auto">
+                                <span class="h5">
+                                    <i class="material-icons text-success md-24">location_on</i>
+                                    <span class="text-muted align-top">От</span>
+                                    <span class="align-top"></span>
+                                </span>
+                            </div>
+                            <div class="col-auto d-none d-md-block">
+                                <i class="material-icons text-muted md-24">chevron_right</i>
+                            </div>
+                            <div class="col-auto">
+                                <span class="h5">
+                                    <i class="material-icons text-success md-24">location_on</i>
+                                    <span class="text-muted align-top">До</span>
+                                    <span class="align-top"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <i class="material-icons text-success"></i>
+                                <span class="text-muted align-top">Дата: </span>
+                                <span class="align-top"></span>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <i class="material-icons text-success"></i>
+                                <span class="text-muted align-top">Час: между</span>
+                                <span class="align-top">18:30 ч.</span>
+                                <span class="text-muted align-top">и</span>
+                                <span class="align-top">19:00 ч.</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <i class="material-icons text-success"></i>
+                                <span class="text-muted align-top">Разход на човек: </span>
+                                <span class="align-top"></span>
+                            </div>
+                            <div class="col-12 d-block d-lg-none">
+                                <i class="material-icons text-success"></i>
+                                <span class="text-muted align-top">Автомобил: </span>
+                                <span class="align-top"></span>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <i class="material-icons text-success"></i>
+                                <span class="text-muted align-top">Свободни места: </span>
+                                <span class="align-top">0 <span class="text-muted align-top">от общо</span> 3</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <i class="material-icons text-success">remove_red_eye</i>
+                                <span class="text-muted align-top">Видяна: </span>
+                                <span class="align-top">14 пъти</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <i class="material-icons text-success"></i>
+                                <span class="text-muted align-top">Информация</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div>
+                                    <div class="card-body">
+                                        <span>Шофьорът не е въвел допълнителна информация за обявата.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Car information</p>
+                <div class="trip-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 mb-3 mb-md-0">
+                                <div class="d-flex flex-row justify-content-center">
+                                    <img src="@Model.Car.Image.Url" alt="Снимка" class="rounded-circle img-fluid vehicle-picture-drive-details">
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-8">
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <span class="text-muted">Марка: </span>
+                                        <span></span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span class="text-muted">Модел: </span>
+                                        <span></span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span class="text-muted">Цвят: </span>
+                                        <span></span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span class="text-muted">Година: </span>
+                                        <span></span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span class="text-muted">Места за пътници: </span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span class="text-muted">Място за багаж: </span>
+                                        <span class="text-success">Да</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success">ac_unit</i> <span class="text-muted">Климатик: </span>
+                                        <span class="text-success">Да</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-muted"></i> <span class="text-muted">Пушачи: </span>
+                                        <span>Не</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-muted"></i> <span class="text-muted">Храна: </span>
+                                        <span>Не</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span class="text-muted">Напитки: </span>
+                                        <span class="text-success">Да</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span class="text-muted">Любимци: </span>
+                                        <span class="text-success">Да</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="d-none d-lg-block">
+                    <p>Driver information</p>
+                    <div class="trip-info">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-sm-auto mb-3 mb-sm-0">
+                                    <div class="d-flex flex-row justify-content-center">
+                                        <a href="/User/Index/0939541a-cb1e-449b-a4ea-1b816608e1da">
+                                            <img src="@Model.Driver.AvatarImage.Url" alt="Профилна снимка" class="rounded-circle img-fluid profile-picture pp-large pp-sm-small">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm">
+                                    <a class="text-link" href="">
+                                        <span class="h5">Имена</span>
+                                    </a>
+                                    <div class="row mb-3">
+                                        <div class="col">
+                                            <div class="text-muted">Рейтинг</div>
+                                            <span class="text-muted">
+                                                / 26
+                                                <span>гласа</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center text-success mb-3">
+                                <div class="col-6">
+                                    <div class="thin-border py-2" id="passangerCount" data-toggle="tooltip" title="" onclick="showPassangerCountTooltip()" data-original-title="Бил е пътник 0 пъти">
+                                        <i class="ci ci-rider" style="font-size: larger; top:3px;"></i>
+                                        <span>0 пъти</span>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="thin-border py-2" id="driverCount" data-toggle="tooltip" title="" onclick="showDriverCountTooltip()" data-original-title="Бил е шофьор 35 пъти">
+                                        <i class="ci ci-driver" style="font-size: larger; top:3px;"></i>
+                                        <span>35 пъти</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <i class="material-icons text-success md-24"></i>
+                                    <span class="text-muted align-top">Телефонен номер:</span>
+                                    <span class="align-top"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <p class="text-muted">Пътници</p>
+
+                <div class="trip-info">
+                    <div class="card-body">
+                        <span>Няма одобрени пътници.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

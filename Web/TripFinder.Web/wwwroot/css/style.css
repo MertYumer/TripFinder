@@ -79,6 +79,17 @@
 
 body {
     color: #ffd000;
+    background: url("/img/page-title.jpg") top right no-repeat;
+    background-attachment: fixed;
+    min-height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    content: "";
+    left: 0;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
 }
 
 .overlay {
@@ -99,9 +110,7 @@ body {
 
 .section-padding {
     padding: 100px 0;
-    background-image: url("/img/page-title.jpg");
-    background-position: center center;
-    background-size: cover;
+    min-height: 100%;
 }
 
 .section-title {
@@ -1315,6 +1324,12 @@ a.slicknav_btn {
 
 /*== Footer Area CSS Start ==*/
 
+#footer-area section {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
 #footer-area a {
     color: #ffd000;
 }
@@ -1546,7 +1561,6 @@ body.loader-active {
 /*== SlideShow CSS ==*/
 
 html,
-body,
 #slideslow-bg,
 #slideslow-bg div {
     height: 100%;
@@ -2229,10 +2243,7 @@ body,
 /*== Page Title CSS ==*/
 
 #page-title-area {
-    background-image: url("/img/page-title.jpg");
-    background-position: center center;
-    background-size: cover;
-    height: 100%;
+    min-height: 100%;
 }
 
     #page-title-area .section-title {
@@ -2252,22 +2263,6 @@ body,
     .single-car-wrap:last-child {
         margin-bottom: 0;
     }
-
-.car-thumb-1 {
-    background-image: url(Resources/img/car/car-1.jpg);
-}
-
-.car-thumb-2 {
-    background-image: url(Resources/img/car/car-2.jpg);
-}
-
-.car-thumb-3 {
-    background-image: url(Resources/img/car/car-3.jpg);
-}
-
-.car-thumb-4 {
-    background-image: url(Resources/img/car/car-4.jpg);
-}
 
 .car-list-thumb {
     background-size: cover;
@@ -3016,6 +3011,12 @@ label {
         top: 10px;
         width: 120px;
     }
+
+.trip-info {
+    background-color: black;
+    border: 1px solid #ffd000;
+    border-radius: 15%;
+}
 
 .login-with-btn {
     background: -webkit-gradient(linear, left top, left bottom, from(#3b5998), to(#344e86));

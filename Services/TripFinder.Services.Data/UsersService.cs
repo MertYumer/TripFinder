@@ -28,13 +28,17 @@
 
         public string CheckForUserById(string id)
         {
-            var userId = this.usersRepository
+            var user = this.usersRepository
                 .All()
                 .Where(x => x.Id == id)
-                .FirstOrDefault()
-                .Id;
+                .FirstOrDefault();
 
-            return userId;
+            if (user == null)
+            {
+                return null;
+            }
+
+            return user.Id;
         }
 
         public async Task<string> DeleteAsync(string id)
