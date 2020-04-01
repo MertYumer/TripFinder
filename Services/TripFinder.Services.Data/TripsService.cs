@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -72,6 +73,19 @@
                 .FirstOrDefault();
 
             return trip;
+        }
+
+        public IEnumerable<T> GetAllTrips<T>()
+        {
+            var query = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car);
+
+            var trips = query.To<T>();
+
+            return trips;
         }
     }
 }

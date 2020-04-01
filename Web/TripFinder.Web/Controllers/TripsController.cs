@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Web.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -21,7 +22,8 @@
 
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
-        private readonly string imageSizing = "w_300,h_300,c_pad,b_black/";
+        private readonly string driverIimageSizing = "w_300,h_300,c_fill/";
+        private readonly string carImageSizing = "w_300,h_300,c_pad,b_black/";
 
         public TripsController(
             UserManager<ApplicationUser> userManager,
@@ -38,7 +40,23 @@
 
         public IActionResult All()
         {
-            return this.View();
+            var tripViewModels = this.tripsService
+                .GetAllTrips<TripViewModel>()
+                .ToList();
+
+            foreach (var trip in tripViewModels)
+            {
+                trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
+            }
+
+            var allTripsviewModel = new TripsAllViewModel
+            {
+                AllTrips = tripViewModels,
+            };
+
+            return this.View(allTripsviewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -94,13 +112,13 @@
                 return this.Redirect("/");
             }
 
-            viewModel.Driver.AvatarImage.Url = viewModel.Driver.AvatarImage.Url == null
+            viewModel.DriverAvatarImageUrl = viewModel.DriverAvatarImageUrl == null
                 ? "/img/avatar.png"
-                : this.imagePathPrefix + this.imageSizing + viewModel.Driver.AvatarImage.Url;
+                : this.imagePathPrefix + this.driverIimageSizing + viewModel.DriverAvatarImageUrl;
 
-            viewModel.Car.Image.Url = viewModel.Car.Image.Url == null
+            viewModel.CarImageUrl = viewModel.CarImageUrl == null
                 ? "/img/car-avatar.png"
-                : this.imagePathPrefix + this.imageSizing + viewModel.Car.Image.Url;
+                : this.imagePathPrefix + this.carImageSizing + viewModel.CarImageUrl;
 
             return this.View(viewModel);
         }

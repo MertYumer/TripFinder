@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using TripFinder.Data.Models;
@@ -10,5 +11,7 @@
         Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user);
 
         T GetById<T>(string id);
+
+        IEnumerable<T> GetAllTrips<T>();
     }
 }

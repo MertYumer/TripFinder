@@ -6,25 +6,21 @@
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
 
-    public class TripDetailsViewModel : IMapFrom<Trip>, IHaveCustomMappings
+    public class TripViewModel : IMapFrom<Trip>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
-        public ApplicationUser Driver { get; set; }
+        public string DriverFirstName { get; set; }
 
         public string DriverAvatarImageUrl { get; set; }
-
-        public Car Car { get; set; }
-
-        public string CarImageUrl { get; set; }
 
         public string Origin { get; set; }
 
         public string Destination { get; set; }
 
-        public int Distance { get; set; }
+        public string CarMake { get; set; }
 
-        public int EstimatedMinutes { get; set; }
+        public string CarModel { get; set; }
 
         public DateTime DateOfDeparture { get; set; }
 
@@ -36,15 +32,11 @@
 
         public decimal ExpensePerPerson { get; set; }
 
-        public string AdditionalInformation { get; set; }
-
         public void CreateMappings(IProfileExpression configuration)
         {
-            configuration.CreateMap<Trip, TripDetailsViewModel>()
+            configuration.CreateMap<Trip, TripViewModel>()
                  .ForMember(vm => vm.Origin, opt => opt.MapFrom(t => t.TownsDistance.Origin))
-                 .ForMember(vm => vm.Destination, opt => opt.MapFrom(t => t.TownsDistance.Destination))
-                 .ForMember(vm => vm.Distance, opt => opt.MapFrom(t => t.TownsDistance.Distance))
-                 .ForMember(vm => vm.EstimatedMinutes, opt => opt.MapFrom(t => t.TownsDistance.EstimatedMinutes));
+                 .ForMember(vm => vm.Destination, opt => opt.MapFrom(t => t.TownsDistance.Destination));
         }
     }
 }
