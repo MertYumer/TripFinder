@@ -13,12 +13,12 @@
                     <div class="card-body">
                         <div class="row justify-content-md-center" style="text-align: center;">
                             <div class="col-auto">
-                                <h6>From: </h6>
-                                <h4>@Model.Origin</h4>
+                                <h5>From: </h5>
+                                <h3>@Model.Origin</h3>
                             </div>
                             <div class="col-auto">
-                                <h6>To: </h6>
-                                <h4>@Model.Destination</h4>
+                                <h5>To: </h5>
+                                <h3>@Model.Destination</h3>
                             </div>
                         </div>
                     </div>
@@ -26,12 +26,12 @@
                         <div class="row justify-content-md-center">
                             <div class="col-12 col-xl-6">
                                 <h6>Date: </h6>
-                                <h5>@Model.DateOfDeparture.Date</h5>
+                                <h5>@Model.DateOfDeparture.ToString("dd/MM/yyyy")</h5>
                                 <hr />
                             </div>
                             <div class="col-12 col-xl-6">
                                 <h6>Time: </h6>
-                                <h5>@Model.TimeOfDeparture.TimeOfDay</h5>
+                                <h5>@Model.TimeOfDeparture.ToShortTimeString()</h5>
                                 <hr />
                             </div>
                         </div>
@@ -43,7 +43,14 @@
                             </div>
                             <div class="col-12 col-xl-6">
                                 <h6>Estimated minutes: </h6>
-                                <h5>@Model.EstimatedMinutes</h5>
+                                @if (Model.EstimatedMinutes > 60)
+                                {
+                                    <h5>@(Model.EstimatedMinutes / 60) hours and @(Model.EstimatedMinutes % 60) minutes</h5>
+                                }
+                                else
+                                {
+                                    <h5>@Model.EstimatedMinutes</h5>
+                                }
                                 <hr />
                             </div>
                         </div>
@@ -193,43 +200,34 @@
                     <p>Driver information</p>
                     <div class="trip-info">
                         <div class="card-body">
-                            <div class="row">
+                            <div class="row justify-content-center">
                                 <div class="col-12 col-sm-auto mb-3 mb-sm-0">
                                     <div class="d-flex flex-row justify-content-center">
                                         <img src="@Model.DriverAvatarImageUrl" alt="Profile Picture" class="rounded-circle img-fluid profile-picture pp-large pp-sm-small">
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm">
+                                <div class="col-12 col-sm-auto">
                                     <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@Model.Driver.Id">
-                                        <span class="h5">@Model.Driver.FirstName @Model.Driver.LastName</span>
+                                        <span class="h3">@Model.Driver.FirstName @Model.Driver.LastName</span>
                                     </a>
-                                    <div class="row mb-3">
-                                        <div class="col">
-                                            <div>Rating</div>
-                                            <span>
-                                                / 26
-                                                <span>votes</span>
-                                            </span>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                            <div class="row text-center text-success mb-3">
-                                <div class="col-6">
-                                    <div class="thin-border py-2" id="passangerCount" data-toggle="tooltip" title="" onclick="showPassangerCountTooltip()" data-original-title="Бил е пътник 0 пъти">
-                                        <span>Driver: 0 times</span>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="thin-border py-2" id="driverCount" data-toggle="tooltip" title="" onclick="showDriverCountTooltip()" data-original-title="Бил е шофьор 35 пъти">
-                                        <span>Passenger: 0 times</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col">
+                            <div style="margin-top: 2%">
+                                <div>
                                     <span>Phone number: </span>
                                     <span>@Model.Driver.PhoneNumber</span>
+                                </div>
+                                <div>
+                                    <span>Rating: </span>
+                                    <span>@Model.Driver.Rating</span>
+                                </div>
+                                <div>
+                                    <span>Driver: </span>
+                                    <span>@Model.Driver.TripsCountAsDriver times</span>
+                                </div>
+                                <div>
+                                    <span>Passenger: </span>
+                                    <span>@Model.Driver.TripsCountAsPassenger times</span>
                                 </div>
                             </div>
                         </div>

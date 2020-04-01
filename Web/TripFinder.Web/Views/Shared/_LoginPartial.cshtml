@@ -13,11 +13,11 @@
     <li><a asp-area="" asp-controller="Trips" asp-action="Create">Will drive</a></li>
     <li><a asp-area="" asp-controller="Trips" asp-action="Search">Will travel</a></li>
     <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>
-    <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Profile</a></li>
-    <li><a asp-area="Identity" asp-page="/Account/Logout">Log out</a></li>
+    <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Hello, <span>@user.FirstName</span></a></li>
+    <li><a asp-area="Identity" asp-page="/Account/Logout">Sign out</a></li>
 }
 else
 {
-    <li><a asp-area="Identity" asp-page="/Account/Login">Log in</a></li>
+    <li><a asp-area="Identity" asp-page="/Account/Login">Sign in</a></li>
     <li><a asp-area="Identity" asp-page="/Account/Register">Sign up</a></li>
 }

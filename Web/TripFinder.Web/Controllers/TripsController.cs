@@ -114,7 +114,7 @@
                 return this.Redirect("/");
             }
 
-            if (user.Id != viewModel.Id)
+            if (user.Id != viewModel.Driver.Id)
             {
                 await this.tripsService.UpdateTripViewsCountAsync(id);
             }
