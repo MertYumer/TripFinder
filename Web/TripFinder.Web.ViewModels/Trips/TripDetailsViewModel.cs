@@ -34,6 +34,8 @@
 
         public int TotalSeats { get; set; }
 
+        public int Views { get; set; }
+
         public decimal ExpensePerPerson { get; set; }
 
         public string AdditionalInformation { get; set; }

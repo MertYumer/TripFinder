@@ -103,13 +103,20 @@
             return this.RedirectToAction("Details", new { id = tripId });
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
+            var user = await this.userManager.GetUserAsync(this.User);
+
             var viewModel = this.tripsService.GetById<TripDetailsViewModel>(id);
 
             if (viewModel == null)
             {
                 return this.Redirect("/");
+            }
+
+            if (user.Id != viewModel.Id)
+            {
+                await this.tripsService.UpdateTripViewsCountAsync(id);
             }
 
             viewModel.DriverAvatarImageUrl = viewModel.DriverAvatarImageUrl == null

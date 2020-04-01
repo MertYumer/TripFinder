@@ -87,5 +87,17 @@
 
             return trips;
         }
+
+        public async Task UpdateTripViewsCountAsync(string id)
+        {
+            var trip = this.tripsRepository
+                .All()
+                .FirstOrDefault(t => t.Id == id);
+
+            trip.Views++;
+
+            this.tripsRepository.Update(trip);
+            await this.tripsRepository.SaveChangesAsync();
+        }
     }
 }

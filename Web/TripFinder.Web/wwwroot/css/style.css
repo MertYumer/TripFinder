@@ -3015,7 +3015,7 @@ label {
 .trip-info {
     background-color: black;
     border: 1px solid #ffd000;
-    border-radius: 15%;
+    border-radius: 15px;
 }
 
 .login-with-btn {

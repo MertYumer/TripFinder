@@ -46,6 +46,8 @@
 
         public string AdditionalInformation { get; set; }
 
+        public int Views { get; set; }
+
         public virtual ICollection<UserTrip> UserTrips { get; set; }
     }
 }

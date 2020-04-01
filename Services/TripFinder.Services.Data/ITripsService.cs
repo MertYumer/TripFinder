@@ -10,6 +10,8 @@
     {
         Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user);
 
+        Task UpdateTripViewsCountAsync(string id);
+
         T GetById<T>(string id);
 
         IEnumerable<T> GetAllTrips<T>();
