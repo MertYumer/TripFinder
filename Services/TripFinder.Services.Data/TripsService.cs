@@ -77,13 +77,12 @@
 
         public IEnumerable<T> GetAllTrips<T>()
         {
-            var query = this.tripsRepository
+            var trips = this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
-                .Include(t => t.Car);
-
-            var trips = query.To<T>();
+                .Include(t => t.Car)
+                .To<T>();
 
             return trips;
         }
