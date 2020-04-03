@@ -14,16 +14,12 @@
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
         private readonly IImagesService imagesService;
 
-        private readonly SignInManager<ApplicationUser> signInManager;
-
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
-            IImagesService imagesService,
-            SignInManager<ApplicationUser> signInManager)
+            IImagesService imagesService)
         {
             this.usersRepository = usersRepository;
             this.imagesService = imagesService;
-            this.signInManager = signInManager;
         }
 
         public string CheckForUserById(string id)
@@ -56,8 +52,6 @@
 
             this.usersRepository.Delete(user);
             await this.usersRepository.SaveChangesAsync();
-
-            await this.signInManager.SignOutAsync();
 
             return userId;
         }

@@ -3,8 +3,10 @@
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
+    using TripFinder.Data.Models;
     using TripFinder.Services.Data;
     using TripFinder.Web.ViewModels.Users;
 
@@ -13,16 +15,21 @@
     {
         private readonly IUsersService usersService;
         private readonly IConfiguration configuration;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string imageSizing = "w_300,h_300,c_fill/";
 
-        public UsersController(IUsersService usersService, IConfiguration configuration)
+        public UsersController(
+            IUsersService usersService,
+            IConfiguration configuration,
+            SignInManager<ApplicationUser> signInManager)
         {
             this.usersService = usersService;
             this.configuration = configuration;
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
+            this.signInManager = signInManager;
         }
 
         public IActionResult Details(string id)
@@ -86,6 +93,8 @@
             {
                 return this.RedirectToAction("Delete", new { id });
             }
+
+            await this.signInManager.SignOutAsync();
 
             return this.RedirectToAction("Index", "Home");
         }
