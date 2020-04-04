@@ -38,8 +38,10 @@
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
+            await this.tripsService.DeletePassedTrips();
+
             var tripViewModels = this.tripsService
                 .GetAllTrips<TripViewModel>()
                 .ToList();

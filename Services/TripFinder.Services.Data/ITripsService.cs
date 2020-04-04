@@ -15,5 +15,7 @@
         T GetById<T>(string id);
 
         IEnumerable<T> GetAllTrips<T>();
+
+        Task DeletePassedTrips();
     }
 }

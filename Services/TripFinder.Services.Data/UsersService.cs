@@ -3,7 +3,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;

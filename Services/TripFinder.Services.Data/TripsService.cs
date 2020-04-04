@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -12,11 +13,11 @@
 
     public class TripsService : ITripsService
     {
-        private readonly IRepository<Trip> tripsRepository;
+        private readonly IDeletableEntityRepository<Trip> tripsRepository;
         private readonly IRepository<TownsDistance> townsDistancesRepository;
 
         public TripsService(
-            IRepository<Trip> tripsRepository,
+            IDeletableEntityRepository<Trip> tripsRepository,
             IRepository<TownsDistance> townsDistancesRepository)
         {
             this.tripsRepository = tripsRepository;
@@ -96,6 +97,23 @@
             trip.Views++;
 
             this.tripsRepository.Update(trip);
+            await this.tripsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeletePassedTrips()
+        {
+            var passedTrips = this.tripsRepository
+                .All()
+                .Include(t => t.TownsDistance)
+                .Where(t => t.DateOfDeparture.CompareTo(DateTime.UtcNow) < 0
+                || (t.DateOfDeparture.CompareTo(DateTime.UtcNow) == 0
+                && t.TimeOfDeparture.AddMinutes(t.TownsDistance.EstimatedMinutes).Minute - DateTime.UtcNow.Minute < 0));
+
+            foreach (var trip in passedTrips)
+            {
+                this.tripsRepository.Delete(trip);
+            }
+
             await this.tripsRepository.SaveChangesAsync();
         }
     }
