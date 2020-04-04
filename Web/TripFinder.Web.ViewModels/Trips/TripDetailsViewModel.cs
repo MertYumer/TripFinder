@@ -43,8 +43,6 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Trip, TripDetailsViewModel>()
-                 .ForMember(vm => vm.Origin, opt => opt.MapFrom(t => t.TownsDistance.Origin))
-                 .ForMember(vm => vm.Destination, opt => opt.MapFrom(t => t.TownsDistance.Destination))
                  .ForMember(vm => vm.Distance, opt => opt.MapFrom(t => t.TownsDistance.Distance))
                  .ForMember(vm => vm.EstimatedMinutes, opt => opt.MapFrom(t => t.TownsDistance.EstimatedMinutes));
         }

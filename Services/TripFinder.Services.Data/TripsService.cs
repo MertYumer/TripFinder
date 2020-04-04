@@ -47,6 +47,8 @@
                 DriverId = user.Id,
                 CarId = user.CarId,
                 TownsDistanceId = townsDistance.Id,
+                Origin = inputModel.Origin,
+                Destination = inputModel.Destination,
                 DateOfDeparture = inputModel.DateOfDeparture,
                 TimeOfDeparture = inputModel.TimeOfDeparture,
                 TotalSeats = user.Car.PassengerSeats,
@@ -105,12 +107,21 @@
             var passedTrips = this.tripsRepository
                 .All()
                 .Include(t => t.TownsDistance)
-                .Where(t => t.DateOfDeparture.CompareTo(DateTime.UtcNow) < 0
-                || (t.DateOfDeparture.CompareTo(DateTime.UtcNow) == 0
-                && t.TimeOfDeparture.AddMinutes(t.TownsDistance.EstimatedMinutes).Minute - DateTime.UtcNow.Minute < 0));
+                .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.UtcNow.Date) < 0
+                || t.DateOfDeparture.Date.CompareTo(DateTime.UtcNow.Date) == 0)
+                .ToList();
 
             foreach (var trip in passedTrips)
             {
+                if (trip.DateOfDeparture.Date.CompareTo(DateTime.UtcNow.Date) == 0)
+                {
+                    if (trip.TimeOfDeparture.TimeOfDay.TotalMinutes + trip.TownsDistance.EstimatedMinutes >
+                        DateTime.UtcNow.TimeOfDay.TotalMinutes)
+                    {
+                        continue;
+                    }
+                }
+
                 this.tripsRepository.Delete(trip);
             }
 

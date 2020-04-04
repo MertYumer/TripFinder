@@ -2,11 +2,10 @@
 {
     using System;
 
-    using AutoMapper;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
 
-    public class TripViewModel : IMapFrom<Trip>, IHaveCustomMappings
+    public class TripViewModel : IMapFrom<Trip>
     {
         public string Id { get; set; }
 
@@ -31,12 +30,5 @@
         public int TotalSeats { get; set; }
 
         public decimal ExpensePerPerson { get; set; }
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration.CreateMap<Trip, TripViewModel>()
-                 .ForMember(vm => vm.Origin, opt => opt.MapFrom(t => t.TownsDistance.Origin))
-                 .ForMember(vm => vm.Destination, opt => opt.MapFrom(t => t.TownsDistance.Destination));
-        }
     }
 }
