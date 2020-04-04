@@ -35,7 +35,7 @@
                                 <span asp-validation-for="DateOfDeparture" class="text-danger"></span>
                             </div>
                             <div>
-                                <input asp-for="TimeOfDeparture" type="text" placeholder="Time of departure" onfocus="(this.type='time')" />
+                                <input asp-for="TimeOfDeparture" type="text" placeholder="Time of departure" id="timepicker" class="time ui-timepicker-input" autocomplete="off">
                                 <span asp-validation-for="TimeOfDeparture" class="text-danger"></span>
                             </div>
                             <div>
@@ -64,5 +64,11 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(function () {
+            $('#timepicker').timepicker({ 'timeFormat': 'H:i' });
+        });
+    </script>
 }
 

@@ -8,7 +8,7 @@
     <div class="container pt-5 d-none d-md-block">
         <div class="row">
             <div class="col">
-                <h3>Последни обяви</h3>
+                <h3>Last added trips</h3>
             </div>
         </div>
         <div class="row">
@@ -39,11 +39,11 @@
                                             </div>
                                             <div class="col-12 col-xl-6">
                                                 <span class="text-muted">Date: </span>
-                                                <span>@trip.DateOfDeparture.Date</span>
+                                                <span>@trip.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</span>
                                             </div>
                                             <div class="col-12 col-xl-6">
                                                 <span class="text-muted">Time: </span>
-                                                <span class="align-top">@trip.TimeOfDeparture.TimeOfDay</span>
+                                                <span class="align-top">@trip.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</span>
                                             </div>
                                             <div class="col-12 col-xl-6">
                                                 <span class="text-muted">Expense per person: </span>

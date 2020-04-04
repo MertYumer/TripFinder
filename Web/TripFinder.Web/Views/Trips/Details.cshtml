@@ -26,12 +26,12 @@
                         <div class="row justify-content-md-center">
                             <div class="col-12 col-xl-6">
                                 <h6>Date: </h6>
-                                <h5>@Model.DateOfDeparture.ToString("dd/MM/yyyy")</h5>
+                                <h5>@Model.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</h5>
                                 <hr />
                             </div>
                             <div class="col-12 col-xl-6">
                                 <h6>Time: </h6>
-                                <h5>@Model.TimeOfDeparture.ToShortTimeString()</h5>
+                                <h5>@Model.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</h5>
                                 <hr />
                             </div>
                         </div>
