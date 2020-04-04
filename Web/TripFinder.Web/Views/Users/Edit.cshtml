@@ -27,30 +27,30 @@
                 <form method="post" enctype="multipart/form-data">
                     <div class="col-lg-8">
                         <div>
-                            <input asp-for="FirstName" type="text" placeholder="First name">
                             <span asp-validation-for="FirstName" class="text-danger"></span>
+                            <input asp-for="FirstName" type="text" placeholder="First name">
                         </div>
                         <div>
-                            <input asp-for="LastName" type="text" placeholder="Last name">
                             <span asp-validation-for="LastName" class="text-danger"></span>
+                            <input asp-for="LastName" type="text" placeholder="Last name">
                         </div>
                         <div>
-                            <input asp-for="Email" type="text" placeholder="Email">
                             <span asp-validation-for="Email" class="text-danger"></span>
+                            <input asp-for="Email" type="text" placeholder="Email">
                         </div>
                         <div>
-                            <input asp-for="Age" type="number" min="1" max="100" placeholder="Age">
                             <span asp-validation-for="Age" class="text-danger"></span>
+                            <input asp-for="Age" type="number" min="1" max="100" placeholder="Age">
                         </div>
                         <div>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
                             <select asp-for="Gender" asp-items="Html.GetEnumSelectList<Gender>()">
                                 <option value="">Gender</option>
                             </select>
-                            <span asp-validation-for="Gender" class="text-danger"></span>
                         </div>
                         <div>
-                            <input asp-for="PhoneNumber" type="text" placeholder="Phone number">
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            <input asp-for="PhoneNumber" type="text" placeholder="Phone number">
                         </div>
                         <div>
                             <label asp-for="NewImage" style="margin: 0; font-size: large">Change photo:</label>

@@ -21,24 +21,25 @@
                 <form class="row mb-3 form" method="post" enctype="multipart/form-data">
                     <div class="col-12 col-lg-6">
                         <div>
-                            <input asp-for="Make" type="text" placeholder="Make">
                             <span asp-validation-for="Make" class="text-danger"></span>
+                            <input asp-for="Make" type="text" placeholder="Make">
                         </div>
                         <div>
-                            <input asp-for="Model" type="text" placeholder="Model">
                             <span asp-validation-for="Model" class="text-danger"></span>
+                            <input asp-for="Model" type="text" placeholder="Model">
                         </div>
                         <div>
+                            <span asp-validation-for="Type" class="text-danger"></span>
                             <select asp-for="Type" asp-items="Html.GetEnumSelectList<CarType>()">
                                 <option value="">Car type</option>
                             </select>
-                            <span asp-validation-for="Type" class="text-danger"></span>
                         </div>
                         <div>
-                            <input asp-for="Color" type="text" placeholder="Color">
                             <span asp-validation-for="Color" class="text-danger"></span>
+                            <input asp-for="Color" type="text" placeholder="Color">
                         </div>
                         <div>
+                            <span asp-validation-for="Year" class="text-danger"></span>
                             <select asp-for="Year" placeholder>
                                 <option value="">Year</option>
                                 <option value="2020">2020</option>
@@ -73,9 +74,9 @@
                                 <option value="1991">1991</option>
                                 <option value="1990">1990</option>
                             </select>
-                            <span asp-validation-for="Year" class="text-danger"></span>
                         </div>
                         <div>
+                            <span asp-validation-for="PassengerSeats" class="text-danger"></span>
                             <select asp-for="PassengerSeats">
                                 <option value="">Passenger seats</option>
                                 <option value="1">1</option>
@@ -85,7 +86,6 @@
                                 <option value="5">5</option>
                                 <option value="6">6</option>
                             </select>
-                            <span asp-validation-for="PassengerSeats" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6" style="text-align:left">
