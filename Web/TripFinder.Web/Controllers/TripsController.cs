@@ -1,7 +1,6 @@
 ﻿namespace TripFinder.Web.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -16,6 +15,8 @@
     [Authorize]
     public class TripsController : Controller
     {
+        private const int TripsPerPage = 6;
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ITripsService tripsService;
         private readonly ICarsService carsService;
@@ -39,23 +40,26 @@
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All(int page = 1)
         {
-            await this.tripsService.DeletePassedTrips();
+            await this.tripsService.DeletePassedTripsAsync();
 
-            var tripViewModels = this.tripsService
-                .GetAllTrips<TripViewModel>();
+            var tripsViewModel = this.tripsService
+                .GetAllTrips<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage);
 
-            foreach (var trip in tripViewModels)
+            foreach (var trip in tripsViewModel)
             {
                 trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
                 ? "/img/avatar.png"
                 : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
             }
 
+            var tripsCount = this.tripsService.GetAllTripsCount();
+
             var tripsAllViewModel = new TripsAllViewModel
             {
-                AllTrips = tripViewModels,
+                PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
+                AllTrips = tripsViewModel,
             };
 
             return this.View(tripsAllViewModel);
@@ -209,7 +213,7 @@
 
         public async Task<IActionResult> MyTrips(string userId)
         {
-            await this.tripsService.DeletePassedTrips();
+            await this.tripsService.DeletePassedTripsAsync();
 
             var tripViewModels = this.tripsService
                 .GetMyTrips<TripViewModel>(userId);

@@ -90,14 +90,22 @@
             return trip;
         }
 
-        public IEnumerable<T> GetAllTrips<T>()
+        public IEnumerable<T> GetAllTrips<T>(int? take = null, int skip = 0)
         {
-            var trips = this.tripsRepository
+            var query = this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
                 .Include(t => t.Car)
                 .OrderByDescending(t => t.CreatedOn)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            var trips = query
                 .To<T>()
                 .ToList();
 
@@ -116,7 +124,7 @@
             await this.tripsRepository.SaveChangesAsync();
         }
 
-        public async Task DeletePassedTrips()
+        public async Task DeletePassedTripsAsync()
         {
             var passedTrips = this.tripsRepository
                 .All()
@@ -198,6 +206,16 @@
                 .ToList();
 
             return trips;
+        }
+
+        public int GetAllTripsCount()
+        {
+            var tripsCount = this.tripsRepository
+                .All()
+                .ToList()
+                .Count;
+
+            return tripsCount;
         }
     }
 }
