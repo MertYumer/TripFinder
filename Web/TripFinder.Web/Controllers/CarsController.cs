@@ -62,13 +62,21 @@
             return this.RedirectToAction("Details", new { id = carId });
         }
 
-        public IActionResult Details(string id)
+        [Authorize]
+        public async Task<IActionResult> Details(string id)
         {
             var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
 
             if (viewModel == null)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.CarId != viewModel.Id)
+            {
+                return this.Forbid();
             }
 
             viewModel.ImageUrl = viewModel.ImageUrl == null
@@ -84,7 +92,7 @@
 
             if (viewModel == null)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("Error", "Home");
             }
 
             viewModel.ImageUrl = viewModel.ImageUrl == null
@@ -99,14 +107,14 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.View(inputModel.Id);
+                return this.RedirectToAction("Edit", new { id = inputModel.Id });
             }
 
             var carId = await this.carsService.UpdateAsync(inputModel);
 
             if (carId == null)
             {
-                return this.RedirectToAction("Edit", new { id = inputModel.Id });
+                return this.BadRequest();
             }
 
             return this.RedirectToAction("Details", new { id = carId });
@@ -118,7 +126,7 @@
 
             if (viewModel == null)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("Error", "Home");
             }
 
             return this.View(viewModel);
@@ -131,7 +139,7 @@
 
             if (carId == null)
             {
-                return this.RedirectToAction("Delete", new { id });
+                return this.BadRequest();
             }
 
             return this.RedirectToAction("Index");

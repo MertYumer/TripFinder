@@ -3,23 +3,23 @@
     this.ViewData["Title"] = "Error";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
-
-@if (this.Model.ShowRequestId)
-{
-    <p>
-        <strong>Request ID:</strong> <code>@this.Model.RequestId</code>
-    </p>
-}
-
-<h3>Development Mode</h3>
-<p>
-    Swapping to <strong>Development</strong> environment will display more detailed information about the error that occurred.
-</p>
-<p>
-    <strong>The Development environment shouldn't be enabled for deployed applications.</strong>
-    It can result in displaying sensitive information from exceptions to end users.
-    For local debugging, enable the <strong>Development</strong> environment by setting the <strong>ASPNETCORE_ENVIRONMENT</strong> environment variable to <strong>Development</strong>
-    and restarting the app.
-</p>
+<section id="page-404-wrap" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="page-404-content">
+                    <div class="number">
+                        <div class="four">4</div>
+                        <div class="zero">
+                            <img src="~/img/404.png" alt="JSOFT">
+                        </div>
+                        <div class="four">4</div>
+                    </div>
+                    <h4>PAGE NOT FOUND !</h4>
+                    <p>SORRY, WE COULDN'T FIND THE PAGE <br> YOU'RE LOOKING.</p>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn-404-home"><i class="fa fa-home"></i>Go to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

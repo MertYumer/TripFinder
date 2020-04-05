@@ -1,7 +1,11 @@
-﻿@model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using TripFinder.Data.Models
+@inject UserManager<ApplicationUser> UserManager
+
+@model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    var user = await this.UserManager.GetUserAsync(this.User);
 }
 
 <section id="page-title-area" class="section-padding overlay">
@@ -13,69 +17,69 @@
                     <div class="card-body">
                         <div class="row justify-content-md-center" style="text-align: center;">
                             <div class="col-auto">
-                                <h5>From: </h5>
-                                <h3>@Model.Origin</h3>
+                                <span class="h5">From: </span>
+                                <span class="h3">@Model.Origin</span>
                             </div>
                             <div class="col-auto">
-                                <h5>To: </h5>
-                                <h3>@Model.Destination</h3>
+                                <span class="h5">To: </span>
+                                <span class="h3">@Model.Destination</span>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-md-center">
                             <div class="col-12 col-xl-6">
-                                <h6>Date: </h6>
-                                <h5>@Model.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</h5>
+                                <span class="h6">Date: </span>
+                                <span class="h5">@Model.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</span>
                                 <hr />
                             </div>
                             <div class="col-12 col-xl-6">
-                                <h6>Time: </h6>
-                                <h5>@Model.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</h5>
+                                <span class="h6">Time: </span>
+                                <span class="h5">@Model.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</span>
                                 <hr />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-xl-6">
-                                <h6>Distance: </h6>
-                                <h5>@Model.Distance km</h5>
+                                <span class="h6">Distance: </span>
+                                <span class="h5">@Model.Distance km</span>
                                 <hr />
                             </div>
                             <div class="col-12 col-xl-6">
-                                <h6>Estimated minutes: </h6>
+                                <span class="h6">Estimated minutes: </span>
                                 @if (Model.EstimatedMinutes > 60)
                                 {
-                                    <h5>@(Model.EstimatedMinutes / 60) hours and @(Model.EstimatedMinutes % 60) minutes</h5>
+                                    <span class="h5">@(Model.EstimatedMinutes / 60) hours and @(Model.EstimatedMinutes % 60) minutes</span>
                                 }
                                 else
                                 {
-                                    <h5>@Model.EstimatedMinutes</h5>
+                                    <span class="h5">@Model.EstimatedMinutes</span>
                                 }
                                 <hr />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-xl-6">
-                                <h6>Expense per person: </h6>
-                                <h5>@Model.ExpensePerPerson lv.</h5>
+                                <span class="h6">Expense per person: </span>
+                                <span class="h5">@Model.ExpensePerPerson lv.</span>
                                 <hr />
                             </div>
                             <div class="col-12 col-xl-6">
-                                <h6>Free seats: </h6>
-                                <h5>@Model.FreeSeats from @Model.TotalSeats</h5>
+                                <span class="h6">Free seats: </span>
+                                <span class="h5">@Model.FreeSeats from @Model.TotalSeats</span>
                                 <hr />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 col-xl-6">
-                                <h6>Viewed: </h6>
-                                <h5>@Model.Views times</h5>
+                                <span class="h6">Viewed: </span>
+                                <span class="h5">@Model.Views times</span>
                                 <hr />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h6>Additional information:</h6>
+                                <span class="h6">Additional information:</span>
                             </div>
                         </div>
                         <div class="row">
@@ -241,6 +245,15 @@
                     </div>
                 </div>
 
+                <div class="justify-content-center">
+                    @if (user.Id == Model.Driver.Id)
+                    {
+                        <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit trip</a>
+                        <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Trips" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete trip</a>
+                    }
+
+                    <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
+                </div>
             </div>
         </div>
     </div>

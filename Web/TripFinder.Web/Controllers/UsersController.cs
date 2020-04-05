@@ -36,6 +36,11 @@
         {
             var viewModel = this.usersService.GetById<UserDetailsViewModel>(id);
 
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
             viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
                 ? "/img/avatar.png"
                 : this.imagePathPrefix + this.imageSizing + viewModel.AvatarImageUrl;
@@ -49,7 +54,7 @@
 
             if (viewModel == null)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("Error", "Home");
             }
 
             viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
@@ -78,7 +83,7 @@
 
             if (userId == null)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("Error", "Home");
             }
 
             return this.View();

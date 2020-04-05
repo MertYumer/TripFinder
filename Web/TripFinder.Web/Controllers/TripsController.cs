@@ -99,7 +99,7 @@
 
             if (tripId == null)
             {
-                return this.View();
+                return this.BadRequest();
             }
 
             return this.RedirectToAction("Details", new { id = tripId });
@@ -113,7 +113,7 @@
 
             if (viewModel == null)
             {
-                return this.Redirect("/");
+                return this.RedirectToAction("Error", "Home");
             }
 
             if (user.Id != viewModel.Driver.Id)
