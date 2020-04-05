@@ -1,19 +1,19 @@
-﻿@model TripFinder.Web.ViewModels.Trips.TripsAllViewModel
+﻿@model TripFinder.Web.ViewModels.Trips.TripsMyViewModel
 
 @{
-    ViewData["Title"] = "All";
+    ViewData["Title"] = "MyTrips";
 }
 
 <section id="page-title-area" class="section-padding overlay">
     <div class="container pt-5 d-none d-md-block">
         <div class="row">
             <div class="col">
-                <h3>Last added trips:</h3>
+                <h3>My trips:</h3>
             </div>
         </div>
         <hr />
         <div class="row">
-            @foreach (var trip in Model.AllTrips)
+            @foreach (var trip in Model.MyTrips)
             {
                 <div class="col-6 mb-2">
                     <a style="color: wheat;" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">

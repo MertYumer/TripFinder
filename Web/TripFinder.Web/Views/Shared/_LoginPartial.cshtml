@@ -10,6 +10,7 @@
 @if (this.SignInManager.IsSignedIn(this.User))
 {
     <li><a asp-area="" asp-controller="Trips" asp-action="All">Trips</a></li>
+    <li><a asp-area="" asp-controller="Trips" asp-action="MyTrips" asp-route-userId="@user.Id">My trips</a></li>
     <li><a asp-area="" asp-controller="Trips" asp-action="Create">Will drive</a></li>
     <li><a asp-area="" asp-controller="Trips" asp-action="Search">Will travel</a></li>
     <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>

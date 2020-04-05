@@ -20,6 +20,8 @@
 
         IEnumerable<T> GetAllTrips<T>();
 
+        IEnumerable<T> GetMyTrips<T>(string userId);
+
         Task DeletePassedTrips();
     }
 }

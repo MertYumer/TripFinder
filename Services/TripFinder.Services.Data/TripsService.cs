@@ -15,13 +15,16 @@
     {
         private readonly IDeletableEntityRepository<Trip> tripsRepository;
         private readonly IRepository<TownsDistance> townsDistancesRepository;
+        private readonly IRepository<UserTrip> userTripsRepository;
 
         public TripsService(
             IDeletableEntityRepository<Trip> tripsRepository,
-            IRepository<TownsDistance> townsDistancesRepository)
+            IRepository<TownsDistance> townsDistancesRepository,
+            IRepository<UserTrip> userTripsRepository)
         {
             this.tripsRepository = tripsRepository;
             this.townsDistancesRepository = townsDistancesRepository;
+            this.userTripsRepository = userTripsRepository;
         }
 
         public async Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user)
@@ -60,6 +63,15 @@
             await this.tripsRepository.AddAsync(trip);
             await this.tripsRepository.SaveChangesAsync();
 
+            var userTrip = new UserTrip
+            {
+                UserId = user.Id,
+                TripId = trip.Id,
+            };
+
+            await this.userTripsRepository.AddAsync(userTrip);
+            await this.userTripsRepository.SaveChangesAsync();
+
             return trip.Id;
         }
 
@@ -85,7 +97,9 @@
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
                 .Include(t => t.Car)
-                .To<T>();
+                .OrderByDescending(t => t.CreatedOn)
+                .To<T>()
+                .ToList();
 
             return trips;
         }
@@ -168,6 +182,22 @@
             await this.tripsRepository.SaveChangesAsync();
 
             return tripId;
+        }
+
+        public IEnumerable<T> GetMyTrips<T>(string userId)
+        {
+            var trips = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car)
+                .Include(t => t.UserTrips)
+                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
+                .OrderByDescending(t => t.CreatedOn)
+                .To<T>()
+                .ToList();
+
+            return trips;
         }
     }
 }

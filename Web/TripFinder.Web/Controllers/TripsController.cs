@@ -44,8 +44,7 @@
             await this.tripsService.DeletePassedTrips();
 
             var tripViewModels = this.tripsService
-                .GetAllTrips<TripViewModel>()
-                .ToList();
+                .GetAllTrips<TripViewModel>();
 
             foreach (var trip in tripViewModels)
             {
@@ -54,12 +53,12 @@
                 : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
             }
 
-            var allTripsviewModel = new TripsAllViewModel
+            var tripsAllViewModel = new TripsAllViewModel
             {
                 AllTrips = tripViewModels,
             };
 
-            return this.View(allTripsviewModel);
+            return this.View(tripsAllViewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -206,6 +205,28 @@
             }
 
             return this.RedirectToAction("All");
+        }
+
+        public async Task<IActionResult> MyTrips(string userId)
+        {
+            await this.tripsService.DeletePassedTrips();
+
+            var tripViewModels = this.tripsService
+                .GetMyTrips<TripViewModel>(userId);
+
+            foreach (var trip in tripViewModels)
+            {
+                trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
+            }
+
+            var tripsMyViewModel = new TripsMyViewModel
+            {
+                MyTrips = tripViewModels,
+            };
+
+            return this.View(tripsMyViewModel);
         }
 
         public IActionResult Search()
