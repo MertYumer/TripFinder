@@ -62,7 +62,6 @@
             return this.RedirectToAction("Details", new { id = carId });
         }
 
-        [Authorize]
         public async Task<IActionResult> Details(string id)
         {
             var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
@@ -86,13 +85,20 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
             var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
 
             if (viewModel == null)
             {
                 return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.CarId != viewModel.Id)
+            {
+                return this.Forbid();
             }
 
             viewModel.ImageUrl = viewModel.ImageUrl == null
@@ -120,13 +126,20 @@
             return this.RedirectToAction("Details", new { id = carId });
         }
 
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             var viewModel = this.carsService.GetById<CarDeleteViewModel>(id);
 
             if (viewModel == null)
             {
                 return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.CarId != viewModel.Id)
+            {
+                return this.Forbid();
             }
 
             return this.View(viewModel);

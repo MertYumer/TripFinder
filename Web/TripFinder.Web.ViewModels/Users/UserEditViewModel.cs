@@ -8,6 +8,8 @@
 
     public class UserEditViewModel : IMapFrom<ApplicationUser>
     {
+        public string Id { get; set; }
+
         [Required]
         [MinLength(3)]
         [MaxLength(20)]

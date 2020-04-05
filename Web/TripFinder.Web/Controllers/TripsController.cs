@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Web.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -85,6 +86,12 @@
                 return this.View();
             }
 
+            if (inputModel.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0 &&
+                inputModel.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes)
+            {
+                return this.View();
+            }
+
             var user = await this.userManager
                 .Users
                 .Include(u => u.Car)
@@ -107,14 +114,14 @@
 
         public async Task<IActionResult> Details(string id)
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-
             var viewModel = this.tripsService.GetById<TripDetailsViewModel>(id);
 
             if (viewModel == null)
             {
                 return this.RedirectToAction("Error", "Home");
             }
+
+            var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.Id != viewModel.Driver.Id)
             {
@@ -130,6 +137,43 @@
                 : this.imagePathPrefix + this.carImageSizing + viewModel.CarImageUrl;
 
             return this.View(viewModel);
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            var viewModel = this.tripsService.GetById<TripEditViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.Id != viewModel.Driver.Id)
+            {
+                return this.Forbid();
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(TripEditInputModel inputModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Edit", new { id = inputModel.Id });
+            }
+
+            var tripId = await this.tripsService.UpdateAsync(inputModel);
+
+            if (tripId == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("Details", new { id = tripId });
         }
 
         public IActionResult Search()

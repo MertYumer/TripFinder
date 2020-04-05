@@ -1,8 +1,7 @@
-﻿@model TripFinder.Web.ViewModels.Trips.TripCreateInputModel;
-
+﻿@model TripFinder.Web.ViewModels.Trips.TripEditViewModel;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
     var totalSeats = this.ViewBag.TotalSeats;
 }
 
@@ -11,7 +10,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2>Create trip</h2>
+                    <h2>Edit trip</h2>
                     <span class="title-line"><i class="fa fa-car"></i></span>
                 </div>
             </div>
@@ -22,12 +21,10 @@
                     <div class="form">
                         <form method="post">
                             <div>
-                                <span asp-validation-for="Origin" class="text-danger"></span>
-                                <input asp-for="Origin" type="text" placeholder="Origin">
+                                <input asp-for="Origin" type="text" placeholder="Origin" readonly>
                             </div>
                             <div>
-                                <span asp-validation-for="Destination" class="text-danger"></span>
-                                <input asp-for="Destination" type="text" placeholder="Destination">
+                                <input asp-for="Destination" type="text" placeholder="Destination" readonly>
                             </div>
                             <div>
                                 <span asp-validation-for="DateOfDeparture" class="text-danger"></span>
@@ -50,8 +47,8 @@
                                 <input asp-for="AdditionalInformation" type="text" placeholder="Additional Information">
                             </div>
                             <div class="col justify-content-center">
-                                <button class="btn btn-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</button>
-                                <button class="btn btn-outline-warning btn-lg" type="button" onclick="location.href='@Url.Action("Index", "Home")'"><i class="fa fa-undo"></i> Cancel</button>
+                                <button class="btn btn-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-plus-circle"></i> Edit trip</button>
+                                <button class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@Model.Id"><i class="fa fa-undo"></i> Cancel</button>
                             </div>
                         </form>
                     </div>

@@ -16,6 +16,7 @@
         private readonly IUsersService usersService;
         private readonly IConfiguration configuration;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
@@ -24,12 +25,14 @@
         public UsersController(
             IUsersService usersService,
             IConfiguration configuration,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
             this.configuration = configuration;
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
             this.signInManager = signInManager;
+            this.userManager = userManager;
         }
 
         public IActionResult Details(string id)
@@ -48,13 +51,20 @@
             return this.View(viewModel);
         }
 
-        public IActionResult Edit(string id)
+        public async Task<IActionResult> Edit(string id)
         {
             var viewModel = this.usersService.GetById<UserEditViewModel>(id);
 
             if (viewModel == null)
             {
                 return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.Id != viewModel.Id)
+            {
+                return this.Forbid();
             }
 
             viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
@@ -77,13 +87,20 @@
             return this.RedirectToAction("Details", new { id = userId });
         }
 
-        public IActionResult Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             var userId = this.usersService.CheckForUserById(id);
 
             if (userId == null)
             {
                 return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.Id != userId)
+            {
+                return this.Forbid();
             }
 
             return this.View();

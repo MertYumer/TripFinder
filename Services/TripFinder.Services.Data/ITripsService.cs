@@ -12,6 +12,8 @@
 
         Task UpdateTripViewsCountAsync(string id);
 
+        Task<string> UpdateAsync(TripEditInputModel inputModel);
+
         T GetById<T>(string id);
 
         IEnumerable<T> GetAllTrips<T>();

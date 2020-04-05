@@ -127,5 +127,28 @@
 
             await this.tripsRepository.SaveChangesAsync();
         }
+
+        public async Task<string> UpdateAsync(TripEditInputModel inputModel)
+        {
+            var trip = this.tripsRepository
+                .All()
+                .FirstOrDefault(t => t.Id == inputModel.Id);
+
+            if (trip == null)
+            {
+                return null;
+            }
+
+            trip.DateOfDeparture = inputModel.DateOfDeparture;
+            trip.TimeOfDeparture = inputModel.TimeOfDeparture;
+            trip.FreeSeats = inputModel.FreeSeats;
+            trip.ExpensePerPerson = inputModel.ExpensePerPerson;
+            trip.AdditionalInformation = inputModel.AdditionalInformation;
+
+            this.tripsRepository.Update(trip);
+            await this.tripsRepository.SaveChangesAsync();
+
+            return trip.Id;
+        }
     }
 }
