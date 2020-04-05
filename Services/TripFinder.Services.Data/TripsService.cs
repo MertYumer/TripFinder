@@ -150,5 +150,24 @@
 
             return trip.Id;
         }
+
+        public async Task<string> DeleteAsync(string id)
+        {
+            var trip = this.tripsRepository
+                .All()
+                .FirstOrDefault(t => t.Id == id);
+
+            if (trip == null)
+            {
+                return null;
+            }
+
+            var tripId = trip.Id;
+
+            this.tripsRepository.Delete(trip);
+            await this.tripsRepository.SaveChangesAsync();
+
+            return tripId;
+        }
     }
 }

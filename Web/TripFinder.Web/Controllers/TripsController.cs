@@ -176,6 +176,38 @@
             return this.RedirectToAction("Details", new { id = tripId });
         }
 
+        public async Task<IActionResult> Delete(string id)
+        {
+            var viewModel = this.tripsService.GetById<TripDeleteViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("Error", "Home");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.Id != viewModel.DriverId)
+            {
+                return this.Forbid();
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            var tripId = await this.tripsService.DeleteAsync(id);
+
+            if (tripId == null)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("All");
+        }
+
         public IActionResult Search()
         {
             return this.View();

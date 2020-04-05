@@ -14,6 +14,8 @@
 
         Task<string> UpdateAsync(TripEditInputModel inputModel);
 
+        Task<string> DeleteAsync(string id);
+
         T GetById<T>(string id);
 
         IEnumerable<T> GetAllTrips<T>();
