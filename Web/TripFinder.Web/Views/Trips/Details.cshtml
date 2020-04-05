@@ -131,66 +131,66 @@
                                         <i class="material-icons md-18 center text-success"></i> <span>Place for luggage: </span>
                                         @if (Model.Car.PlaceForLuggage)
                                         {
-                                            <span class="text-success">@Model.Car.PlaceForLuggage</span>
+                                            <span class="text-success">Yes</span>
                                         }
                                         else
                                         {
-                                            <span class="text-danger">@Model.Car.PlaceForLuggage</span>
+                                            <span class="text-danger">No</span>
                                         }
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <i class="material-icons md-18 center text-success"></i> <span>Air conditioning: </span>
                                         @if (Model.Car.HasAirConditioning)
                                         {
-                                            <span class="text-success">@Model.Car.HasAirConditioning</span>
+                                            <span class="text-success">Yes</span>
                                         }
                                         else
                                         {
-                                            <span class="text-danger">@Model.Car.HasAirConditioning</span>
+                                    <span class="text-danger">No</span>
                                         }
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <i class="material-icons md-18 center text-muted"></i> <span>Smoking allowed: </span>
                                         @if (Model.Car.AllowedSmoking)
                                         {
-                                            <span class="text-success">@Model.Car.AllowedSmoking</span>
+                                            <span class="text-success">Yes</span>
                                         }
                                         else
                                         {
-                                            <span class="text-danger">@Model.Car.AllowedSmoking</span>
+                                    <span class="text-danger">No</span>
                                         }
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <i class="material-icons md-18 center text-muted"></i> <span>Food allowed: </span>
                                         @if (Model.Car.AllowedFood)
                                         {
-                                            <span class="text-success">@Model.Car.AllowedFood</span>
+                                            <span class="text-success">Yes</span>
                                         }
                                         else
                                         {
-                                            <span class="text-danger">@Model.Car.AllowedFood</span>
+                                    <span class="text-danger">No</span>
                                         }
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <i class="material-icons md-18 center text-success"></i> <span>Drinks allowed: </span>
                                         @if (Model.Car.AllowedDrinks)
                                         {
-                                            <span class="text-success">@Model.Car.AllowedDrinks</span>
+                                            <span class="text-success">Yes</span>
                                         }
                                         else
                                         {
-                                            <span class="text-danger">@Model.Car.AllowedDrinks</span>
+                                    <span class="text-danger">No</span>
                                         }
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <i class="material-icons md-18 center text-success"></i> <span>Pets allowed: </span>
                                         @if (Model.Car.AllowedPets)
                                         {
-                                            <span class="text-success">@Model.Car.AllowedPets</span>
+                                            <span class="text-success">Yes</span>
                                         }
                                         else
                                         {
-                                            <span class="text-danger">@Model.Car.AllowedPets</span>
+                                    <span class="text-danger">No</span>
                                         }
                                     </div>
                                 </div>
@@ -204,18 +204,18 @@
                     <p>Driver information</p>
                     <div class="trip-info">
                         <div class="card-body">
-                            <div class="row justify-content-center">
-                                <div class="col-12 col-sm-auto mb-3 mb-sm-0">
-                                    <div class="d-flex flex-row justify-content-center">
-                                        <img src="@Model.DriverAvatarImageUrl" alt="Profile Picture" class="rounded-circle img-fluid profile-picture pp-large pp-sm-small">
+                            <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@Model.Driver.Id" style="color: #ffd000;">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-sm-auto mb-3 mb-sm-0">
+                                        <div class="d-flex flex-row justify-content-center">
+                                            <img src="@Model.DriverAvatarImageUrl" alt="Profile Picture" class="rounded-circle img-fluid profile-picture pp-large pp-sm-small">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-auto">
+                                        <span class="h3">@Model.Driver.FirstName @Model.Driver.LastName</span>
                                     </div>
                                 </div>
-                                <div class="col-12 col-sm-auto">
-                                    <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@Model.Driver.Id">
-                                        <span class="h3">@Model.Driver.FirstName @Model.Driver.LastName</span>
-                                    </a>
-                                </div>
-                            </div>
+                            </a>
                             <div style="margin-top: 2%">
                                 <div>
                                     <span>Phone number: </span>

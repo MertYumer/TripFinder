@@ -52,37 +52,37 @@
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Allowed smoking:</div>
-                                <h3>@Model.AllowedSmoking</h3>
+                                <h3>@(Model.AllowedSmoking ? "Yes" : "No")</h3>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Allowed food:</div>
-                                <h3>@Model.AllowedFood</h3>
+                                <h3>@(Model.AllowedFood ? "Yes" : "No")</h3>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Allowed drinks:</div>
-                                <h3>@Model.AllowedDrinks</h3>
+                                <h3>@(Model.AllowedDrinks ? "Yes" : "No")</h3>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Place for luggage:</div>
-                                <h3>@Model.PlaceForLuggage</h3>
+                                <h3>@(Model.PlaceForLuggage ? "Yes" : "No")</h3>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Allowed pets:</div>
-                                <h3>@Model.AllowedPets</h3>
+                                <h3>@(Model.AllowedPets ? "Yes" : "No")</h3>
                             </div>
                         </div>
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Has air conditioning:</div>
-                                <h3>@Model.HasAirConditioning</h3>
+                                <h3>@(Model.HasAirConditioning ? "Yes" : "No")</h3>
                             </div>
                         </div>
                     </div>
