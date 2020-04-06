@@ -20,10 +20,12 @@
 
         IEnumerable<T> GetAllTrips<T>(int? take = null, int skip = 0);
 
-        IEnumerable<T> GetMyTrips<T>(string userId);
+        IEnumerable<T> GetMyTrips<T>(string userId, int? take = null, int skip = 0);
 
         Task DeletePassedTripsAsync();
 
         int GetAllTripsCount();
+
+        int GetAllMyTripsCount(string userId);
     }
 }

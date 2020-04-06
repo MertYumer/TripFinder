@@ -63,7 +63,43 @@
                 AllTrips = tripsViewModel,
             };
 
+            if (tripsAllViewModel.PagesCount == 0)
+            {
+                tripsAllViewModel.PagesCount = 1;
+            }
+
             return this.View(tripsAllViewModel);
+        }
+
+        public async Task<IActionResult> MyTrips(string userId, int page = 1)
+        {
+            await this.tripsService.DeletePassedTripsAsync();
+
+            var tripViewModels = this.tripsService
+                .GetMyTrips<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage);
+
+            foreach (var trip in tripViewModels)
+            {
+                trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
+            }
+
+            var tripsCount = this.tripsService.GetAllMyTripsCount(userId);
+
+            var tripsMyViewModel = new TripsMyViewModel
+            {
+                CurrentPage = page,
+                PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
+                MyTrips = tripViewModels,
+            };
+
+            if (tripsMyViewModel.PagesCount == 0)
+            {
+                tripsMyViewModel.PagesCount = 1;
+            }
+
+            return this.View(tripsMyViewModel);
         }
 
         public async Task<IActionResult> Create()
@@ -212,27 +248,7 @@
             return this.RedirectToAction("All");
         }
 
-        public async Task<IActionResult> MyTrips(string userId)
-        {
-            await this.tripsService.DeletePassedTripsAsync();
-
-            var tripViewModels = this.tripsService
-                .GetMyTrips<TripViewModel>(userId);
-
-            foreach (var trip in tripViewModels)
-            {
-                trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
-                ? "/img/avatar.png"
-                : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
-            }
-
-            var tripsMyViewModel = new TripsMyViewModel
-            {
-                MyTrips = tripViewModels,
-            };
-
-            return this.View(tripsMyViewModel);
-        }
+        
 
         public IActionResult Search()
         {

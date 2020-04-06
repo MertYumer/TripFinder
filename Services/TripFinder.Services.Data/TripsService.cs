@@ -112,6 +112,30 @@
             return trips;
         }
 
+        public IEnumerable<T> GetMyTrips<T>(string userId, int? take = null, int skip = 0)
+        {
+            var query = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car)
+                .Include(t => t.UserTrips)
+                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
+                .OrderByDescending(t => t.CreatedOn)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            var trips = query
+                .To<T>()
+                .ToList();
+
+            return trips;
+        }
+
         public async Task UpdateTripViewsCountAsync(string id)
         {
             var trip = this.tripsRepository
@@ -192,26 +216,22 @@
             return tripId;
         }
 
-        public IEnumerable<T> GetMyTrips<T>(string userId)
-        {
-            var trips = this.tripsRepository
-                .All()
-                .Include(t => t.Driver)
-                .ThenInclude(d => d.AvatarImage)
-                .Include(t => t.Car)
-                .Include(t => t.UserTrips)
-                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
-                .OrderByDescending(t => t.CreatedOn)
-                .To<T>()
-                .ToList();
-
-            return trips;
-        }
-
         public int GetAllTripsCount()
         {
             var tripsCount = this.tripsRepository
                 .All()
+                .ToList()
+                .Count;
+
+            return tripsCount;
+        }
+
+        public int GetAllMyTripsCount(string userId)
+        {
+            var tripsCount = this.tripsRepository
+                .All()
+                .Include(t => t.UserTrips)
+                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
                 .ToList()
                 .Count;
 
