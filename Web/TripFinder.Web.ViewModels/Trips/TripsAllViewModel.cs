@@ -4,6 +4,8 @@
 
     public class TripsAllViewModel
     {
+        public int CurrentPage { get; set; }
+
         public int PagesCount { get; set; }
 
         public IEnumerable<TripViewModel> AllTrips { get; set; }

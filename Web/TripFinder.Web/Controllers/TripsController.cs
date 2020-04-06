@@ -58,6 +58,7 @@
 
             var tripsAllViewModel = new TripsAllViewModel
             {
+                CurrentPage = page,
                 PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
                 AllTrips = tripsViewModel,
             };

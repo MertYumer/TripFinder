@@ -3019,6 +3019,31 @@ label {
     margin-bottom: 5%;
 }
 
+.pagination > li > a {
+    background-color: black;
+    color: #ffd000;
+    border: solid 1px #ffd000
+}
+
+    .pagination > li > a:focus,
+    .pagination > li > a:hover,
+    .pagination > li > span:focus,
+    .pagination > li > span:hover {
+        color: black;
+        background-color: yellow;
+        border-color: #ffd000;
+    }
+
+.page-item.active .page-link {
+    color: black;
+    background-color: #ffd000 !Important;
+    border-color: #ffd000 !Important;
+}
+
+.page-item.disabled .page-link {
+    background-color: black;
+}
+
 .login-with-btn {
     background: -webkit-gradient(linear, left top, left bottom, from(#3b5998), to(#344e86));
     background: linear-gradient(to bottom, #3b5998, #344e86);
