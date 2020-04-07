@@ -24,7 +24,7 @@
 
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
-        private readonly string driverIimageSizing = "w_300,h_300,c_fill/";
+        private readonly string driverImageSizing = "w_300,h_300,c_fill/";
         private readonly string carImageSizing = "w_300,h_300,c_pad,b_black/";
 
         public TripsController(
@@ -51,7 +51,7 @@
             {
                 trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
                 ? "/img/avatar.png"
-                : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
+                : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
             }
 
             var tripsCount = this.tripsService.GetAllTripsCount();
@@ -82,7 +82,7 @@
             {
                 trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
                 ? "/img/avatar.png"
-                : this.imagePathPrefix + this.driverIimageSizing + trip.DriverAvatarImageUrl;
+                : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
             }
 
             var tripsCount = this.tripsService.GetAllMyTripsCount(userId);
@@ -170,7 +170,7 @@
 
             viewModel.DriverAvatarImageUrl = viewModel.DriverAvatarImageUrl == null
                 ? "/img/avatar.png"
-                : this.imagePathPrefix + this.driverIimageSizing + viewModel.DriverAvatarImageUrl;
+                : this.imagePathPrefix + this.driverImageSizing + viewModel.DriverAvatarImageUrl;
 
             viewModel.CarImageUrl = viewModel.CarImageUrl == null
                 ? "/img/car-avatar.png"
@@ -247,8 +247,6 @@
 
             return this.RedirectToAction("All");
         }
-
-        
 
         public IActionResult Search()
         {

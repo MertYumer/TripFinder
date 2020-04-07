@@ -11,7 +11,7 @@
     using TripFinder.Web.ViewModels.Users;
 
     [Authorize]
-    public class UsersController : BaseController
+    public class UsersController : Controller
     {
         private readonly IUsersService usersService;
         private readonly IConfiguration configuration;
