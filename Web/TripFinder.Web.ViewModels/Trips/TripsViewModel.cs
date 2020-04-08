@@ -2,12 +2,14 @@
 {
     using System.Collections.Generic;
 
-    public class TripsAllViewModel
+    public class TripsViewModel
     {
+        public string Title { get; set; }
+
         public int CurrentPage { get; set; }
 
         public int PagesCount { get; set; }
 
-        public IEnumerable<TripViewModel> AllTrips { get; set; }
+        public IEnumerable<TripViewModel> Trips { get; set; }
     }
 }

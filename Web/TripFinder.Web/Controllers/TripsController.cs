@@ -56,11 +56,12 @@
 
             var tripsCount = this.tripsService.GetAllTripsCount();
 
-            var tripsAllViewModel = new TripsAllViewModel
+            var tripsAllViewModel = new TripsViewModel
             {
+                Title = "Last added trips:",
                 CurrentPage = page,
                 PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
-                AllTrips = tripsViewModel,
+                Trips = tripsViewModel,
             };
 
             if (tripsAllViewModel.PagesCount == 0)
@@ -87,11 +88,12 @@
 
             var tripsCount = this.tripsService.GetAllMyTripsCount(userId);
 
-            var tripsMyViewModel = new TripsMyViewModel
+            var tripsMyViewModel = new TripsViewModel
             {
+                Title = "My trips:",
                 CurrentPage = page,
                 PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
-                MyTrips = tripViewModels,
+                Trips = tripViewModels,
             };
 
             if (tripsMyViewModel.PagesCount == 0)
@@ -99,7 +101,7 @@
                 tripsMyViewModel.PagesCount = 1;
             }
 
-            return this.View(tripsMyViewModel);
+            return this.View("All", tripsMyViewModel);
         }
 
         public async Task<IActionResult> Create()
