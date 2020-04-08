@@ -46,6 +46,24 @@
         <div>
             <partial name="_CookieConsentPartial" />
         </div>
+        @if (this.TempData["Notification"] != null)
+        {
+
+
+            <div class="alert alert-success" role="alert" id="alert" style="position: absolute; top: 0; right: 0;">
+                @this.TempData["Notification"]
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <script>
+                window.setTimeout(function () {
+                    $("#alert").fadeTo(1000, 0).slideUp(1000, function () {
+                        $(this).remove();
+                    });
+                }, 5000);
+            </script>
+        }
     </header>
     @RenderBody()
     <section id="footer-area">

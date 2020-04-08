@@ -89,6 +89,8 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
+            this.TempData["Notification"] = "Your profile was successfully edited.";
+
             return this.RedirectToAction("Details", new { id = userId });
         }
 
@@ -122,6 +124,8 @@
             }
 
             await this.signInManager.SignOutAsync();
+
+            this.TempData["Notification"] = "Your profile was successfully deleted.";
 
             return this.RedirectToAction("Index", "Home");
         }

@@ -149,6 +149,8 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
+            this.TempData["Notification"] = "Trip was successfully created.";
+
             return this.RedirectToAction("Details", new { id = tripId });
         }
 
@@ -213,6 +215,8 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
+            this.TempData["Notification"] = "Trip was successfully edited.";
+
             return this.RedirectToAction("Details", new { id = tripId });
         }
 
@@ -244,6 +248,8 @@
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
+
+            this.TempData["Notification"] = "Trip was successfully deleted.";
 
             return this.RedirectToAction("All");
         }

@@ -66,6 +66,8 @@
                 return this.View();
             }
 
+            this.TempData["Notification"] = "Car was successfully created.";
+
             return this.RedirectToAction("Details", new { id = carId });
         }
 
@@ -130,6 +132,8 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
+            this.TempData["Notification"] = "Car was successfully edited.";
+
             return this.RedirectToAction("Details", new { id = carId });
         }
 
@@ -161,6 +165,8 @@
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
+
+            this.TempData["Notification"] = "Car was successfully deleted.";
 
             return this.RedirectToAction("Index");
         }
