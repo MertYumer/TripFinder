@@ -1,6 +1,7 @@
 ﻿namespace TripFinder.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -45,7 +46,8 @@
             await this.tripsService.DeletePassedTripsAsync();
 
             var tripsViewModel = this.tripsService
-                .GetAllTrips<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage);
+                .GetAllTrips<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage)
+                .ToList();
 
             foreach (var trip in tripsViewModel)
             {
@@ -54,13 +56,13 @@
                 : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
             }
 
-            var tripsCount = this.tripsService.GetAllTripsCount();
+            var allTripsCount = this.tripsService.GetAllTripsCount();
 
             var tripsAllViewModel = new TripsViewModel
             {
                 Title = "Last added trips:",
                 CurrentPage = page,
-                PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
+                PagesCount = (int)Math.Ceiling((double)allTripsCount / TripsPerPage),
                 Trips = tripsViewModel,
             };
 
@@ -76,24 +78,25 @@
         {
             await this.tripsService.DeletePassedTripsAsync();
 
-            var tripViewModels = this.tripsService
-                .GetMyTrips<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage);
+            var tripsViewModel = this.tripsService
+                .GetMyTrips<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage)
+                .ToList();
 
-            foreach (var trip in tripViewModels)
+            foreach (var trip in tripsViewModel)
             {
                 trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
                 ? "/img/avatar.png"
                 : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
             }
 
-            var tripsCount = this.tripsService.GetAllMyTripsCount(userId);
+            var myTripsCount = this.tripsService.GetMyTripsCount(userId);
 
             var tripsMyViewModel = new TripsViewModel
             {
                 Title = "My trips:",
                 CurrentPage = page,
-                PagesCount = (int)Math.Ceiling((double)tripsCount / TripsPerPage),
-                Trips = tripViewModels,
+                PagesCount = (int)Math.Ceiling((double)myTripsCount / TripsPerPage),
+                Trips = tripsViewModel,
             };
 
             if (tripsMyViewModel.PagesCount == 0)
@@ -259,6 +262,45 @@
         public IActionResult Search()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Search(TripSearchInputModel inputModel, int page = 1)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var userId = this.userManager.GetUserId(this.User);
+
+            var tripsViewModel = this.tripsService
+                .ShowSearchResults<TripViewModel>(inputModel, userId, TripsPerPage, (page - 1) * TripsPerPage)
+                .ToList();
+
+            foreach (var trip in tripsViewModel)
+            {
+                trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
+            }
+
+            var searchResultsCount = this.tripsService.GetSearchResultsCount(inputModel, userId);
+
+            var tripsSearchViewModel = new TripsViewModel
+            {
+                Title = "Search results:",
+                CurrentPage = page,
+                PagesCount = (int)Math.Ceiling((double)searchResultsCount / TripsPerPage),
+                Trips = tripsViewModel,
+            };
+
+            if (tripsSearchViewModel.PagesCount == 0)
+            {
+                tripsSearchViewModel.PagesCount = 1;
+            }
+
+            return this.View("All", tripsSearchViewModel);
         }
     }
 }

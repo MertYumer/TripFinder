@@ -12,6 +12,41 @@
             </div>
         </div>
         <hr />
+        @if (Model.Trips.Count() == 0)
+        {
+            <div class="row justify-content-center">
+                @switch (Model.Title)
+                {
+                    case "Last added trips:":
+                        <div class="text-center">
+                            <h5>Currently there are no trips in the app.</h5>
+                            <h5>Create one.</h5>
+                            <hr />
+                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</a>
+                        </div>
+                        break;
+
+                    case "My trips:":
+                        <div class="text-center">
+                            <h5>Currently you don't have created trips, neither you joined any.</h5>
+                            <h5>Create trip or join any, that match your requirements.</h5>
+                            <hr />
+                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</a>
+                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
+                        </div>
+                        break;
+
+                    case "Search results:":
+                        <div class="text-center">
+                            <h5>Currently there are no trips that match your search criteria.</h5>
+                            <h5>Try again with other requirements.</h5>
+                            <hr />
+                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
+                        </div>
+                        break;
+                }
+            </div>
+        }
         <div class="row">
             @foreach (var trip in Model.Trips)
             {
@@ -67,6 +102,7 @@
                 </div>
             }
         </div>
+        <hr />
         <div class="row justify-content-center">
             <nav aria-label="...">
                 <ul class="pagination pagination-lg">

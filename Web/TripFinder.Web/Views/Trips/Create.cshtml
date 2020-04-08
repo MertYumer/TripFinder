@@ -39,7 +39,7 @@
                             </div>
                             <div>
                                 <span asp-validation-for="FreeSeats" class="text-danger"></span>
-                                <input asp-for="FreeSeats" type="number" min="0" max="@totalSeats" placeholder="Free seats">
+                                <input asp-for="FreeSeats" type="number" min="1" max="@totalSeats" placeholder="Free seats">
                             </div>
                             <div>
                                 <span asp-validation-for="ExpensePerPerson" class="text-danger"></span>

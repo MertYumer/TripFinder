@@ -4,6 +4,11 @@
 
     public class TripsViewModel
     {
+        public TripsViewModel()
+        {
+            this.Trips = new HashSet<TripViewModel>();
+        }
+
         public string Title { get; set; }
 
         public int CurrentPage { get; set; }

@@ -26,6 +26,10 @@
 
         int GetAllTripsCount();
 
-        int GetAllMyTripsCount(string userId);
+        int GetMyTripsCount(string userId);
+
+        int GetSearchResultsCount(TripSearchInputModel inputModel, string userId);
+
+        IEnumerable<T> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int? take = null, int skip = 0);
     }
 }

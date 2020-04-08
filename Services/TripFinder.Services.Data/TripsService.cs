@@ -30,7 +30,7 @@
         public async Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user)
         {
             var townsDistance = this.townsDistancesRepository
-                .AllAsNoTracking()
+                .All()
                 .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
                 || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
                 .FirstOrDefault();
@@ -88,52 +88,6 @@
                 .FirstOrDefault();
 
             return trip;
-        }
-
-        public IEnumerable<T> GetAllTrips<T>(int? take = null, int skip = 0)
-        {
-            var query = this.tripsRepository
-                .All()
-                .Include(t => t.Driver)
-                .ThenInclude(d => d.AvatarImage)
-                .Include(t => t.Car)
-                .OrderByDescending(t => t.CreatedOn)
-                .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
-
-            var trips = query
-                .To<T>()
-                .ToList();
-
-            return trips;
-        }
-
-        public IEnumerable<T> GetMyTrips<T>(string userId, int? take = null, int skip = 0)
-        {
-            var query = this.tripsRepository
-                .All()
-                .Include(t => t.Driver)
-                .ThenInclude(d => d.AvatarImage)
-                .Include(t => t.Car)
-                .Include(t => t.UserTrips)
-                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
-                .OrderByDescending(t => t.CreatedOn)
-                .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
-
-            var trips = query
-                .To<T>()
-                .ToList();
-
-            return trips;
         }
 
         public async Task UpdateTripViewsCountAsync(string id)
@@ -216,6 +170,91 @@
             return tripId;
         }
 
+        public IEnumerable<T> GetAllTrips<T>(int? take = null, int skip = 0)
+        {
+            var query = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car)
+                .OrderByDescending(t => t.CreatedOn)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            var trips = query
+                .To<T>()
+                .ToList();
+
+            return trips;
+        }
+
+        public IEnumerable<T> GetMyTrips<T>(string userId, int? take = null, int skip = 0)
+        {
+            var query = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car)
+                .Include(t => t.UserTrips)
+                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
+                .OrderByDescending(t => t.CreatedOn)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            var trips = query
+                .To<T>()
+                .ToList();
+
+            return trips;
+        }
+
+        public IEnumerable<T> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int? take = null, int skip = 0)
+        {
+            var townsDistance = this.townsDistancesRepository
+                .All()
+                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
+                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
+                .FirstOrDefault();
+
+            if (townsDistance == null)
+            {
+                return null;
+            }
+
+            var query = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car)
+                .Include(t => t.TownsDistance)
+                .Where(t => t.UserTrips.All(ut => ut.UserId != userId)
+                && t.Origin == inputModel.Origin
+                && t.Destination == inputModel.Destination
+                && t.DateOfDeparture.Date.CompareTo(inputModel.DateOfDeparture) == 0
+                && t.FreeSeats >= inputModel.SeatsNeeded)
+                .OrderBy(t => t.DateOfDeparture)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            var trips = query
+                .To<T>()
+                .ToList();
+
+            return trips;
+        }
+
         public int GetAllTripsCount()
         {
             var tripsCount = this.tripsRepository
@@ -226,8 +265,40 @@
             return tripsCount;
         }
 
-        public int GetAllMyTripsCount(string userId)
+        public int GetMyTripsCount(string userId)
         {
+            var tripsCount = this.tripsRepository
+                .All()
+                .Include(t => t.UserTrips)
+                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
+                .ToList()
+                .Count;
+
+            return tripsCount;
+        }
+
+        public int GetSearchResultsCount(TripSearchInputModel inputModel, string userId)
+        {
+            var townsDistance = this.townsDistancesRepository
+                .All()
+                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
+                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
+                .FirstOrDefault();
+
+            var query = this.tripsRepository
+                .All()
+                .Include(t => t.Driver)
+                .ThenInclude(d => d.AvatarImage)
+                .Include(t => t.Car)
+                .Include(t => t.TownsDistance)
+                .Where(t => t.UserTrips.All(ut => ut.UserId != userId)
+                && t.Origin == inputModel.Origin
+                && t.Destination == inputModel.Destination
+                && t.DateOfDeparture.Date.CompareTo(inputModel.DateOfDeparture) == 0
+                && t.FreeSeats >= inputModel.SeatsNeeded)
+                .ToList()
+                .Count;
+
             var tripsCount = this.tripsRepository
                 .All()
                 .Include(t => t.UserTrips)
