@@ -146,7 +146,7 @@
 
             if (tripId == null)
             {
-                return this.BadRequest();
+                return this.RedirectToAction("BadRequest", "Errors");
             }
 
             return this.RedirectToAction("Details", new { id = tripId });
@@ -158,7 +158,7 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
@@ -185,14 +185,14 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.Id != viewModel.Driver.Id)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             return this.View(viewModel);
@@ -210,7 +210,7 @@
 
             if (tripId == null)
             {
-                return this.BadRequest();
+                return this.RedirectToAction("BadRequest", "Errors");
             }
 
             return this.RedirectToAction("Details", new { id = tripId });
@@ -222,14 +222,14 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.Id != viewModel.DriverId)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             return this.View(viewModel);
@@ -242,7 +242,7 @@
 
             if (tripId == null)
             {
-                return this.BadRequest();
+                return this.RedirectToAction("BadRequest", "Errors");
             }
 
             return this.RedirectToAction("All");

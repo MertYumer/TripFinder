@@ -3120,7 +3120,8 @@ label {
     margin: auto;
 }
 
-.four {
+.four,
+.three {
     color: #ffd000;
     font-size: 150px;
     font-weight: 400;

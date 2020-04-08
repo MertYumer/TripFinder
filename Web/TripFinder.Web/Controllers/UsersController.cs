@@ -41,7 +41,7 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
@@ -57,14 +57,14 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.Id != viewModel.Id)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
@@ -84,6 +84,11 @@
 
             var userId = await this.usersService.UpdateAsync(inputModel);
 
+            if (userId == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
             return this.RedirectToAction("Details", new { id = userId });
         }
 
@@ -93,14 +98,14 @@
 
             if (userId == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.Id != userId)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             return this.View();

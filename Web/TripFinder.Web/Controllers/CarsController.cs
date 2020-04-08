@@ -37,8 +37,15 @@
             return this.View();
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.CarId != null)
+            {
+                return this.RedirectToAction("Index", "Cars");
+            }
+
             return this.View();
         }
 
@@ -68,14 +75,14 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.CarId != viewModel.Id)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             viewModel.ImageUrl = viewModel.ImageUrl == null
@@ -91,14 +98,14 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.CarId != viewModel.Id)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             viewModel.ImageUrl = viewModel.ImageUrl == null
@@ -120,7 +127,7 @@
 
             if (carId == null)
             {
-                return this.BadRequest();
+                return this.RedirectToAction("BadRequest", "Errors");
             }
 
             return this.RedirectToAction("Details", new { id = carId });
@@ -132,14 +139,14 @@
 
             if (viewModel == null)
             {
-                return this.RedirectToAction("Error", "Home");
+                return this.RedirectToAction("NotFound", "Errors");
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (user.CarId != viewModel.Id)
             {
-                return this.Forbid();
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             return this.View(viewModel);
@@ -152,7 +159,7 @@
 
             if (carId == null)
             {
-                return this.BadRequest();
+                return this.RedirectToAction("BadRequest", "Errors");
             }
 
             return this.RedirectToAction("Index");
