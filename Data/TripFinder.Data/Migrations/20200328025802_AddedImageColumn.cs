@@ -31,7 +31,7 @@
                     Id = table.Column<string>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
-                    CarId = table.Column<string>(nullable: true)
+                    CarId = table.Column<string>(nullable: true),
                 },
                 constraints: table =>
                 {

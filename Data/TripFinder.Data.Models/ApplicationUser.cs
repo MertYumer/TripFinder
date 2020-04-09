@@ -19,6 +19,8 @@ namespace TripFinder.Data.Models
             this.ReviewsForUser = new HashSet<Review>();
             this.ReviewsByUser = new HashSet<Review>();
             this.UserTrips = new HashSet<UserTrip>();
+            this.ReceivedNotifications = new HashSet<Notification>();
+            this.SentNotifications = new HashSet<Notification>();
             this.CreatedOn = DateTime.UtcNow;
         }
 
@@ -84,5 +86,9 @@ namespace TripFinder.Data.Models
         public virtual ICollection<Review> ReviewsByUser { get; set; }
 
         public virtual ICollection<UserTrip> UserTrips { get; set; }
+
+        public virtual ICollection<Notification> ReceivedNotifications { get; set; }
+
+        public virtual ICollection<Notification> SentNotifications { get; set; }
     }
 }

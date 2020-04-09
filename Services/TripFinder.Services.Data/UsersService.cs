@@ -1,8 +1,10 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
@@ -11,13 +13,16 @@
     public class UsersService : IUsersService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
+        private readonly IRepository<Notification> notificationsRepository;
         private readonly IImagesService imagesService;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IRepository<Notification> notificationsRepository,
             IImagesService imagesService)
         {
             this.usersRepository = usersRepository;
+            this.notificationsRepository = notificationsRepository;
             this.imagesService = imagesService;
         }
 
@@ -66,6 +71,38 @@
             return user;
         }
 
+        public ApplicationUser GetById(string id)
+        {
+            var user = this.usersRepository
+                .All()
+                .Include(u => u.UserTrips)
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            return user;
+        }
+
+        public async Task<string> SendNotificationAsync(ApplicationUser receiver, ApplicationUser sender, string tripId, string subject)
+        {
+            var notification = new Notification
+            {
+                SenderId = sender.Id,
+                ReceiverId = receiver.Id,
+                TripId = tripId,
+                Subject = subject,
+            };
+
+            receiver.ReceivedNotifications.Add(notification);
+            this.usersRepository.Update(receiver);
+
+            sender.SentNotifications.Add(notification);
+            this.usersRepository.Update(sender);
+
+            await this.usersRepository.SaveChangesAsync();
+
+            return notification.Id;
+        }
+
         public async Task<string> UpdateAsync(UserEditInputModel inputModel)
         {
             var user = this.usersRepository
@@ -96,6 +133,17 @@
             await this.usersRepository.SaveChangesAsync();
 
             return user.Id;
+        }
+
+        public IEnumerable<T> GetUserNotifications<T>(string userId)
+        {
+            var notifications = this.usersRepository
+                .All()
+                .Where(x => x.Id == userId)
+                .Select(x => x.ReceivedNotifications)
+                .To<T>();
+
+            return notifications;
         }
     }
 }

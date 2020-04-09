@@ -3174,11 +3174,21 @@ label {
     background-color: rgba(0, 0, 0, 0.9);
 }
 
+.dropdown-toggle::after {
+    display: none;
+}
 
+.dropdown-menu {
+    background-color: black;
+    color: #ffd000;
+}
+
+.dropdown-item {
+    margin-left: 0;
+}
 /*==============================
     Driver Page Css
 ================================*/
-
 .single-driver-member {
     margin-bottom: 30px;
     position: relative;

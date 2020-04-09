@@ -131,11 +131,6 @@
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
 
-            if (car == null)
-            {
-                return null;
-            }
-
             return car;
         }
     }

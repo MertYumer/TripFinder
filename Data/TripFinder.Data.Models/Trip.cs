@@ -12,6 +12,7 @@
         {
             this.Id = Guid.NewGuid().ToString();
             this.UserTrips = new HashSet<UserTrip>();
+            this.Notifications = new HashSet<Notification>();
             this.CreatedOn = DateTime.UtcNow;
         }
 
@@ -55,5 +56,7 @@
         public int Views { get; set; }
 
         public virtual ICollection<UserTrip> UserTrips { get; set; }
+
+        public virtual ICollection<Notification> Notifications { get; set; }
     }
 }

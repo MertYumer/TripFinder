@@ -31,6 +31,8 @@
 
         public DbSet<Trip> Trips { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
+
         public DbSet<TownsDistance> TownsDistances { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
@@ -131,6 +133,22 @@
                 .HasMany(u => u.UserTrips)
                 .WithOne(ut => ut.User)
                 .HasForeignKey(ut => ut.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Sender)
+                .WithMany(u => u.SentNotifications)
+                .HasForeignKey(n => n.SenderId);
+
+            modelBuilder.Entity<Notification>()
+                .HasOne(n => n.Receiver)
+                .WithMany(u => u.ReceivedNotifications)
+                .HasForeignKey(n => n.ReceiverId);
+
+            modelBuilder.Entity<Trip>()
+                .HasMany(u => u.Notifications)
+                .WithOne(n => n.Trip)
+                .HasForeignKey(n => n.TripId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Trip>()

@@ -1,5 +1,7 @@
 ﻿namespace TripFinder.Web.Controllers
 {
+    using System.Linq;
+    using System.Text.Json;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -8,6 +10,7 @@
     using Microsoft.Extensions.Configuration;
     using TripFinder.Data.Models;
     using TripFinder.Services.Data;
+    using TripFinder.Web.ViewModels.Notifications;
     using TripFinder.Web.ViewModels.Users;
 
     [Authorize]
@@ -21,6 +24,8 @@
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string imageSizing = "w_300,h_300,c_fill/";
+
+        private readonly string notificationSubject = "{0} wants to join your trip";
 
         public UsersController(
             IUsersService usersService,
@@ -128,6 +133,49 @@
             this.TempData["Notification"] = "Your profile was successfully deleted.";
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult JoinTrip(string receiverId, string tripId, string senderId)
+        {
+            var receiver = this.usersService.GetById(receiverId);
+            var sender = this.usersService.GetById(senderId);
+
+            if (receiver == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            if (receiver.UserTrips.All(ut => ut.TripId != tripId))
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            var subject = string.Format(this.notificationSubject, $"{sender.FirstName} {sender.LastName}");
+
+            var notification = this.usersService.SendNotificationAsync(receiver, sender, tripId, subject);
+
+            if (notification == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            //this.GetNotifications(receiver.Id);
+
+            return this.RedirectToAction("Index", "Home");
+        }
+
+        public JsonResult GetNotifications(string userId)
+        {
+            var notificationsViewModel = this.usersService
+                .GetUserNotifications<NotificationViewModel>(userId)
+                .ToList();
+
+            var notificationsAllViewModel = new UserNotificationsViewModel
+            {
+                Notifications = notificationsViewModel,
+            };
+
+            return this.Json(notificationsAllViewModel);
         }
     }
 }
