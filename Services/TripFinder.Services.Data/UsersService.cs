@@ -82,7 +82,7 @@
             return user;
         }
 
-        public async Task<string> SendNotificationAsync(ApplicationUser receiver, ApplicationUser sender, string tripId, string subject)
+        public async Task<string> SendNotificationAsync(ApplicationUser receiver, ApplicationUser sender, string tripId, NotificationSubject subject)
         {
             var notification = new Notification
             {

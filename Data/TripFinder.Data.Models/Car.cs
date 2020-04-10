@@ -27,7 +27,7 @@
 
         public CarType Type { get; set; }
 
-        public string Color { get; set; }
+        public Color Color { get; set; }
 
         public int? Year { get; set; }
 

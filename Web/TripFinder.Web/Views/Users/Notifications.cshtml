@@ -21,7 +21,7 @@
                 {
                     <div class="trip-info">
                         <div class="card-body">
-                            <h5>@notification.SenderFirstName @notification.SenderLastName wants to join your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId" style="color: forestgreen;">trip</a>.</h5>
+                            <h5>@notification.SenderFirstName @notification.SenderLastName wants to join your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
                             <a class="btn btn-success" asp-area="" asp-controller="Users" asp-action="AcceptUserRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-check"></i> Accept</a>
                             <a class="btn btn-danger" asp-area="" asp-controller="Users" asp-action="DeclineUserRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
                         </div>
@@ -35,7 +35,7 @@
                 {
                     <div class="trip-info">
                         <div class="card-body">
-                            <h5>You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId" style="color: forestgreen;">trip</a>.</h5>
+                            <h5>You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
                             <a class="btn btn-danger" asp-area="" asp-controller="Users" asp-action="DeclineUserRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
                         </div>
                     </div>

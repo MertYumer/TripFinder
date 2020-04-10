@@ -1,7 +1,7 @@
 ﻿namespace TripFinder.Web.ViewModels.Cars
 {
     using System.ComponentModel.DataAnnotations;
-
+    
     using TripFinder.Data.Models;
 
     public class CarCreateInputModel
@@ -18,7 +18,7 @@
 
         public CarType Type { get; set; }
 
-        public string Color { get; set; }
+        public Color Color { get; set; }
 
         public int? Year { get; set; }
 

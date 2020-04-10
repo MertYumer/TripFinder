@@ -18,7 +18,7 @@
 
         Task<string> DeleteAsync(string id);
 
-        Task<string> SendNotificationAsync(ApplicationUser receiver, ApplicationUser sender, string tripId, string subject);
+        Task<string> SendNotificationAsync(ApplicationUser receiver, ApplicationUser sender, string tripId, NotificationSubject subject);
 
         IEnumerable<T> GetUserNotifications<T>(string userId);
     }

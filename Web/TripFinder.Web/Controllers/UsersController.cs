@@ -24,8 +24,6 @@
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string imageSizing = "w_300,h_300,c_fill/";
 
-        private readonly string notificationSubject = "{0} wants to join your trip";
-
         public UsersController(
             IUsersService usersService,
             IConfiguration configuration,
@@ -134,7 +132,7 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        public IActionResult JoinTrip(string receiverId, string tripId, string senderId)
+        public async Task<IActionResult> JoinTrip(string receiverId, string tripId, string senderId)
         {
             var receiver = this.usersService.GetById(receiverId);
             var sender = this.usersService.GetById(senderId);
@@ -149,16 +147,18 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            var subject = string.Format(this.notificationSubject, $"{sender.FirstName} {sender.LastName}");
+            var subject = NotificationSubject.RequestJoin;
 
-            var notificationId = this.usersService.SendNotificationAsync(receiver, sender, tripId, subject);
+            var notificationId = await this.usersService.SendNotificationAsync(receiver, sender, tripId, subject);
 
             if (notificationId == null)
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            return this.RedirectToAction("GetNotifications", "Users");
+            this.TempData["Notification"] = "You successfully made request for the trip.";
+
+            return this.RedirectToAction("Details", "Trips", new { id = tripId });
         }
 
         public IActionResult GetNotifications(string userId)

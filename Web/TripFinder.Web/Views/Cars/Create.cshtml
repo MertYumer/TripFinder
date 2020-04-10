@@ -36,7 +36,9 @@
                                 </div>
                                 <div>
                                     <span asp-validation-for="Color" class="text-danger"></span>
-                                    <input asp-for="Color" type="text" placeholder="Color">
+                                    <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()">
+                                        <option value="0">Color</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <span asp-validation-for="Year" class="text-danger"></span>
