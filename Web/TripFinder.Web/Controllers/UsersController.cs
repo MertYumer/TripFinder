@@ -169,7 +169,8 @@
 
             var notificationsAllViewModel = new UserNotificationsViewModel
             {
-                ReceivedNotifications = notificationsViewModel,
+                ReceivedNotifications = notificationsViewModel.Where(x => x.ReceiverId == userId).ToList(),
+                SentNotifications = notificationsViewModel.Where(x => x.SenderId == userId).ToList(),
             };
 
             return this.View("Notifications", notificationsAllViewModel);

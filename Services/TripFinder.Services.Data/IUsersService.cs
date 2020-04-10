@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using TripFinder.Data.Models;
     using TripFinder.Web.ViewModels.Users;
 

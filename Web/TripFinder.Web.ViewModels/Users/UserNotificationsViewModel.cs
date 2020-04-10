@@ -9,8 +9,11 @@
         public UserNotificationsViewModel()
         {
             this.ReceivedNotifications = new HashSet<NotificationViewModel>();
+            this.SentNotifications = new HashSet<NotificationViewModel>();
         }
 
-        public ICollection<NotificationViewModel> ReceivedNotifications { get; set; }
+        public IEnumerable<NotificationViewModel> ReceivedNotifications { get; set; }
+
+        public IEnumerable<NotificationViewModel> SentNotifications { get; set; }
     }
 }

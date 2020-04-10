@@ -1,7 +1,7 @@
 ﻿@model TripFinder.Web.ViewModels.Users.UserNotificationsViewModel
 
 @{
-    ViewData["Title"] = "GetNotifications";
+    ViewData["Title"] = "Notifications";
 }
 
 <section id="page-title-area" class="section-padding overlay">
@@ -11,11 +11,35 @@
                 <div class="section-title text-center">
                     <h1>Notifications:</h1>
                     <hr />
-                    @foreach (var notification in Model.ReceivedNotifications)
-                    {
-                        <h4>@notification.Subject</h4>
-                    }
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
+                <h2>Received:</h2>
+                @foreach (var notification in Model.ReceivedNotifications)
+                {
+                    <div class="trip-info">
+                        <div class="card-body">
+                            <h5>@notification.SenderFirstName @notification.SenderLastName wants to join your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId" style="color: forestgreen;">trip</a>.</h5>
+                            <a class="btn btn-success" asp-area="" asp-controller="Users" asp-action="AcceptUserRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-check"></i> Accept</a>
+                            <a class="btn btn-danger" asp-area="" asp-controller="Users" asp-action="DeclineUserRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
+                        </div>
+                    </div>
+                }
+            </div>
+            <hr />
+            <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
+                <h2>Sent:</h2>
+                @foreach (var notification in Model.SentNotifications)
+                {
+                    <div class="trip-info">
+                        <div class="card-body">
+                            <h5>You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId" style="color: forestgreen;">trip</a>.</h5>
+                            <a class="btn btn-danger" asp-area="" asp-controller="Users" asp-action="DeclineUserRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>

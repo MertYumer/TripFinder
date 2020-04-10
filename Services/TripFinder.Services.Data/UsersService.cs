@@ -139,7 +139,7 @@
         {
             var notifications = this.notificationsRepository
                 .All()
-                .Where(x => x.ReceiverId == userId)
+                .Where(x => x.ReceiverId == userId || x.SenderId == userId)
                 .To<T>();
 
             return notifications;
