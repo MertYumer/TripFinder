@@ -15,15 +15,7 @@
     <li><a asp-area="" asp-controller="Trips" asp-action="Search">Search</a></li>
     <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>
     <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Hello, <span>@user.FirstName</span></a></li>
-    <li>
-        <div class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell fa-lg"></i></a>
-            <ul class="dropdown-menu" id="notifications">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-            </ul>
-        </div>
-    </li>
+    <li><a asp-area="" asp-controller="Users" asp-action="GetNotifications" asp-route-userId="@user.Id"><i class="fa fa-bell fa-lg"></i></a></li>
     <li><a asp-area="Identity" asp-page="/Account/Logout">Sign out</a></li>
 }
 else
@@ -31,43 +23,3 @@ else
     <li><a asp-area="Identity" asp-page="/Account/Login">Sign in</a></li>
     <li><a asp-area="Identity" asp-page="/Account/Register">Sign up</a></li>
 }
-
-@*@section Scripts {
-    <script>
-        $(document).ready(function () {
-            setInterval(function () {
-                UpdateNotifications();
-            }, 3000);
-        });
-
-        function UpdateNotifications() {
-            $.ajax({
-                type: "GET",
-                url: "/Users/GetNotifications?userId=@user.Id",
-                data: '{}',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    console.log(response);
-                    if (response != null) {
-
-                        var j = ""; var p = 0; var Q = "";
-                        $.each(response, function (k, v) {
-                            p++;
-                            if (p < 6) {
-                                j += "<li><a><img src='assets/img/nty.png' style='height:20px;width:20px'/> <strong>  " + v.Notification.toString() + " </strong> <br /> <div style='text-align:right;font-size:smaller;font-style:italic'> <i style='font-size:smaller'> updated : " + v.LastUpdated.toString() + "</i></div></a></li>";
-                            }
-                            Q += "<a><img src='assets/img/nty.png' style='height:20px;width:20px'/> <strong>  " + v.Notification.toString() + " </strong> <br /> <div style='text-align:right;font-size:smaller;font-style:italic'> <i style='font-size:smaller'> updated : " + v.LastUpdated.toString() + "</i></div></a>";
-                        });
-                        $('#notifications').html("");
-                        j += "<li><a data-toggle='modal' data-target='#myModal'><div style='text-align:center'><strong> Show more </strong></div></li>";
-                        $('#notifications').append(j);
-                    }  
-                },
-                failure: function (response) {
-                    alert(response.d);
-                }
-            });
-        }
-    </script>
-}*@

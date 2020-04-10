@@ -9,6 +9,7 @@
         public Image()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.CreatedOn = DateTime.UtcNow;
         }
 
         public string Url { get; set; }

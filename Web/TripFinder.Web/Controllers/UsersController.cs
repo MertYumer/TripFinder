@@ -1,7 +1,6 @@
 ﻿namespace TripFinder.Web.Controllers
 {
     using System.Linq;
-    using System.Text.Json;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -152,19 +151,17 @@
 
             var subject = string.Format(this.notificationSubject, $"{sender.FirstName} {sender.LastName}");
 
-            var notification = this.usersService.SendNotificationAsync(receiver, sender, tripId, subject);
+            var notificationId = this.usersService.SendNotificationAsync(receiver, sender, tripId, subject);
 
-            if (notification == null)
+            if (notificationId == null)
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            //this.GetNotifications(receiver.Id);
-
-            return this.RedirectToAction("Index", "Home");
+            return this.RedirectToAction("GetNotifications", "Users");
         }
 
-        public JsonResult GetNotifications(string userId)
+        public IActionResult GetNotifications(string userId)
         {
             var notificationsViewModel = this.usersService
                 .GetUserNotifications<NotificationViewModel>(userId)
@@ -172,10 +169,10 @@
 
             var notificationsAllViewModel = new UserNotificationsViewModel
             {
-                Notifications = notificationsViewModel,
+                ReceivedNotifications = notificationsViewModel,
             };
 
-            return this.Json(notificationsAllViewModel);
+            return this.View("Notifications", notificationsAllViewModel);
         }
     }
 }

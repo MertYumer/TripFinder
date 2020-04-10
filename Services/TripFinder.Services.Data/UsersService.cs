@@ -137,10 +137,9 @@
 
         public IEnumerable<T> GetUserNotifications<T>(string userId)
         {
-            var notifications = this.usersRepository
+            var notifications = this.notificationsRepository
                 .All()
-                .Where(x => x.Id == userId)
-                .Select(x => x.ReceivedNotifications)
+                .Where(x => x.ReceiverId == userId)
                 .To<T>();
 
             return notifications;

@@ -3,14 +3,15 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class Notification
+    using TripFinder.Data.Common.Models;
+
+    public class Notification : BaseDeletableModel<string>
     {
         public Notification()
         {
             this.Id = Guid.NewGuid().ToString();
+            this.CreatedOn = DateTime.UtcNow;
         }
-
-        public string Id { get; set; }
 
         [Required]
         public string SenderId { get; set; }
