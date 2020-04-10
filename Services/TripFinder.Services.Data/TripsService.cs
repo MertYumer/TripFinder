@@ -17,14 +17,18 @@
         private readonly IRepository<TownsDistance> townsDistancesRepository;
         private readonly IRepository<UserTrip> userTripsRepository;
 
+        private readonly IUsersService usersService;
+
         public TripsService(
             IDeletableEntityRepository<Trip> tripsRepository,
             IRepository<TownsDistance> townsDistancesRepository,
-            IRepository<UserTrip> userTripsRepository)
+            IRepository<UserTrip> userTripsRepository,
+            IUsersService usersService)
         {
             this.tripsRepository = tripsRepository;
             this.townsDistancesRepository = townsDistancesRepository;
             this.userTripsRepository = userTripsRepository;
+            this.usersService = usersService;
         }
 
         public async Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user)
@@ -83,8 +87,21 @@
                 .ThenInclude(d => d.AvatarImage)
                 .Include(t => t.Car)
                 .ThenInclude(c => c.Image)
+                .Include(t => t.UserTrips)
+                .ThenInclude(ut => ut.User)
+                .ThenInclude(u => u.AvatarImage)
                 .Where(t => t.Id == id)
                 .To<T>()
+                .FirstOrDefault();
+
+            return trip;
+        }
+
+        public Trip GetById(string id)
+        {
+            var trip = this.tripsRepository
+                .All()
+                .Where(x => x.Id == id)
                 .FirstOrDefault();
 
             return trip;
@@ -307,6 +324,38 @@
                 .Count;
 
             return tripsCount;
+        }
+
+        public async Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, Trip trip)
+        {
+            var requestor = this.usersService.GetById(requestorId);
+            var tripCreator = this.usersService.GetById(tripCreatorId);
+
+            if (requestor == null || tripCreator == null || trip == null)
+            {
+                return null;
+            }
+
+            if (trip.DriverId != tripCreator.Id || trip.FreeSeats == 0)
+            {
+                return null;
+            }
+
+            var userTrip = new UserTrip
+            {
+                UserId = requestor.Id,
+                TripId = trip.Id,
+            };
+
+            await this.userTripsRepository.AddAsync(userTrip);
+            await this.userTripsRepository.SaveChangesAsync();
+
+            trip.FreeSeats--;
+
+            this.tripsRepository.Update(trip);
+            await this.tripsRepository.SaveChangesAsync();
+
+            return trip.Id;
         }
     }
 }

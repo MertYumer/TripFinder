@@ -1,6 +1,5 @@
 ﻿namespace TripFinder.Services.Data
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -13,16 +12,14 @@
     public class UsersService : IUsersService
     {
         private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
-        private readonly IRepository<Notification> notificationsRepository;
+
         private readonly IImagesService imagesService;
 
         public UsersService(
             IDeletableEntityRepository<ApplicationUser> usersRepository,
-            IRepository<Notification> notificationsRepository,
             IImagesService imagesService)
         {
             this.usersRepository = usersRepository;
-            this.notificationsRepository = notificationsRepository;
             this.imagesService = imagesService;
         }
 
@@ -82,15 +79,38 @@
             return user;
         }
 
-        public async Task<string> SendNotificationAsync(ApplicationUser receiver, ApplicationUser sender, string tripId, NotificationSubject subject)
+        public async Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject)
         {
+            var receiver = this.GetById(receiverId);
+            var sender = this.GetById(senderId);
+
+            if (receiver == null || sender == null || trip == null)
+            {
+                return null;
+            }
+
+            if (receiver.UserTrips.All(ut => ut.TripId != trip.Id) || sender.UserTrips.Any(ut => ut.TripId == trip.Id))
+            {
+                return null;
+            }
+
+            if (trip.FreeSeats == 0)
+            {
+                return null;
+            }
+
             var notification = new Notification
             {
                 SenderId = sender.Id,
                 ReceiverId = receiver.Id,
-                TripId = tripId,
+                TripId = trip.Id,
                 Subject = subject,
             };
+
+            if (notification == null)
+            {
+                return null;
+            }
 
             receiver.ReceivedNotifications.Add(notification);
             this.usersRepository.Update(receiver);
@@ -133,16 +153,6 @@
             await this.usersRepository.SaveChangesAsync();
 
             return user.Id;
-        }
-
-        public IEnumerable<T> GetUserNotifications<T>(string userId)
-        {
-            var notifications = this.notificationsRepository
-                .All()
-                .Where(x => x.ReceiverId == userId || x.SenderId == userId)
-                .To<T>();
-
-            return notifications;
         }
     }
 }

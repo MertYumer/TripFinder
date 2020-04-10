@@ -1,6 +1,8 @@
 ﻿namespace TripFinder.Web.ViewModels.Trips
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using AutoMapper;
     using TripFinder.Data.Models;
@@ -40,11 +42,14 @@
 
         public string AdditionalInformation { get; set; }
 
+        public IEnumerable<PassengerViewModel> Passengers { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Trip, TripDetailsViewModel>()
                  .ForMember(vm => vm.Distance, opt => opt.MapFrom(t => t.TownsDistance.Distance))
-                 .ForMember(vm => vm.EstimatedMinutes, opt => opt.MapFrom(t => t.TownsDistance.EstimatedMinutes));
+                 .ForMember(vm => vm.EstimatedMinutes, opt => opt.MapFrom(t => t.TownsDistance.EstimatedMinutes))
+                 .ForMember(vm => vm.Passengers, opt => opt.MapFrom(t => t.UserTrips.Select(ut => ut.User)));
         }
     }
 }

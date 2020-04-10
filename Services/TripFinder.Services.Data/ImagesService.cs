@@ -12,10 +12,10 @@
 
     public class ImagesService : IImagesService
     {
-        private readonly Cloudinary cloudinary;
-        private readonly IConfiguration configuration;
         private readonly IDeletableEntityRepository<Image> imagesRepository;
 
+        private readonly Cloudinary cloudinary;
+        private readonly IConfiguration configuration;
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
 

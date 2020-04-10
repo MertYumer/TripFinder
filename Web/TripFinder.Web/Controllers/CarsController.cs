@@ -13,10 +13,11 @@
     [Authorize]
     public class CarsController : Controller
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly ICarsService carsService;
-        private readonly IConfiguration configuration;
 
+        private readonly UserManager<ApplicationUser> userManager;
+
+        private readonly IConfiguration configuration;
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string imageSizing = "w_300,h_300,c_pad,b_black/";

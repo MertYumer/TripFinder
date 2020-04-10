@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <span>Color: </span>
-                                        <span>@Model.Car.Color</span>
+                                        <span>@Enum.GetName(typeof(Color), Model.Car.Color)</span>
                                     </div>
                                     <div class="col-12 col-xl-6">
                                         <span>Year: </span>
@@ -241,7 +241,23 @@
                 <p>Passengers</p>
                 <div class="trip-info">
                     <div class="card-body">
-                        <span>There are no passengers at the moment.</span>
+                        @if (!Model.Passengers.Any())
+                        {
+                            <span>There are no passengers at the moment.</span>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                @foreach (var passenger in Model.Passengers)
+                                {
+                                    <div class="col-sm-3">
+                                        <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@passenger.Id" style="color: #ffd000;">
+                                            <img src="@passenger.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        }
                     </div>
                 </div>
 
@@ -254,7 +270,14 @@
                     }
                     else
                     {
-                        <a class="btn btn-success btn-lg" asp-area="" asp-controller="Users" asp-action="JoinTrip"  asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
+                        var disabled = string.Empty;
+
+                        if (Model.FreeSeats == 0)
+                        {
+                            disabled = "disabled";
+                        }
+
+                        <a class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Users" asp-action="JoinTrip" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
                     }
                     <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
                 </div>

@@ -16,21 +16,28 @@
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
-        private readonly IConfiguration configuration;
+        private readonly ITripsService tripsService;
+        private readonly INotificationsService notificationsService;
+
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
 
+        private readonly IConfiguration configuration;
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string imageSizing = "w_300,h_300,c_fill/";
 
         public UsersController(
             IUsersService usersService,
+            ITripsService tripsService,
+            INotificationsService notificationsService,
             IConfiguration configuration,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
+            this.tripsService = tripsService;
+            this.notificationsService = notificationsService;
             this.configuration = configuration;
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
             this.signInManager = signInManager;
@@ -134,22 +141,11 @@
 
         public async Task<IActionResult> JoinTrip(string receiverId, string tripId, string senderId)
         {
-            var receiver = this.usersService.GetById(receiverId);
-            var sender = this.usersService.GetById(senderId);
-
-            if (receiver == null)
-            {
-                return this.RedirectToAction("BadRequest", "Errors");
-            }
-
-            if (receiver.UserTrips.All(ut => ut.TripId != tripId))
-            {
-                return this.RedirectToAction("BadRequest", "Errors");
-            }
-
             var subject = NotificationSubject.RequestJoin;
 
-            var notificationId = await this.usersService.SendNotificationAsync(receiver, sender, tripId, subject);
+            var trip = this.tripsService.GetById(tripId);
+
+            var notificationId = await this.usersService.SendNotificationAsync(receiverId, senderId, trip, subject);
 
             if (notificationId == null)
             {
@@ -163,7 +159,7 @@
 
         public IActionResult GetNotifications(string userId)
         {
-            var notificationsViewModel = this.usersService
+            var notificationsViewModel = this.notificationsService
                 .GetUserNotifications<NotificationViewModel>(userId)
                 .ToList();
 
@@ -174,6 +170,29 @@
             };
 
             return this.View("Notifications", notificationsAllViewModel);
+        }
+
+        public async Task<IActionResult> AcceptUserRequest(string notificationId)
+        {
+            var notification = this.notificationsService.GetById(notificationId);
+
+            if (notification == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            var trip = this.tripsService.GetById(notification.TripId);
+
+            var tripId = await this.tripsService.AddUserToTripAsync(notification.SenderId, notification.ReceiverId, trip);
+
+            if (tripId == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            this.TempData["Notification"] = "You successfully accepted request for the trip.";
+
+            return this.RedirectToAction("Details", "Trips", new { id = tripId });
         }
     }
 }

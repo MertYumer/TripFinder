@@ -18,11 +18,12 @@
     {
         private const int TripsPerPage = 6;
 
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly ITripsService tripsService;
         private readonly ICarsService carsService;
-        private readonly IConfiguration configuration;
 
+        private readonly UserManager<ApplicationUser> userManager;
+
+        private readonly IConfiguration configuration;
         private readonly string imagePathPrefix;
         private readonly string cloudinaryPrefix = "https://res.cloudinary.com/{0}/image/upload/";
         private readonly string driverImageSizing = "w_300,h_300,c_fill/";
@@ -182,6 +183,13 @@
             viewModel.CarImageUrl = viewModel.CarImageUrl == null
                 ? "/img/car-avatar.png"
                 : this.imagePathPrefix + this.carImageSizing + viewModel.CarImageUrl;
+
+            foreach (var passenger in viewModel.Passengers)
+            {
+                passenger.AvatarImageUrl = passenger.AvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverImageSizing + passenger.AvatarImageUrl;
+            }
 
             return this.View(viewModel);
         }

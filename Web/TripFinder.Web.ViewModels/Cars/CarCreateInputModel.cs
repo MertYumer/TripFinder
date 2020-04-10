@@ -1,7 +1,7 @@
 ﻿namespace TripFinder.Web.ViewModels.Cars
 {
     using System.ComponentModel.DataAnnotations;
-    
+
     using TripFinder.Data.Models;
 
     public class CarCreateInputModel
