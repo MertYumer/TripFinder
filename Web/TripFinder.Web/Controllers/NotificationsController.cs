@@ -3,25 +3,32 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using TripFinder.Data.Models;
     using TripFinder.Services.Data;
     using TripFinder.Web.ViewModels.Notifications;
-    using TripFinder.Web.ViewModels.Users;
 
+    [Authorize]
     public class NotificationsController : Controller
     {
         private readonly ITripsService tripsService;
         private readonly INotificationsService notificationsService;
 
+        private readonly UserManager<ApplicationUser> userManager;
+
         public NotificationsController(
             ITripsService tripsService,
-            INotificationsService notificationsService)
+            INotificationsService notificationsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.tripsService = tripsService;
             this.notificationsService = notificationsService;
+            this.userManager = userManager;
         }
 
-        public IActionResult AllNotifications(string userId)
+        public IActionResult All(string userId)
         {
             var notificationsViewModel = this.notificationsService
                 .GetUserNotifications<NotificationViewModel>(userId)
@@ -54,9 +61,27 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
+            await this.notificationsService.DeleteAsync(notification.Id);
+
             this.TempData["Notification"] = "You successfully accepted request for the trip.";
 
             return this.RedirectToAction("Details", "Trips", new { id = tripId });
+        }
+
+        public async Task<IActionResult> DeclineTripRequest(string notificationId)
+        {
+            var id = await this.notificationsService.DeleteAsync(notificationId);
+
+            if (id == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            this.TempData["Notification"] = "You successfully declined request for the trip.";
+
+            return this.RedirectToAction("All", new { userId = user.Id });
         }
     }
 }

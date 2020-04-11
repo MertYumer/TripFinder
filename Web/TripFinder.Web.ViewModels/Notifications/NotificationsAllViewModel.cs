@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using TripFinder.Web.ViewModels.Notifications;
-
     public class NotificationsAllViewModel
     {
         public NotificationsAllViewModel()

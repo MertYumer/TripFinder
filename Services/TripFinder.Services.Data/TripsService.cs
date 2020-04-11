@@ -18,7 +18,7 @@
         private readonly IRepository<UserTrip> userTripsRepository;
 
         private readonly IUsersService usersService;
-       
+
         public TripsService(
             IDeletableEntityRepository<Trip> tripsRepository,
             IRepository<TownsDistance> townsDistancesRepository,
