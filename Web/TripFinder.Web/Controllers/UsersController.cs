@@ -1,6 +1,5 @@
 ﻿namespace TripFinder.Web.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -9,7 +8,6 @@
     using Microsoft.Extensions.Configuration;
     using TripFinder.Data.Models;
     using TripFinder.Services.Data;
-    using TripFinder.Web.ViewModels.Notifications;
     using TripFinder.Web.ViewModels.Users;
 
     [Authorize]
@@ -17,7 +15,6 @@
     {
         private readonly IUsersService usersService;
         private readonly ITripsService tripsService;
-        private readonly INotificationsService notificationsService;
 
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
@@ -30,14 +27,12 @@
         public UsersController(
             IUsersService usersService,
             ITripsService tripsService,
-            INotificationsService notificationsService,
             IConfiguration configuration,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
             this.tripsService = tripsService;
-            this.notificationsService = notificationsService;
             this.configuration = configuration;
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
             this.signInManager = signInManager;
@@ -153,44 +148,6 @@
             }
 
             this.TempData["Notification"] = "You successfully made request for the trip.";
-
-            return this.RedirectToAction("Details", "Trips", new { id = tripId });
-        }
-
-        public IActionResult GetNotifications(string userId)
-        {
-            var notificationsViewModel = this.notificationsService
-                .GetUserNotifications<NotificationViewModel>(userId)
-                .ToList();
-
-            var notificationsAllViewModel = new UserNotificationsViewModel
-            {
-                ReceivedNotifications = notificationsViewModel.Where(x => x.ReceiverId == userId).ToList(),
-                SentNotifications = notificationsViewModel.Where(x => x.SenderId == userId).ToList(),
-            };
-
-            return this.View("Notifications", notificationsAllViewModel);
-        }
-
-        public async Task<IActionResult> AcceptUserRequest(string notificationId)
-        {
-            var notification = this.notificationsService.GetById(notificationId);
-
-            if (notification == null)
-            {
-                return this.RedirectToAction("BadRequest", "Errors");
-            }
-
-            var trip = this.tripsService.GetById(notification.TripId);
-
-            var tripId = await this.tripsService.AddUserToTripAsync(notification.SenderId, notification.ReceiverId, trip);
-
-            if (tripId == null)
-            {
-                return this.RedirectToAction("BadRequest", "Errors");
-            }
-
-            this.TempData["Notification"] = "You successfully accepted request for the trip.";
 
             return this.RedirectToAction("Details", "Trips", new { id = tripId });
         }

@@ -1,12 +1,12 @@
-﻿namespace TripFinder.Web.ViewModels.Users
+﻿namespace TripFinder.Web.ViewModels.Notifications
 {
     using System.Collections.Generic;
 
     using TripFinder.Web.ViewModels.Notifications;
 
-    public class UserNotificationsViewModel
+    public class NotificationsAllViewModel
     {
-        public UserNotificationsViewModel()
+        public NotificationsAllViewModel()
         {
             this.ReceivedNotifications = new HashSet<NotificationViewModel>();
             this.SentNotifications = new HashSet<NotificationViewModel>();

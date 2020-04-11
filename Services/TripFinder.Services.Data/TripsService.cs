@@ -18,7 +18,7 @@
         private readonly IRepository<UserTrip> userTripsRepository;
 
         private readonly IUsersService usersService;
-
+       
         public TripsService(
             IDeletableEntityRepository<Trip> tripsRepository,
             IRepository<TownsDistance> townsDistancesRepository,
@@ -84,12 +84,9 @@
             var trip = this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
-                .ThenInclude(d => d.AvatarImage)
                 .Include(t => t.Car)
-                .ThenInclude(c => c.Image)
                 .Include(t => t.UserTrips)
                 .ThenInclude(ut => ut.User)
-                .ThenInclude(u => u.AvatarImage)
                 .Where(t => t.Id == id)
                 .To<T>()
                 .FirstOrDefault();
@@ -121,12 +118,12 @@
 
         public async Task DeletePassedTripsAsync()
         {
-            var passedTrips = this.tripsRepository
+            var passedTrips = await this.tripsRepository
                 .All()
                 .Include(t => t.TownsDistance)
                 .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
                 || t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
-                .ToList();
+                .ToListAsync();
 
             foreach (var trip in passedTrips)
             {
@@ -187,8 +184,10 @@
             return tripId;
         }
 
-        public IEnumerable<T> GetAllTrips<T>(int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> GetAllTrips<T>(int? take = null, int skip = 0)
         {
+            await this.DeletePassedTripsAsync();
+
             var query = this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
@@ -202,15 +201,17 @@
                 query = query.Take(take.Value);
             }
 
-            var trips = query
+            var trips = await query
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return trips;
         }
 
-        public IEnumerable<T> GetMyTrips<T>(string userId, int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> GetMyTrips<T>(string userId, int? take = null, int skip = 0)
         {
+            await this.DeletePassedTripsAsync();
+
             var query = this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
@@ -226,20 +227,22 @@
                 query = query.Take(take.Value);
             }
 
-            var trips = query
+            var trips = await query
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return trips;
         }
 
-        public IEnumerable<T> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int? take = null, int skip = 0)
         {
-            var townsDistance = this.townsDistancesRepository
+            await this.DeletePassedTripsAsync();
+
+            var townsDistance = await this.townsDistancesRepository
                 .All()
                 .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
                 || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (townsDistance == null)
             {
@@ -265,9 +268,9 @@
                 query = query.Take(take.Value);
             }
 
-            var trips = query
+            var trips = await query
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return trips;
         }

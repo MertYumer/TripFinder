@@ -1,7 +1,6 @@
 ﻿namespace TripFinder.Web.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -18,10 +17,10 @@
     {
         private const int TripsPerPage = 6;
 
+        private readonly UserManager<ApplicationUser> userManager;
+
         private readonly ITripsService tripsService;
         private readonly ICarsService carsService;
-
-        private readonly UserManager<ApplicationUser> userManager;
 
         private readonly IConfiguration configuration;
         private readonly string imagePathPrefix;
@@ -44,11 +43,8 @@
 
         public async Task<IActionResult> All(int page = 1)
         {
-            await this.tripsService.DeletePassedTripsAsync();
-
-            var tripsViewModel = this.tripsService
-                .GetAllTrips<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage)
-                .ToList();
+            var tripsViewModel = await this.tripsService
+                .GetAllTrips<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage);
 
             foreach (var trip in tripsViewModel)
             {
@@ -77,11 +73,8 @@
 
         public async Task<IActionResult> MyTrips(string userId, int page = 1)
         {
-            await this.tripsService.DeletePassedTripsAsync();
-
-            var tripsViewModel = this.tripsService
-                .GetMyTrips<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage)
-                .ToList();
+            var tripsViewModel = await this.tripsService
+                .GetMyTrips<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage);
 
             foreach (var trip in tripsViewModel)
             {
@@ -273,7 +266,7 @@
         }
 
         [HttpPost]
-        public IActionResult Search(TripSearchInputModel inputModel, int page = 1)
+        public async Task<IActionResult> Search(TripSearchInputModel inputModel, int page = 1)
         {
             if (!this.ModelState.IsValid)
             {
@@ -282,9 +275,8 @@
 
             var userId = this.userManager.GetUserId(this.User);
 
-            var tripsViewModel = this.tripsService
-                .ShowSearchResults<TripViewModel>(inputModel, userId, TripsPerPage, (page - 1) * TripsPerPage)
-                .ToList();
+            var tripsViewModel = await this.tripsService
+                .ShowSearchResults<TripViewModel>(inputModel, userId, TripsPerPage, (page - 1) * TripsPerPage);
 
             foreach (var trip in tripsViewModel)
             {

@@ -247,16 +247,19 @@
                         }
                         else
                         {
-                            <div class="row">
-                                @foreach (var passenger in Model.Passengers)
-                                {
-                                    <div class="col-sm-3">
-                                        <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@passenger.Id" style="color: #ffd000;">
-                                            <img src="@passenger.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
-                                        </a>
-                                    </div>
-                                }
-                            </div>
+                    <div class="row">
+                        @foreach (var passenger in Model.Passengers)
+                        {
+                            if (passenger.Id != Model.Driver.Id)
+                            {
+                                <div class="col-sm-3">
+                                    <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@passenger.Id" style="color: #ffd000;">
+                                        <img src="@passenger.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
+                                    </a>
+                                </div>
+                            }
+                        }
+                    </div>
                         }
                     </div>
                 </div>

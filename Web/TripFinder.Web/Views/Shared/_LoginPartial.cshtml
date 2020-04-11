@@ -15,7 +15,7 @@
     <li><a asp-area="" asp-controller="Trips" asp-action="Search">Search</a></li>
     <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>
     <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Hello, <span>@user.FirstName</span></a></li>
-    <li><a asp-area="" asp-controller="Users" asp-action="GetNotifications" asp-route-userId="@user.Id"><i class="fa fa-bell fa-lg"></i></a></li>
+    <li><a asp-area="" asp-controller="Notifications" asp-action="AllNotifications" asp-route-userId="@user.Id"><i class="fa fa-bell fa-lg"></i></a></li>
     <li><a asp-area="Identity" asp-page="/Account/Logout">Sign out</a></li>
 }
 else

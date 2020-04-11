@@ -49,6 +49,8 @@
     <Compile Remove="Migrations\20200328025514_AddedImageColumn.Designer.cs" />
     <Compile Remove="Migrations\20200406022255_AddChanges.cs" />
     <Compile Remove="Migrations\20200406022255_AddChanges.Designer.cs" />
+    <Compile Remove="Migrations\20200411145343_ChangeOnDeleteBehaviorToSetNull.cs" />
+    <Compile Remove="Migrations\20200411145343_ChangeOnDeleteBehaviorToSetNull.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

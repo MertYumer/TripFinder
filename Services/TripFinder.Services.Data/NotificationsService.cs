@@ -31,6 +31,7 @@
             var notifications = this.notificationsRepository
                 .All()
                 .Where(x => x.ReceiverId == userId || x.SenderId == userId)
+                .OrderByDescending(x => x.CreatedOn)
                 .To<T>();
 
             return notifications;
