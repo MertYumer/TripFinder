@@ -1,10 +1,11 @@
 ﻿namespace TripFinder.Services.Data
 {
-    using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
@@ -49,6 +50,8 @@
 
         public async Task<IEnumerable<T>> GetUserNotifications<T>(string userId)
         {
+            await this.DeletePassedNotificationsAsync();
+
             var notifications = new List<T>();
 
             var receivedNotifications = await this.notificationsRepository
@@ -71,6 +74,21 @@
             notifications.AddRange(sentNotifications);
 
             return notifications;
+        }
+
+        private async Task DeletePassedNotificationsAsync()
+        {
+            var passedNotifications = await this.notificationsRepository
+                .AllWithDeleted()
+                .Where(n => n.IsDeleted && n.CreatedOn.Date.CompareTo(DateTime.UtcNow.Date) < 0)
+                .ToListAsync();
+
+            foreach (var notification in passedNotifications)
+            {
+                this.notificationsRepository.HardDelete(notification);
+            }
+
+            await this.notificationsRepository.SaveChangesAsync();
         }
     }
 }

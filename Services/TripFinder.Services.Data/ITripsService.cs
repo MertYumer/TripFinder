@@ -26,8 +26,6 @@
 
         Task<IEnumerable<T>> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int? take = null, int skip = 0);
 
-        Task DeletePassedTripsAsync();
-
         int GetAllTripsCount();
 
         int GetMyTripsCount(string userId);

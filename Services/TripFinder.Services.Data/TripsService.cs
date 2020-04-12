@@ -116,32 +116,6 @@
             await this.tripsRepository.SaveChangesAsync();
         }
 
-        public async Task DeletePassedTripsAsync()
-        {
-            var passedTrips = await this.tripsRepository
-                .All()
-                .Include(t => t.TownsDistance)
-                .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
-                || t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
-                .ToListAsync();
-
-            foreach (var trip in passedTrips)
-            {
-                if (trip.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
-                {
-                    if (trip.TimeOfDeparture.TimeOfDay.TotalMinutes + trip.TownsDistance.EstimatedMinutes >
-                        DateTime.Now.TimeOfDay.TotalMinutes)
-                    {
-                        continue;
-                    }
-                }
-
-                this.tripsRepository.Delete(trip);
-            }
-
-            await this.tripsRepository.SaveChangesAsync();
-        }
-
         public async Task<string> UpdateAsync(TripEditInputModel inputModel)
         {
             var trip = this.tripsRepository
@@ -359,6 +333,32 @@
             await this.tripsRepository.SaveChangesAsync();
 
             return trip.Id;
+        }
+
+        private async Task DeletePassedTripsAsync()
+        {
+            var passedTrips = await this.tripsRepository
+                .All()
+                .Include(t => t.TownsDistance)
+                .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
+                || t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
+                .ToListAsync();
+
+            foreach (var trip in passedTrips)
+            {
+                if (trip.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
+                {
+                    if (trip.TimeOfDeparture.TimeOfDay.TotalMinutes + trip.TownsDistance.EstimatedMinutes >
+                        DateTime.Now.TimeOfDay.TotalMinutes)
+                    {
+                        continue;
+                    }
+                }
+
+                this.tripsRepository.Delete(trip);
+            }
+
+            await this.tripsRepository.SaveChangesAsync();
         }
     }
 }
