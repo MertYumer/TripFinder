@@ -28,11 +28,10 @@
             this.userManager = userManager;
         }
 
-        public IActionResult All(string userId)
+        public async Task<IActionResult> All(string userId)
         {
-            var notificationsViewModel = this.notificationsService
-                .GetUserNotifications<NotificationViewModel>(userId)
-                .ToList();
+            var notificationsViewModel = await this.notificationsService
+                .GetUserNotifications<NotificationViewModel>(userId);
 
             var notificationsAllViewModel = new NotificationsAllViewModel
             {

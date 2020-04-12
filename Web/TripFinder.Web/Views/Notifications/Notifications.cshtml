@@ -35,8 +35,10 @@
                 {
                     <div class="trip-info">
                         <div class="card-body">
-                            <h5>You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
-                            <a class="btn btn-danger" asp-area="" asp-controller="Notifications" asp-action="DeclineTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
+                            <h5>
+                                You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.
+                                <a asp-area="" asp-controller="Notifications" asp-action="DeclineTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-remove"></i></a>
+                            </h5>
                         </div>
                     </div>
                 }

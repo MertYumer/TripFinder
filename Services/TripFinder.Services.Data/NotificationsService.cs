@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -46,13 +47,28 @@
             return notification;
         }
 
-        public IEnumerable<T> GetUserNotifications<T>(string userId)
+        public async Task<IEnumerable<T>> GetUserNotifications<T>(string userId)
         {
-            var notifications = this.notificationsRepository
+            var notifications = new List<T>();
+
+            var receivedNotifications = await this.notificationsRepository
                 .All()
-                .Where(x => x.ReceiverId == userId || x.SenderId == userId)
+                .Where(x => x.ReceiverId == userId)
                 .OrderByDescending(x => x.CreatedOn)
-                .To<T>();
+                .Take(5)
+                .To<T>()
+                .ToListAsync();
+
+            var sentNotifications = await this.notificationsRepository
+                .All()
+                .Where(x => x.SenderId == userId)
+                .OrderByDescending(x => x.CreatedOn)
+                .Take(5)
+                .To<T>()
+                .ToListAsync();
+
+            notifications.AddRange(receivedNotifications);
+            notifications.AddRange(sentNotifications);
 
             return notifications;
         }
