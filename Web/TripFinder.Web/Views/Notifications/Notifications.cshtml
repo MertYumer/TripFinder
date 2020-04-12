@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
-                <h2>Received:</h2>
+                <h2>Last received:</h2>
                 @foreach (var notification in Model.ReceivedNotifications)
                 {
                     <div class="trip-info">
@@ -30,14 +30,13 @@
             </div>
             <hr />
             <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
-                <h2>Sent:</h2>
+                <h2>Last activity:</h2>
                 @foreach (var notification in Model.SentNotifications)
                 {
                     <div class="trip-info">
                         <div class="card-body">
                             <h5>
                                 You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.
-                                <a asp-area="" asp-controller="Notifications" asp-action="DeclineTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-remove"></i></a>
                             </h5>
                         </div>
                     </div>

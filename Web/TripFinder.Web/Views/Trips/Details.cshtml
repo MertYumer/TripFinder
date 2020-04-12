@@ -241,49 +241,52 @@
                 <p>Passengers</p>
                 <div class="trip-info">
                     <div class="card-body">
-                        @if (!Model.Passengers.Any())
+                        @if (Model.Passengers.Count() == 1)
                         {
                             <span>There are no passengers at the moment.</span>
                         }
                         else
                         {
-                    <div class="row">
-                        @foreach (var passenger in Model.Passengers)
-                        {
-                            if (passenger.Id != Model.Driver.Id)
-                            {
-                                <div class="col-sm-3">
-                                    <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@passenger.Id" style="color: #ffd000;">
-                                        <img src="@passenger.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
-                                    </a>
-                                </div>
-                            }
-                        }
-                    </div>
+                            <div class="row">
+                                @foreach (var passenger in Model.Passengers)
+                                {
+                                    if (passenger.Id != Model.Driver.Id)
+                                    {
+                                        <div class="col-sm-3" style="padding-bottom: 15px;">
+                                            <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@passenger.Id" style="color: #ffd000;">
+                                                <img src="@passenger.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            </div>
                         }
                     </div>
                 </div>
 
-                <div class="justify-content-center">
-                    @if (user.Id == Model.Driver.Id)
-                    {
-                        <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit trip</a>
-                        <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Trips" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete trip</a>
-                        <hr />
-                    }
-                    else
-                    {
-                        var disabled = string.Empty;
+                
+            </div>
+        </div>
 
-                        if (Model.FreeSeats == 0)
-                        {
-                            disabled = "disabled";
-                        }
+        <div class="row">
+            <div class="col-md-auto m-auto">
+                @if (user.Id == Model.Driver.Id)
+                {
+                    <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit trip</a>
+                    <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Trips" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete trip</a>
+                }
+                else
+                {
+                    var disabled = string.Empty;
 
-                        <a class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Users" asp-action="JoinTrip" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
+                    if (Model.FreeSeats == 0)
+                    {
+                        disabled = "disabled";
                     }
-                    <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
-                </div>
+
+                    <a class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Users" asp-action="JoinTrip" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
+                }
+                <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
             </div>
         </div>
     </div>
