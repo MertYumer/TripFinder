@@ -1,8 +1,9 @@
 ﻿namespace TripFinder.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
     using TripFinder.Data.Models;
     using TripFinder.Services.Data;
 
