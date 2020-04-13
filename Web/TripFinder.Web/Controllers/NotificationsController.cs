@@ -42,6 +42,31 @@
             return this.View("Notifications", notificationsAllViewModel);
         }
 
+        public async Task<IActionResult> SendTripNotification(string receiverId, string tripId, string senderId)
+        {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (senderId != user.Id)
+            {
+                return this.RedirectToAction("Forbid", "Errors");
+            }
+
+            var subject = NotificationSubject.RequestJoin;
+
+            var trip = this.tripsService.GetById(tripId);
+
+            var notificationId = await this.notificationsService.SendNotificationAsync(receiverId, senderId, trip, subject);
+
+            if (notificationId == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            this.TempData["Notification"] = "You successfully made request for the trip.";
+
+            return this.RedirectToAction("Details", "Trips", new { id = tripId });
+        }
+
         public async Task<IActionResult> AcceptTripRequest(string notificationId)
         {
             var notification = this.notificationsService.GetById(notificationId);

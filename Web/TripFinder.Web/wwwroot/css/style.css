@@ -3044,6 +3044,25 @@ label {
     background-color: black;
 }
 
+#noti_Container {
+    position: relative;
+    width: 16px;
+    height: 16px;
+}
+
+.noti_bubble {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    padding: 1px 2px 1px 2px;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    font-size: 0.75em;
+    border-radius: 30px;
+    box-shadow: 1px 1px 1px gray;
+}
+
 .login-with-btn {
     background: -webkit-gradient(linear, left top, left bottom, from(#3b5998), to(#344e86));
     background: linear-gradient(to bottom, #3b5998, #344e86);

@@ -11,12 +11,12 @@
 
         ApplicationUser GetById(string id);
 
+        int GetUserNotificationsCount(string id);
+
         string CheckForUserById(string id);
 
         Task<string> UpdateAsync(UserEditInputModel inputModel);
 
         Task<string> DeleteAsync(string id);
-
-        Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject);
     }
 }

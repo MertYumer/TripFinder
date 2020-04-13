@@ -38,6 +38,19 @@
             return user.Id;
         }
 
+        public int GetUserNotificationsCount(string id)
+        {
+            var notificationsCount = this.usersRepository
+                .All()
+                .Include(u => u.ReceivedNotifications)
+                .Where(x => x.Id == id)
+                .FirstOrDefault()
+                .ReceivedNotifications
+                .Count;
+
+            return notificationsCount;
+        }
+
         public async Task<string> DeleteAsync(string id)
         {
             var user = this.usersRepository
@@ -77,50 +90,6 @@
                 .FirstOrDefault();
 
             return user;
-        }
-
-        public async Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject)
-        {
-            var receiver = this.GetById(receiverId);
-            var sender = this.GetById(senderId);
-
-            if (receiver == null || sender == null || trip == null)
-            {
-                return null;
-            }
-
-            if (receiver.UserTrips.All(ut => ut.TripId != trip.Id) || sender.UserTrips.Any(ut => ut.TripId == trip.Id))
-            {
-                return null;
-            }
-
-            if (trip.FreeSeats == 0)
-            {
-                return null;
-            }
-
-            var notification = new Notification
-            {
-                SenderId = sender.Id,
-                ReceiverId = receiver.Id,
-                TripId = trip.Id,
-                Subject = subject,
-            };
-
-            if (notification == null)
-            {
-                return null;
-            }
-
-            receiver.ReceivedNotifications.Add(notification);
-            this.usersRepository.Update(receiver);
-
-            sender.SentNotifications.Add(notification);
-            this.usersRepository.Update(sender);
-
-            await this.usersRepository.SaveChangesAsync();
-
-            return notification.Id;
         }
 
         public async Task<string> UpdateAsync(UserEditInputModel inputModel)

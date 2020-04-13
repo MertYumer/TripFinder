@@ -12,5 +12,7 @@
         Notification GetById(string id);
 
         Task<string> DeleteAsync(string id);
+
+        Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject);
     }
 }

@@ -13,10 +13,18 @@
     public class NotificationsService : INotificationsService
     {
         private readonly IDeletableEntityRepository<Notification> notificationsRepository;
+        private readonly IRepository<ApplicationUser> usersRepository;
 
-        public NotificationsService(IDeletableEntityRepository<Notification> notificationsRepository)
+        private readonly IUsersService usersService;
+
+        public NotificationsService(
+            IDeletableEntityRepository<Notification> notificationsRepository,
+            IRepository<ApplicationUser> usersRepository,
+            IUsersService usersService)
         {
             this.notificationsRepository = notificationsRepository;
+            this.usersRepository = usersRepository;
+            this.usersService = usersService;
         }
 
         public async Task<string> DeleteAsync(string id)
@@ -76,11 +84,56 @@
             return notifications;
         }
 
+        public async Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject)
+        {
+            var receiver = this.usersService.GetById(receiverId);
+            var sender = this.usersService.GetById(senderId);
+
+            if (receiver == null || sender == null || trip == null)
+            {
+                return null;
+            }
+
+            if (receiver.UserTrips.All(ut => ut.TripId != trip.Id) || sender.UserTrips.Any(ut => ut.TripId == trip.Id))
+            {
+                return null;
+            }
+
+            if (trip.FreeSeats == 0)
+            {
+                return null;
+            }
+
+            var notification = new Notification
+            {
+                SenderId = sender.Id,
+                ReceiverId = receiver.Id,
+                TripId = trip.Id,
+                Subject = subject,
+            };
+
+            if (notification == null)
+            {
+                return null;
+            }
+
+            receiver.ReceivedNotifications.Add(notification);
+            this.usersRepository.Update(receiver);
+
+            sender.SentNotifications.Add(notification);
+            this.usersRepository.Update(sender);
+
+            await this.usersRepository.SaveChangesAsync();
+
+            return notification.Id;
+        }
+
         private async Task DeletePassedNotificationsAsync()
         {
             var passedNotifications = await this.notificationsRepository
                 .AllWithDeleted()
-                .Where(n => n.IsDeleted && n.CreatedOn.Date.CompareTo(DateTime.UtcNow.Date) < 0)
+                .Where(n => n.IsDeleted)
+                .Where(n => n.DeletedOn <= DateTime.UtcNow.AddDays(3))
                 .ToListAsync();
 
             foreach (var notification in passedNotifications)

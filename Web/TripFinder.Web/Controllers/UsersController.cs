@@ -14,7 +14,6 @@
     public class UsersController : Controller
     {
         private readonly IUsersService usersService;
-        private readonly ITripsService tripsService;
 
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly UserManager<ApplicationUser> userManager;
@@ -26,13 +25,11 @@
 
         public UsersController(
             IUsersService usersService,
-            ITripsService tripsService,
             IConfiguration configuration,
             SignInManager<ApplicationUser> signInManager,
             UserManager<ApplicationUser> userManager)
         {
             this.usersService = usersService;
-            this.tripsService = tripsService;
             this.configuration = configuration;
             this.imagePathPrefix = string.Format(this.cloudinaryPrefix, this.configuration["Cloudinary:AppName"]);
             this.signInManager = signInManager;
@@ -132,24 +129,6 @@
             this.TempData["Notification"] = "Your profile was successfully deleted.";
 
             return this.RedirectToAction("Index", "Home");
-        }
-
-        public async Task<IActionResult> JoinTrip(string receiverId, string tripId, string senderId)
-        {
-            var subject = NotificationSubject.RequestJoin;
-
-            var trip = this.tripsService.GetById(tripId);
-
-            var notificationId = await this.usersService.SendNotificationAsync(receiverId, senderId, trip, subject);
-
-            if (notificationId == null)
-            {
-                return this.RedirectToAction("BadRequest", "Errors");
-            }
-
-            this.TempData["Notification"] = "You successfully made request for the trip.";
-
-            return this.RedirectToAction("Details", "Trips", new { id = tripId });
         }
     }
 }
