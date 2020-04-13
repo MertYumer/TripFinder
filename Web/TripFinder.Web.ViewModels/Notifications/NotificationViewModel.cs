@@ -21,6 +21,6 @@
 
         public string TripId { get; set; }
 
-        public string Subject { get; set; }
+        public NotificationSubject Subject { get; set; }
     }
 }

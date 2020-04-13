@@ -303,8 +303,9 @@
             return tripsCount;
         }
 
-        public async Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, Trip trip)
+        public async Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId)
         {
+            var trip = this.GetById(tripId);
             var requestor = this.usersService.GetById(requestorId);
             var tripCreator = this.usersService.GetById(tripCreatorId);
 
@@ -318,7 +319,17 @@
                 return null;
             }
 
-            var userTrip = new UserTrip
+            var userTrip = this.userTripsRepository
+                .All()
+                .Where(ut => ut.UserId == requestorId && ut.TripId == tripId)
+                .FirstOrDefault();
+
+            if (userTrip != null)
+            {
+                return null;
+            }
+
+            userTrip = new UserTrip
             {
                 UserId = requestor.Id,
                 TripId = trip.Id,

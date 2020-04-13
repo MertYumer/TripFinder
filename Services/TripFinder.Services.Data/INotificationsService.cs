@@ -13,6 +13,6 @@
 
         Task<string> DeleteAsync(string id);
 
-        Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject);
+        Task<string> SendNotificationAsync(string receiverId, string senderId, string tripId, NotificationSubject subject);
     }
 }

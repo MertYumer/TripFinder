@@ -21,9 +21,26 @@
                 {
                     <div class="trip-info">
                         <div class="card-body">
-                            <h5>@notification.SenderFirstName @notification.SenderLastName wants to join your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
-                            <a class="btn btn-success" asp-area="" asp-controller="Notifications" asp-action="AcceptTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-check"></i> Accept</a>
-                            <a class="btn btn-danger" asp-area="" asp-controller="Notifications" asp-action="DeclineTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
+                            @switch (notification.Subject)
+                            {
+                                case NotificationSubject.RequestJoin:
+                                    <h5>@notification.SenderFirstName @notification.SenderLastName wants to join your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
+                                    <a class="btn btn-success" asp-area="" asp-controller="Notifications" asp-action="AcceptTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-check"></i> Accept</a>
+                                    <a class="btn btn-danger" asp-area="" asp-controller="Notifications" asp-action="RejectTripRequest" asp-route-notificationId="@notification.Id"><i class="fa fa-times"></i> Decline</a>
+                                    break;
+
+                                case NotificationSubject.CancelJoin:
+                                    <h5>@notification.SenderFirstName @notification.SenderLastName canceled their <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a> request.</h5>
+                                    break;
+
+                                case NotificationSubject.AcceptRequest:
+                                    <h5>@notification.SenderFirstName @notification.SenderLastName accepted your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a> request.</h5>
+                                    break;
+
+                                case NotificationSubject.RejectRequest:
+                                    <h5>@notification.SenderFirstName @notification.SenderLastName rejected your <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a> request.</h5>
+                                    break;
+                            }
                         </div>
                     </div>
                 }
@@ -35,7 +52,24 @@
                 {
                     <div class="trip-info">
                         <div class="card-body">
-                            <h5>You want to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
+                            @switch (notification.Subject)
+                            {
+                                case NotificationSubject.RequestJoin:
+                                    <h5>You made request to join @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
+                                    break;
+
+                                case NotificationSubject.CancelJoin:
+                                    <h5>You canceled your request for @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a>.</h5>
+                                    break;
+
+                                case NotificationSubject.AcceptRequest:
+                                    <h5>You accepted @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a> request.</h5>
+                                    break;
+
+                                case NotificationSubject.RejectRequest:
+                                    <h5>You rejected @notification.ReceiverFirstName @notification.ReceiverLastName's <a asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@notification.TripId">trip</a> request.</h5>
+                                    break;
+                            }
                         </div>
                     </div>
                 }

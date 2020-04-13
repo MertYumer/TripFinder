@@ -32,6 +32,6 @@
 
         int GetSearchResultsCount(TripSearchInputModel inputModel, string userId);
 
-        Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, Trip trip);
+        Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId);
     }
 }

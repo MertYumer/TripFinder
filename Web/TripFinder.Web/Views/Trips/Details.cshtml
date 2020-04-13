@@ -263,11 +263,8 @@
                         }
                     </div>
                 </div>
-
-                
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-auto m-auto">
                 @if (user.Id == Model.Driver.Id)
@@ -284,7 +281,7 @@
                         disabled = "disabled";
                     }
 
-                    <a class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Notifications" asp-action="SendTripNotification" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
+                    <a id="button" class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Notifications" asp-action="SendTripNotification" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
                 }
                 <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
             </div>

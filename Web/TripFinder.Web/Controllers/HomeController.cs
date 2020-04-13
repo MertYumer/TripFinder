@@ -23,8 +23,12 @@
         public async Task<IActionResult> Index()
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            var notificationsCount = this.usersService.GetUserNotificationsCount(user.Id);
-            this.TempData["notificationsCount"] = notificationsCount;
+
+            if (user != null)
+            {
+                var notificationsCount = this.usersService.GetUserNotificationsCount(user.Id);
+                this.TempData["notificationsCount"] = notificationsCount;
+            }
 
             return this.View();
         }

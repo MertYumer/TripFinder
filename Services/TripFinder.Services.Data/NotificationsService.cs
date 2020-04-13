@@ -16,15 +16,18 @@
         private readonly IRepository<ApplicationUser> usersRepository;
 
         private readonly IUsersService usersService;
+        private readonly ITripsService tripsService;
 
         public NotificationsService(
             IDeletableEntityRepository<Notification> notificationsRepository,
             IRepository<ApplicationUser> usersRepository,
-            IUsersService usersService)
+            IUsersService usersService,
+            ITripsService tripsService)
         {
             this.notificationsRepository = notificationsRepository;
             this.usersRepository = usersRepository;
             this.usersService = usersService;
+            this.tripsService = tripsService;
         }
 
         public async Task<string> DeleteAsync(string id)
@@ -84,17 +87,13 @@
             return notifications;
         }
 
-        public async Task<string> SendNotificationAsync(string receiverId, string senderId, Trip trip, NotificationSubject subject)
+        public async Task<string> SendNotificationAsync(string receiverId, string senderId, string tripId, NotificationSubject subject)
         {
             var receiver = this.usersService.GetById(receiverId);
             var sender = this.usersService.GetById(senderId);
+            var trip = this.tripsService.GetById(tripId);
 
             if (receiver == null || sender == null || trip == null)
-            {
-                return null;
-            }
-
-            if (receiver.UserTrips.All(ut => ut.TripId != trip.Id) || sender.UserTrips.Any(ut => ut.TripId == trip.Id))
             {
                 return null;
             }
