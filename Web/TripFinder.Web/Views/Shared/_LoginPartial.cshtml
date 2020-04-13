@@ -1,10 +1,23 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using TripFinder.Data.Models
+@using Microsoft.EntityFrameworkCore;
+
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
 @{
     var user = await this.UserManager.GetUserAsync(this.User);
+    int notificationsCount = 0;
+
+    if (this.SignInManager.IsSignedIn(this.User))
+    {
+        notificationsCount = this.UserManager
+                    .Users
+                    .Include(u => u.ReceivedNotifications)
+                    .FirstOrDefault(u => u.Id == user.Id)
+                    .ReceivedNotifications
+                    .Count;
+    }
 }
 
 @if (this.SignInManager.IsSignedIn(this.User))
@@ -19,9 +32,9 @@
         <a asp-area="" asp-controller="Notifications" asp-action="All" asp-route-userId="@user.Id">
             <div id="noti_Container">
                 <i class="fa fa-bell fa-lg"></i>
-                @if (this.TempData["notificationsCount"] != null)
+                @if (notificationsCount > 0)
                 {
-                    <div class="noti_bubble">@this.TempData["notificationsCount"]</div>
+                    <div class="noti_bubble">@notificationsCount</div>
                 }
             </div>
         </a>

@@ -21,16 +21,8 @@
             this.userManager = userManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var user = await this.userManager.GetUserAsync(this.User);
-
-            if (user != null)
-            {
-                var notificationsCount = this.usersService.GetUserNotificationsCount(user.Id);
-                this.TempData["notificationsCount"] = notificationsCount;
-            }
-
             return this.View();
         }
 
