@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using TripFinder.Data.Models
+
 @inject UserManager<ApplicationUser> UserManager
 
 @model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
@@ -18,11 +19,11 @@
                         <div class="row justify-content-md-center" style="text-align: center;">
                             <div class="col-auto">
                                 <span class="h5">From: </span>
-                                <span class="h3">@Model.Origin</span>
+                                <span class="h3">@EnumMethods.GetDescription((Enum)Model.Origin)</span>
                             </div>
                             <div class="col-auto">
                                 <span class="h5">To: </span>
-                                <span class="h3">@Model.Destination</span>
+                                <span class="h3">@EnumMethods.GetDescription((Enum)Model.Destination)</span>
                             </div>
                         </div>
                     </div>

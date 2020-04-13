@@ -1,6 +1,5 @@
 ﻿@model TripFinder.Web.ViewModels.Trips.TripCreateInputModel;
 
-
 @{
     ViewData["Title"] = "Create";
     var totalSeats = this.ViewBag.TotalSeats;
@@ -23,11 +22,23 @@
                         <form method="post">
                             <div>
                                 <span asp-validation-for="Origin" class="text-danger"></span>
-                                <input asp-for="Origin" type="text" placeholder="Origin">
+                                <select asp-for="Origin">
+                                    @foreach (var value in Enum.GetValues(typeof(Town)))
+                                    {
+                                        var town = EnumMethods.GetDescription((Enum)value);
+                                        <option>@town</option>
+                                    }
+                                </select>
                             </div>
                             <div>
                                 <span asp-validation-for="Destination" class="text-danger"></span>
-                                <input asp-for="Destination" type="text" placeholder="Destination">
+                                <select asp-for="Destination">
+                                    @foreach (var value in Enum.GetValues(typeof(Town)))
+                                    {
+                                        var town = EnumMethods.GetDescription((Enum)value);
+                                        <option>@town</option>
+                                    }
+                                </select>
                             </div>
                             <div>
                                 <span asp-validation-for="DateOfDeparture" class="text-danger"></span>

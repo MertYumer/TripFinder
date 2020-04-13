@@ -13,9 +13,9 @@
 
         public string DriverAvatarImageUrl { get; set; }
 
-        public string Origin { get; set; }
+        public Town Origin { get; set; }
 
-        public string Destination { get; set; }
+        public Town Destination { get; set; }
 
         public string CarMake { get; set; }
 

@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -50,13 +49,16 @@
                 return null;
             }
 
+            var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
+            var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
+
             var trip = new Trip
             {
                 DriverId = user.Id,
                 CarId = user.CarId,
                 TownsDistanceId = townsDistance.Id,
-                Origin = inputModel.Origin,
-                Destination = inputModel.Destination,
+                Origin = origin,
+                Destination = destination,
                 DateOfDeparture = inputModel.DateOfDeparture,
                 TimeOfDeparture = inputModel.TimeOfDeparture,
                 TotalSeats = user.Car.PassengerSeats,
@@ -201,10 +203,13 @@
         {
             await this.DeletePassedTripsAsync();
 
+            var origin = Enum.GetName(typeof(Town), inputModel.Origin);
+            var destination = Enum.GetName(typeof(Town), inputModel.Destination);
+
             var townsDistance = await this.townsDistancesRepository
                 .All()
-                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
-                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
+                .Where(td => (td.Origin == origin && td.Destination == destination)
+                || (td.Origin == destination && td.Destination == origin))
                 .FirstOrDefaultAsync();
 
             if (townsDistance == null)
@@ -256,10 +261,13 @@
 
         public int GetSearchResultsCount(TripSearchInputModel inputModel, string userId)
         {
+            var origin = Enum.GetName(typeof(Town), inputModel.Origin);
+            var destination = Enum.GetName(typeof(Town), inputModel.Destination);
+
             var townsDistance = this.townsDistancesRepository
                 .All()
-                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
-                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
+                .Where(td => (td.Origin == origin && td.Destination == destination)
+                || (td.Origin == destination && td.Destination == origin))
                 .FirstOrDefault();
 
             var query = this.tripsRepository

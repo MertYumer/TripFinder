@@ -26,10 +26,10 @@
         public virtual TownsDistance TownsDistance { get; set; }
 
         [Required]
-        public string Origin { get; set; }
+        public Town Origin { get; set; }
 
         [Required]
-        public string Destination { get; set; }
+        public Town Destination { get; set; }
 
         [Required]
         public DateTime DateOfDeparture { get; set; }

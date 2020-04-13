@@ -3,17 +3,19 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using TripFinder.Data.Models;
+
     public class TripSearchInputModel
     {
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
-        public string Origin { get; set; }
+        public Town Origin { get; set; }
 
         [Required]
         [MinLength(3)]
         [MaxLength(30)]
-        public string Destination { get; set; }
+        public Town Destination { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

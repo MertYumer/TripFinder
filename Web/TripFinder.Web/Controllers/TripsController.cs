@@ -291,7 +291,7 @@
             {
                 Title = "Search results:",
                 CurrentPage = page,
-                PagesCount = (int)Math.Ceiling((double)searchResultsCount / TripsPerPage),
+                PagesCount = (int)Math.Ceiling((double)(searchResultsCount / TripsPerPage)),
                 Trips = tripsViewModel,
             };
 

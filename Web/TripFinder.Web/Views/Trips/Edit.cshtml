@@ -21,10 +21,10 @@
                     <div class="form">
                         <form method="post">
                             <div>
-                                <input asp-for="Origin" type="text" placeholder="Origin" readonly>
+                                <input asp-for="Origin" type="text" placeholder="Origin" readonly value="@EnumMethods.GetDescription((Enum)Model.Origin)">
                             </div>
                             <div>
-                                <input asp-for="Destination" type="text" placeholder="Destination" readonly>
+                                <input asp-for="Destination" type="text" placeholder="Destination" readonly value="@EnumMethods.GetDescription((Enum)Model.Destination)">
                             </div>
                             <div>
                                 <span asp-validation-for="DateOfDeparture" class="text-danger"></span>
