@@ -145,7 +145,7 @@
 
             var user = await this.userManager.GetUserAsync(this.User);
 
-            this.TempData["Notification"] = "You successfully deleted request for the trip.";
+            this.TempData["Notification"] = "You successfully accepted request for the trip.";
 
             return this.RedirectToAction("All", new { userId = user.Id });
         }

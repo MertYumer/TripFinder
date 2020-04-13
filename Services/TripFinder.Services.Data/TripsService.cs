@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -158,35 +159,29 @@
             return tripId;
         }
 
-        public async Task<IEnumerable<T>> GetAllTrips<T>(int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> GetAllTrips<T>(int take, int skip = 0)
         {
             await this.DeletePassedTripsAsync();
 
-            var query = this.tripsRepository
+            var trips = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
                 .Include(t => t.Car)
                 .OrderByDescending(t => t.CreatedOn)
-                .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
-
-            var trips = await query
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
 
             return trips;
         }
 
-        public async Task<IEnumerable<T>> GetMyTrips<T>(string userId, int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> GetMyTrips<T>(string userId, int take, int skip = 0)
         {
             await this.DeletePassedTripsAsync();
 
-            var query = this.tripsRepository
+            var trips = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
@@ -194,21 +189,15 @@
                 .Include(t => t.UserTrips)
                 .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
                 .OrderByDescending(t => t.CreatedOn)
-                .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
-
-            var trips = await query
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
 
             return trips;
         }
 
-        public async Task<IEnumerable<T>> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int? take = null, int skip = 0)
+        public async Task<IEnumerable<T>> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int take, int skip = 0)
         {
             await this.DeletePassedTripsAsync();
 
@@ -223,7 +212,7 @@
                 return null;
             }
 
-            var query = this.tripsRepository
+            var trips = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
@@ -235,14 +224,8 @@
                 && t.DateOfDeparture.Date.CompareTo(inputModel.DateOfDeparture) == 0
                 && t.FreeSeats >= inputModel.SeatsNeeded)
                 .OrderBy(t => t.DateOfDeparture)
-                .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
-
-            var trips = await query
+                .Skip(skip)
+                .Take(take)
                 .To<T>()
                 .ToListAsync();
 
@@ -344,6 +327,15 @@
             await this.tripsRepository.SaveChangesAsync();
 
             return trip.Id;
+        }
+
+        public bool CheckForUserTrip(string userId, string tripId)
+        {
+            var userTripExists = this.userTripsRepository
+                .All()
+                .Any(ut => ut.UserId == userId && ut.TripId == tripId);
+
+            return userTripExists;
         }
 
         private async Task DeletePassedTripsAsync()

@@ -61,7 +61,7 @@
 
         public async Task<IEnumerable<T>> GetUserNotifications<T>(string userId)
         {
-            await this.DeletePassedNotificationsAsync();
+            await this.DeletePassedNotificationsAsync(userId);
 
             var notifications = new List<T>();
 
@@ -98,7 +98,11 @@
                 return null;
             }
 
-            if (trip.FreeSeats == 0)
+            var userTripExists = this.tripsService.CheckForUserTrip(receiver.Id, tripId);
+
+            if ((subject == NotificationSubject.RequestJoin || subject == NotificationSubject.AcceptRequest)
+                && trip.FreeSeats == 0
+                && !userTripExists)
             {
                 return null;
             }
@@ -111,11 +115,6 @@
                 Subject = subject,
             };
 
-            if (notification == null)
-            {
-                return null;
-            }
-
             receiver.ReceivedNotifications.Add(notification);
             this.usersRepository.Update(receiver);
 
@@ -127,11 +126,11 @@
             return notification.Id;
         }
 
-        private async Task DeletePassedNotificationsAsync()
+        private async Task DeletePassedNotificationsAsync(string userId)
         {
             var passedNotifications = await this.notificationsRepository
                 .AllWithDeleted()
-                .Where(n => n.IsDeleted)
+                .Where(n => n.IsDeleted && (n.ReceiverId == userId || n.SenderId == userId))
                 .Where(n => n.DeletedOn <= DateTime.UtcNow.AddDays(3))
                 .ToListAsync();
 
