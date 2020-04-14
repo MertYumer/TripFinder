@@ -30,6 +30,13 @@
 
         public async Task<IActionResult> All(string userId)
         {
+            var currentUserId = this.userManager.GetUserId(this.User);
+
+            if (currentUserId != userId)
+            {
+                return this.RedirectToAction("Forbid", "Errors");
+            }
+
             var notificationsViewModel = await this.notificationsService
                 .GetUserNotifications<NotificationViewModel>(userId);
 
