@@ -33,13 +33,9 @@
 
         public async Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user)
         {
-            var townsDistance = await this.townsDistancesRepository
-                .All()
-                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
-                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
-                .FirstOrDefaultAsync();
+            var townsDistanceId = await this.GetOriginAndDestination(inputModel.Origin, inputModel.Destination);
 
-            if (townsDistance == null)
+            if (townsDistanceId == null)
             {
                 return null;
             }
@@ -56,7 +52,7 @@
             {
                 DriverId = user.Id,
                 CarId = user.CarId,
-                TownsDistanceId = townsDistance.Id,
+                TownsDistanceId = townsDistanceId,
                 Origin = origin,
                 Destination = destination,
                 DateOfDeparture = inputModel.DateOfDeparture,
@@ -203,13 +199,9 @@
         {
             await this.DeletePassedTripsAsync();
 
-            var townsDistance = await this.townsDistancesRepository
-                .All()
-                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
-                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
-                .FirstOrDefaultAsync();
+            var townsDistanceId = await this.GetOriginAndDestination(inputModel.Origin, inputModel.Destination);
 
-            if (townsDistance == null)
+            if (townsDistanceId == null)
             {
                 return null;
             }
@@ -261,12 +253,6 @@
 
         public int GetSearchResultsCount(TripSearchInputModel inputModel, string userId)
         {
-            var townsDistance = this.townsDistancesRepository
-                .All()
-                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
-                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
-                .FirstOrDefault();
-
             var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
             var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
 
@@ -363,6 +349,22 @@
             }
 
             await this.tripsRepository.SaveChangesAsync();
+        }
+
+        private async Task<string> GetOriginAndDestination(string origin, string destination)
+        {
+            var townsDistance = await this.townsDistancesRepository
+                .All()
+                .Where(td => (td.Origin == origin && td.Destination == destination)
+                || (td.Origin == destination && td.Destination == origin))
+                .FirstOrDefaultAsync();
+
+            if (townsDistance == null)
+            {
+                return null;
+            }
+
+            return townsDistance.Id;
         }
     }
 }
