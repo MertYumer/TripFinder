@@ -8,14 +8,10 @@
     public class TripSearchInputModel
     {
         [Required]
-        [MinLength(3)]
-        [MaxLength(30)]
-        public Town Origin { get; set; }
+        public string Origin { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(30)]
-        public Town Destination { get; set; }
+        public string Destination { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

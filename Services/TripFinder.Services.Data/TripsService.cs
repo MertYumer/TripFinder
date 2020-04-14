@@ -33,11 +33,11 @@
 
         public async Task<string> CreateAsync(TripCreateInputModel inputModel, ApplicationUser user)
         {
-            var townsDistance = this.townsDistancesRepository
+            var townsDistance = await this.townsDistancesRepository
                 .All()
                 .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
                 || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (townsDistance == null)
             {
@@ -203,19 +203,19 @@
         {
             await this.DeletePassedTripsAsync();
 
-            var origin = Enum.GetName(typeof(Town), inputModel.Origin);
-            var destination = Enum.GetName(typeof(Town), inputModel.Destination);
-
             var townsDistance = await this.townsDistancesRepository
                 .All()
-                .Where(td => (td.Origin == origin && td.Destination == destination)
-                || (td.Origin == destination && td.Destination == origin))
+                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
+                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
                 .FirstOrDefaultAsync();
 
             if (townsDistance == null)
             {
                 return null;
             }
+
+            var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
+            var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
 
             var trips = await this.tripsRepository
                 .All()
@@ -224,8 +224,8 @@
                 .Include(t => t.Car)
                 .Include(t => t.TownsDistance)
                 .Where(t => t.UserTrips.All(ut => ut.UserId != userId)
-                && t.Origin == inputModel.Origin
-                && t.Destination == inputModel.Destination
+                && t.Origin == origin
+                && t.Destination == destination
                 && t.DateOfDeparture.Date.CompareTo(inputModel.DateOfDeparture) == 0
                 && t.FreeSeats >= inputModel.SeatsNeeded)
                 .OrderBy(t => t.DateOfDeparture)
@@ -261,33 +261,26 @@
 
         public int GetSearchResultsCount(TripSearchInputModel inputModel, string userId)
         {
-            var origin = Enum.GetName(typeof(Town), inputModel.Origin);
-            var destination = Enum.GetName(typeof(Town), inputModel.Destination);
-
             var townsDistance = this.townsDistancesRepository
                 .All()
-                .Where(td => (td.Origin == origin && td.Destination == destination)
-                || (td.Origin == destination && td.Destination == origin))
+                .Where(td => (td.Origin == inputModel.Origin && td.Destination == inputModel.Destination)
+                || (td.Origin == inputModel.Destination && td.Destination == inputModel.Origin))
                 .FirstOrDefault();
 
-            var query = this.tripsRepository
+            var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
+            var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
+
+            var tripsCount = this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
                 .Include(t => t.Car)
                 .Include(t => t.TownsDistance)
                 .Where(t => t.UserTrips.All(ut => ut.UserId != userId)
-                && t.Origin == inputModel.Origin
-                && t.Destination == inputModel.Destination
+                && t.Origin == origin
+                && t.Destination == destination
                 && t.DateOfDeparture.Date.CompareTo(inputModel.DateOfDeparture) == 0
                 && t.FreeSeats >= inputModel.SeatsNeeded)
-                .ToList()
-                .Count;
-
-            var tripsCount = this.tripsRepository
-                .All()
-                .Include(t => t.UserTrips)
-                .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
                 .ToList()
                 .Count;
 
