@@ -12,94 +12,111 @@
             </div>
         </div>
         <hr />
-        @if (Model.Trips.Count() == 0)
+        @if (Model.Trips != null)
+        {
+            @if (Model.Trips.Count() == 0)
+            {
+                <div class="row justify-content-center">
+                    @switch (Model.Title)
+                    {
+                        case "Last added trips:":
+                            <div class="text-center">
+                                <h5>Currently there are no trips in the app.</h5>
+                                <h5>Create one.</h5>
+                                <hr />
+                                <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</a>
+                            </div>
+                            break;
+
+                        case "My trips:":
+                            <div class="text-center">
+                                <h5>Currently you don't have created trips, neither you joined any.</h5>
+                                <h5>Create trip or join any, that match your requirements.</h5>
+                                <hr />
+                                <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</a>
+                                <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
+                            </div>
+                            break;
+
+                        case "Search results:":
+                            <div class="text-center">
+                                <h5>Currently there are no trips that match your search criteria.</h5>
+                                <h5>Try again with different requirements.</h5>
+                                <hr />
+                                <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
+                            </div>
+                            break;
+                    }
+                </div>
+            }
+        }
+        else
         {
             <div class="row justify-content-center">
-                @switch (Model.Title)
-                {
-                    case "Last added trips:":
-                        <div class="text-center">
-                            <h5>Currently there are no trips in the app.</h5>
-                            <h5>Create one.</h5>
-                            <hr />
-                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</a>
-                        </div>
-                        break;
-
-                    case "My trips:":
-                        <div class="text-center">
-                            <h5>Currently you don't have created trips, neither you joined any.</h5>
-                            <h5>Create trip or join any, that match your requirements.</h5>
-                            <hr />
-                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Create"><i class="fa fa-plus-circle"></i> Create trip</a>
-                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
-                        </div>
-                        break;
-
-                    case "Search results:":
-                        <div class="text-center">
-                            <h5>Currently there are no trips that match your search criteria.</h5>
-                            <h5>Try again with different requirements.</h5>
-                            <hr />
-                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
-                        </div>
-                        break;
-                }
+                <div class="text-center">
+                    <h5>Currently there are no trips that match your search criteria.</h5>
+                    <h5>Try again with different requirements.</h5>
+                    <hr />
+                    <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Search"><i class="fa fa-search"></i> Search trip</a>
+                </div>
             </div>
         }
         <div class="row">
-            @foreach (var trip in Model.Trips)
+            @if (Model.Trips != null)
             {
-                <div class="col-6 mb-2">
-                    <a style="color: wheat;" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">
-                        <div class="trip-info">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-5 col-xl-3 col-lg-4 mb-3 mb-md-0">
-                                        <div class="d-flex flex-row justify-content-center">
-                                            <img src="@trip.DriverAvatarImageUrl" alt="Profile Picture" class="rounded-circle profile-picture pp-small">
+                @foreach (var trip in Model.Trips)
+                {
+                    <div class="col-6 mb-2">
+                        <a style="color: wheat;" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">
+                            <div class="trip-info">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-5 col-xl-3 col-lg-4 mb-3 mb-md-0">
+                                            <div class="d-flex flex-row justify-content-center">
+                                                <img src="@trip.DriverAvatarImageUrl" alt="Profile Picture" class="rounded-circle profile-picture pp-small">
+                                            </div>
+                                            <div class="d-flex flex-row justify-content-center">
+                                                <span class="text-md-center">@trip.DriverFirstName</span>
+                                            </div>
                                         </div>
-                                        <div class="d-flex flex-row justify-content-center">
-                                            <span class="text-md-center">@trip.DriverFirstName</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-7 col-xl-9 col-lg-8">
-                                        <div class="row">
-                                            <div class="col-12 col-xl-6">
-                                                <span class="text-muted">From: </span>
-                                                <span>@EnumMethods.GetDescription((Enum)trip.Origin)</span>
-                                            </div>
-                                            <div class="col-12 col-xl-6">
-                                                <span class="text-muted">To: </span>
-                                                <span>@EnumMethods.GetDescription((Enum)trip.Destination)</span>
-                                            </div>
-                                            <div class="col-12 col-xl-6">
-                                                <span class="text-muted">Date: </span>
-                                                <span>@trip.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</span>
-                                            </div>
-                                            <div class="col-12 col-xl-6">
-                                                <span class="text-muted">Time: </span>
-                                                <span class="align-top">@trip.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</span>
-                                            </div>
-                                            <div class="col-12 col-xl-6">
-                                                <span class="text-muted">Expense per person: </span>
-                                                <span>@trip.ExpensePerPerson lv.</span>
-                                            </div>
-                                            <div class="col-12 col-xl-6">
-                                                <span class="text-muted">Seats: </span>
-                                                <span>@trip.FreeSeats from @trip.TotalSeats</span>
-                                            </div>
-                                            <div class="col-12">
-                                                <span class="text-muted">Car: </span>
-                                                <span>@trip.CarMake @trip.CarModel</span>
+                                        <div class="col-md-7 col-xl-9 col-lg-8">
+                                            <div class="row">
+                                                <div class="col-12 col-xl-6">
+                                                    <span class="text-muted">From: </span>
+                                                    <span>@EnumMethods.GetDescription((Enum)trip.Origin)</span>
+                                                </div>
+                                                <div class="col-12 col-xl-6">
+                                                    <span class="text-muted">To: </span>
+                                                    <span>@EnumMethods.GetDescription((Enum)trip.Destination)</span>
+                                                </div>
+                                                <div class="col-12 col-xl-6">
+                                                    <span class="text-muted">Date: </span>
+                                                    <span>@trip.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</span>
+                                                </div>
+                                                <div class="col-12 col-xl-6">
+                                                    <span class="text-muted">Time: </span>
+                                                    <span class="align-top">@trip.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</span>
+                                                </div>
+                                                <div class="col-12 col-xl-6">
+                                                    <span class="text-muted">Expense per person: </span>
+                                                    <span>@trip.ExpensePerPerson lv.</span>
+                                                </div>
+                                                <div class="col-12 col-xl-6">
+                                                    <span class="text-muted">Seats: </span>
+                                                    <span>@trip.FreeSeats from @trip.TotalSeats</span>
+                                                </div>
+                                                <div class="col-12">
+                                                    <span class="text-muted">Car: </span>
+                                                    <span>@trip.CarMake @trip.CarModel</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                }
             }
         </div>
         <hr />

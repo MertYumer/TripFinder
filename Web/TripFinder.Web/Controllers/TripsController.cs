@@ -278,14 +278,19 @@
             var tripsViewModel = await this.tripsService
                 .ShowSearchResults<TripViewModel>(inputModel, userId, TripsPerPage, (page - 1) * TripsPerPage);
 
-            foreach (var trip in tripsViewModel)
-            {
-                trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
-                ? "/img/avatar.png"
-                : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
-            }
+            int searchResultsCount = 0;
 
-            var searchResultsCount = this.tripsService.GetSearchResultsCount(inputModel, userId);
+            if (tripsViewModel != null)
+            {
+                foreach (var trip in tripsViewModel)
+                {
+                    trip.DriverAvatarImageUrl = trip.DriverAvatarImageUrl == null
+                    ? "/img/avatar.png"
+                    : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
+                }
+
+                searchResultsCount = this.tripsService.GetSearchResultsCount(inputModel, userId);
+            }
 
             var tripsSearchViewModel = new TripsViewModel
             {

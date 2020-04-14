@@ -197,14 +197,14 @@
 
         public async Task<IEnumerable<T>> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int take, int skip = 0)
         {
-            await this.DeletePassedTripsAsync();
-
             var townsDistanceId = await this.GetOriginAndDestination(inputModel.Origin, inputModel.Destination);
 
             if (townsDistanceId == null)
             {
                 return null;
             }
+
+            await this.DeletePassedTripsAsync();
 
             var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
             var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
