@@ -23,6 +23,7 @@
                             <div>
                                 <span asp-validation-for="Origin" class="text-danger"></span>
                                 <select asp-for="Origin">
+                                    <option value="" selected disabled hidden>Origin</option>
                                     @foreach (var value in Enum.GetValues(typeof(Town)))
                                     {
                                         var town = EnumMethods.GetDescription((Enum)value);
@@ -33,6 +34,7 @@
                             <div>
                                 <span asp-validation-for="Destination" class="text-danger"></span>
                                 <select asp-for="Destination">
+                                    <option value="" selected disabled hidden>Destination</option>
                                     @foreach (var value in Enum.GetValues(typeof(Town)))
                                     {
                                         var town = EnumMethods.GetDescription((Enum)value);
