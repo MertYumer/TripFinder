@@ -310,7 +310,12 @@
 
         public IActionResult Complete(string id)
         {
-            var tripId = this.tripsService.CompleteAsync(id);
+            var userIds = this.tripsService.GetDriverAndPassengersIds(id);
+
+            if (userIds == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
 
             return this.RedirectToAction("All");
         }

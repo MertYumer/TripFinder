@@ -34,7 +34,7 @@
 
         Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId);
 
-        Task<string> CompleteAsync(string id);
+        IEnumerable<string> GetDriverAndPassengersIds(string id);
 
         bool CheckForUserTrip(string userId, string tripId);
     }

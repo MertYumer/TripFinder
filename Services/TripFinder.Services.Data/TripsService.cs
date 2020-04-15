@@ -316,19 +316,22 @@
             return trip.Id;
         }
 
-        public async Task<string> CompleteAsync(string id)
+        public IEnumerable<string> GetDriverAndPassengersIds(string id)
         {
-            var trip = await this.tripsRepository
+            var userIds = this.tripsRepository
                 .All()
                 .Include(t => t.UserTrips)
-                .FirstOrDefaultAsync(t => t.Id == id);
+                .FirstOrDefault(t => t.Id == id)
+                .UserTrips
+                .Select(ut => ut.UserId)
+                .ToList();
 
-            if (trip == null)
+            if (userIds == null)
             {
                 return null;
             }
 
-            return trip.Id;
+            return userIds;
         }
 
         public bool CheckForUserTrip(string userId, string tripId)

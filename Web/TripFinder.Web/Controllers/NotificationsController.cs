@@ -74,12 +74,20 @@
 
         public async Task<IActionResult> CancelTripRequest(string notificationId)
         {
-            var notification = await this.DeleteRequest(notificationId);
+            var notification = this.notificationsService.GetById(notificationId);
+            var user = await this.userManager.GetUserAsync(this.User);
 
             if (notification == null)
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
+
+            if (notification.SenderId != user.Id)
+            {
+                return this.RedirectToAction("Forbid", "Errors");
+            }
+
+            await this.DeleteRequestAsync(notification.Id);
 
             var subject = NotificationSubject.CancelJoin;
 
@@ -91,8 +99,6 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
-
             this.TempData["Notification"] = "You successfully deleted request for the trip.";
 
             return this.RedirectToAction("All", new { userId = user.Id });
@@ -101,10 +107,16 @@
         public async Task<IActionResult> AcceptTripRequest(string notificationId)
         {
             var notification = this.notificationsService.GetById(notificationId);
+            var user = await this.userManager.GetUserAsync(this.User);
 
             if (notification == null)
             {
                 return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            if (notification.ReceiverId != user.Id)
+            {
+                return this.RedirectToAction("Forbid", "Errors");
             }
 
             var tripId = await this.tripsService.AddUserToTripAsync(notification.SenderId, notification.ReceiverId, notification.TripId);
@@ -114,7 +126,7 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            await this.notificationsService.DeleteAsync(notification.Id);
+            await this.DeleteRequestAsync(notification.Id);
 
             var subject = NotificationSubject.AcceptRequest;
 
@@ -133,12 +145,20 @@
 
         public async Task<IActionResult> RejectTripRequest(string notificationId)
         {
-            var notification = await this.DeleteRequest(notificationId);
+            var notification = this.notificationsService.GetById(notificationId);
+            var user = await this.userManager.GetUserAsync(this.User);
 
             if (notification == null)
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
+
+            if (notification.ReceiverId != user.Id)
+            {
+                return this.RedirectToAction("Forbid", "Errors");
+            }
+
+            await this.DeleteRequestAsync(notification.Id);
 
             var subject = NotificationSubject.RejectRequest;
 
@@ -150,14 +170,17 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            var user = await this.userManager.GetUserAsync(this.User);
-
             this.TempData["Notification"] = "You successfully rejected request for the trip.";
 
             return this.RedirectToAction("All", new { userId = user.Id });
         }
 
-        private async Task<Notification> DeleteRequest(string notificationId)
+        public async Task<IActionResult> SendUsersRatingRequest()
+        {
+            return null;
+        }
+
+        private async Task<Notification> DeleteRequestAsync(string notificationId)
         {
             var notification = this.notificationsService.GetById(notificationId);
 

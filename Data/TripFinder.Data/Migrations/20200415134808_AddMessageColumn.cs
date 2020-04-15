@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace TripFinder.Data.Migrations
+﻿namespace TripFinder.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddMessageColumn : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -10,7 +10,7 @@ namespace TripFinder.Data.Migrations
                 name: "Message",
                 table: "Notifications",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

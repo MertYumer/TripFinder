@@ -10,7 +10,7 @@
                 name: "ReceiverId",
                 table: "Notifications",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_ReceiverId",
