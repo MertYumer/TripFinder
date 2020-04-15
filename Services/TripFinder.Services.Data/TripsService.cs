@@ -157,7 +157,7 @@
             return tripId;
         }
 
-        public async Task<IEnumerable<T>> GetAllTrips<T>(int take, int skip = 0)
+        public async Task<IEnumerable<T>> GetAllTripsAsync<T>(int take, int skip = 0)
         {
             await this.DeletePassedTripsAsync();
 
@@ -175,7 +175,7 @@
             return trips;
         }
 
-        public async Task<IEnumerable<T>> GetMyTrips<T>(string userId, int take, int skip = 0)
+        public async Task<IEnumerable<T>> GetMyTripsAsync<T>(string userId, int take, int skip = 0)
         {
             await this.DeletePassedTripsAsync();
 
@@ -195,7 +195,7 @@
             return trips;
         }
 
-        public async Task<IEnumerable<T>> ShowSearchResults<T>(TripSearchInputModel inputModel, string userId, int take, int skip = 0)
+        public async Task<IEnumerable<T>> ShowSearchResultsAsync<T>(TripSearchInputModel inputModel, string userId, int take, int skip = 0)
         {
             var townsDistanceId = await this.GetOriginAndDestination(inputModel.Origin, inputModel.Destination);
 
@@ -312,6 +312,21 @@
 
             this.tripsRepository.Update(trip);
             await this.tripsRepository.SaveChangesAsync();
+
+            return trip.Id;
+        }
+
+        public async Task<string> CompleteAsync(string id)
+        {
+            var trip = await this.tripsRepository
+                .All()
+                .Include(t => t.UserTrips)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (trip == null)
+            {
+                return null;
+            }
 
             return trip.Id;
         }

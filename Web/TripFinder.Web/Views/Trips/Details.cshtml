@@ -73,23 +73,15 @@
                         </div>
                         <div class="row">
                             <div class="col-12 col-xl-6">
+                                <span class="h6">Additional information:</span>
+                            </div>
+                            <div class="col-12 col-xl-6">
                                 <span class="h6">Viewed: </span>
                                 <span class="h5">@Model.Views times</span>
                                 <hr />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <span class="h6">Additional information:</span>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div>
-                                    <div class="card-body">
-                                        <span class="h5">@Model.AdditionalInformation</span>
-                                    </div>
-                                </div>
+                            <div class="col-12">
+                                <span class="h5">@Model.AdditionalInformation</span>
                             </div>
                         </div>
                     </div>
@@ -284,7 +276,7 @@
                 {
                     var disabled = string.Empty;
 
-                    if (Model.FreeSeats == 0)
+                    if (Model.FreeSeats == 0 || Model.Passengers.Any(p => p.Id == user.Id))
                     {
                         disabled = "disabled";
                     }

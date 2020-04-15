@@ -107,12 +107,37 @@
                 return null;
             }
 
+            var receiverMessage = string.Empty;
+            var senderMessage = string.Empty;
+
+            switch (subject)
+            {
+                case NotificationSubject.RequestJoin:
+                    receiverMessage = $"{sender.FirstName} {sender.LastName} wants to join your trip.";
+                    senderMessage = $"You made request to join {receiver.FirstName} {receiver.LastName}'s trip.";
+                    break;
+                case NotificationSubject.CancelJoin:
+                    receiverMessage = $"{sender.FirstName} {sender.LastName} cancelled their trip request.";
+                    senderMessage = $"You cancelled your request for {receiver.FirstName} {receiver.LastName}'s trip.";
+                    break;
+                case NotificationSubject.AcceptRequest:
+                    receiverMessage = $"{sender.FirstName} {sender.LastName} accepted your trip request.";
+                    senderMessage = $"You accepted {receiver.FirstName} {receiver.LastName}'s trip request.";
+                    break;
+                case NotificationSubject.RejectRequest:
+                    receiverMessage = $"{sender.FirstName} {sender.LastName} rejected your trip request.";
+                    senderMessage = $"You rejected {receiver.FirstName} {receiver.LastName}'s trip request.";
+                    break;
+            }
+
             var notification = new Notification
             {
                 SenderId = sender.Id,
                 ReceiverId = receiver.Id,
                 TripId = trip.Id,
                 Subject = subject,
+                ReceiverMessage = receiverMessage,
+                SenderMessage = senderMessage,
             };
 
             receiver.ReceivedNotifications.Add(notification);

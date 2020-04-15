@@ -9,18 +9,14 @@
 
         public string ReceiverId { get; set; }
 
-        public string ReceiverFirstName { get; set; }
-
-        public string ReceiverLastName { get; set; }
-
         public string SenderId { get; set; }
-
-        public string SenderFirstName { get; set; }
-
-        public string SenderLastName { get; set; }
 
         public string TripId { get; set; }
 
         public NotificationSubject Subject { get; set; }
+
+        public string ReceiverMessage { get; set; }
+
+        public string SenderMessage { get; set; }
     }
 }

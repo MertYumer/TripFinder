@@ -44,7 +44,7 @@
         public async Task<IActionResult> All(int page = 1)
         {
             var tripsViewModel = await this.tripsService
-                .GetAllTrips<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage);
+                .GetAllTripsAsync<TripViewModel>(TripsPerPage, (page - 1) * TripsPerPage);
 
             foreach (var trip in tripsViewModel)
             {
@@ -74,7 +74,7 @@
         public async Task<IActionResult> MyTrips(string userId, int page = 1)
         {
             var tripsViewModel = await this.tripsService
-                .GetMyTrips<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage);
+                .GetMyTripsAsync<TripViewModel>(userId, TripsPerPage, (page - 1) * TripsPerPage);
 
             foreach (var trip in tripsViewModel)
             {
@@ -276,7 +276,7 @@
             var userId = this.userManager.GetUserId(this.User);
 
             var tripsViewModel = await this.tripsService
-                .ShowSearchResults<TripViewModel>(inputModel, userId, TripsPerPage, (page - 1) * TripsPerPage);
+                .ShowSearchResultsAsync<TripViewModel>(inputModel, userId, TripsPerPage, (page - 1) * TripsPerPage);
 
             int searchResultsCount = 0;
 
@@ -306,6 +306,13 @@
             }
 
             return this.View("All", tripsSearchViewModel);
+        }
+
+        public IActionResult Complete(string id)
+        {
+            var tripId = this.tripsService.CompleteAsync(id);
+
+            return this.RedirectToAction("All");
         }
     }
 }

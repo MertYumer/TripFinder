@@ -28,6 +28,13 @@
 
         public virtual Trip Trip { get; set; }
 
+        [Required]
         public NotificationSubject Subject { get; set; }
+
+        [Required]
+        public string ReceiverMessage { get; set; }
+
+        [Required]
+        public string SenderMessage { get; set; }
     }
 }

@@ -72,7 +72,7 @@
             return this.RedirectToAction("Details", "Trips", new { id = tripId });
         }
 
-        public async Task<IActionResult> CanselTripRequest(string notificationId)
+        public async Task<IActionResult> CancelTripRequest(string notificationId)
         {
             var notification = await this.DeleteRequest(notificationId);
 
