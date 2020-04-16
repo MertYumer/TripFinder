@@ -318,7 +318,7 @@
                 return this.RedirectToAction("BadRequest", "Errors");
             }
 
-            this.TempData["Notification"] = "You completed a successful trip.";
+            this.TempData["Notification"] = "Trip was successfully completed.";
 
             return this.RedirectToAction("All");
         }
