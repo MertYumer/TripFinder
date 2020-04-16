@@ -275,7 +275,9 @@
                 {
                     var disabled = string.Empty;
 
-                    if (Model.FreeSeats == 0 || Model.Passengers.Any(p => p.Id == user.Id))
+                    if (Model.FreeSeats == 0 || Model.Passengers.Any(p => p.Id == user.Id)
+                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
                     {
                         disabled = "disabled";
                     }

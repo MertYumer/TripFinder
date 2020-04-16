@@ -159,8 +159,6 @@
 
         public async Task<IEnumerable<T>> GetAllTripsAsync<T>(int take, int skip = 0)
         {
-            await this.DeletePassedTripsAsync();
-
             var trips = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
@@ -177,8 +175,6 @@
 
         public async Task<IEnumerable<T>> GetMyTripsAsync<T>(string userId, int take, int skip = 0)
         {
-            await this.DeletePassedTripsAsync();
-
             var trips = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
@@ -203,8 +199,6 @@
             {
                 return null;
             }
-
-            await this.DeletePassedTripsAsync();
 
             var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
             var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
@@ -367,6 +361,24 @@
             return tripId;
         }
 
+        public IEnumerable<string> GetDriverAndPassengersIds(string id)
+        {
+            var usersIds = this.tripsRepository
+                .All()
+                .Include(t => t.UserTrips)
+                .FirstOrDefault(t => t.Id == id)
+                .UserTrips
+                .Select(ut => ut.UserId)
+                .ToList();
+
+            if (usersIds == null)
+            {
+                return null;
+            }
+
+            return usersIds;
+        }
+
         private async Task DeletePassedTripsAsync()
         {
             var passedTrips = await this.tripsRepository
@@ -397,24 +409,6 @@
             }
 
             return townsDistance.Id;
-        }
-
-        private IEnumerable<string> GetDriverAndPassengersIds(string id)
-        {
-            var usersIds = this.tripsRepository
-                .All()
-                .Include(t => t.UserTrips)
-                .FirstOrDefault(t => t.Id == id)
-                .UserTrips
-                .Select(ut => ut.UserId)
-                .ToList();
-
-            if (usersIds == null)
-            {
-                return null;
-            }
-
-            return usersIds;
         }
     }
 }

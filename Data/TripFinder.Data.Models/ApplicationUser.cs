@@ -81,6 +81,8 @@ namespace TripFinder.Data.Models
 
         public virtual Car Car { get; set; }
 
+        public bool HasUsersToReview { get; set; }
+
         public virtual ICollection<Review> ReviewsForUser { get; set; }
 
         public virtual ICollection<Review> ReviewsByUser { get; set; }

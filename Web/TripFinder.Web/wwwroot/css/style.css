@@ -119,12 +119,6 @@ body {
     margin-bottom: 80px;
 }
 
-    .section-title h2 {
-        margin-bottom: 10px;
-        position: relative;
-        text-transform: uppercase;
-    }
-
     .section-title p {
         margin-top: 10px;
     }
@@ -3062,6 +3056,32 @@ label {
     border-radius: 30px;
     box-shadow: 1px 1px 1px gray;
 }
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 25px;
+    background: white;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        background: #ffd000;
+        cursor: pointer;
+    }
+
+    .slider::-moz-range-thumb {
+        width: 25px;
+        height: 25px;
+        background: #ffd000;
+        cursor: pointer;
+    }
 
 .login-with-btn {
     background: -webkit-gradient(linear, left top, left bottom, from(#3b5998), to(#344e86));

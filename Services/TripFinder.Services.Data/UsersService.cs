@@ -132,6 +132,12 @@
             var driver = this.GetById(driverId);
             driver.TripsCountAsDriver++;
             driver.TravelledDistance += distance;
+
+            if (passengersIds.Count() > 0)
+            {
+                driver.HasUsersToReview = true;
+            }
+
             this.usersRepository.Update(driver);
             updatedUsersCount++;
 
@@ -140,6 +146,7 @@
                 var passenger = this.GetById(passengerId);
                 passenger.TripsCountAsPassenger++;
                 passenger.TravelledDistance += distance;
+                passenger.HasUsersToReview = true;
                 this.usersRepository.Update(passenger);
                 updatedUsersCount++;
             }

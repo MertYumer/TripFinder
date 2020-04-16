@@ -1,0 +1,43 @@
+﻿@model TripFinder.Web.ViewModels.Reviews.ReviewsAllViewModel
+
+@{
+    ViewData["Title"] = "Pending";
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h2>Rate users from your last trip</h2>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var user in Model.Reviews)
+            {
+                <div class="col-4">
+                    <div class="trip-info">
+                        <div class="form text-center">
+                            <a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">
+                                <h5>@user.FirstName @user.LastName</h5>
+                            </a>
+                            <form method="post">
+                                <div>
+                                    <input type="range" class="slider" min="0" max="5">
+                                </div>
+                                <div>
+                                    <input type="text" placeholder="Comment">
+                                </div>
+                                <div class="col justify-content-center">
+                                    <button class="btn btn-warning btn-lg" type="submit" asp-area="" asp-controller="Reviews" asp-action="Create"><i class="fa fa-plus-circle"></i> Rate</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>

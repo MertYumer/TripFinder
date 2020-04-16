@@ -36,6 +36,8 @@
 
         Task<string> Complete(string tripId, string userId);
 
+        IEnumerable<string> GetDriverAndPassengersIds(string id);
+
         bool CheckForUserTrip(string userId, string tripId);
     }
 }

@@ -29,12 +29,12 @@
     <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>
     <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Hello, <span>@user.FirstName</span></a></li>
     <li>
-        <a>
+        <a asp-area="" asp-controller="Reviews" asp-action="Pending" asp-route-id="@user.Id">
             <div id="noti_Container">
                 <i class="fa fa-trophy fa-lg"></i>
-                @if (notificationsCount > 0)
+                @if (user.HasUsersToReview)
                 {
-                    <div class="noti_bubble"></div>
+                    <div class="noti_bubble">new</div>
                 }
             </div>
         </a>

@@ -3,8 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using TripFinder.Data.Models;
-
     public class TripSearchInputModel
     {
         [Required]
