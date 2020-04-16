@@ -175,11 +175,6 @@
             return this.RedirectToAction("All", new { userId = user.Id });
         }
 
-        public async Task<IActionResult> SendUsersRatingRequest()
-        {
-            return null;
-        }
-
         private async Task<Notification> DeleteRequestAsync(string notificationId)
         {
             var notification = this.notificationsService.GetById(notificationId);

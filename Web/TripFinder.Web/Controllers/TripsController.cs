@@ -308,14 +308,17 @@
             return this.View("All", tripsSearchViewModel);
         }
 
-        public IActionResult Complete(string id)
+        public async Task<IActionResult> Complete(string tripId)
         {
-            var userIds = this.tripsService.GetDriverAndPassengersIds(id);
+            var user = await this.userManager.GetUserAsync(this.User);
+            tripId = await this.tripsService.Complete(tripId, user.Id);
 
-            if (userIds == null)
+            if (tripId == null)
             {
                 return this.RedirectToAction("BadRequest", "Errors");
             }
+
+            this.TempData["Notification"] = "You completed a successful trip.";
 
             return this.RedirectToAction("All");
         }

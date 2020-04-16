@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -122,6 +123,30 @@
             await this.usersRepository.SaveChangesAsync();
 
             return user.Id;
+        }
+
+        public async Task<int> UpdateTripUsersAsync(string driverId, IEnumerable<string> passengersIds, int distance)
+        {
+            var updatedUsersCount = 0;
+
+            var driver = this.GetById(driverId);
+            driver.TripsCountAsDriver++;
+            driver.TravelledDistance += distance;
+            this.usersRepository.Update(driver);
+            updatedUsersCount++;
+
+            foreach (var passengerId in passengersIds)
+            {
+                var passenger = this.GetById(passengerId);
+                passenger.TripsCountAsPassenger++;
+                passenger.TravelledDistance += distance;
+                this.usersRepository.Update(passenger);
+                updatedUsersCount++;
+            }
+
+            await this.usersRepository.SaveChangesAsync();
+
+            return updatedUsersCount;
         }
     }
 }

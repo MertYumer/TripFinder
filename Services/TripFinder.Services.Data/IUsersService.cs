@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using TripFinder.Data.Models;
@@ -16,6 +17,8 @@
         string CheckForUserById(string id);
 
         Task<string> UpdateAsync(UserEditInputModel inputModel);
+
+        Task<int> UpdateTripUsersAsync(string driverId, IEnumerable<string> passengersIds, int distance);
 
         Task<string> DeleteAsync(string id);
     }

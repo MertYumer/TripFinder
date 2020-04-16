@@ -29,6 +29,17 @@
     <li><a asp-area="" asp-controller="Cars" asp-action="Index">Car</a></li>
     <li><a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Hello, <span>@user.FirstName</span></a></li>
     <li>
+        <a>
+            <div id="noti_Container">
+                <i class="fa fa-trophy fa-lg"></i>
+                @if (notificationsCount > 0)
+                {
+                    <div class="noti_bubble"></div>
+                }
+            </div>
+        </a>
+    </li>
+    <li>
         <a asp-area="" asp-controller="Notifications" asp-action="All" asp-route-userId="@user.Id">
             <div id="noti_Container">
                 <i class="fa fa-bell fa-lg"></i>

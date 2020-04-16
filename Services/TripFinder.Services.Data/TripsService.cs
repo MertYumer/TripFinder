@@ -316,24 +316,6 @@
             return trip.Id;
         }
 
-        public IEnumerable<string> GetDriverAndPassengersIds(string id)
-        {
-            var userIds = this.tripsRepository
-                .All()
-                .Include(t => t.UserTrips)
-                .FirstOrDefault(t => t.Id == id)
-                .UserTrips
-                .Select(ut => ut.UserId)
-                .ToList();
-
-            if (userIds == null)
-            {
-                return null;
-            }
-
-            return userIds;
-        }
-
         public bool CheckForUserTrip(string userId, string tripId)
         {
             var userTripExists = this.userTripsRepository
@@ -343,26 +325,58 @@
             return userTripExists;
         }
 
+        public async Task<string> Complete(string tripId, string userId)
+        {
+            var trip = await this.tripsRepository
+                .All()
+                .Include(t => t.TownsDistance)
+                .FirstOrDefaultAsync(t => t.Id == tripId);
+
+            if (trip == null)
+            {
+                return null;
+            }
+
+            if (trip.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) > 0
+                || (trip.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                && trip.TimeOfDeparture.TimeOfDay.TotalMinutes >= DateTime.Now.TimeOfDay.TotalMinutes))
+            {
+                return null;
+            }
+
+            var usersIds = this.GetDriverAndPassengersIds(trip.Id).ToList();
+
+            if (usersIds == null)
+            {
+                return null;
+            }
+
+            var driverId = usersIds.FirstOrDefault(u => u == trip.DriverId);
+
+            if (driverId != userId)
+            {
+                return null;
+            }
+
+            usersIds.Remove(driverId);
+
+            var updatedUsersCount = await this.usersService
+                .UpdateTripUsersAsync(driverId, usersIds, trip.TownsDistance.Distance);
+            tripId = await this.DeleteAsync(trip.Id);
+
+            return tripId;
+        }
+
         private async Task DeletePassedTripsAsync()
         {
             var passedTrips = await this.tripsRepository
                 .All()
                 .Include(t => t.TownsDistance)
-                .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
-                || t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
+                .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0)
                 .ToListAsync();
 
             foreach (var trip in passedTrips)
             {
-                if (trip.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0)
-                {
-                    if (trip.TimeOfDeparture.TimeOfDay.TotalMinutes + trip.TownsDistance.EstimatedMinutes >
-                        DateTime.Now.TimeOfDay.TotalMinutes)
-                    {
-                        continue;
-                    }
-                }
-
                 this.tripsRepository.Delete(trip);
             }
 
@@ -383,6 +397,24 @@
             }
 
             return townsDistance.Id;
+        }
+
+        private IEnumerable<string> GetDriverAndPassengersIds(string id)
+        {
+            var usersIds = this.tripsRepository
+                .All()
+                .Include(t => t.UserTrips)
+                .FirstOrDefault(t => t.Id == id)
+                .UserTrips
+                .Select(ut => ut.UserId)
+                .ToList();
+
+            if (usersIds == null)
+            {
+                return null;
+            }
+
+            return usersIds;
         }
     }
 }
