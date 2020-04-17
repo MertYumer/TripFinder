@@ -379,22 +379,6 @@
             return usersIds;
         }
 
-        private async Task DeletePassedTripsAsync()
-        {
-            var passedTrips = await this.tripsRepository
-                .All()
-                .Include(t => t.TownsDistance)
-                .Where(t => t.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0)
-                .ToListAsync();
-
-            foreach (var trip in passedTrips)
-            {
-                this.tripsRepository.Delete(trip);
-            }
-
-            await this.tripsRepository.SaveChangesAsync();
-        }
-
         private async Task<string> GetOriginAndDestination(string origin, string destination)
         {
             var townsDistance = await this.townsDistancesRepository

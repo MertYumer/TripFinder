@@ -30,28 +30,28 @@
             this.usersService = usersService;
         }
 
-        public IEnumerable<T> GetLastTripPassengers<T>(string userId)
+        public async Task<IEnumerable<T>> GetLastTripPassengers<T>(string userId)
         {
-            var lastTrip = this.tripsRepository
+            var lastTrip = await this.tripsRepository
                 .AllWithDeleted()
                 .Include(t => t.UserTrips)
                 .ThenInclude(ut => ut.User)
+                .ThenInclude(u => u.AvatarImage)
                 .Where(t => t.IsDeleted && t.UserTrips.Any(ut => ut.UserId == userId && !ut.GaveRatings))
                 .OrderByDescending(t => t.DeletedOn)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (lastTrip == null)
             {
                 return null;
             }
 
-            var passengers = lastTrip
-                .UserTrips
-                .Where(ut => ut.UserId != userId)
+            var passengers = await this.userTripsRepository
+                .All()
+                .Where(ut => ut.UserId != userId && ut.TripId == lastTrip.Id)
                 .Select(ut => ut.User)
-                .AsQueryable()
                 .To<T>()
-                .ToList();
+                .ToListAsync();
 
             return passengers;
         }
