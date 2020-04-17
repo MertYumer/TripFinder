@@ -87,8 +87,18 @@
             var user = this.usersRepository
                 .All()
                 .Include(u => u.UserTrips)
-                .Where(x => x.Id == id)
-                .FirstOrDefault();
+                .FirstOrDefault(x => x.Id == id);
+
+            return user;
+        }
+
+        public ApplicationUser GetByIdWithReviews(string id)
+        {
+            var user = this.usersRepository
+                .All()
+                .Include(u => u.ReviewsByUser)
+                .Include(u => u.ReviewsForUser)
+                .FirstOrDefault(x => x.Id == id);
 
             return user;
         }

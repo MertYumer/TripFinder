@@ -13,5 +13,7 @@
         public string TripId { get; set; }
 
         public virtual Trip Trip { get; set; }
+
+        public bool GaveRatings { get; set; }
     }
 }

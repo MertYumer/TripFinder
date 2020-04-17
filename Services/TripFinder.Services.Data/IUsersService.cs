@@ -12,6 +12,8 @@
 
         ApplicationUser GetById(string id);
 
+        ApplicationUser GetByIdWithReviews(string id);
+
         int GetUserNotificationsCount(string id);
 
         string CheckForUserById(string id);

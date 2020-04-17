@@ -25,7 +25,7 @@
 
         [Required]
         [Range(0, 5)]
-        public double Rating { get; set; }
+        public int Rating { get; set; }
 
         [MinLength(5)]
         [MaxLength(50)]

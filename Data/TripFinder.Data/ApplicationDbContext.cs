@@ -119,14 +119,14 @@
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.ReviewsByUser)
-                .WithOne(r => r.ReviewedUser)
-                .HasForeignKey(r => r.ReviewedUserId)
+                .WithOne(r => r.Reviewer)
+                .HasForeignKey(r => r.ReviewerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ApplicationUser>()
                 .HasMany(u => u.ReviewsForUser)
-                .WithOne(r => r.Reviewer)
-                .HasForeignKey(r => r.ReviewerId)
+                .WithOne(r => r.ReviewedUser)
+                .HasForeignKey(r => r.ReviewedUserId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ApplicationUser>()
