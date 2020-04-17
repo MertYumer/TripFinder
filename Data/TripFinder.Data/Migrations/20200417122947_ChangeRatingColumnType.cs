@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace TripFinder.Data.Migrations
+﻿namespace TripFinder.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ChangeRatingColumnType : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

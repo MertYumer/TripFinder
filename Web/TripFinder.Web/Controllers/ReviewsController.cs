@@ -1,8 +1,8 @@
 ﻿namespace TripFinder.Web.Controllers
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -24,17 +24,22 @@
             this.reviewsService = reviewsService;
         }
 
-        public IActionResult All()
-        {
-            return this.View();
-        }
-
-        public async Task<IActionResult> Pending()
+        public async Task<IActionResult> All(string userId)
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
+            if (user.HasUsersToReview)
+            {
+                return this.RedirectToAction("Pending", new { userId });
+            }
+
+            return this.View();
+        }
+
+        public async Task<IActionResult> Pending(string userId)
+        {
             var reviewViewModels = this.reviewsService
-                .GetLastTripPassengers<UserReviewViewModel>(user.Id)
+                .GetLastTripPassengers<UserReviewViewModel>(userId)
                 .ToList();
 
             if (reviewViewModels == null)
