@@ -37,42 +37,63 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            //if (user.HasUsersToReview)
-            //{
-            //    return this.RedirectToAction("Pending", new { userId });
-            //}
+            var reviewsForUserViewModels = await this.reviewsService
+                .GetReviewsForUser<ReviewForUserViewModel>(userId);
 
-            return this.View();
+            var reviewsByUserViewModels = await this.reviewsService
+                .GetReviewsByUser<ReviewByUserViewModel>(userId);
+
+            foreach (var review in reviewsForUserViewModels)
+            {
+                review.ReviewerAvatarImageUrl = review.ReviewerAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.imageSizing + review.ReviewerAvatarImageUrl;
+            }
+
+            foreach (var review in reviewsByUserViewModels)
+            {
+                review.ReviewedUserAvatarImageUrl = review.ReviewedUserAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.imageSizing + review.ReviewedUserAvatarImageUrl;
+            }
+
+            var reviewsAllViewModel = new ReviewsAllViewModel
+            {
+                ReviewsForUser = reviewsForUserViewModels,
+                ReviewsByUser = reviewsByUserViewModels,
+            };
+
+            return this.View(reviewsAllViewModel);
         }
 
         public async Task<IActionResult> Pending(string userId)
         {
-            var reviewViewModels = await this.reviewsService
-                .GetLastTripPassengers<UserReviewViewModel>(userId);
+            var reviewPendingViewModels = await this.reviewsService
+                .GetPendingReviews<ReviewPendingViewModel>(userId);
 
-            if (reviewViewModels == null)
+            if (reviewPendingViewModels == null)
             {
                 return this.RedirectToAction("All", new { userId });
             }
 
-            if (reviewViewModels.Count() == 0)
+            if (reviewPendingViewModels.Count() == 0)
             {
                 return this.RedirectToAction("All", new { userId });
             }
 
-            foreach (var review in reviewViewModels)
+            foreach (var review in reviewPendingViewModels)
             {
                 review.AvatarImageUrl = review.AvatarImageUrl == null
                 ? "/img/avatar.png"
                 : this.imagePathPrefix + this.imageSizing + review.AvatarImageUrl;
             }
 
-            var reviewsViewModel = new ReviewsAllViewModel
+            var reviewsPendingViewModel = new ReviewsPendingViewModel
             {
-                Reviews = reviewViewModels,
+                Reviews = reviewPendingViewModels,
             };
 
-            return this.View(reviewsViewModel);
+            return this.View(reviewsPendingViewModel);
         }
 
         [HttpPost]

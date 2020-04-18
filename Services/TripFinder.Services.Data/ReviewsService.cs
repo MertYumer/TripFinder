@@ -15,6 +15,7 @@
         private readonly IDeletableEntityRepository<Trip> tripsRepository;
         private readonly IRepository<ApplicationUser> usersRepository;
         private readonly IRepository<UserTrip> userTripsRepository;
+        private readonly IRepository<Review> reviewsRepository;
 
         private readonly IUsersService usersService;
 
@@ -22,15 +23,17 @@
             IDeletableEntityRepository<Trip> tripsRepository,
             IRepository<ApplicationUser> usersRepository,
             IRepository<UserTrip> userTripsRepository,
+            IRepository<Review> reviewsRepository,
             IUsersService usersService)
         {
             this.tripsRepository = tripsRepository;
             this.usersRepository = usersRepository;
             this.userTripsRepository = userTripsRepository;
+            this.reviewsRepository = reviewsRepository;
             this.usersService = usersService;
         }
 
-        public async Task<IEnumerable<T>> GetLastTripPassengers<T>(string userId)
+        public async Task<IEnumerable<T>> GetPendingReviews<T>(string userId)
         {
             var lastTrip = await this.tripsRepository
                 .AllWithDeleted()
@@ -46,14 +49,14 @@
                 return null;
             }
 
-            var passengers = await this.userTripsRepository
+            var pendingReviews = await this.userTripsRepository
                 .All()
                 .Where(ut => ut.UserId != userId && ut.TripId == lastTrip.Id)
                 .Select(ut => ut.User)
                 .To<T>()
                 .ToListAsync();
 
-            return passengers;
+            return pendingReviews;
         }
 
         public async Task<bool> AddReviews(IFormCollection data, string userId)
@@ -97,6 +100,36 @@
             var userGaveRatings = this.UpdateUserTrip(user.Id).Result;
 
             return userGaveRatings;
+        }
+
+        public async Task<IEnumerable<T>> GetReviewsForUser<T>(string userId)
+        {
+            var reviewsForUser = await this.reviewsRepository
+                .All()
+                .Include(r => r.ReviewedUser)
+                .ThenInclude(ru => ru.AvatarImage)
+                .Where(r => r.ReviewedUserId == userId)
+                .OrderByDescending(r => r.CreatedOn)
+                .Take(5)
+                .To<T>()
+                .ToListAsync();
+
+            return reviewsForUser;
+        }
+
+        public async Task<IEnumerable<T>> GetReviewsByUser<T>(string userId)
+        {
+            var reviewsByUser = await this.reviewsRepository
+                .All()
+                .Include(r => r.Reviewer)
+                .ThenInclude(ru => ru.AvatarImage)
+                .Where(r => r.ReviewerId == userId)
+                .OrderByDescending(r => r.CreatedOn)
+                .Take(5)
+                .To<T>()
+                .ToListAsync();
+
+            return reviewsByUser;
         }
 
         private async Task<bool> UpdateUserTrip(string userId)

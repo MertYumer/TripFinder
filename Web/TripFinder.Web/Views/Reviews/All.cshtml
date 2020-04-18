@@ -1,7 +1,79 @@
-﻿
+﻿@model TripFinder.Web.ViewModels.Reviews.ReviewsAllViewModel
+
 @{
     ViewData["Title"] = "All";
 }
 
-<h1>All</h1>
-
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title text-center">
+                    <h1>Reviews:</h1>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
+                <h2>Given by other users:</h2>
+                <hr />
+                @foreach (var review in Model.ReviewsForUser)
+                {
+                    <div class="trip-info">
+                        <a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@review.ReviewerId">
+                            <div class="row align-items-center" style="margin: 2%;">
+                                <div class="col-3 text-center mx-auto">
+                                    <div class="d-flex flex-row justify-content-center">
+                                        <img src="@review.ReviewerAvatarImageUrl" alt="Profile Picture" class="rounded-circle profile-picture pp-small">
+                                    </div>
+                                </div>
+                                <div class="col-8 text-center mx-auto">
+                                    <h3>@review.ReviewerFirstName @review.ReviewerLastName</h3>
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 2%;">
+                                <div class="col-4">
+                                    <h5>Given rating: @review.Rating</h5>
+                                </div>
+                                <div class="col-8">
+                                    <h5>Comment: @review.Comment</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+            <hr />
+            <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
+                <h2>Given by you:</h2>
+                <hr />
+                @foreach (var review in Model.ReviewsByUser)
+                {
+                    <div class="trip-info">
+                        <a asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@review.ReviewedUserId">
+                            <div class="row align-items-center" style="margin: 2%;">
+                                <div class="col-3 text-center mx-auto">
+                                    <div class="d-flex flex-row justify-content-center">
+                                        <img src="@review.ReviewedUserAvatarImageUrl" alt="Profile Picture" class="rounded-circle profile-picture pp-small">
+                                    </div>
+                                </div>
+                                <div class="col-8 text-center mx-auto">
+                                    <h3>@review.ReviewedUserFirstName @review.ReviewedUserLastName</h3>
+                                </div>
+                            </div>
+                            <div class="row" style="margin: 2%;">
+                                <div class="col-4">
+                                    <h5>Given rating: @review.Rating</h5>
+                                </div>
+                                <div class="col-8">
+                                    <h5>Comment: @review.Comment</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

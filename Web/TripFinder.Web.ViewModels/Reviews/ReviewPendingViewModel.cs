@@ -3,7 +3,7 @@
     using TripFinder.Data.Models;
     using TripFinder.Services.Mapping;
 
-    public class UserReviewViewModel : IMapFrom<ApplicationUser>
+    public class ReviewPendingViewModel : IMapFrom<ApplicationUser>
     {
         public string Id { get; set; }
 
