@@ -125,8 +125,9 @@
                 return this.View();
             }
 
-            if (inputModel.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0 &&
-                inputModel.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes)
+            if (inputModel.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
+                || (inputModel.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                && inputModel.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
             {
                 return this.View();
             }
@@ -203,6 +204,9 @@
                 return this.RedirectToAction("Forbid", "Errors");
             }
 
+            var car = this.carsService.GetById(user.CarId);
+            this.ViewBag.TotalSeats = car.PassengerSeats;
+
             return this.View(viewModel);
         }
 
@@ -210,6 +214,13 @@
         public async Task<IActionResult> Edit(TripEditInputModel inputModel)
         {
             if (!this.ModelState.IsValid)
+            {
+                return this.RedirectToAction("Edit", new { id = inputModel.Id });
+            }
+
+            if (inputModel.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
+                || (inputModel.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                && inputModel.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
             {
                 return this.RedirectToAction("Edit", new { id = inputModel.Id });
             }
