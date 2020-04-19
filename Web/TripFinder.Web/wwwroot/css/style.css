@@ -82,7 +82,6 @@ body {
     background: url("/img/page-title.jpg") top right no-repeat;
     background-attachment: fixed;
     min-height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
     content: "";
     left: 0;
     position: absolute;
@@ -109,7 +108,6 @@ body {
     }
 
 .section-padding {
-    padding: 100px 0;
     min-height: 100%;
 }
 
@@ -171,10 +169,10 @@ body {
 /*== Theme Defualt CSS ==*/
 
 /*== Header Top CSS Start ==*/
-
 #header-area,
 #header-area a {
     color: #fff;
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 #header-top {
@@ -1559,6 +1557,10 @@ html,
     height: 100%;
 }
 
+#slideslow-bg {
+height: 95%;
+}
+
     #slideslow-bg .vegas-timer {
         height: 1px !important;
     }
@@ -2237,6 +2239,7 @@ html,
 
 #page-title-area {
     min-height: 100%;
+    padding-top: 2%;
 }
 
     #page-title-area .section-title {

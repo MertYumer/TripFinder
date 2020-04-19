@@ -3,5 +3,18 @@
     this.ViewData["Title"] = "Admin dashboard";
 }
 
-<h1>@this.ViewData["Title"]</h1>
-Settings: @this.Model.SettingsCount
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container">
+        <div class="row section-title text-center">
+            <div class="col-4">
+                <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="Users">Users</a>
+            </div>
+            <div class="col-4">
+                <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="Cars">Cars</a>
+            </div>
+            <div class="col-4">
+                <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="Trips">Trips</a>
+            </div>
+        </div>
+    </div>
+</section>
