@@ -27,6 +27,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new AdminSeeder(),
                               new TownsDistancesSeeder(),
                           };
 

@@ -1,8 +1,6 @@
 namespace TripFinder.Web.Areas.Identity.Pages.Account
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authentication;
@@ -66,8 +64,6 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
-            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             this.ReturnUrl = returnUrl;

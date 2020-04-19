@@ -1,13 +1,10 @@
 namespace TripFinder.Web.Areas.Identity.Pages.Account
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
@@ -73,7 +70,7 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public void OnGetAsync(string returnUrl = null)
         {
             if (this.User.Identity.IsAuthenticated)
             {
