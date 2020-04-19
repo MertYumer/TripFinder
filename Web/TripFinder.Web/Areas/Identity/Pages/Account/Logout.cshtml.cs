@@ -25,6 +25,8 @@
         {
             await this.signInManager.SignOutAsync();
             this.logger.LogInformation("User logged out.");
+            this.TempData["Notification"] = $"You successfully logged out. Thank you for using TripFinder!";
+
             return this.Redirect("/");
         }
 
@@ -32,6 +34,7 @@
         {
             await this.signInManager.SignOutAsync();
             this.logger.LogInformation("User logged out.");
+
             if (returnUrl != null)
             {
                 return this.LocalRedirect(returnUrl);

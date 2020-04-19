@@ -42,23 +42,51 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
 
         public string ReturnUrl { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public class InputModel
+        {
+            [Required]
+            [Display(Name = "FirstName")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [Display(Name = "LastName")]
+            public string LastName { get; set; }
+
+            [Required]
+            [EmailAddress]
+            [Display(Name = "Email")]
+            public string Email { get; set; }
+
+            [Required]
+            [RegularExpression(@"^(087|088|089|098)[0-9]{7}$")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Password)]
+            [Display(Name = "Password")]
+            public string Password { get; set; }
+
+            [DataType(DataType.Password)]
+            [Display(Name = "Confirm password")]
+            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            public string ConfirmPassword { get; set; }
+        }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                this.Response.Redirect("/Home/Index");
+                this.Response.Redirect("/");
             }
 
             this.ReturnUrl = returnUrl;
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? this.Url.Content("~/");
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (this.ModelState.IsValid)
             {
                 var user = new ApplicationUser
@@ -71,6 +99,7 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
                 };
 
                 var result = await this.userManager.CreateAsync(user, this.Input.Password);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User created a new account with password.");
@@ -94,6 +123,8 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
                     }
                     else
                     {
+                        this.TempData["Notification"] = $"Welcome, {user.FirstName} {user.LastName}!";
+
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         return this.LocalRedirect(returnUrl);
                     }
@@ -108,36 +139,5 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return this.Page();
         }
-    }
-
-    public class InputModel
-    {
-        [Required]
-        [Display(Name = "FirstName")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [Display(Name = "LastName")]
-        public string LastName { get; set; }
-
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
-
-        [Required]
-        [RegularExpression(@"^(087|088|089|098)[0-9]{7}$")]
-        public string PhoneNumber { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
     }
 }

@@ -33,8 +33,6 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
         [BindProperty]
         public InputModel Input { get; set; }
 
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
-
         public string ReturnUrl { get; set; }
 
         [TempData]
@@ -57,7 +55,7 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                this.Response.Redirect("/Home/Index");
+                this.Response.Redirect("/");
             }
 
             if (!string.IsNullOrEmpty(this.ErrorMessage))
@@ -70,7 +68,7 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             this.ReturnUrl = returnUrl;
         }
@@ -84,8 +82,13 @@ namespace TripFinder.Web.Areas.Identity.Pages.Account
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await this.signInManager.PasswordSignInAsync(this.Input.Email, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
+                    var user = await this.userManager.FindByNameAsync(this.Input.Email);
+
+                    this.TempData["Notification"] = $"Welcome, {user.FirstName} {user.LastName}!";
+
                     this.logger.LogInformation("User logged in.");
                     return this.LocalRedirect(returnUrl);
                 }
