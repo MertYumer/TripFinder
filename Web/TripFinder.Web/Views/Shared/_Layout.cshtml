@@ -24,22 +24,24 @@
     </div>
     <header id="header-area" class="fixed-top">
         <div id="header-bottom">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2">
-                        <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
-                            <img src="/img/logo.png" alt="JSOFT">
-                        </a>
-                    </div>
-                    <div class="col-lg-10 d-none d-xl-block">
-                        <nav class="mainmenu alignright">
-                            <ul>
-                                <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                                <li><a asp-area="" asp-controller="About" asp-action="Index">About</a></li>
-                                <partial name="_LoginPartial" />
-                            </ul>
-                        </nav>
-                    </div>
+            <div class="navbar">
+                <div class="col-lg-2">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="logo">
+                        <img src="/img/logo.png" alt="JSOFT">
+                    </a>
+                </div>
+                <div class="col-lg-10 d-none d-xl-block">
+                    <nav class="mainmenu alignright">
+                        <ul>
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <li><a asp-area="Administration" asp-controller="Dashboard" asp-action="Index">Dashboard</a></li>
+                            }
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-area="" asp-controller="About" asp-action="Index">About</a></li>
+                            <partial name="_LoginPartial" />
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -48,7 +50,7 @@
         </div>
         @if (this.TempData["Notification"] != null)
         {
-            <div class="alert alert-success" role="alert" id="alert" style="position: absolute; top: 0; left: 0;">
+            <div class="alert alert-success" role="alert" id="alert" style="position: absolute; top: 0; left: 15%;">
                 @this.TempData["Notification"]
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

@@ -212,7 +212,6 @@ header.fixTotop #header-top {
 
 #header-bottom {
     background-color: rgba(0, 0, 0, 0.5);
-    padding: 15px 0;
     -webkit-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
 }
