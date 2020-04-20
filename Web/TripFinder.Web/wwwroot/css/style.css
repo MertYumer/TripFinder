@@ -170,7 +170,7 @@ body {
 
 /*== Header Top CSS Start ==*/
 #header-area {
-    min-height: 10%;
+    min-height: 8%;
 }
 
     #header-area,
@@ -1319,14 +1319,12 @@ a.slicknav_btn {
 
 /*== Footer Area CSS Start ==*/
 #footer-area {
+    background-color: #000;
     min-height: 6%;
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
-
-    #footer-area section {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-    }
 
     #footer-area a {
         color: #ffd000;
@@ -1499,6 +1497,7 @@ a.slicknav_btn {
 }
 
 .footer-bottom-area {
+    bottom: 0;
     background-color: #000;
     color: #eaeaea;
     padding: 15px 0;
@@ -1564,7 +1563,7 @@ html,
 }
 
     #slideslow-bg {
-        height: 84%;
+        height: 86%;
     }
 
         #slideslow-bg .vegas-timer {
@@ -2244,8 +2243,7 @@ html,
 /*== Page Title CSS ==*/
 
 #page-title-area {
-    min-height: 83%;
-    padding-top: 2%;
+    min-height: 86%;
     display: table;
     min-width: 100%;
 }
