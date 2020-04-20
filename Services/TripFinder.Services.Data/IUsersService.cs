@@ -23,5 +23,11 @@
         Task<int> UpdateTripUsersAsync(string driverId, IEnumerable<string> passengersIds, int distance);
 
         Task<string> DeleteAsync(string id);
+
+        Task<int> GetAllUsersCountAsync();
+
+        Task<int> GetActiveUsersCountAsync();
+
+        Task<int> GetDeletedUsersCountAsync();
     }
 }

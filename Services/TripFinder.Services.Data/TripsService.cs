@@ -223,34 +223,23 @@
             return trips;
         }
 
-        public int GetAllTripsCount()
+        public async Task<int> GetMyTripsCountAsync(string userId)
         {
-            var tripsCount = this.tripsRepository
-                .All()
-                .ToList()
-                .Count;
-
-            return tripsCount;
-        }
-
-        public int GetMyTripsCount(string userId)
-        {
-            var tripsCount = this.tripsRepository
+            var tripsCount = await this.tripsRepository
                 .All()
                 .Include(t => t.UserTrips)
                 .Where(t => t.UserTrips.Any(ut => ut.UserId == userId))
-                .ToList()
-                .Count;
+                .CountAsync();
 
             return tripsCount;
         }
 
-        public int GetSearchResultsCount(TripSearchInputModel inputModel, string userId)
+        public async Task<int> GetSearchResultsCountAsync(TripSearchInputModel inputModel, string userId)
         {
             var origin = (Town)Enum.Parse(typeof(Town), inputModel.Origin.Replace(" ", string.Empty));
             var destination = (Town)Enum.Parse(typeof(Town), inputModel.Destination.Replace(" ", string.Empty));
 
-            var tripsCount = this.tripsRepository
+            var tripsCount = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .ThenInclude(d => d.AvatarImage)
@@ -261,8 +250,7 @@
                 && t.Destination == destination
                 && t.DateOfDeparture.Date.CompareTo(inputModel.DateOfDeparture) == 0
                 && t.FreeSeats >= inputModel.SeatsNeeded)
-                .ToList()
-                .Count;
+                .CountAsync();
 
             return tripsCount;
         }
@@ -377,6 +365,43 @@
             }
 
             return usersIds;
+        }
+
+        public async Task<int> GetAllTripsCountAsync()
+        {
+            var tripsCount = await this.tripsRepository
+                .All()
+                .CountAsync();
+
+            return tripsCount;
+        }
+
+        public async Task<int> GetAllTripsCountWithDeleted()
+        {
+            var allTripsCountWithDeleted = await this.tripsRepository
+                .AllWithDeleted()
+                .CountAsync();
+
+            return allTripsCountWithDeleted;
+        }
+
+        public async Task<int> GetActiveTripsCountAsync()
+        {
+            var activeTripsCount = await this.tripsRepository
+                .All()
+                .CountAsync();
+
+            return activeTripsCount;
+        }
+
+        public async Task<int> GetDeletedTripsCountAsync()
+        {
+            var deletedTripsCount = await this.tripsRepository
+                .AllWithDeleted()
+                .Where(t => t.IsDeleted)
+                .CountAsync();
+
+            return deletedTripsCount;
         }
 
         private async Task<string> GetOriginAndDestination(string origin, string destination)

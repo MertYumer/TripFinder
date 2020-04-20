@@ -262,8 +262,9 @@
             <div class="col-md-auto m-auto">
                 @if (user.Id == Model.Driver.Id)
                 {
-                    if (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) <= 0
-                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes)
+                    if (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
+                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
                     {
                         <a class="btn btn-success btn-lg" asp-area="" asp-controller="Trips" asp-action="Complete" asp-route-tripId="@Model.Id"><i class="fa fa-check"></i> Complete trip</a>
                     }

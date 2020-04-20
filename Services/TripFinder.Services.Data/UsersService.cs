@@ -165,5 +165,33 @@
 
             return updatedUsersCount;
         }
+
+        public async Task<int> GetAllUsersCountAsync()
+        {
+            var allUsersCount = await this.usersRepository
+                .AllWithDeleted()
+                .CountAsync();
+
+            return allUsersCount;
+        }
+
+        public async Task<int> GetActiveUsersCountAsync()
+        {
+            var activeUsersCount = await this.usersRepository
+                .All()
+                .CountAsync();
+
+            return activeUsersCount;
+        }
+
+        public async Task<int> GetDeletedUsersCountAsync()
+        {
+            var deletedUsersCount = await this.usersRepository
+                .AllWithDeleted()
+                .Where(u => u.IsDeleted)
+                .CountAsync();
+
+            return deletedUsersCount;
+        }
     }
 }

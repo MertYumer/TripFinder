@@ -134,5 +134,33 @@
 
             return car;
         }
+
+        public async Task<int> GetAllCarsCountAsync()
+        {
+            var allCarsCount = await this.carsRepository
+                .AllWithDeleted()
+                .CountAsync();
+
+            return allCarsCount;
+        }
+
+        public async Task<int> GetCurrentCarsCountAsync()
+        {
+            var currentCarsCount = await this.carsRepository
+                .All()
+                .CountAsync();
+
+            return currentCarsCount;
+        }
+
+        public async Task<int> GetDeletedCarsCountAsync()
+        {
+            var deletedCarsCount = await this.carsRepository
+                .AllWithDeleted()
+                .Where(c => c.IsDeleted)
+                .CountAsync();
+
+            return deletedCarsCount;
+        }
     }
 }

@@ -16,5 +16,11 @@
         T GetById<T>(string id);
 
         Car GetById(string id);
+
+        Task<int> GetAllCarsCountAsync();
+
+        Task<int> GetCurrentCarsCountAsync();
+
+        Task<int> GetDeletedCarsCountAsync();
     }
 }

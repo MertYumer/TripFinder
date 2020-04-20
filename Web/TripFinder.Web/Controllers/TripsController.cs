@@ -53,7 +53,7 @@
                 : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
             }
 
-            var allTripsCount = this.tripsService.GetAllTripsCount();
+            var allTripsCount = await this.tripsService.GetAllTripsCountAsync();
 
             var tripsAllViewModel = new TripsViewModel
             {
@@ -83,7 +83,7 @@
                 : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
             }
 
-            var myTripsCount = this.tripsService.GetMyTripsCount(userId);
+            var myTripsCount = await this.tripsService.GetMyTripsCountAsync(userId);
 
             var tripsMyViewModel = new TripsViewModel
             {
@@ -300,7 +300,7 @@
                     : this.imagePathPrefix + this.driverImageSizing + trip.DriverAvatarImageUrl;
                 }
 
-                searchResultsCount = this.tripsService.GetSearchResultsCount(inputModel, userId);
+                searchResultsCount = await this.tripsService.GetSearchResultsCountAsync(inputModel, userId);
             }
 
             var tripsSearchViewModel = new TripsViewModel

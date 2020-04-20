@@ -26,11 +26,9 @@
 
         Task<IEnumerable<T>> ShowSearchResultsAsync<T>(TripSearchInputModel inputModel, string userId, int take, int skip = 0);
 
-        int GetAllTripsCount();
+        Task<int> GetMyTripsCountAsync(string userId);
 
-        int GetMyTripsCount(string userId);
-
-        int GetSearchResultsCount(TripSearchInputModel inputModel, string userId);
+        Task<int> GetSearchResultsCountAsync(TripSearchInputModel inputModel, string userId);
 
         Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId);
 
@@ -39,5 +37,13 @@
         IEnumerable<string> GetDriverAndPassengersIds(string id);
 
         bool CheckForUserTrip(string userId, string tripId);
+
+        Task<int> GetAllTripsCountAsync();
+
+        Task<int> GetAllTripsCountWithDeleted();
+
+        Task<int> GetActiveTripsCountAsync();
+
+        Task<int> GetDeletedTripsCountAsync();
     }
 }
