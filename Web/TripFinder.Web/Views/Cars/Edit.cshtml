@@ -4,17 +4,15 @@
     ViewData["Title"] = "Edit";
 }
 
-<section id="page-title-area" class="section-padding overlay">
-    <div class="container">
-        <div>
+<section id="page-title-area" class="section-padding overlay d-flex justify-content-center">
+    <div class="container d-table-cell align-middle jumbotron" style="background-color: transparent;">
+        <div class="row justify-content-md-center">
             <h2 style="text-align: center">Update car details</h2>
         </div>
-        <div class="row">
+        <div class="row justify-content-md-center">
             <div class="col-md-4 mb-3">
-                <div class="d-flex flex-row justify-content-center">
-                    <div>
-                        <img src="@Model.ImageUrl" class="rounded-circle">
-                    </div>
+                <div class="jumbotron" style="background-color: transparent;">
+                    <img src="@Model.ImageUrl" class="rounded-circle">
                 </div>
             </div>
             <div class="col-md-8">

@@ -169,11 +169,15 @@ body {
 /*== Theme Defualt CSS ==*/
 
 /*== Header Top CSS Start ==*/
-#header-area,
-#header-area a {
-    color: #fff;
-    background-color: rgba(0, 0, 0, 0.9);
+#header-area {
+    min-height: 10%;
 }
+
+    #header-area,
+    #header-area a {
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.9);
+    }
 
 #header-top {
     background-color: #1e2228;
@@ -1314,16 +1318,19 @@ a.slicknav_btn {
 /*== Article Area CSS End ==*/
 
 /*== Footer Area CSS Start ==*/
-
-#footer-area section {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+#footer-area {
+    min-height: 6%;
 }
 
-#footer-area a {
-    color: #ffd000;
-}
+    #footer-area section {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+
+    #footer-area a {
+        color: #ffd000;
+    }
 
 .footer-widget-area {
     background-color: #1e2228;
@@ -1552,18 +1559,17 @@ body.loader-active {
 /*== SlideShow CSS ==*/
 
 html,
-#slideslow-bg,
-#slideslow-bg div {
+#slideslow-bg {
     height: 100%;
 }
 
-#slideslow-bg {
-height: 95%;
-}
-
-    #slideslow-bg .vegas-timer {
-        height: 1px !important;
+    #slideslow-bg {
+        height: 84%;
     }
+
+        #slideslow-bg .vegas-timer {
+            height: 1px !important;
+        }
 
 .slideshowcontent {
     color: #fff;
@@ -2238,8 +2244,10 @@ height: 95%;
 /*== Page Title CSS ==*/
 
 #page-title-area {
-    min-height: 100%;
+    min-height: 83%;
     padding-top: 2%;
+    display: table;
+    min-width: 100%;
 }
 
     #page-title-area .section-title {

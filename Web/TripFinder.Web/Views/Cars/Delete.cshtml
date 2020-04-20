@@ -5,11 +5,11 @@
 }
 
 <section id="page-title-area" class="section-padding overlay">
-    <div class="container">
+    <div class="container d-table-cell align-middle">
         <div class="row justify-content-center">
-            <div class="col-md-8 form">
+            <div class="col-md-8 form text-center">
                 <h3>Are you sure you want to delete your car from TripFinder?</h3>
-                <form class="row mb-3" method="post">
+                <form class="row mb-3 justify-content-md-center" method="post">
                     <div class="col-4 col-md-auto">
                         <button class="btn btn-danger btn-lg" type="submit" asp-area="" asp-controller="Cars" asp-action="DeletePost" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</button>
                         <button class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@Model.Id"><i class="fa fa-undo"></i> Cancel</button>
