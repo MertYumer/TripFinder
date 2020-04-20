@@ -1499,6 +1499,7 @@ a.slicknav_btn {
 .footer-bottom-area {
     bottom: 0;
     background-color: #000;
+    min-height: 100%;
     color: #eaeaea;
     padding: 15px 0;
 }
@@ -2253,6 +2254,10 @@ html,
     }
 
 /*== Car List CSS ==*/
+
+.trip-details {
+    color: #ffd000;
+}
 
 .single-car-wrap {
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);

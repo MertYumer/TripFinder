@@ -10,71 +10,81 @@
 
 <section id="page-title-area" class="section-padding overlay">
     <div class="container d-table-cell align-middle">
-        <div class="row">
-            <div class="col-md-4 mb-3">
+        <div class="row w-50 mx-auto justify-content-md-center">
+            <div class="col-4">
                 <div class="d-flex flex-row justify-content-center">
                     <div>
                         <img src="@Model.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="row">
+            <div class="col-6">
+                <div class="row mb-2">
                     <div class="col">
-                        <div>Profile of</div>
-                        <h3>@Model.FirstName @Model.LastName</h3>
+                        <span class="h4">Profile of: </span>
+                        <span class="h3"><strong>@Model.FirstName @Model.LastName</strong></span>
                     </div>
-
                 </div>
-                <div class="row mb-3 mt-3 mt-md-0">
+                <div class="row mb-2">
                     <div class="col">
-                        <div>Rating</div>
-                        <h3>@Model.Rating.ToString("f")</h3>
-                        <span>
-                            from @Model.RatingsCount <span>users</span>
-                        </span>
+                        <span class="h4">Rating: </span>
+                        <span class="h3"><strong>@Model.Rating.ToString("f")</strong> (from @Model.RatingsCount users)</span>
                     </div>
                 </div>
-                <div class="row mb-4 mb-md-3">
-                    <div class="col-12 col-sm col-lg-3">
-                        <div class="thin-border py-2" data-toggle="tooltip">
-                            <h5>Driver - @Model.TripsCountAsDriver times</h5>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm col-lg-3">
-                        <div class="thin-border py-2" data-toggle="tooltip">
-                            <h5>Passenger - @Model.TripsCountAsPassenger times</h5>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm col-lg-3">
-                        <div class="thin-border py-2" data-toggle="tooltip">
-                            <h5>Travelled distance - @Model.TravelledDistance km</h5>
-                        </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <span class="h4">Phone number: </span>
+                        <span class="h3"><strong>@Model.PhoneNumber</strong></span>
                     </div>
                 </div>
-                <div class="row text-center mb-4 mb-md-3">
-                    <div class="col-4 col-md-auto">
-                        @if (user.Id == Model.Id)
+                <div class="row mb-2">
+                    <div class="col">
+                        <span class="h4">Gender: </span>
+                        <span class="h3"><strong>@(Model.Gender == null || Model.Gender == string.Empty ? "N/A" : Model.Gender)</strong></span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <span class="h4">Age: </span>
+                        @if (Model.Age == null)
                         {
-                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit profile</a>
-                            <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete profile</a>
+                            <span class="h3"><strong>N/A</strong></span>
+
                         }
-                        <a class="btn btn-outline-warning btn-lg" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
+                        else
+                        {
+                            <span class="h3"><strong>@Model.Age years old</strong></span>
+                        }
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <span class="h4">Driver: </span>
+                        <span class="h3"><strong>@Model.TripsCountAsDriver</strong> times</span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col">
+                        <span class="h4">Passenger: </span>
+                        <span class="h3"><strong>@Model.TripsCountAsPassenger</strong> times</span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col">
+                        <span class="h4">Travelled distance: </span>
+                        <span class="h3"><strong>@Model.TravelledDistance</strong> km</span>
                     </div>
                 </div>
             </div>
-
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="d-flex flex-row justify-content-md-center">
-                    <div>
-                        <h5>Information</h5>
-                        <span class="d-block"><strong>Phone number:</strong> @Model.PhoneNumber</span>
-                        <span class="d-block"><strong>Gender:</strong> @Model.Gender</span>
-                        <span class="d-block"><strong>Age:</strong> @Model.Age</span>
-                    </div>
-                </div>
+        <div class="row mx-auto">
+            <div class="col-md-auto m-auto">
+                @if (user.Id == Model.Id)
+                {
+                    <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit profile</a>
+                    <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete profile</a>
+                }
+                <a class="btn btn-outline-warning btn-lg" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
             </div>
         </div>
     </div>
