@@ -40,7 +40,14 @@
                         <td>@user.CreatedOn.ToString(GlobalConstants.DefaultDateFormat)</td>
                         <td>@(user.IsDeleted ? user.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>
                         <td>
-                            <a class="btn btn-info" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                            @if (user.IsDeleted)
+                            {
+                                <a class="btn btn-info" asp-area="Administration" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-info" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                            }
                             <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteUser" asp-route-userId="@user.Id">Delete</a>
                         </td>
                     </tr>

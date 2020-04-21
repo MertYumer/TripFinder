@@ -206,5 +206,16 @@
 
             return allUsers;
         }
+
+        public async Task<T> GetDeletedUserDetailsAsync<T>(string id)
+        {
+            var user = await this.usersRepository
+                .AllWithDeleted()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return user;
+        }
     }
 }

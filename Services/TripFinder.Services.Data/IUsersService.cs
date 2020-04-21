@@ -31,5 +31,7 @@
         Task<int> GetDeletedUsersCountAsync();
 
         Task<IEnumerable<T>> GetAllUsersAsync<T>();
+
+        Task<T> GetDeletedUserDetailsAsync<T>(string id);
     }
 }

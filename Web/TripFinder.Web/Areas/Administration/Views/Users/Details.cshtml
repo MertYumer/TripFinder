@@ -45,14 +45,14 @@
                     <div class="col">
                         <span class="h4">Age: </span>
                         @if (Model.Age == null)
-                        {
-                            <span class="h3"><strong>N/A</strong></span>
+                    {
+                        <span class="h3"><strong>N/A</strong></span>
 
-                        }
-                        else
-                        {
-                            <span class="h3"><strong>@Model.Age years old</strong></span>
-                        }
+                    }
+                    else
+                    {
+                        <span class="h3"><strong>@Model.Age years old</strong></span>
+                    }
                     </div>
                 </div>
                 <div class="row mb-2">
@@ -78,10 +78,10 @@
         <div class="row mx-auto">
             <div class="col-md-auto m-auto">
                 @if (user.Id == Model.Id)
-                {
-                    <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit profile</a>
-                    <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete profile</a>
-                }
+            {
+                <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Users" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit profile</a>
+                <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Users" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete profile</a>
+            }
                 <a class="btn btn-outline-warning btn-lg" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
             </div>
         </div>
