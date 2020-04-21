@@ -1,0 +1,296 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+
+@model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
+
+@{
+    var user = await this.UserManager.GetUserAsync(this.User);
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container" style=" padding-top: 2%; padding-bottom: 2%;">
+        <div class="row">
+            <div class="col-lg-7">
+                <p>Trip information</p>
+                <div class="trip-info">
+                    <div class="card-body">
+                        <div class="row justify-content-md-center" style="text-align: center;">
+                            <div class="col-auto">
+                                <span class="h5">From: </span>
+                                <span class="h3">@EnumMethods.GetDescription((Enum)Model.Origin)</span>
+                            </div>
+                            <div class="col-auto">
+                                <span class="h5">To: </span>
+                                <span class="h3">@EnumMethods.GetDescription((Enum)Model.Destination)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-md-center">
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Date: </span>
+                                <span class="h5">@Model.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</span>
+                                <hr />
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Time: </span>
+                                <span class="h5">@Model.TimeOfDeparture.ToString(GlobalConstants.DefaultTimeFormat)</span>
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Distance: </span>
+                                <span class="h5">@Model.Distance km</span>
+                                <hr />
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Estimated minutes: </span>
+                                @if (Model.EstimatedMinutes > 60)
+                                {
+                                    <span class="h5">@(Model.EstimatedMinutes / 60) hours and @(Model.EstimatedMinutes % 60) minutes</span>
+                                }
+                                else
+                                {
+                                    <span class="h5">@Model.EstimatedMinutes</span>
+                                }
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Expense per person: </span>
+                                <span class="h5">@Model.ExpensePerPerson lv.</span>
+                                <hr />
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Free seats: </span>
+                                <span class="h5">@Model.FreeSeats from @Model.TotalSeats</span>
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Additional information:</span>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <span class="h6">Viewed: </span>
+                                <span class="h5">@Model.Views times</span>
+                                <hr />
+                            </div>
+                            <div class="col-12">
+                                <span class="h5">@Model.AdditionalInformation</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p>Car information</p>
+                <div class="trip-info">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 mb-3 mb-md-0">
+                                <div class="d-flex flex-row justify-content-center">
+                                    <img src="@Model.CarImageUrl" class="rounded-circle">
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-lg-8">
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <span>Make: </span>
+                                        <span>@Model.Car.Make</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span>Model: </span>
+                                        <span>@Model.Car.Model</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span>Color: </span>
+                                        <span>@Enum.GetName(typeof(Color), Model.Car.Color)</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span>Year: </span>
+                                        <span>@Model.Car.Year</span>
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <span>Passenger seats: </span>
+                                        <span>@Model.Car.PassengerSeats</span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span>Place for luggage: </span>
+                                        @if (Model.Car.PlaceForLuggage)
+                                        {
+                                            <span class="text-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span>Air conditioning: </span>
+                                        @if (Model.Car.HasAirConditioning)
+                                        {
+                                            <span class="text-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-muted"></i> <span>Smoking allowed: </span>
+                                        @if (Model.Car.AllowedSmoking)
+                                        {
+                                            <span class="text-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-muted"></i> <span>Food allowed: </span>
+                                        @if (Model.Car.AllowedFood)
+                                        {
+                                            <span class="text-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span>Drinks allowed: </span>
+                                        @if (Model.Car.AllowedDrinks)
+                                        {
+                                            <span class="text-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                    <div class="col-12 col-xl-6">
+                                        <i class="material-icons md-18 center text-success"></i> <span>Pets allowed: </span>
+                                        @if (Model.Car.AllowedPets)
+                                        {
+                                            <span class="text-success">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-danger">No</span>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="d-none d-lg-block">
+                    <p>Driver information</p>
+                    <div class="trip-info">
+                        <div class="card-body">
+                            <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@Model.Driver.Id" style="color: #ffd000;">
+                                <div class="row justify-content-center">
+                                    <div class="col-12 col-sm-auto mb-3 mb-sm-0">
+                                        <div class="d-flex flex-row justify-content-center">
+                                            <img src="@Model.DriverAvatarImageUrl" alt="Profile Picture" class="rounded-circle img-fluid profile-picture pp-large pp-sm-small">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-sm-auto">
+                                        <span class="h3">@Model.Driver.FirstName @Model.Driver.LastName</span>
+                                    </div>
+                                </div>
+                            </a>
+                            <div style="margin-top: 2%">
+                                <div>
+                                    <span>Phone number: </span>
+                                    <span>@Model.Driver.PhoneNumber</span>
+                                </div>
+                                <div>
+                                    <span>Rating: </span>
+                                    <span>@Model.Driver.Rating</span>
+                                </div>
+                                <div>
+                                    <span>Driver: </span>
+                                    <span>@Model.Driver.TripsCountAsDriver times</span>
+                                </div>
+                                <div>
+                                    <span>Passenger: </span>
+                                    <span>@Model.Driver.TripsCountAsPassenger times</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <p>Passengers</p>
+                <div class="trip-info">
+                    <div class="card-body">
+                        @if (Model.Passengers.Count() == 1)
+                        {
+                            <span>There are no passengers at the moment.</span>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                @foreach (var passenger in Model.Passengers)
+                                {
+                                    if (passenger.Id != Model.Driver.Id)
+                                    {
+                                        <div class="col-sm-3">
+                                            <a class="text-link" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@passenger.Id" style="color: #ffd000;">
+                                                <img src="@passenger.AvatarImageUrl" alt="Profile Picture" class="rounded-circle">
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-auto m-auto">
+                @if (user.Id == Model.Driver.Id)
+                {
+                    if (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
+                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
+                    {
+                        <a class="btn btn-success btn-lg" asp-area="" asp-controller="Trips" asp-action="Complete" asp-route-tripId="@Model.Id"><i class="fa fa-check"></i> Complete trip</a>
+                    }
+
+                    if ((Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes > DateTime.Now.TimeOfDay.TotalMinutes)
+                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) > 0))
+                    {
+                        <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit trip</a>
+                        <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Trips" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete trip</a>
+                    }
+                }
+                else
+                {
+                    var disabled = string.Empty;
+
+                    if (Model.FreeSeats == 0
+                        || Model.Passengers.Any(p => p.Id == user.Id)
+                        || Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
+                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
+                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
+                    {
+                        disabled = "disabled";
+                    }
+
+                    <a id="button" class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Notifications" asp-action="SendTripNotification" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
+                }
+                <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
+            </div>
+        </div>
+    </div>
+</section>

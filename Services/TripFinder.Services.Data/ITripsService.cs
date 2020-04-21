@@ -47,5 +47,7 @@
         Task<int> GetActiveTripsCountAsync();
 
         Task<int> GetDeletedTripsCountAsync();
+
+        Task<T> GetDeletedTripDetailsAsync<T>(string id);
     }
 }

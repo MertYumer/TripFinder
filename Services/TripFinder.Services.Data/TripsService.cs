@@ -415,6 +415,19 @@
             return allTrips;
         }
 
+        public async Task<T> GetDeletedTripDetailsAsync<T>(string id)
+        {
+            var trip = await this.tripsRepository
+                .AllWithDeleted()
+                .Include(t => t.UserTrips)
+                .ThenInclude(ut => ut.User)
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return trip;
+        }
+
         private async Task<string> GetOriginAndDestination(string origin, string destination)
         {
             var townsDistance = await this.townsDistancesRepository

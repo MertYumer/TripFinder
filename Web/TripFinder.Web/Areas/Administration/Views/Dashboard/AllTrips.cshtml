@@ -44,7 +44,14 @@
                         <td>@trip.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</td>
                         <td>@(trip.IsDeleted ? trip.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>
                         <td>
-                            <a class="btn btn-info" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">Details</a>
+                            @if (trip.IsDeleted)
+                            {
+                                <a class="btn btn-info" asp-area="Administration" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">Details</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-info" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">Details</a>
+                            }
                             <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteTrip" asp-route-carId="@trip.Id">Delete</a>
                         </td>
                     </tr>
