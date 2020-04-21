@@ -38,7 +38,7 @@
 
         public async Task<IActionResult> Details(string id)
         {
-            var viewModel = await this.usersService.GetById<UserDetailsViewModel>(id);
+            var viewModel = await this.usersService.GetByIdAsync<UserDetailsViewModel>(id);
 
             if (viewModel == null)
             {
@@ -54,7 +54,7 @@
 
         public async Task<IActionResult> Edit(string id)
         {
-            var viewModel = await this.usersService.GetById<UserEditViewModel>(id);
+            var viewModel = await this.usersService.GetByIdAsync<UserEditViewModel>(id);
 
             if (viewModel == null)
             {

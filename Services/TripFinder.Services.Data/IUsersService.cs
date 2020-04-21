@@ -8,7 +8,7 @@
 
     public interface IUsersService
     {
-        Task<T> GetById<T>(string id);
+        Task<T> GetByIdAsync<T>(string id);
 
         ApplicationUser GetById(string id);
 

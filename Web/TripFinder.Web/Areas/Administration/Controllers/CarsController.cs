@@ -40,5 +40,43 @@
 
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var viewModel = await this.carsService.GetByIdAsync<CarDetailsViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("NotFound", "Errors");
+            }
+
+            viewModel.ImageUrl = viewModel.ImageUrl == null
+                ? "/img/car-avatar.png"
+                : this.imagePathPrefix + this.imageSizing + viewModel.ImageUrl;
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            var car = await this.carsService.GetByIdAsync(id);
+
+            if (car == null)
+            {
+                return this.RedirectToAction("NotFound", "Errors");
+            }
+
+            var carId = await this.carsService.DeleteAsync(id);
+
+            if (carId == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            this.TempData["Notification"] = "You successfully deleted car from TripFinder.";
+
+            return this.RedirectToAction("AllCars", "Dashboard");
+        }
     }
 }

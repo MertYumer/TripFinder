@@ -115,23 +115,23 @@
             return carId;
         }
 
-        public T GetById<T>(string id)
+        public async Task<T> GetByIdAsync<T>(string id)
         {
-            var car = this.carsRepository
+            var car = await this.carsRepository
                 .All()
                 .Where(x => x.Id == id)
                 .To<T>()
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return car;
         }
 
-        public Car GetById(string id)
+        public async Task<Car> GetByIdAsync(string id)
         {
-            var car = this.carsRepository
+            var car = await this.carsRepository
                 .All()
                 .Where(x => x.Id == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return car;
         }

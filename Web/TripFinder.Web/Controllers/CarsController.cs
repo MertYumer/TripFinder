@@ -75,7 +75,7 @@
 
         public async Task<IActionResult> Details(string id)
         {
-            var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
+            var viewModel = await this.carsService.GetByIdAsync<CarDetailsViewModel>(id);
 
             if (viewModel == null)
             {
@@ -99,7 +99,7 @@
 
         public async Task<IActionResult> Edit(string id)
         {
-            var viewModel = this.carsService.GetById<CarDetailsViewModel>(id);
+            var viewModel = await this.carsService.GetByIdAsync<CarDetailsViewModel>(id);
 
             if (viewModel == null)
             {
@@ -142,7 +142,7 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            var viewModel = this.carsService.GetById<CarDeleteViewModel>(id);
+            var viewModel = await this.carsService.GetByIdAsync<CarDeleteViewModel>(id);
 
             if (viewModel == null)
             {

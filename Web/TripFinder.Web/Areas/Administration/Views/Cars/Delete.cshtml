@@ -1,18 +1,28 @@
-﻿@inject UserManager<ApplicationUser> UserManager
-
-@model TripFinder.Web.ViewModels.Cars.CarDetailsViewModel
+﻿@model TripFinder.Web.ViewModels.Cars.CarDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
-    var user = await this.UserManager.GetUserAsync(this.User);
+    ViewData["Title"] = "Delete";
 }
 
-<section id="page-title-area" class="section-padding overlay d-flex justify-content-center">
+<section id="page-title-area" class="section-padding overlay">
     <div class="container d-table-cell align-middle">
-        <div class="row h-100 justify-content-md-center jumbotron align-items-center" style="background-color: transparent;">
-            <div class="col-md-4 mb-3">
-                <div class="jumbotron" style="background-color: transparent;">
-                    <img src="@Model.ImageUrl" class="rounded-circle">
+        <div class="row justify-content-center">
+            <div class="col-md-8 form text-center">
+                <h3>Are you sure you want to delete this car from TripFinder?</h3>
+                <form class="row mb-3 justify-content-md-center" method="post">
+                    <div class="col-4 col-md-auto">
+                        <button class="btn btn-danger btn-lg" type="submit" asp-area="Administration" asp-controller="Cars" asp-action="DeletePost" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</button>
+                        <button class="btn btn-outline-warning btn-lg" type="submit" asp-area="Administration" asp-controller="Dashboard" asp-action="AllCars"><i class="fa fa-undo"></i> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row w-50 mx-auto justify-content-md-center">
+            <div class="col-4">
+                <div class="d-flex flex-row justify-content-center">
+                    <div>
+                        <img src="@Model.ImageUrl" class="rounded-circle">
+                    </div>
                 </div>
             </div>
             <div class="col-md-8">
@@ -86,14 +96,6 @@
                                 <h3>@(Model.HasAirConditioning ? "Yes" : "No")</h3>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-4 col-md-auto">
-                        @if (user.Id == Model.Id)
-                        {
-                            <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Modify car</a>
-                            <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Cars" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</a>
-                        }
-                        <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
                     </div>
                 </div>
             </div>

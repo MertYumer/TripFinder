@@ -105,7 +105,7 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var car = this.carsService.GetById(user.CarId);
+            var car = await this.carsService.GetByIdAsync(user.CarId);
 
             if (car == null)
             {
@@ -204,7 +204,7 @@
                 return this.RedirectToAction("Forbid", "Errors");
             }
 
-            var car = this.carsService.GetById(user.CarId);
+            var car = await this.carsService.GetByIdAsync(user.CarId);
             this.ViewBag.TotalSeats = car.PassengerSeats;
 
             return this.View(viewModel);

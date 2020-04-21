@@ -71,7 +71,7 @@
             return userId;
         }
 
-        public async Task<T> GetById<T>(string id)
+        public async Task<T> GetByIdAsync<T>(string id)
         {
             var user = await this.usersRepository
                 .All()

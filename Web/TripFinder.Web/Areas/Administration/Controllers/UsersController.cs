@@ -43,7 +43,7 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            var viewModel = await this.usersService.GetById<UserDetailsViewModel>(id);
+            var viewModel = await this.usersService.GetByIdAsync<UserDetailsViewModel>(id);
 
             if (viewModel == null)
             {
@@ -74,7 +74,7 @@
                 return this.RedirectToAction("Delete", new { id });
             }
 
-            this.TempData["Notification"] = $"You successfully deleted user's profile.";
+            this.TempData["Notification"] = "You successfully deleted user's profile from TripFinder.";
 
             return this.RedirectToAction("AllUsers", "Dashboard");
         }

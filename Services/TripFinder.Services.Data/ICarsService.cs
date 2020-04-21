@@ -14,9 +14,9 @@
 
         Task<string> DeleteAsync(string id);
 
-        T GetById<T>(string id);
+        Task<T> GetByIdAsync<T>(string id);
 
-        Car GetById(string id);
+        Task<Car> GetByIdAsync(string id);
 
         Task<int> GetAllCarsCountAsync();
 
