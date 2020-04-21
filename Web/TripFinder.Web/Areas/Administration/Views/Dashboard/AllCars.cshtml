@@ -1,0 +1,44 @@
+﻿@model TripFinder.Web.ViewModels.Administration.Dashboard.CarsAllViewModel
+
+@{
+    ViewData["Title"] = "AllCars";
+    int rowNumber = 0;
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container" style="min-width: 100%; padding-top: 2%">
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Driver name</th>
+                    <th>Status</th>
+                    <th>Created on</th>
+                    <th>Deleted on</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var car in Model.Cars)
+                {
+                    rowNumber++;
+                    <tr>
+                        <td>@rowNumber</td>
+                        <td>@car.Make</td>
+                        <td>@car.Model</td>
+                        <td>@(car.IsDeleted ? "N/A" : car.DriverName)</td>
+                        <td>@(car.IsDeleted ? "Deleted" : "Active")</td>
+                        <td>@car.CreatedOn.ToString(GlobalConstants.DefaultDateFormat)</td>
+                        <td>@(car.IsDeleted ? car.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>
+                        <td>
+                            <a class="btn btn-info" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                            <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCar" asp-route-carId="@car.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

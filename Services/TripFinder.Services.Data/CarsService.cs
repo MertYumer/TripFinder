@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -161,6 +162,17 @@
                 .CountAsync();
 
             return deletedCarsCount;
+        }
+
+        public async Task<IEnumerable<T>> GetAllCarsAsync<T>()
+        {
+            var allCars = await this.carsRepository
+                .AllWithDeleted()
+                .Where(c => c.User.Email != "admin@tripfinder.com")
+                .To<T>()
+                .ToListAsync();
+
+            return allCars;
         }
     }
 }

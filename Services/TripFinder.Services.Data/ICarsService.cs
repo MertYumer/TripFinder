@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using TripFinder.Data.Models;
@@ -22,5 +23,7 @@
         Task<int> GetCurrentCarsCountAsync();
 
         Task<int> GetDeletedCarsCountAsync();
+
+        Task<IEnumerable<T>> GetAllCarsAsync<T>();
     }
 }

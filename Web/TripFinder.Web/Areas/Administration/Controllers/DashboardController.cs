@@ -63,5 +63,17 @@
 
             return this.View(usersAllViewModel);
         }
+
+        public async Task<IActionResult> AllCars()
+        {
+            var carViewModels = await this.carsService.GetAllCarsAsync<CarViewModel>();
+
+            var carsAllViewModel = new CarsAllViewModel
+            {
+                Cars = carViewModels,
+            };
+
+            return this.View(carsAllViewModel);
+        }
     }
 }
