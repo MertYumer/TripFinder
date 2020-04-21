@@ -1,7 +1,22 @@
 ﻿@model TripFinder.Web.ViewModels.Users.UserDetailsViewModel
 
+@{
+    ViewData["Title"] = "Delete";
+}
+
 <section id="page-title-area" class="section-padding overlay">
     <div class="container d-table-cell align-middle">
+        <div class="row justify-content-center">
+            <div class="col-md-8 form text-center">
+                <h3>Are you sure you want to delete @Model.FirstName @Model.LastName's profile from TripFinder?</h3>
+                <form class="row mb-3 justify-content-md-center" method="post">
+                    <div class="col-4 col-md-auto">
+                        <button class="btn btn-danger btn-lg" type="submit" asp-area="Administration" asp-controller="Users" asp-action="DeletePost" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete profile</button>
+                        <button class="btn btn-outline-warning btn-lg" type="submit" asp-area="Administration" asp-controller="Dashboard" asp-action="AllUsers"><i class="fa fa-undo"></i> Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="row w-50 mx-auto justify-content-md-center">
             <div class="col-4">
                 <div class="d-flex flex-row justify-content-center">
@@ -66,11 +81,6 @@
                         <span class="h3"><strong>@Model.TravelledDistance</strong> km</span>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row mx-auto">
-            <div class="col-md-auto m-auto">
-                <a class="btn btn-outline-warning btn-lg" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
             </div>
         </div>
     </div>

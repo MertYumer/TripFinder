@@ -1,10 +1,4 @@
-﻿@inject UserManager<ApplicationUser> UserManager
-
-@model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
-
-@{
-    var user = await this.UserManager.GetUserAsync(this.User);
-}
+﻿@model TripFinder.Web.ViewModels.Trips.TripDetailsViewModel
 
 <section id="page-title-area" class="section-padding overlay">
     <div class="container" style=" padding-top: 2%; padding-bottom: 2%;">
@@ -257,38 +251,6 @@
         </div>
         <div class="row">
             <div class="col-md-auto m-auto">
-                @if (user.Id == Model.Driver.Id)
-                {
-                    if (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
-                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
-                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
-                    {
-                        <a class="btn btn-success btn-lg" asp-area="" asp-controller="Trips" asp-action="Complete" asp-route-tripId="@Model.Id"><i class="fa fa-check"></i> Complete trip</a>
-                    }
-
-                    if ((Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
-                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes > DateTime.Now.TimeOfDay.TotalMinutes)
-                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) > 0))
-                    {
-                        <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Trips" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Edit trip</a>
-                        <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Trips" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete trip</a>
-                    }
-                }
-                else
-                {
-                    var disabled = string.Empty;
-
-                    if (Model.FreeSeats == 0
-                        || Model.Passengers.Any(p => p.Id == user.Id)
-                        || Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) < 0
-                        || (Model.DateOfDeparture.Date.CompareTo(DateTime.Now.Date) == 0
-                        && Model.TimeOfDeparture.TimeOfDay.TotalMinutes < DateTime.Now.TimeOfDay.TotalMinutes))
-                    {
-                        disabled = "disabled";
-                    }
-
-                    <a id="button" class="btn btn-success btn-lg @disabled" asp-area="" asp-controller="Notifications" asp-action="SendTripNotification" asp-route-receiverId="@Model.Driver.Id" asp-route-tripId="@Model.Id" asp-route-senderId="@user.Id"><i class="fa fa-suitcase"></i> Join trip</a>
-                }
                 <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Trips" asp-action="All"><i class="fa fa-arrow-circle-left"></i> Go to all trips</a>
             </div>
         </div>

@@ -40,5 +40,43 @@
 
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var viewModel = await this.usersService.GetById<UserDetailsViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("NotFound", "Errors");
+            }
+
+            viewModel.AvatarImageUrl = viewModel.AvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.imageSizing + viewModel.AvatarImageUrl;
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            var userId = await this.usersService.CheckForUserByIdAsync(id);
+
+            if (userId == null)
+            {
+                return this.RedirectToAction("NotFound", "Errors");
+            }
+
+            userId = await this.usersService.DeleteAsync(id);
+
+            if (userId == null)
+            {
+                return this.RedirectToAction("Delete", new { id });
+            }
+
+            this.TempData["Notification"] = $"You successfully deleted user's profile.";
+
+            return this.RedirectToAction("AllUsers", "Dashboard");
+        }
     }
 }

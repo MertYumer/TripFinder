@@ -51,7 +51,7 @@
                             else
                             {
                                 <a class="btn btn-info" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">Details</a>
-                                <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteTrip" asp-route-carId="@trip.Id">Delete</a>
+                                <a class="btn btn-danger" asp-area="Administration" asp-controller="Trips" asp-action="Delete" asp-route-id="@trip.Id">Delete</a>
                             }
                         </td>
                     </tr>

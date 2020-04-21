@@ -24,12 +24,12 @@
             this.imagesService = imagesService;
         }
 
-        public string CheckForUserById(string id)
+        public async Task<string> CheckForUserByIdAsync(string id)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
                 .Where(x => x.Id == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (user == null)
             {
@@ -71,13 +71,13 @@
             return userId;
         }
 
-        public T GetById<T>(string id)
+        public async Task<T> GetById<T>(string id)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
                 .Where(x => x.Id == id)
                 .To<T>()
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return user;
         }

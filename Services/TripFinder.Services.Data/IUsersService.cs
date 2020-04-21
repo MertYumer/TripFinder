@@ -8,7 +8,7 @@
 
     public interface IUsersService
     {
-        T GetById<T>(string id);
+        Task<T> GetById<T>(string id);
 
         ApplicationUser GetById(string id);
 
@@ -16,7 +16,7 @@
 
         int GetUserNotificationsCount(string id);
 
-        string CheckForUserById(string id);
+        Task<string> CheckForUserByIdAsync(string id);
 
         Task<string> UpdateAsync(UserEditInputModel inputModel);
 

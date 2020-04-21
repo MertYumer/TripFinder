@@ -36,9 +36,9 @@
             this.userManager = userManager;
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
-            var viewModel = this.usersService.GetById<UserDetailsViewModel>(id);
+            var viewModel = await this.usersService.GetById<UserDetailsViewModel>(id);
 
             if (viewModel == null)
             {
@@ -54,7 +54,7 @@
 
         public async Task<IActionResult> Edit(string id)
         {
-            var viewModel = this.usersService.GetById<UserEditViewModel>(id);
+            var viewModel = await this.usersService.GetById<UserEditViewModel>(id);
 
             if (viewModel == null)
             {
@@ -97,7 +97,7 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            var userId = this.usersService.CheckForUserById(id);
+            var userId = await this.usersService.CheckForUserByIdAsync(id);
 
             if (userId == null)
             {
@@ -117,6 +117,13 @@
         [HttpPost]
         public async Task<IActionResult> DeletePost(string id)
         {
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            if (user.Id != id)
+            {
+                return this.RedirectToAction("Forbid", "Errors");
+            }
+
             var userId = await this.usersService.DeleteAsync(id);
 
             if (userId == null)
