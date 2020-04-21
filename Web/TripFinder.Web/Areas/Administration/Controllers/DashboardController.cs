@@ -75,5 +75,17 @@
 
             return this.View(carsAllViewModel);
         }
+
+        public async Task<IActionResult> AllTrips()
+        {
+            var tripViewModels = await this.tripsService.GetAllTripsWithDeletedAsync<TripViewModel>();
+
+            var tripsAllViewModel = new TripsAllViewModel
+            {
+                Trips = tripViewModels,
+            };
+
+            return this.View(tripsAllViewModel);
+        }
     }
 }

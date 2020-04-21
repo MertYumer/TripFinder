@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
+    using TripFinder.Common;
     using TripFinder.Data.Models;
     using TripFinder.Services.Data;
     using TripFinder.Web.ViewModels.Cars;
@@ -82,8 +83,9 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
+            var isAdmin = await this.userManager.IsInRoleAsync(user, GlobalConstants.AdministratorRoleName);
 
-            if (user.CarId != viewModel.Id)
+            if (user.CarId != viewModel.Id && !isAdmin)
             {
                 return this.RedirectToAction("Forbid", "Errors");
             }

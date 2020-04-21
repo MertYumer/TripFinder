@@ -20,6 +20,8 @@
 
         Trip GetById(string id);
 
+        Task<IEnumerable<T>> GetAllTripsWithDeletedAsync<T>();
+
         Task<IEnumerable<T>> GetAllTripsAsync<T>(int take, int skip = 0);
 
         Task<IEnumerable<T>> GetMyTripsAsync<T>(string userId, int take, int skip = 0);

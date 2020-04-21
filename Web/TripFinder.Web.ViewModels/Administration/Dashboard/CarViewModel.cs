@@ -14,7 +14,7 @@
 
         public string Model { get; set; }
 
-        public string DriverName { get; set; }
+        public string Owner { get; set; }
 
         public bool IsDeleted { get; set; }
 
@@ -25,7 +25,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Car, CarViewModel>()
-                 .ForMember(vm => vm.DriverName, opt => opt.MapFrom(c => $"{c.User.FirstName} {c.User.LastName}"));
+                 .ForMember(vm => vm.Owner, opt => opt.MapFrom(c => $"{c.User.FirstName} {c.User.LastName}"));
         }
     }
 }

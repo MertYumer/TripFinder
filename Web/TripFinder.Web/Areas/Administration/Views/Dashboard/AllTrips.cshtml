@@ -1,0 +1,55 @@
+﻿@model TripFinder.Web.ViewModels.Administration.Dashboard.TripsAllViewModel
+
+@{
+    ViewData["Title"] = "AllTrips";
+    int rowNumber = 0;
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container" style="min-width: 100%; padding-top: 2%">
+        <div class="row mb-1 justify-content-center">
+            <div class="col-2">
+                <h2>All trips:</h2>
+            </div>
+        </div>
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Creator</th>
+                    <th>Car</th>
+                    <th>Passengers</th>
+                    <th>Status</th>
+                    <th>Created on</th>
+                    <th>Departure date</th>
+                    <th>Deleted on</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var trip in Model.Trips)
+                {
+                    rowNumber++;
+                    <tr>
+                        <td>@rowNumber</td>
+                        <td>@trip.Origin</td>
+                        <td>@trip.Destination</td>
+                        <td>@trip.Creator</td>
+                        <td>@trip.Car</td>
+                        <td>@trip.PassengersCount</td>
+                        <td>@(trip.IsDeleted ? "Deleted" : "Active")</td>
+                        <td>@trip.CreatedOn.ToString(GlobalConstants.DefaultDateFormat)</td>
+                        <td>@trip.DateOfDeparture.ToString(GlobalConstants.DefaultDateFormat)</td>
+                        <td>@(trip.IsDeleted ? trip.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>
+                        <td>
+                            <a class="btn btn-info" asp-area="" asp-controller="Trips" asp-action="Details" asp-route-id="@trip.Id">Details</a>
+                            <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteTrip" asp-route-carId="@trip.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

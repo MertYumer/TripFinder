@@ -7,13 +7,18 @@
 
 <section id="page-title-area" class="section-padding overlay">
     <div class="container" style="min-width: 100%; padding-top: 2%">
+        <div class="row mb-1 justify-content-center">
+            <div class="col-2">
+                <h2>All cars:</h2>
+            </div>
+        </div>
         <table class="table table-hover table-dark">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Make</th>
                     <th>Model</th>
-                    <th>Driver name</th>
+                    <th>Driver</th>
                     <th>Status</th>
                     <th>Created on</th>
                     <th>Deleted on</th>
@@ -28,7 +33,7 @@
                         <td>@rowNumber</td>
                         <td>@car.Make</td>
                         <td>@car.Model</td>
-                        <td>@(car.IsDeleted ? "N/A" : car.DriverName)</td>
+                        <td>@(car.IsDeleted ? "N/A" : car.Owner)</td>
                         <td>@(car.IsDeleted ? "Deleted" : "Active")</td>
                         <td>@car.CreatedOn.ToString(GlobalConstants.DefaultDateFormat)</td>
                         <td>@(car.IsDeleted ? car.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>

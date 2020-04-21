@@ -404,6 +404,17 @@
             return deletedTripsCount;
         }
 
+        public async Task<IEnumerable<T>> GetAllTripsWithDeletedAsync<T>()
+        {
+            var allTrips = await this.tripsRepository
+                .AllWithDeleted()
+                .Where(c => c.Driver.Email != "admin@tripfinder.com")
+                .To<T>()
+                .ToListAsync();
+
+            return allTrips;
+        }
+
         private async Task<string> GetOriginAndDestination(string origin, string destination)
         {
             var townsDistance = await this.townsDistancesRepository
