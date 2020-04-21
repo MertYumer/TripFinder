@@ -45,8 +45,8 @@
                             else
                             {
                                 <a class="btn btn-info" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                                <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCar" asp-route-carId="@car.Id">Delete</a>
                             }
-                            <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCar" asp-route-carId="@car.Id">Delete</a>
                         </td>
                     </tr>
                 }
