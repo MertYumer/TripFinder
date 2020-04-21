@@ -170,6 +170,7 @@
         {
             var allUsersCount = await this.usersRepository
                 .AllWithDeleted()
+                .Where(u => u.Email != "admin@tripfinder.com")
                 .CountAsync();
 
             return allUsersCount;
@@ -179,6 +180,7 @@
         {
             var activeUsersCount = await this.usersRepository
                 .All()
+                .Where(u => u.Email != "admin@tripfinder.com")
                 .CountAsync();
 
             return activeUsersCount;
@@ -192,6 +194,17 @@
                 .CountAsync();
 
             return deletedUsersCount;
+        }
+
+        public async Task<IEnumerable<T>> GetAllUsersAsync<T>()
+        {
+            var allUsers = await this.usersRepository
+                .AllWithDeleted()
+                .Where(u => u.Email != "admin@tripfinder.com")
+                .To<T>()
+                .ToListAsync();
+
+            return allUsers;
         }
     }
 }

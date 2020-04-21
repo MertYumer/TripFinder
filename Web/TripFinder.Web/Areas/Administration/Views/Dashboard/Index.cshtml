@@ -1,4 +1,5 @@
 ﻿@model TripFinder.Web.ViewModels.Administration.Dashboard.StatisticsViewModel
+
 @{
     this.ViewData["Title"] = "Admin dashboard";
 }
@@ -7,13 +8,56 @@
     <div class="container d-table-cell align-middle">
         <div class="row section-title text-center">
             <div class="col-4">
-                <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="AllUsers">Users</a>
+                <div class="row mb-2 justify-content-center">
+                    <h2>Users' statistic:</h2>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>All users' count: @Model.AllUsersCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>Active users' count: @Model.ActiveUsersCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>Deleted users' count: @Model.DeletedUsersCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="AllUsers">All Users</a>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="row mb-2 justify-content-center">
+                    <h2>Cars' statistic:</h2>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>All cars' count: @Model.AllCarsCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>Current cars' count: @Model.CurrentCarsCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>Deleted cars' count: @Model.DeletedCarsCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="AllCars">All Cars</a>
+                </div>
             </div>
             <div class="col-4">
-                <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="AllCars">Cars</a>
-            </div>
-            <div class="col-4">
-                <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="CarsTrips">Trips</a>
+                <div class="row mb-2 justify-content-center">
+                    <h2>Users' statistic:</h2>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>All trips' count: @Model.AllTripsCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>Active trips' count: @Model.ActiveTripsCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <h3>Deleted trips' count: @Model.DeletedTripsCount</h3>
+                </div>
+                <div class="row mb-2 justify-content-center">
+                    <a class="btn-lg btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="AllTrips">All Trips</a>
+                </div>
             </div>
         </div>
     </div>

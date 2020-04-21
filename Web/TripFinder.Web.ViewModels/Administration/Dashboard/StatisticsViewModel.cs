@@ -4,7 +4,7 @@
     {
         public int AllUsersCount { get; set; }
 
-        public int AcitveUsersCount { get; set; }
+        public int ActiveUsersCount { get; set; }
 
         public int DeletedUsersCount { get; set; }
 

@@ -4,6 +4,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using TripFinder.Services.Data;
+    using TripFinder.Web.ViewModels.Administration.Dashboard;
 
     public class DashboardController : AdministrationController
     {
@@ -35,7 +36,32 @@
             var activeTripsCount = await this.tripsService.GetActiveTripsCountAsync();
             var deletedTripsCount = await this.tripsService.GetDeletedTripsCountAsync();
 
-            return this.View();
+            var statisticsViewModel = new StatisticsViewModel
+            {
+                AllUsersCount = allUsersCount,
+                ActiveUsersCount = activeUsersCount,
+                DeletedUsersCount = deletedUsersCount,
+                AllCarsCount = allCarsCount,
+                CurrentCarsCount = currentCarsUsersCount,
+                DeletedCarsCount = deletedCarsCount,
+                AllTripsCount = allTripsCount,
+                ActiveTripsCount = activeTripsCount,
+                DeletedTripsCount = deletedTripsCount,
+            };
+
+            return this.View(statisticsViewModel);
+        }
+
+        public async Task<IActionResult> AllUsers()
+        {
+            var userViewModels = await this.usersService.GetAllUsersAsync<UserViewModel>();
+
+            var usersAllViewModel = new UsersAllViewModel
+            {
+                Users = userViewModels,
+            };
+
+            return this.View(usersAllViewModel);
         }
     }
 }

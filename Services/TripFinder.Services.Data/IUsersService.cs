@@ -29,5 +29,7 @@
         Task<int> GetActiveUsersCountAsync();
 
         Task<int> GetDeletedUsersCountAsync();
+
+        Task<IEnumerable<T>> GetAllUsersAsync<T>();
     }
 }

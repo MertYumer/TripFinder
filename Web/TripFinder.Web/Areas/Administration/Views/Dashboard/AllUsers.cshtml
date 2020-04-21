@@ -1,0 +1,46 @@
+﻿@model TripFinder.Web.ViewModels.Administration.Dashboard.UsersAllViewModel
+
+@{
+    ViewData["Title"] = "AllUsers";
+    int rowNumber = 0;
+}
+
+<section id="page-title-area" class="section-padding overlay">
+    <div class="container" style="min-width: 100%; padding-top: 2%">
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Status</th>
+                    <th>Created on</th>
+                    <th>Deleted on</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    rowNumber++;
+                    <tr>
+                        <td>@rowNumber</td>
+                        <td>@user.FirstName</td>
+                        <td>@user.LastName</td>
+                        <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@(user.IsDeleted ? "Deleted" : "Active")</td>
+                        <td>@user.CreatedOn.ToString(GlobalConstants.DefaultDateFormat)</td>
+                        <td>@(user.IsDeleted ? user.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>
+                        <td>
+                            <a class="btn btn-info" asp-area="" asp-controller="Users" asp-action="Details" asp-route-id="@user.Id">Details</a>
+                            <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteUser" asp-routeuserId="@user.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</section>

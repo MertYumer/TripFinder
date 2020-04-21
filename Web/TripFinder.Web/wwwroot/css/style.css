@@ -2259,6 +2259,12 @@ html,
     color: #ffd000;
 }
 
+.table {
+    background-color: black;
+    color: #ffd000;
+    font-size: medium;
+}
+
 .single-car-wrap {
     -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
