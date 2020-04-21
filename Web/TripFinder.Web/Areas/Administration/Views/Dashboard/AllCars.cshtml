@@ -38,7 +38,14 @@
                         <td>@car.CreatedOn.ToString(GlobalConstants.DefaultDateFormat)</td>
                         <td>@(car.IsDeleted ? car.DeletedOn.ToString(GlobalConstants.DefaultDateFormat) : "N/A")</td>
                         <td>
-                            <a class="btn btn-info" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                            @if (car.IsDeleted)
+                            {
+                                <a class="btn btn-info" asp-area="Administration" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                            }
+                            else
+                            {
+                                <a class="btn btn-info" asp-area="" asp-controller="Cars" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                            }
                             <a class="btn btn-danger" asp-area="Administration" asp-controller="Dashboard" asp-action="DeleteCar" asp-route-carId="@car.Id">Delete</a>
                         </td>
                     </tr>

@@ -25,5 +25,7 @@
         Task<int> GetDeletedCarsCountAsync();
 
         Task<IEnumerable<T>> GetAllCarsAsync<T>();
+
+        Task<T> GetDeletedCarDetailsAsync<T>(string id);
     }
 }

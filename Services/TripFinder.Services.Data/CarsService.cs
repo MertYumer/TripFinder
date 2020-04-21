@@ -174,5 +174,16 @@
 
             return allCars;
         }
+
+        public async Task<T> GetDeletedCarDetailsAsync<T>(string id)
+        {
+            var car = await this.carsRepository
+                .AllWithDeleted()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
+
+            return car;
+        }
     }
 }

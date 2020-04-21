@@ -1,0 +1,96 @@
+﻿@model TripFinder.Web.ViewModels.Cars.CarDetailsViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section id="page-title-area" class="section-padding overlay d-flex justify-content-center">
+    <div class="container d-table-cell align-middle">
+        <div class="row h-100 justify-content-md-center jumbotron align-items-center" style="background-color: transparent;">
+            <div class="col-md-4 mb-3">
+                <div class="jumbotron" style="background-color: transparent;">
+                    <img src="@Model.ImageUrl" class="rounded-circle">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row mb-3">
+                    <div class="col-12 col-lg-6">
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Car: </div>
+                                <h3>@Model.Make @Model.Model</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Owner:</div>
+                                <h3>@Model.UserFirstName @Model.UserLastName</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Type:</div>
+                                <h3>@Model.Type</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Color:</div>
+                                <h3>@Model.Color</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Year:</div>
+                                <h3>@Model.Year</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed smoking:</div>
+                                <h3>@(Model.AllowedSmoking ? "Yes" : "No")</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed food:</div>
+                                <h3>@(Model.AllowedFood ? "Yes" : "No")</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed drinks:</div>
+                                <h3>@(Model.AllowedDrinks ? "Yes" : "No")</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Place for luggage:</div>
+                                <h3>@(Model.PlaceForLuggage ? "Yes" : "No")</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Allowed pets:</div>
+                                <h3>@(Model.AllowedPets ? "Yes" : "No")</h3>
+                            </div>
+                        </div>
+                        <div class="row mb-3 mt-3 mt-md-0">
+                            <div class="col">
+                                <div>Has air conditioning:</div>
+                                <h3>@(Model.HasAirConditioning ? "Yes" : "No")</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4 col-md-auto">
+                        <a class="btn btn-warning btn-lg" asp-area="" asp-controller="Cars" asp-action="Edit" asp-route-id="@Model.Id"><i class="fa fa-pencil"></i> Modify car</a>
+                        <a class="btn btn-danger btn-lg" asp-area="" asp-controller="Cars" asp-action="Delete" asp-route-id="@Model.Id"><i class="fa fa-trash"></i> Delete car</a>
+                        <a class="btn btn-outline-warning btn-lg" type="submit" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-arrow-circle-left"></i> Go to home page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
