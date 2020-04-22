@@ -5,7 +5,7 @@
 }
 
 <section id="page-title-area" class="section-padding overlay d-flex justify-content-center">
-    <div class="container d-table-cell align-middle jumbotron" style="background-color: transparent;">
+    <div class="container d-table-cell align-middle jumbotron" style="background-color: transparent; margin-bottom: 0;">
         <div class="row justify-content-md-center">
             <h2 style="text-align: center">Update car details</h2>
         </div>
@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-8">
                 <form class="row mb-3 form" method="post" enctype="multipart/form-data">
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-6 mb-2">
                         <div>
                             <span asp-validation-for="Make" class="text-danger"></span>
                             <input asp-for="Make" type="text" placeholder="Make">
