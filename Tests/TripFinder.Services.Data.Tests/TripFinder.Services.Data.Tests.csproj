@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="Moq" Version="4.13.1" />
@@ -29,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\TripFinder.Data\TripFinder.Data.csproj" />
     <ProjectReference Include="..\..\Services\TripFinder.Services.Data\TripFinder.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Web\TripFinder.Web\TripFinder.Web.csproj" />
   </ItemGroup>
 
 </Project>
