@@ -35,7 +35,7 @@
                         <div>
                             <span asp-validation-for="Color" class="text-danger"></span>
                             <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()">
-                                <option value="0">Color</option>
+                                <option>@Model.Color</option>
                             </select>
                         </div>
                         <div>

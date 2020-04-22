@@ -16,8 +16,7 @@
         </div>
         <div class="row">
             <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
-                <h2>Given by other users:</h2>
-                <hr />
+                <h2 class="row mt-3 mb-3 mx-auto">Given by other users:</h2>
                 @foreach (var review in Model.ReviewsForUser)
                 {
                     <div class="trip-info">
@@ -44,10 +43,8 @@
                     </div>
                 }
             </div>
-            <hr />
             <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
-                <h2>Given by you:</h2>
-                <hr />
+                <h2 class="row mt-3 mb-3 mx-auto">Given by you:</h2>
                 @foreach (var review in Model.ReviewsByUser)
                 {
                     <div class="trip-info">

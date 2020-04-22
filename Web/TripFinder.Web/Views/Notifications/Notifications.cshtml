@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
-                <h2>Last received:</h2>
+                <h2 class="row mt-3 mb-3 mx-auto">Last received:</h2>
                 @foreach (var notification in Model.ReceivedNotifications)
                 {
                     <div class="trip-info">
@@ -33,9 +33,8 @@
                     </div>
                 }
             </div>
-            <hr />
             <div class="col-lg-6 text-center trip-info" style="background-color: rgba(1,1,1,0.5);">
-                <h2>Last activity:</h2>
+                <h2 class="row mt-3 mb-3 mx-auto">Last activity:</h2>
                 @foreach (var notification in Model.SentNotifications)
                 {
                     <div class="trip-info">
