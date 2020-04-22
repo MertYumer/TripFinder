@@ -34,8 +34,8 @@
                     rowNumber++;
                     <tr>
                         <td>@rowNumber</td>
-                        <td>@trip.Origin</td>
-                        <td>@trip.Destination</td>
+                        <td>@EnumMethods.GetDescription((Enum)trip.Origin)</td>
+                        <td>@EnumMethods.GetDescription((Enum)trip.Destination)</td>
                         <td>@trip.Creator</td>
                         <td>@trip.Car</td>
                         <td>@trip.PassengersCount</td>

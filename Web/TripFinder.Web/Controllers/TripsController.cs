@@ -156,7 +156,7 @@
 
         public async Task<IActionResult> Details(string id)
         {
-            var viewModel = this.tripsService.GetById<TripDetailsViewModel>(id);
+            var viewModel = await this.tripsService.GetByIdAsync<TripDetailsViewModel>(id);
 
             if (viewModel == null)
             {
@@ -190,7 +190,7 @@
 
         public async Task<IActionResult> Edit(string id)
         {
-            var viewModel = this.tripsService.GetById<TripEditViewModel>(id);
+            var viewModel = await this.tripsService.GetByIdAsync<TripEditViewModel>(id);
 
             if (viewModel == null)
             {
@@ -239,7 +239,7 @@
 
         public async Task<IActionResult> Delete(string id)
         {
-            var viewModel = this.tripsService.GetById<TripDeleteViewModel>(id);
+            var viewModel = await this.tripsService.GetByIdAsync<TripDeleteViewModel>(id);
 
             if (viewModel == null)
             {

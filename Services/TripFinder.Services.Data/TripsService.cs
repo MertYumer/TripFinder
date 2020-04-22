@@ -78,9 +78,9 @@
             return trip.Id;
         }
 
-        public T GetById<T>(string id)
+        public async Task<T> GetByIdAsync<T>(string id)
         {
-            var trip = this.tripsRepository
+            var trip = await this.tripsRepository
                 .All()
                 .Include(t => t.Driver)
                 .Include(t => t.Car)
@@ -88,17 +88,17 @@
                 .ThenInclude(ut => ut.User)
                 .Where(t => t.Id == id)
                 .To<T>()
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return trip;
         }
 
-        public Trip GetById(string id)
+        public async Task<Trip> GetByIdAsync(string id)
         {
-            var trip = this.tripsRepository
+            var trip = await this.tripsRepository
                 .All()
                 .Where(x => x.Id == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return trip;
         }
@@ -257,7 +257,7 @@
 
         public async Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId)
         {
-            var trip = this.GetById(tripId);
+            var trip = await this.GetByIdAsync(tripId);
             var requestor = this.usersService.GetById(requestorId);
             var tripCreator = this.usersService.GetById(tripCreatorId);
 

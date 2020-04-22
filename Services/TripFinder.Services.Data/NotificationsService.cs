@@ -91,7 +91,7 @@
         {
             var receiver = this.usersService.GetById(receiverId);
             var sender = this.usersService.GetById(senderId);
-            var trip = this.tripsService.GetById(tripId);
+            var trip = await this.tripsService.GetByIdAsync(tripId);
 
             if (receiver == null || sender == null || trip == null)
             {

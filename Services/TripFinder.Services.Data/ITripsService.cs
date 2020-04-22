@@ -16,9 +16,9 @@
 
         Task<string> DeleteAsync(string id);
 
-        T GetById<T>(string id);
+        Task<T> GetByIdAsync<T>(string id);
 
-        Trip GetById(string id);
+        Task<Trip> GetByIdAsync(string id);
 
         Task<IEnumerable<T>> GetAllTripsWithDeletedAsync<T>();
 

@@ -52,5 +52,54 @@
 
             return this.View(viewModel);
         }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var viewModel = await this.tripsService.GetByIdAsync<TripDetailsViewModel>(id);
+
+            if (viewModel == null)
+            {
+                return this.RedirectToAction("NotFound", "Errors");
+            }
+
+            viewModel.DriverAvatarImageUrl = viewModel.DriverAvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverImageSizing + viewModel.DriverAvatarImageUrl;
+
+            viewModel.CarImageUrl = viewModel.CarImageUrl == null
+                ? "/img/car-avatar.png"
+                : this.imagePathPrefix + this.carImageSizing + viewModel.CarImageUrl;
+
+            foreach (var passenger in viewModel.Passengers)
+            {
+                passenger.AvatarImageUrl = passenger.AvatarImageUrl == null
+                ? "/img/avatar.png"
+                : this.imagePathPrefix + this.driverImageSizing + passenger.AvatarImageUrl;
+            }
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(string id)
+        {
+            var trip = await this.tripsService.GetByIdAsync(id);
+
+            if (trip == null)
+            {
+                return this.RedirectToAction("NotFound", "Errors");
+            }
+
+            var tripId = await this.tripsService.DeleteAsync(id);
+
+            if (tripId == null)
+            {
+                return this.RedirectToAction("BadRequest", "Errors");
+            }
+
+            this.TempData["Notification"] = "You successfully deleted trip from TripFinder.";
+
+            return this.RedirectToAction("AllTrips", "Dashboard");
+        }
     }
 }
