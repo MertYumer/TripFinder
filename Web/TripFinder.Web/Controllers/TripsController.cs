@@ -322,7 +322,7 @@
         public async Task<IActionResult> Complete(string tripId)
         {
             var user = await this.userManager.GetUserAsync(this.User);
-            tripId = await this.tripsService.Complete(tripId, user.Id);
+            tripId = await this.tripsService.CompleteAsync(tripId, user.Id);
 
             if (tripId == null)
             {

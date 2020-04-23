@@ -33,7 +33,7 @@
             this.usersService = usersService;
         }
 
-        public async Task<IEnumerable<T>> GetPendingReviews<T>(string userId)
+        public async Task<IEnumerable<T>> GetPendingReviewsAsync<T>(string userId)
         {
             var lastTrip = await this.tripsRepository
                 .AllWithDeleted()
@@ -59,15 +59,15 @@
             return pendingReviews;
         }
 
-        public async Task<bool> AddReviews(IFormCollection data, string userId)
+        public async Task<bool> AddReviewsAsync(IFormCollection data, string userId)
         {
-            var user = this.usersService.GetByIdWithReviews(userId);
+            var user = await this.usersService.GetByIdWithReviewsAsync(userId);
             var reviewsCount = data.Count / 3;
 
             for (int i = 0; i < reviewsCount; i++)
             {
                 var reviewedUserId = data[$"id-{i}"];
-                var reviewedUser = this.usersService.GetByIdWithReviews(reviewedUserId);
+                var reviewedUser = await this.usersService.GetByIdWithReviewsAsync(reviewedUserId);
 
                 var review = new Review
                 {
@@ -97,12 +97,12 @@
             this.usersRepository.Update(user);
             await this.usersRepository.SaveChangesAsync();
 
-            var userGaveRatings = this.UpdateUserTrip(user.Id).Result;
+            var userGaveRatings = this.UpdateUserTripAsync(user.Id).Result;
 
             return userGaveRatings;
         }
 
-        public async Task<IEnumerable<T>> GetReviewsForUser<T>(string userId)
+        public async Task<IEnumerable<T>> GetReviewsForUserAsync<T>(string userId)
         {
             var reviewsForUser = await this.reviewsRepository
                 .All()
@@ -117,7 +117,7 @@
             return reviewsForUser;
         }
 
-        public async Task<IEnumerable<T>> GetReviewsByUser<T>(string userId)
+        public async Task<IEnumerable<T>> GetReviewsByUserAsync<T>(string userId)
         {
             var reviewsByUser = await this.reviewsRepository
                 .All()
@@ -132,7 +132,7 @@
             return reviewsByUser;
         }
 
-        private async Task<bool> UpdateUserTrip(string userId)
+        private async Task<bool> UpdateUserTripAsync(string userId)
         {
             var lastTripId = this.tripsRepository
                 .AllWithDeleted()
@@ -143,10 +143,9 @@
                 .Result
                 .Id;
 
-            var userTrip = this.userTripsRepository
+            var userTrip = await this.userTripsRepository
                 .All()
-                .FirstOrDefaultAsync(ut => ut.TripId == lastTripId && ut.UserId == userId)
-                .Result;
+                .FirstOrDefaultAsync(ut => ut.TripId == lastTripId && ut.UserId == userId);
 
             userTrip.GaveRatings = true;
             this.userTripsRepository.Update(userTrip);

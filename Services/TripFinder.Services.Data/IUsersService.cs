@@ -10,9 +10,9 @@
     {
         Task<T> GetByIdAsync<T>(string id);
 
-        ApplicationUser GetById(string id);
+        Task<ApplicationUser> GetByIdAsync(string id);
 
-        ApplicationUser GetByIdWithReviews(string id);
+        Task<ApplicationUser> GetByIdWithReviewsAsync(string id);
 
         int GetUserNotificationsCount(string id);
 

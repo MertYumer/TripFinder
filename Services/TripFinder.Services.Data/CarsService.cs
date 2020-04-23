@@ -55,9 +55,9 @@
 
         public async Task<string> UpdateAsync(CarEditInputModel inputModel)
         {
-            var car = this.carsRepository
+            var car = await this.carsRepository
                 .All()
-                .FirstOrDefault(c => c.Id == inputModel.Id);
+                .FirstOrDefaultAsync(c => c.Id == inputModel.Id);
 
             if (car == null)
             {
@@ -93,10 +93,10 @@
 
         public async Task<string> DeleteAsync(string id)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
                 .Include(u => u.Car)
-                .FirstOrDefault(u => u.CarId == id);
+                .FirstOrDefaultAsync(u => u.CarId == id);
 
             if (user.CarId == null)
             {

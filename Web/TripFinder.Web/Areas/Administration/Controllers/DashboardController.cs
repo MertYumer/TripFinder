@@ -32,7 +32,7 @@
             var currentCarsUsersCount = await this.carsService.GetCurrentCarsCountAsync();
             var deletedCarsCount = await this.carsService.GetDeletedCarsCountAsync();
 
-            var allTripsCount = await this.tripsService.GetAllTripsCountWithDeleted();
+            var allTripsCount = await this.tripsService.GetAllTripsCountWithDeletedAsync();
             var activeTripsCount = await this.tripsService.GetActiveTripsCountAsync();
             var deletedTripsCount = await this.tripsService.GetDeletedTripsCountAsync();
 

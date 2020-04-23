@@ -38,10 +38,10 @@
             var user = await this.userManager.GetUserAsync(this.User);
 
             var reviewsForUserViewModels = await this.reviewsService
-                .GetReviewsForUser<ReviewForUserViewModel>(userId);
+                .GetReviewsForUserAsync<ReviewForUserViewModel>(userId);
 
             var reviewsByUserViewModels = await this.reviewsService
-                .GetReviewsByUser<ReviewByUserViewModel>(userId);
+                .GetReviewsByUserAsync<ReviewByUserViewModel>(userId);
 
             foreach (var review in reviewsForUserViewModels)
             {
@@ -69,7 +69,7 @@
         public async Task<IActionResult> Pending(string userId)
         {
             var reviewPendingViewModels = await this.reviewsService
-                .GetPendingReviews<ReviewPendingViewModel>(userId);
+                .GetPendingReviewsAsync<ReviewPendingViewModel>(userId);
 
             if (reviewPendingViewModels == null)
             {
@@ -101,7 +101,7 @@
         {
             var user = await this.userManager.GetUserAsync(this.User);
 
-            var userGaveRatings = this.reviewsService.AddReviews(data, user.Id).Result;
+            var userGaveRatings = await this.reviewsService.AddReviewsAsync(data, user.Id);
 
             if (!userGaveRatings)
             {

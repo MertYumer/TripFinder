@@ -34,15 +34,15 @@
 
         Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId);
 
-        Task<string> Complete(string tripId, string userId);
+        Task<string> CompleteAsync(string tripId, string userId);
 
         IEnumerable<string> GetDriverAndPassengersIds(string id);
 
-        bool CheckForUserTrip(string userId, string tripId);
+        Task<bool> CheckForUserTripAsync(string userId, string tripId);
 
         Task<int> GetAllTripsCountAsync();
 
-        Task<int> GetAllTripsCountWithDeleted();
+        Task<int> GetAllTripsCountWithDeletedAsync();
 
         Task<int> GetActiveTripsCountAsync();
 

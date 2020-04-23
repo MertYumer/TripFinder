@@ -117,9 +117,9 @@
 
         public async Task<string> UpdateAsync(TripEditInputModel inputModel)
         {
-            var trip = this.tripsRepository
+            var trip = await this.tripsRepository
                 .All()
-                .FirstOrDefault(t => t.Id == inputModel.Id);
+                .FirstOrDefaultAsync(t => t.Id == inputModel.Id);
 
             if (trip == null)
             {
@@ -140,9 +140,9 @@
 
         public async Task<string> DeleteAsync(string id)
         {
-            var trip = this.tripsRepository
+            var trip = await this.tripsRepository
                 .All()
-                .FirstOrDefault(t => t.Id == id);
+                .FirstOrDefaultAsync(t => t.Id == id);
 
             if (trip == null)
             {
@@ -258,8 +258,8 @@
         public async Task<string> AddUserToTripAsync(string requestorId, string tripCreatorId, string tripId)
         {
             var trip = await this.GetByIdAsync(tripId);
-            var requestor = this.usersService.GetById(requestorId);
-            var tripCreator = this.usersService.GetById(tripCreatorId);
+            var requestor = await this.usersService.GetByIdAsync(requestorId);
+            var tripCreator = await this.usersService.GetByIdAsync(tripCreatorId);
 
             if (requestor == null || tripCreator == null || trip == null)
             {
@@ -271,10 +271,10 @@
                 return null;
             }
 
-            var userTrip = this.userTripsRepository
+            var userTrip = await this.userTripsRepository
                 .All()
                 .Where(ut => ut.UserId == requestorId && ut.TripId == tripId)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (userTrip != null)
             {
@@ -298,16 +298,16 @@
             return trip.Id;
         }
 
-        public bool CheckForUserTrip(string userId, string tripId)
+        public async Task<bool> CheckForUserTripAsync(string userId, string tripId)
         {
-            var userTripExists = this.userTripsRepository
+            var userTripExists = await this.userTripsRepository
                 .All()
-                .Any(ut => ut.UserId == userId && ut.TripId == tripId);
+                .AnyAsync(ut => ut.UserId == userId && ut.TripId == tripId);
 
             return userTripExists;
         }
 
-        public async Task<string> Complete(string tripId, string userId)
+        public async Task<string> CompleteAsync(string tripId, string userId)
         {
             var trip = await this.tripsRepository
                 .All()
@@ -344,6 +344,7 @@
 
             var updatedUsersCount = await this.usersService
                 .UpdateTripUsersAsync(driverId, usersIds, trip.TownsDistance.Distance);
+
             tripId = await this.DeleteAsync(trip.Id);
 
             return tripId;
@@ -376,7 +377,7 @@
             return tripsCount;
         }
 
-        public async Task<int> GetAllTripsCountWithDeleted()
+        public async Task<int> GetAllTripsCountWithDeletedAsync()
         {
             var allTripsCountWithDeleted = await this.tripsRepository
                 .AllWithDeleted()

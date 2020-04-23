@@ -49,17 +49,17 @@
             return notificationId;
         }
 
-        public Notification GetById(string id)
+        public async Task<Notification> GetByIdAsync(string id)
         {
-            var notification = this.notificationsRepository
+            var notification = await this.notificationsRepository
                 .All()
                 .Where(x => x.Id == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return notification;
         }
 
-        public async Task<IEnumerable<T>> GetUserNotifications<T>(string userId)
+        public async Task<IEnumerable<T>> GetUserNotificationsAsync<T>(string userId)
         {
             await this.DeletePassedNotificationsAsync(userId);
 
@@ -89,8 +89,8 @@
 
         public async Task<string> SendNotificationAsync(string receiverId, string senderId, string tripId, NotificationSubject subject)
         {
-            var receiver = this.usersService.GetById(receiverId);
-            var sender = this.usersService.GetById(senderId);
+            var receiver = await this.usersService.GetByIdAsync(receiverId);
+            var sender = await this.usersService.GetByIdAsync(senderId);
             var trip = await this.tripsService.GetByIdAsync(tripId);
 
             if (receiver == null || sender == null || trip == null)
@@ -98,7 +98,7 @@
                 return null;
             }
 
-            var userTripExists = this.tripsService.CheckForUserTrip(receiver.Id, tripId);
+            var userTripExists = await this.tripsService.CheckForUserTripAsync(receiver.Id, tripId);
 
             if ((subject == NotificationSubject.RequestJoin || subject == NotificationSubject.AcceptRequest)
                 && trip.FreeSeats == 0

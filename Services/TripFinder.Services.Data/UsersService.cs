@@ -54,9 +54,9 @@
 
         public async Task<string> DeleteAsync(string id)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
-                .FirstOrDefault(u => u.Id == id);
+                .FirstOrDefaultAsync(u => u.Id == id);
 
             if (user == null)
             {
@@ -82,32 +82,32 @@
             return user;
         }
 
-        public ApplicationUser GetById(string id)
+        public async Task<ApplicationUser> GetByIdAsync(string id)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
                 .Include(u => u.UserTrips)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             return user;
         }
 
-        public ApplicationUser GetByIdWithReviews(string id)
+        public async Task<ApplicationUser> GetByIdWithReviewsAsync(string id)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
                 .Include(u => u.ReviewsByUser)
                 .Include(u => u.ReviewsForUser)
-                .FirstOrDefault(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             return user;
         }
 
         public async Task<string> UpdateAsync(UserEditInputModel inputModel)
         {
-            var user = this.usersRepository
+            var user = await this.usersRepository
                 .All()
-                .FirstOrDefault(u => u.Id == inputModel.Id);
+                .FirstOrDefaultAsync(u => u.Id == inputModel.Id);
 
             if (user == null)
             {
@@ -139,7 +139,7 @@
         {
             var updatedUsersCount = 0;
 
-            var driver = this.GetById(driverId);
+            var driver = await this.GetByIdAsync(driverId);
             driver.TripsCountAsDriver++;
             driver.TravelledDistance += distance;
 
@@ -153,7 +153,7 @@
 
             foreach (var passengerId in passengersIds)
             {
-                var passenger = this.GetById(passengerId);
+                var passenger = await this.GetByIdAsync(passengerId);
                 passenger.TripsCountAsPassenger++;
                 passenger.TravelledDistance += distance;
                 passenger.HasUsersToReview = true;

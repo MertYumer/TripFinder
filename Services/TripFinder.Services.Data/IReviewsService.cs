@@ -7,12 +7,12 @@
 
     public interface IReviewsService
     {
-        Task<IEnumerable<T>> GetPendingReviews<T>(string userId);
+        Task<IEnumerable<T>> GetPendingReviewsAsync<T>(string userId);
 
-        Task<IEnumerable<T>> GetReviewsForUser<T>(string userId);
+        Task<IEnumerable<T>> GetReviewsForUserAsync<T>(string userId);
 
-        Task<IEnumerable<T>> GetReviewsByUser<T>(string userId);
+        Task<IEnumerable<T>> GetReviewsByUserAsync<T>(string userId);
 
-        Task<bool> AddReviews(IFormCollection data, string userId);
+        Task<bool> AddReviewsAsync(IFormCollection data, string userId);
     }
 }

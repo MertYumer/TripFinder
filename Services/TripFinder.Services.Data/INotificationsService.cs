@@ -7,9 +7,9 @@
 
     public interface INotificationsService
     {
-        Task<IEnumerable<T>> GetUserNotifications<T>(string userId);
+        Task<IEnumerable<T>> GetUserNotificationsAsync<T>(string userId);
 
-        Notification GetById(string id);
+        Task<Notification> GetByIdAsync(string id);
 
         Task<string> DeleteAsync(string id);
 

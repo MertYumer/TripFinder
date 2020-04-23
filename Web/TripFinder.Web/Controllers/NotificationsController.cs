@@ -38,7 +38,7 @@
             }
 
             var notificationsViewModel = await this.notificationsService
-                .GetUserNotifications<NotificationViewModel>(userId);
+                .GetUserNotificationsAsync<NotificationViewModel>(userId);
 
             var notificationsAllViewModel = new NotificationsAllViewModel
             {
@@ -74,7 +74,7 @@
 
         public async Task<IActionResult> CancelTripRequest(string notificationId)
         {
-            var notification = this.notificationsService.GetById(notificationId);
+            var notification = await this.notificationsService.GetByIdAsync(notificationId);
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (notification == null)
@@ -106,7 +106,7 @@
 
         public async Task<IActionResult> AcceptTripRequest(string notificationId)
         {
-            var notification = this.notificationsService.GetById(notificationId);
+            var notification = await this.notificationsService.GetByIdAsync(notificationId);
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (notification == null)
@@ -145,7 +145,7 @@
 
         public async Task<IActionResult> RejectTripRequest(string notificationId)
         {
-            var notification = this.notificationsService.GetById(notificationId);
+            var notification = await this.notificationsService.GetByIdAsync(notificationId);
             var user = await this.userManager.GetUserAsync(this.User);
 
             if (notification == null)
@@ -177,7 +177,7 @@
 
         private async Task<Notification> DeleteRequestAsync(string notificationId)
         {
-            var notification = this.notificationsService.GetById(notificationId);
+            var notification = await this.notificationsService.GetByIdAsync(notificationId);
 
             var id = await this.notificationsService.DeleteAsync(notificationId);
 

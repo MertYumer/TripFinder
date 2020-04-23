@@ -2,15 +2,13 @@
 {
     using System;
     using System.IO;
-    using System.Reflection;
+
     using AutoMapper;
     using CloudinaryDotNet;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using TripFinder.Data;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
