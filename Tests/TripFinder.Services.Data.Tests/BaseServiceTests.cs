@@ -3,13 +3,14 @@
     using System;
     using System.IO;
     using System.Reflection;
-
     using AutoMapper;
     using CloudinaryDotNet;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
     using TripFinder.Data;
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
@@ -66,12 +67,12 @@
             services.AddAutoMapper(typeof(Startup));
             services.AddSingleton<IConfiguration>(this.Configuration);
 
-            var cloudinaryAccount = new CloudinaryDotNet.Account(
+            Account account = new Account(
                 this.Configuration["Cloudinary:AppName"],
                 this.Configuration["Cloudinary:AppKey"],
                 this.Configuration["Cloudinary:AppSecret"]);
 
-            var cloudinary = new Cloudinary(cloudinaryAccount);
+            var cloudinary = new Cloudinary(account);
             services.AddSingleton(cloudinary);
 
             services.AddTransient<ISettingsService, SettingsService>();
@@ -91,7 +92,7 @@
         private IConfigurationRoot SetConfiguration()
         {
             return new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
+            .SetBasePath(Path.GetFullPath("../../../"))
             .AddJsonFile(
                  path: "appsettings.json",
                  optional: false,
