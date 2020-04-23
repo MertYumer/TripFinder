@@ -98,7 +98,7 @@
                 .Include(u => u.Car)
                 .FirstOrDefaultAsync(u => u.CarId == id);
 
-            if (user.CarId == null)
+            if (user == null)
             {
                 return null;
             }
@@ -117,13 +117,16 @@
 
         public async Task<T> GetByIdAsync<T>(string id)
         {
-            var car = await this.carsRepository
-                .All()
-                .Where(x => x.Id == id)
-                .To<T>()
-                .FirstOrDefaultAsync();
+            var query = this.GetByIdAsIQueryable(id);
 
-            return car;
+            if (query == null)
+            {
+                return default;
+            }
+
+            var car = query.To<T>();
+
+            return await car.FirstOrDefaultAsync();
         }
 
         public async Task<Car> GetByIdAsync(string id)
@@ -184,6 +187,20 @@
                 .FirstOrDefaultAsync();
 
             return car;
+        }
+
+        private IQueryable GetByIdAsIQueryable(string id)
+        {
+            var query = this.carsRepository
+                .All()
+                .Where(c => c.Id == id);
+
+            if (!query.Any())
+            {
+                return null;
+            }
+
+            return query;
         }
     }
 }

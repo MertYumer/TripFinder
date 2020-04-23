@@ -1,5 +1,6 @@
 ﻿namespace TripFinder.Services.Data.Tests
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -15,15 +16,13 @@
         {
             this.User = new ApplicationUser
             {
+                Id = "54475fd2-b87f-4821-9daa-f2d86e6274f6",
                 UserName = "user@test.com",
                 Email = "user@test.com",
                 FirstName = "UserFirstName",
                 LastName = "UserLastName",
                 PhoneNumber = "0880000000",
             };
-
-            this.DbContext.ApplicationUsers.Add(this.User);
-            this.DbContext.SaveChanges();
 
             var car = new Car
             {
@@ -33,7 +32,9 @@
                 PassengerSeats = 3,
             };
 
-            this.DbContext.Cars.Add(car);
+            this.User.Car = car;
+
+            this.DbContext.ApplicationUsers.Add(this.User);
             this.DbContext.SaveChanges();
         }
 
@@ -71,7 +72,7 @@
         }
 
         [Fact]
-        public async Task UpdateAsyncReturnsNullWhenCarIdDoesNotExist()
+        public async Task UpdateAsyncReturnsNullWhenCarDoesNotExist()
         {
             var inputModel = new CarEditInputModel
             {
@@ -84,6 +85,22 @@
             var carId = await this.Service.UpdateAsync(inputModel);
 
             Assert.Null(carId);
+        }
+
+        [Fact]
+        public async Task UpdateAsyncReturnsTheCarId()
+        {
+            var inputModel = new CarEditInputModel
+            {
+                Id = "3c95a1e2-c0fc-468d-abae-8348552a98fc",
+                Make = "Ford",
+                Model = "Fiesta 1.9 TDI",
+                PassengerSeats = 4,
+            };
+
+            var carId = await this.Service.UpdateAsync(inputModel);
+
+            Assert.Equal("3c95a1e2-c0fc-468d-abae-8348552a98fc", carId);
         }
 
         [Fact]
@@ -101,9 +118,9 @@
 
             var car = await this.DbContext.Cars.FirstOrDefaultAsync(c => c.Id == carId);
 
-            Assert.Equal("Ford", car.Make);
-            Assert.Equal("Fiesta 1.9 TDI", car.Model);
-            Assert.Equal(4, car.PassengerSeats);
+            Assert.Equal(inputModel.Make, car.Make);
+            Assert.Equal(inputModel.Model, car.Model);
+            Assert.Equal(inputModel.PassengerSeats, car.PassengerSeats);
             Assert.Equal(CarType.NotAvailable, car.Type);
             Assert.Equal(Color.None, car.Color);
             Assert.Null(car.Year);
@@ -114,6 +131,57 @@
             Assert.False(car.AllowedSmoking);
             Assert.False(car.HasAirConditioning);
             Assert.False(car.PlaceForLuggage);
+        }
+
+        [Fact]
+        public async Task DeleteAsyncReturnsNullWhenCarDoesNotExist()
+        {
+            var id = "testId";
+
+            var carId = await this.Service.DeleteAsync(id);
+
+            Assert.Null(carId);
+        }
+
+        [Fact]
+        public async Task DeleteAsyncSetsUsersCarIdToNull()
+        {
+            var user = await this.DbContext.ApplicationUsers.FirstOrDefaultAsync();
+            var car = await this.DbContext.Cars.FirstOrDefaultAsync();
+
+            await this.Service.DeleteAsync(car.Id);
+
+            Assert.Null(user.CarId);
+        }
+
+        [Fact]
+        public async Task DeleteAsyncReturnsTheCarId()
+        {
+            var car = await this.DbContext.Cars.FirstOrDefaultAsync();
+
+            var carId = await this.Service.DeleteAsync(car.Id);
+
+            Assert.Equal(car.Id, carId);
+        }
+
+        [Fact]
+        public async Task GenericGetByIdAsyncReturnsNullWhenCarDoesNotExist()
+        {
+            var id = "testId";
+
+            var viewModel = await this.Service.GetByIdAsync<CarDetailsViewModel>(id);
+
+            Assert.Null(viewModel);
+        }
+
+        [Fact]
+        public async Task GenericGetByIdAsyncReturnsTheCorrectType()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+
+            var viewModel = await this.Service.GetByIdAsync<CarDetailsViewModel>(id);
+
+            Assert.IsType<CarDetailsViewModel>(viewModel);
         }
     }
 }
