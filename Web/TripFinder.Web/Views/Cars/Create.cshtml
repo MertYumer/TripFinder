@@ -30,14 +30,24 @@
                                 </div>
                                 <div>
                                     <span asp-validation-for="Type" class="text-danger"></span>
-                                    <select asp-for="Type" asp-items="Html.GetEnumSelectList<CarType>()">
-                                        <option value="">Car type</option>
+                                    <select asp-for="Type">
+                                        <option value="" selected disabled hidden>Type</option>
+                                        @foreach (var value in Enum.GetValues(typeof(CarType)))
+                                        {
+                                            var type = EnumMethods.GetDescription((Enum)value);
+                                            <option>@type</option>
+                                        }
                                     </select>
                                 </div>
                                 <div>
                                     <span asp-validation-for="Color" class="text-danger"></span>
-                                    <select asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()">
-                                        <option value="0">Color</option>
+                                    <select asp-for="Color">
+                                        <option value="" selected disabled hidden>Color</option>
+                                        @foreach (var value in Enum.GetValues(typeof(Color)))
+                                        {
+                                            var color = EnumMethods.GetDescription((Enum)value);
+                                            <option>@color</option>
+                                        }
                                     </select>
                                 </div>
                                 <div>

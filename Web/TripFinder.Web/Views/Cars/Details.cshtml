@@ -45,7 +45,16 @@
                         <div class="row mb-3 mt-3 mt-md-0">
                             <div class="col">
                                 <div>Year:</div>
-                                <h3>@Model.Year</h3>
+                                @if (Model.Year == null)
+                                {
+                                    <h3>N/A</h3>
+                                }
+                                else
+                                {
+                                    <h3>
+                                        @Model.Year
+                                    </h3>
+                                }
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,9 @@
 
     public enum CarType
     {
+        [Display(Name = "N/A")]
+        NotAvailable = 0,
+
         [Display(Name = "Hatchback")]
         Hatchback = 1,
 

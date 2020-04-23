@@ -29,7 +29,7 @@
                         <div>
                             <span asp-validation-for="Type" class="text-danger"></span>
                             <select asp-for="Type" asp-items="Html.GetEnumSelectList<CarType>()">
-                                <option value="">Car type</option>
+                                <option>@Model.Type</option>
                             </select>
                         </div>
                         <div>
