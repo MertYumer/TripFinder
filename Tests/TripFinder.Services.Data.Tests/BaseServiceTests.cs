@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Reflection;
 
     using AutoMapper;
     using CloudinaryDotNet;
@@ -13,16 +14,17 @@
     using TripFinder.Data.Common.Repositories;
     using TripFinder.Data.Models;
     using TripFinder.Data.Repositories;
+    using TripFinder.Services.Mapping;
     using TripFinder.Web;
+    using TripFinder.Web.ViewModels.Cars;
 
     public abstract class BaseServiceTests : IDisposable
     {
         protected BaseServiceTests()
         {
             this.Configuration = this.SetConfiguration();
-
             var services = this.SetServices();
-
+            this.RegisterMappings();
             this.ServiceProvider = services.BuildServiceProvider();
             this.DbContext = this.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         }
@@ -85,6 +87,12 @@
             services.AddSingleton<IHttpContextAccessor>(new HttpContextAccessor { HttpContext = context });
 
             return services;
+        }
+
+        private void RegisterMappings()
+        {
+            AutoMapperConfig.RegisterMappings(
+                typeof(CarDetailsViewModel).GetTypeInfo().Assembly);
         }
 
         private IConfigurationRoot SetConfiguration()

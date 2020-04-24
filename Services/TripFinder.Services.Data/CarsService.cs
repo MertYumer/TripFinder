@@ -117,24 +117,20 @@
 
         public async Task<T> GetByIdAsync<T>(string id)
         {
-            var query = this.GetByIdAsIQueryable(id);
+            var car = await this.carsRepository
+                .All()
+                .Where(c => c.Id == id)
+                .To<T>()
+                .FirstOrDefaultAsync();
 
-            if (query == null)
-            {
-                return default;
-            }
-
-            var car = query.To<T>();
-
-            return await car.FirstOrDefaultAsync();
+            return car;
         }
 
         public async Task<Car> GetByIdAsync(string id)
         {
             var car = await this.carsRepository
                 .All()
-                .Where(x => x.Id == id)
-                .FirstOrDefaultAsync();
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             return car;
         }
@@ -187,20 +183,6 @@
                 .FirstOrDefaultAsync();
 
             return car;
-        }
-
-        private IQueryable GetByIdAsIQueryable(string id)
-        {
-            var query = this.carsRepository
-                .All()
-                .Where(c => c.Id == id);
-
-            if (!query.Any())
-            {
-                return null;
-            }
-
-            return query;
         }
     }
 }

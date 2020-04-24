@@ -1,18 +1,20 @@
 ﻿namespace TripFinder.Services.Data.Tests
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.DependencyInjection;
     using TripFinder.Data.Models;
+    using TripFinder.Web.ViewModels.Administration.Dashboard;
     using TripFinder.Web.ViewModels.Cars;
     using Xunit;
 
-    public class CarsServiceTest : BaseServiceTests
+    public class CarsServiceTests : BaseServiceTests
     {
-        public CarsServiceTest()
+        public CarsServiceTests()
         {
             this.User = new ApplicationUser
             {
@@ -182,6 +184,151 @@
             var viewModel = await this.Service.GetByIdAsync<CarDetailsViewModel>(id);
 
             Assert.IsType<CarDetailsViewModel>(viewModel);
+        }
+
+        [Fact]
+        public async Task GenericGetByIdAsyncMapsAllPropertiesCorrectly()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+
+            var viewModel = await this.Service.GetByIdAsync<CarDetailsViewModel>(id);
+
+            Assert.Equal(id, viewModel.Id);
+            Assert.Equal("Ford", viewModel.Make);
+            Assert.Equal("Fiesta", viewModel.Model);
+            Assert.Equal("UserFirstName", viewModel.UserFirstName);
+            Assert.Equal("UserLastName", viewModel.UserLastName);
+            Assert.Equal(CarType.NotAvailable, viewModel.Type);
+            Assert.Equal(Color.None, viewModel.Color);
+            Assert.Equal(3, viewModel.PassengerSeats);
+            Assert.Null(viewModel.Year);
+            Assert.Null(viewModel.ImageId);
+            Assert.Null(viewModel.ImageUrl);
+            Assert.Null(viewModel.NewImage);
+            Assert.False(viewModel.AllowedDrinks);
+            Assert.False(viewModel.AllowedFood);
+            Assert.False(viewModel.AllowedSmoking);
+            Assert.False(viewModel.AllowedPets);
+            Assert.False(viewModel.HasAirConditioning);
+            Assert.False(viewModel.PlaceForLuggage);
+        }
+
+        [Fact]
+        public async Task GetByIdAsyncReturnsNullWhenCarDoesNotExist()
+        {
+            var id = "testId";
+
+            var car = await this.Service.GetByIdAsync(id);
+
+            Assert.Null(car);
+        }
+
+        [Fact]
+        public async Task GetByIdAsyncReturnsTheCorrectCar()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+
+            var expectedCar = await this.DbContext.Cars.FirstOrDefaultAsync(c => c.Id == id);
+            var actualCar = await this.Service.GetByIdAsync(id);
+
+            Assert.StrictEqual(expectedCar, actualCar);
+        }
+
+        [Fact]
+        public async Task GetAllCarsCountAsyncReturnsTheCorrectCount()
+        {
+            var carsCount = await this.Service.GetAllCarsCountAsync();
+
+            Assert.Equal(1, carsCount);
+        }
+
+        [Fact]
+        public async Task GetAllCarsCountAsyncAlsoCountsTheDeletedCars()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+            await this.Service.DeleteAsync(id);
+
+            var carsCount = await this.Service.GetAllCarsCountAsync();
+
+            Assert.Equal(1, carsCount);
+        }
+
+        [Fact]
+        public async Task GetCurrentCarsCountAsyncReturnsTheCorrectCount()
+        {
+            var carsCount = await this.Service.GetCurrentCarsCountAsync();
+
+            Assert.Equal(1, carsCount);
+        }
+
+        [Fact]
+        public async Task GetCurrentCarsCountAsyncDoesNotCountTheDeletedCars()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+            await this.Service.DeleteAsync(id);
+
+            var carsCount = await this.Service.GetCurrentCarsCountAsync();
+
+            Assert.Equal(0, carsCount);
+        }
+
+        [Fact]
+        public async Task GetDeletedCarsCountAsyncReturnsTheCorrectCount()
+        {
+            var carsCount = await this.Service.GetDeletedCarsCountAsync();
+
+            Assert.Equal(0, carsCount);
+        }
+
+        [Fact]
+        public async Task GetDeletedCarsCountAsyncDoesNotCountTheCurrentCars()
+        {
+            var carsCount = await this.Service.GetDeletedCarsCountAsync();
+
+            Assert.Equal(0, carsCount);
+        }
+
+        [Fact]
+        public async Task GetAllCarsAsyncReturnsACollectionFromTheSameType()
+        {
+            var viewModels = await this.Service.GetAllCarsAsync<CarViewModel>();
+
+            Assert.IsAssignableFrom<IEnumerable<CarViewModel>>(viewModels);
+        }
+
+        [Fact]
+        public async Task GetAllCarsAsyncReturnsAndDeletedCars()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+            await this.Service.DeleteAsync(id);
+
+            var viewModels = await this.Service.GetAllCarsAsync<CarViewModel>();
+
+            Assert.Equal(id, viewModels.FirstOrDefault().Id);
+        }
+
+        [Fact]
+        public async Task GetDeletedCarDetailsReturnsTheCorrectCar()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+
+            var expectedCar = await this.Service.GetByIdAsync<CarDetailsViewModel>(id);
+
+            await this.Service.DeleteAsync(id);
+
+            var actualCar = await this.Service.GetDeletedCarDetailsAsync<CarDetailsViewModel>(id);
+
+            Assert.Equal(expectedCar.Id, actualCar.Id);
+        }
+
+        [Fact]
+        public async Task GetDeletedCarDetailsReturnsNullWhenTheCarDoesNotExist()
+        {
+            var id = "testId";
+
+            var viewModel = await this.Service.GetDeletedCarDetailsAsync<CarDetailsViewModel>(id);
+
+            Assert.Null(viewModel);
         }
     }
 }
