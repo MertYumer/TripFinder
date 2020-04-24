@@ -39,19 +39,6 @@
             return user.Id;
         }
 
-        public int GetUserNotificationsCount(string id)
-        {
-            var notificationsCount = this.usersRepository
-                .All()
-                .Include(u => u.ReceivedNotifications)
-                .Where(x => x.Id == id)
-                .FirstOrDefault()
-                .ReceivedNotifications
-                .Count;
-
-            return notificationsCount;
-        }
-
         public async Task<string> DeleteAsync(string id)
         {
             var user = await this.usersRepository

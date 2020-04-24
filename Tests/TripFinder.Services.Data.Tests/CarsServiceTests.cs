@@ -1,6 +1,5 @@
 ﻿namespace TripFinder.Services.Data.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -45,7 +44,7 @@
         private ApplicationUser User { get; set; }
 
         [Fact]
-        public async Task CreateAsyncAddCarInDb()
+        public async Task CreateAsyncAddsTheCarInDb()
         {
             var inputModel = new CarCreateInputModel
             {
@@ -59,7 +58,7 @@
         }
 
         [Fact]
-        public async Task CreateAsyncSetCarToUserCorrectly()
+        public async Task CreateAsyncSetCarIdToUserCorrectly()
         {
             var inputModel = new CarCreateInputModel
             {
@@ -164,6 +163,18 @@
             var carId = await this.Service.DeleteAsync(car.Id);
 
             Assert.Equal(car.Id, carId);
+        }
+
+        [Fact]
+        public async Task DeleteAsyncRemovesTheCarFromTheDb()
+        {
+            var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
+
+            await this.Service.DeleteAsync(id);
+
+            var carsCount = this.DbContext.Cars.Count();
+
+            Assert.Equal(0, carsCount);
         }
 
         [Fact]
@@ -308,7 +319,7 @@
         }
 
         [Fact]
-        public async Task GetDeletedCarDetailsReturnsTheCorrectCar()
+        public async Task GetDeletedCarDetailsAsyncReturnsTheCorrectCar()
         {
             var id = "3c95a1e2-c0fc-468d-abae-8348552a98fc";
 
@@ -322,7 +333,7 @@
         }
 
         [Fact]
-        public async Task GetDeletedCarDetailsReturnsNullWhenTheCarDoesNotExist()
+        public async Task GetDeletedCarDetailsAsyncReturnsNullWhenTheCarDoesNotExist()
         {
             var id = "testId";
 

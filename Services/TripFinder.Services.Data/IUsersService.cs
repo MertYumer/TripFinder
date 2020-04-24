@@ -14,8 +14,6 @@
 
         Task<ApplicationUser> GetByIdWithReviewsAsync(string id);
 
-        int GetUserNotificationsCount(string id);
-
         Task<string> CheckForUserByIdAsync(string id);
 
         Task<string> UpdateAsync(UserEditInputModel inputModel);
