@@ -206,20 +206,20 @@
                                     </div>
                                 </div>
                             </a>
-                            <div style="margin-top: 2%">
-                                <div>
+                            <div class="row justify-content-center" style="margin-top: 2%">
+                                <div class="col-12 text-center">
                                     <span>Phone number: </span>
                                     <span>@Model.Driver.PhoneNumber</span>
                                 </div>
-                                <div>
+                                <div class="col-12 text-center">
                                     <span>Rating: </span>
-                                    <span>@Model.Driver.Rating</span>
+                                    <span>@Model.Driver.Rating.ToString("f")</span>
                                 </div>
-                                <div>
+                                <div class="col-12 text-center">
                                     <span>Driver: </span>
                                     <span>@Model.Driver.TripsCountAsDriver times</span>
                                 </div>
-                                <div>
+                                <div class="col-12 text-center">
                                     <span>Passenger: </span>
                                     <span>@Model.Driver.TripsCountAsPassenger times</span>
                                 </div>
